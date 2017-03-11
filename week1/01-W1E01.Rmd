@@ -1,0 +1,127 @@
+# Week One
+```{r, echo = FALSE, include=FALSE}
+knitr::opts_chunk$set(comment = NA, echo = FALSE)
+```
+
+
+## Exercise 1
+  a) Input the ‘Portland cement’ data (reproduced from Montgomery Table 2.1 in week1, slide 13) into R. Excel file called Tabl2
+
+<div class = 'ans'>
+
+This can be done in several ways. One possibility is to enter data in excel and copy and then go
+**R Commander:** _Data > Import data > From text ..._
+  - Tick: Clipboard, Comma (If you use comma as Decimal point in excel)
+  - Check that data looks right by ticking: View data set
+  
+You can also load it using `load` function if your dataset is in `.Rdata` format. In this case, if your dataset `Tabl21.Rdata` is in download folder under your home folder,
+
+```{r, echo = TRUE, eval = FALSE}
+load("~/Downloads/Tabl21.Rdata")
+```
+
+From R-commander: _Data > Load data > ..._
+
+```{r}
+load("_data/Portlandcement.RData")
+```
+
+</div>  
+
+  b) Stack the columns (_Data > Active dataset> ..._)
+  
+<div class = 'ans'>
+
+```{r, echo = TRUE}
+PortlandStack <- stack(Portlandcement)
+names(PortlandStack) <- c('Strength', 'Modification')
+```
+
+</div>
+
+  c) Use R to produce summary statistics (as produced by the summary command in R) for each of the groups.
+  
+<div class = 'ans'>
+
+```{r}
+summary(Portlandcement)
+```
+
+</div>  
+  
+  d) Make boxplot for each of the groups.
+
+<div class = 'ans'>
+
+```{r}
+plot(Strength ~ Modification, data = PortlandStack, horizontal = T)
+```
+
+</div>
+
+e) We would like to test if the two cement types are equal. Formulate the hypotheses
+formally and use R to perform the test. Formulate a conclusion.
+  
+<div class = 'ans'>
+
+Let $Y_{ij}$ is strength in cement type $i$, sample $j$.
+We assume $Y_{ij} \sim N(\mu_i, \sigma^2)$, where all observations are independent. This is equal to assume this model: $$Y_{ij} = \mu_i + \epsilon_{ij}, \text{ where } \epsilon_{ij} \sim N(0, \sigma^2), i = 1, 2 \text{ and } j = 1, 2, \ldots 9$$
+
+Note that we assumed equal variances for both types. The hypothesis for testing if the two mortar formulations are equal is,
+
+$$
+\begin{aligned}
+H_0 &: \mu_\text{modified} - \mu_\text{unmodified} = 0 \\
+H_1 &: \mu_\text{modified} - \mu_\text{unmodified} \ne 0
+\end{aligned}
+$$
+
+
+```{r}
+Ttest <- with(Portlandcement, mixlm::t_test(Modified, Unmodified, var.equal = TRUE))
+Ttest
+```
+
+Since p-value is smaller than 0.05, we reject null hypothesis ($H_0$) and conclude that there is significant different between two mortar formulation at 5 percent level.
+
+</div>
+  
+f) Explain different ways of performing tests (hints: test statistic, p-values, and confidence intervals).
+
+<div class = 'ans'>
+
+Although we have used p-value in previous question, we can use following ways to perform this test,
+
+  I) **Test Statistics:** The test-statistic is compared with the critical value from t-table at 5% level of significance. We reject $H_0$ if,
+  $$t_\text{calculated} (\text{test-statistic}) > t_{\alpha/2, n_1 + n_2 - 2}$$. 
+  II) **Confidence Interval Method:** If 95% confidence interval for the estimate does not include zero, then we reject the null hypothesis $H_0$ at 5% level of significance. In our case, the 95%  confidence interval (`r Ttest$conf.int`) does not include zero so, we reject null hypothesis at 5% level of significance.
+  III) **p-value Approach:** If p-value is less than 0.05 then we reject $H_0$ at 5% level of significance.
+
+</div>
+
+g) Repeat the calculations for e) above, but now using only a calculator, summary output from R and a table of the t distribution.
+
+<div class = 'ans'>
+
+The null hypotheses expresses equality of expected values, i.e.,
+
+$$H_0: \mu_1 = \mu_2$$
+The test statistic is,
+
+$$t = \frac{\bar{x}_1 - \bar{x}_2}{\text{SEM}}$$
+where,
+
+$$
+\begin{aligned}
+\bar{x}_1 &= `r mean(Portlandcement$Modified)` && \bar{x}_2 = `r mean(Portlandcement$Unmodified)` \\
+s_1^2 &= `r var(Portlandcement$Modified)` && s_2^2 = `r var(Portlandcement$Unmodified)` \\
+s_p^2 &= \frac{(n_1-1)s_1^2 + (n_2-1)s_2^2}{n_1 + n_2 -2} = `r Ttest$estimate[3]` \\
+\text{SEM} &= s_p\sqrt{\frac{1}{n_1} + \frac{1}{n_2}} = `r Ttest$estimate[3] * sqrt(2/nrow(Portlandcement))`\\
+t &= `r Ttest$statistic`
+\end{aligned}
+$$
+
+Here, We reject the null hypothesis since 
+$$|t| = `r abs(Ttest$statistic)` > t_{0.025;18} = `r abs(qt(0.025, nrow(Portlandcement) * ncol(Portlandcement) - 2))`$$
+
+</div>

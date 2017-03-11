@@ -1,0 +1,177 @@
+## Exercise 3
+
+a) See [Exercise 11 Week 1](./week-one.html#exercise-11). Load the sire data once more.
+
+```{r}
+load("_data/Sires.Rdata")
+Sires$sire <- as.factor(Sires$sire)
+mdl <- mixlm::lm(milk ~ sire, data = Sires)
+```
+
+
+- Explain what we mean by a residual.
+    
+    <div class = 'ans'>
+    The part of response that your model could not expalin are residuals. Residuals are also termed as error terms or noise. You can obtain residuals as,
+    
+    $$\text{Error: }(\epsilon_{ij}) = y_{ij} - \hat{y}_{ij}$$
+    
+    For example in a one-way ANOVA model $y_{ij} = \mu + \tau_i + \epsilon_{ij},\; \epsilon \sim \text{NID}(0, \sigma^2)$, the estimated error terms are,
+    
+    $$\text{Error: }(\epsilon_{ij}) = y_{ij} - \hat{y}_{ij} = y_{ij} - (\hat{\mu} + \hat{\tau_i})$$
+    
+    </div>
+    
+    
+- Calculate the residuals for all observations.
+    
+    <div class = 'ans'>
+    In R-commander: _Model > Add Observation to ..._ and choose Residuals.
+    
+    ```{r}
+    Sires$residual <- residuals(mdl)
+    ```
+    
+    </div>
+    
+    
+- What does it mean if a residual is positive or negative?
+    
+    <div class = 'ans'>
+    Since $\epsilon_{ij} = y_{ij} - \hat{y}_{ij}$, when the true values are larger than the fitted values, residuals are positive. Similary, when the true values are smaller than the fitted values, residuals are negative. Large residual, either it is positive or negative indicates that the observation corresponding that residual is far away from the fitted model.
+    </div>
+    
+- Find the standardized residual. Do any residual have large absolute value?
+    
+    <div class = 'ans'>
+    In R-commander: _Model > Add Observation to ..._ and choose standardized residuals. Following observation has largest absolute residual and standardized residuals.
+    
+    ```{r}
+    Sires$std.residual <- rstandard(mdl)
+    suppressMessages(library(data.table))
+    Sires <- data.table(Sires)
+    knitr::kable(Sires[which.max(abs(std.residual))])
+    ```
+    
+    </div>
+    
+    
+- Find the animal with the largest and the smallest residual.
+    
+    <div class = 'ans'>
+    Sire 1 has both largest and smallest residuals. This also shows that there is large variation in the milk production from `sire1`.
+    
+    ```{r}
+    minmax <- Sires[c(which.min(residual), which.max(residual))]
+    knitr::kable(minmax)
+    ```
+    
+    
+    </div>
+    
+    
+- Plot the residuals against the fitted values, make comments
+    
+    <div class = 'ans'>
+    
+    ```{r}
+    plot(mdl, 1, add.smooth = FALSE)
+    ```
+    
+    The plot shows that the residual terms have constant variance expcept for some larger fitted values. Observations 30, 39 and 40 have largest absolute residuals. These observations have distorted the assumption of constant variation of residual and could lead to poor predictions.
+    
+    </div>
+    
+
+b) Assume now that sire is a random effect (_discussed on lecture Tuesday_). 
+
+If we are interested in the sire effect in general, explain why it is natural to assume sire as a random factor.
+
+- Write down the model. Interpretate the 3 parameter in the model.
+    
+    <div class = 'ans'>
+    The model with sire as random effect is,
+    
+    \begin{equation}
+    y_{ij} = \mu + \tau_i + \epsilon_{ij}, \text{ where, }
+        \epsilon_{ij} \sim \text{NID}(0, \sigma^2) \text{ and }
+        \tau_i \sim \text{NID}(0, \sigma_\tau^2)
+    \label{eq:W2E03bModel}
+    \end{equation}
+    
+    The three unknown parameters are,
+    
+    $\mu$ : Overall average annual milk production from all sires
+    
+    $\sigma_\tau^2$ : Variability in annual milk production between different sires
+    
+    $\sigma^2$ : Variability in annual milk production within same sires
+    
+    </div>
+    
+    
+- Is there effect of sire? State the null hypothesis and the alternative. Estimate the variance components, and give an interpretation of these estimates. Estimate the correlation between cows with same father.
+    
+    <div class = 'ans'>
+    Hypothesis for testing effect of sire is,
+    
+    $$
+    \begin{aligned}
+    H_0 &: \sigma_\tau^2 = 0 \\
+    H_1 &: \sigma_\tau^2 > 0
+    \end{aligned}
+    $$ 
+    
+    The ANOVA table for model (\@ref(eq:W2E03bModel)) is,
+    
+    ```{r}
+    randModel <- mixlm::lm(milk ~ r(sire), data = Sires)
+    randAnova <- mixlm::AnovaMix(randModel)
+    gsub("NA", "  ", knitr::kable(randAnova$anova, digits = 3))
+    ```    
+    
+    Here, we have Mean Sum of Squares,
+    
+    $$
+    \begin{aligned}
+    \text{MS}_\text{treatment} &= `r round(randAnova[["anova"]][["Mean Sq"]][1], 2)` \\  
+    \text{MS}_\text{Error} &= `r round(randAnova[["anova"]][["Mean Sq"]][2], 2)`
+    \end{aligned}
+    $$  
+    
+    The variance components $\sigma^2$ and $\sigma_\tau^2$ referes to the variation within a factor and variation between factors respectively. The total variation present in $y_{ij}$ is the sum of these two variances. The estimates of these variance components can be obtained as,
+    
+    $$
+    \begin{aligned}
+    \hat{\sigma}^2 &= `r round(randAnova[["anova"]][["Mean Sq"]][2])` \\
+    \hat{\sigma}_\tau^2 &= \frac{\text{MS}_\text{treatment} - \text{MS}_\text{E}}{n} \\
+    &= \frac{`r round(diff(randAnova[["anova"]][["Mean Sq"]][2:1]), 2)`}{8} = `r round(randAnova$var.comps[1], 2)`
+    \end{aligned}
+    $$
+    
+    </div>
+    
+    
+- How would you estimate the variance and the standard deviation for annual milk production in the whole population?
+
+    <div class = 'ans'>
+    Since the total variation present in $y_{ij}$ is the sum of two variance components we have,
+    
+    $$
+    \begin{aligned}
+    \text{Total Variation} &= \sigma_\tau^2 + \sigma^2 \\
+    & = `r paste(round(randAnova$var.comps, 2), collapse = "+")` = `r round(sum(randAnova$var.comps), 2)`
+    \end{aligned}
+    $$
+    
+    Thus, the standard deviation for annual milk production in whole population is estimated as $\sqrt{`r round(sum(randAnova$var.comps), 3)`} = `r round(sqrt(sum(randAnova$var.comps)), 3)`$
+    
+    </div>
+    
+
+- How would you estimate the expected annual milk production in the whole population? What is the standard error of this estimate? Construct a 95% CI for these expectation?
+
+### Exam Questions for exercise
+
+a) Exam STAT 210 Sep 2012, Exercise 1. Problems and solutions available on fronter.
+b) Exam STAT 210 Sep 2013, Exercise 3. Problems and solutions available on fronter (Tuesday).

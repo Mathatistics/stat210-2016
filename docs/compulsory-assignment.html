@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Design and Analysis of Experiment</title>
+  <meta name="description" content="This contains the weekly exercises related to Design and Analysis of Experiment">
+  <meta name="generator" content="bookdown 0.3.9 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Design and Analysis of Experiment" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This contains the weekly exercises related to Design and Analysis of Experiment" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Design and Analysis of Experiment" />
+  
+  <meta name="twitter:description" content="This contains the weekly exercises related to Design and Analysis of Experiment" />
+  
+
+<meta name="author" content="Trygve Almøy">
+
+
+<meta name="date" content="2017-01-01">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="exam-2012-sep-3-2012.html">
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Design and Analysis of Experiment</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Practical Information</a></li>
+<li class="chapter" data-level="" data-path="week-one.html"><a href="week-one.html"><i class="fa fa-check"></i>Week One</a></li>
+<li class="chapter" data-level="" data-path="week-two.html"><a href="week-two.html"><i class="fa fa-check"></i>Week Two</a></li>
+<li class="chapter" data-level="" data-path="week-three.html"><a href="week-three.html"><i class="fa fa-check"></i>Week Three</a></li>
+<li><a href="exam-2011-sep-5-2011.html#exam-2011-sep-5-2011">Exam 2011 <small>(Sep 5, 2011)</small></a></li>
+<li><a href="exam-2012-sep-3-2012.html#exam-2012-sep-3-2012">Exam 2012 <small>(Sep 3, 2012)</small></a></li>
+<li class="chapter" data-level="" data-path="compulsory-assignment.html"><a href="compulsory-assignment.html"><i class="fa fa-check"></i>Compulsory Assignment</a></li>
+<li class="divider"></li>
+<li><a name="title" href="javascript:void(0)"><b>Lecturer:</b></a><ul>
+<li><a href="https://www.nmbu.no/ans/trygve.almoy" target="blank">Trygve Almøy</a></li></ul></li>
+<li><a name="title" href="javascript:void(0)"><b>Assistent Teachers:</b></a><ul>
+<li><a href="https://www.nmbu.no/ans/hilde.vinje" target="blank">Hilde Vinje</a></li>
+<li><a href="https://www.nmbu.no/ans/raju.rimal" target="blank">Raju Rimal</a></li></ul></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Design and Analysis of Experiment</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="compulsory-assignment" class="section level1">
+<h1>Compulsory Assignment</h1>
+<p>Please upload your solution to the fronter folder <strong>Compulsory paper Stat 210 2016</strong>. Each student is asked to hand in their own private solution. Please hand in only one file. The name of the file should start with your <em>family name</em>. It’s not important to type mathematical symbols nicely. You can, if you prefer, write longhand (by hand), scan and upload a <em>pdf</em>.</p>
+<p>Please limit computer output as much as possible in your paper, and any computer output should be commented.</p>
+<div id="exercise-1-4" class="section level2">
+<h2>Exercise 1</h2>
+<p>You may use R or other statistical software for this exercise. The data for this exercise is called <code>frystemp</code> and can be loaded from the file <code>comp1.frystemp.RData</code> (all data sets are in the <em>data</em> folder of fronter). A lab has investigated the freezing temperature (called <code>frystemp</code> in the dataset reproduced below) for three different brands (called <code>merke</code> in the dataset).</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>Calculate mean and standard deviation for each brand. Calculate the overall mean (mean for all observations).</p>
+<div class="ans">
+<table>
+<caption><span id="tab:unnamed-chunk-166">Table 4: </span>Numerical Summary of <code>frystemp</code> data</caption>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">Mean</th>
+<th align="right">SD</th>
+<th align="right">N</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>merke1</td>
+<td align="right">-16.163</td>
+<td align="right">1.309</td>
+<td align="right">8</td>
+</tr>
+<tr class="even">
+<td>merke2</td>
+<td align="right">-13.562</td>
+<td align="right">1.283</td>
+<td align="right">8</td>
+</tr>
+<tr class="odd">
+<td>merke3</td>
+<td align="right">-14.575</td>
+<td align="right">0.755</td>
+<td align="right">8</td>
+</tr>
+<tr class="even">
+<td>Overall</td>
+<td align="right">-14.767</td>
+<td align="right">1.546</td>
+<td align="right">24</td>
+</tr>
+</tbody>
+</table>
+</div></li>
+<li><p>Consider the following model:</p>
+<p><span class="math display">\[y_{ij} = \mu + \tau_i + \epsilon_{ij}, \; \text{ where, } \sum_{i = 1}^3\tau_i = 0\]</span></p>
+<p>Here,</p>
+<p><span class="math display">\[
+\begin{aligned}
+y_{ij} &amp;: \text{freezing temperature for each brand, } i = 1, 2, 3 \text{ and } j = 1, \ldots, 8 \\
+\tau_i &amp;: \text{effect of brand }i
+\end{aligned}
+\]</span></p>
+<p>State the standard assumptions of the model. Use ANOVA to test if there is a difference between the brands. Formulate the hypothesis, carry out a test and formulate a conclusion. Give the ANOVA table.</p>
+<div class="ans">
+<p>The standard assumption of the model is, <span class="math display">\[\epsilon_{ij} \sim N(0, \sigma^2)\]</span></p>
+<p>It is also assumed that the <span class="math inline">\(y_{ij}\)</span> are independent. The hypothesis for testing if there is a difference between the brands is,</p>
+<p><span class="math display">\[
+\begin{aligned}
+H_0 &amp;: \tau_i = 0 \text{ for all } i \\
+H_1 &amp;: \tau_i \ne 0 \text{ for at least one } i
+\end{aligned}
+\]</span></p>
+<p>The ANOVA table for the model is,</p>
+<table>
+<caption><span id="tab:unnamed-chunk-167">Table 5: </span>ANOVA table for <code>frystemp</code> model</caption>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">Df</th>
+<th align="right">Sum Sq</th>
+<th align="right">Mean Sq</th>
+<th align="right">F value</th>
+<th align="right">Pr(&gt;F)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>merke</td>
+<td align="right">2</td>
+<td align="right">27.48083</td>
+<td align="right">13.740417</td>
+<td align="right">10.48791</td>
+<td align="right">0.0006947</td>
+</tr>
+<tr class="even">
+<td>Residuals</td>
+<td align="right">21</td>
+<td align="right">27.51250</td>
+<td align="right">1.310119</td>
+<td align="right"></td>
+<td align="right"></td>
+</tr>
+</tbody>
+</table>
+<p>Here, p-value <span class="math inline">\(\left(0.001\right)\)</span> is much smaller than 0.05, so we reject <span class="math inline">\(H_0\)</span> and claim that there is significant difference between <code>merke</code> at 95% confidence level.</p>
+</div></li>
+<li><p>Estimate all parameters in the model.</p>
+<div class="ans">
+<p>The estimated parameters in the model can be obtained from model summary as below:</p>
+<table>
+<caption><span id="tab:unnamed-chunk-168">Table 6: </span>Coefficient Estimate of Linear Model: <code>frystemp</code> ~ <code>merke</code></caption>
+<thead>
+<tr class="header">
+<th align="left">term</th>
+<th align="right">estimate</th>
+<th align="right">std.error</th>
+<th align="right">statistic</th>
+<th align="right">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><span class="math inline">\(\hat{\mu}\)</span></td>
+<td align="right">-14.767</td>
+<td align="right">0.234</td>
+<td align="right">-63.202</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="even">
+<td align="left"><span class="math inline">\(\hat{\tau_1}\)</span></td>
+<td align="right">-1.396</td>
+<td align="right">0.330</td>
+<td align="right">-4.224</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="odd">
+<td align="left"><span class="math inline">\(\hat{\tau_2}\)</span></td>
+<td align="right">1.204</td>
+<td align="right">0.330</td>
+<td align="right">3.644</td>
+<td align="right">0.002</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption><span id="tab:unnamed-chunk-168">Table 6: </span>Summary of Linear Model: <code>frystemp</code>~ <code>merke</code></caption>
+<thead>
+<tr class="header">
+<th align="right">r.squared</th>
+<th align="right">adj.r.squared</th>
+<th align="right">sigma</th>
+<th align="right">statistic</th>
+<th align="right">p.value</th>
+<th align="right">df</th>
+<th align="right">df.residual</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">0.4997</td>
+<td align="right">0.4521</td>
+<td align="right">1.1446</td>
+<td align="right">10.4879</td>
+<td align="right">0.0007</td>
+<td align="right">3</td>
+<td align="right">21</td>
+</tr>
+</tbody>
+</table>
+<p>From the output, we can estimate <span class="math inline">\(\tau_3\)</span> from the assumption that the overall mean sum to zero. i.e. <span class="math inline">\(\hat{\tau}_3 = -\left(\tau_1 + \tau_2\right) = -(-1.4+1.2) = 0.192\)</span></p>
+</div></li>
+<li><p>Calculate confidence intervals for <span class="math inline">\(\tau_1 - \tau_2\)</span>, <span class="math inline">\(\tau_1 - \tau_3\)</span> and <span class="math inline">\(\tau_2 - \tau_3\)</span> using Tukey’s method. Are there any significant differences?</p>
+<div class="ans">
+<p>The confidence intervals for Tukey’s method can be computed as,</p>
+<p><span class="math display">\[
+\begin{aligned}
+\bar{y}_{i\cdot} - \bar{y}_{j\cdot} - q_\alpha (a, f)\sqrt{\frac{\text{MS}_\text{E}}{n}} &amp;\le \mu_i - \mu_j\\
+&amp; \le \bar{y}_{i\cdot} - \bar{y}_{j\cdot} + q_\alpha (a, f)\sqrt{\frac{\text{MS}_\text{E}}{n}} &amp;\le \mu_i - \mu_j, i \ne j
+\end{aligned}
+\]</span></p>
+<p>since, <span class="math inline">\(\mu_i - \mu_j\)</span> is same as <span class="math inline">\(\tau_i - \tau_j\)</span>, the conficence interval for group <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span> can also be written as,</p>
+<p><span class="math display">\[
+\begin{aligned}
+\hat{\tau}_{i\cdot} - \hat{\tau}_{j\cdot} - q_\alpha (a, f)\sqrt{\frac{\text{MS}_\text{E}}{n}} &amp;\le \mu_i - \mu_j\\
+&amp; \le \hat{\tau}_{i\cdot} - \hat{\tau}_{j\cdot} + q_\alpha (a, f)\sqrt{\frac{\text{MS}_\text{E}}{n}} &amp;\le \mu_i - \mu_j, i \ne j
+\label{eqn:tukeyCI}
+\end{aligned}
+\]</span></p>
+<p>Here we have,</p>
+<p><span class="math display">\[
+\begin{aligned}
+q_\alpha (a, f)\sqrt{\frac{\text{MS}_\text{E}}{n}} &amp;= q_{0.05} (3, 21)\sqrt{\frac{1.310119}{8}} \\
+&amp;= 1.4425278
+\label{eqn:tukeyCriteria}
+\end{aligned}
+\]</span></p>
+<p>Further, this value is now compated with the absolute difference between the estimates. The difference between the estimates of various group-pairs are,</p>
+<table>
+<thead>
+<tr class="header">
+<th align="right">merke1 - merke2</th>
+<th align="right">merke1 - merke3</th>
+<th align="right">merke2 - merke3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">-2.6</td>
+<td align="right">-1.5875</td>
+<td align="right">1.0125</td>
+</tr>
+</tbody>
+</table>
+<p>If the absolute difference between two groups are larger than the value 1.443 than we reject the null hypothesis and claim that the pair are significantly different from each other. The R output for this test is,</p>
+<pre><code>                Lower  Center   Upper Std.Err t value  P(&gt;t)    
+merke1-merke2 -4.0425 -2.6000 -1.1575  0.5723  -4.543 0.0005 ***
+merke1-merke3 -3.0300 -1.5875 -0.1450  0.5723  -2.774 0.0294 *  
+merke2-merke3 -0.4300  1.0125  2.4550  0.5723   1.769 0.2042    
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>Above output shows the difference between <code>merke2</code> and <code>merke1</code> whose interpretation will be same as the difference between <code>merke1</code> and <code>merke2</code> except the sign of Estimate and interval will switch. For instance, in this situation, the estimate will be -2.6 and the lower and upper confidence interval at 95% confidence level will be -4.043 and -2.600 respectively.</p>
+<p>The result shows that <code>marke1</code> is significantly different than <code>marke2</code> and <code>marke3</code> at 95% confidence level.</p>
+</div></li>
+</ol>
+</div>
+<div id="exercise-2-topic-discussed-at-lecture-august-23" class="section level2">
+<h2>Exercise 2 (Topic discussed at lecture August 23)</h2>
+<p><em>You are <strong>not</strong> supposed to use R or other statistical software for this exercise</em>. (But you should use R to check. The dataset is ‘fett’ contained in the file <code>comp2.fett.RData</code>).</p>
+<p>We would like to investigate the fat concentration in milk (<code>fettprosent</code> in the below data set). Three farms have been randomly selected and 5 cows from each farm (<code>besetning</code>) is recruited to the study. The data is as given below:</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>Explain what is meant by a <em>random effect</em> and why <code>besetning</code> (farm) reasonably can be modeled as a random effect.</p>
+<div class="ans">
+<p>In many situations, factors have infinitely many levels and a researcher randomly choose some of the levels and make inference about the whole population. Models with such factors are called <em>Random effect models</em>. In case of random effect model, the interest is on the population distribution of factor rather than some specific chosen levels.</p>
+<p>For example, An experiment where some specific drugs are to be tested for their efficacy. A randomly chosen drug will barely be an interest in any experiment. Here, the experiment is oriented in finding the effect of those specific drugs and thus, this is the case of <em>fixed effect model</em>. While in another experiment where researcher is interested in finding if there is any differences between farm in Akershus area of Norway in the context of milk production. There can be many farms and the research is not interested on some specific farm but rather is interested on overal population of farm. So some farms are randomly choosen and are used to construct a model. This is the case of <em>random effect model</em>.</p>
+</div></li>
+<li><p>Consider the model, <span class="math display">\[
+\begin{aligned}
+y_{ij} &amp;= \mu + \tau_i + \epsilon_{ij} \\
+\tau_i &amp;\sim \text{NID}\left(0, \sigma_\tau^2\right)\\
+\epsilon_{ij} &amp;\sim \text{N}\left(0, \sigma^2\right) \\
+i &amp;= 1, 2, 3\; j = 1, 2, \ldots 5\; N = 15
+\end{aligned}
+\]</span> Also, all random variables are independent</p>
+<p>Use the output below:</p>
+<pre><code>          Df Sum Sq F value      Pr(&gt;F)    
+besetning  2 13.545  35.213 0.000009521 ***
+Residuals 12  2.308                        
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>Estimate <span class="math inline">\(\sigma_\tau^2\)</span> and <span class="math inline">\(\sigma^2\)</span> and the correlation for animals from the same farm.</p>
+<div class="ans">
+<p>Here we can find <span class="math inline">\(\text{MS}_\text{treatment}\)</span> and <span class="math inline">\(\text{MS}_\text{E}\)</span> as,</p>
+<p><span class="math display">\[
+\begin{aligned}
+\text{MS}_\text{treatment} &amp;= \frac{\text{SS}_\text{treatment}}{df_\text{treatment}}
+= 6.773 \\
+\text{and, }\text{MS}_\text{E} &amp;= \frac{\text{SS}_\text{E}}{df_\text{Error}}
+= 0.192
+\end{aligned}
+\]</span></p>
+<p>Therefore, we can find the estimates of <em>variance components</em> <span class="math inline">\(\hat{\sigma}_\tau^2\)</span> and <span class="math inline">\(\hat{\sigma}^2\)</span> as,</p>
+<p><span class="math display">\[
+\begin{aligned}
+\hat{\sigma}^2 &amp;= \text{MS}_\text{E} = 0.192 \\
+\hat{\sigma}_\tau^2 &amp;= \frac{\text{MS}_\text{treatment}-\text{MS}_\text{E}}{n} \\
+&amp;= \frac{6.773 - 0.192}{5}
+= 1.316
+\end{aligned}
+\]</span></p>
+<p>Finally, the correlation for animals from the same farm is,</p>
+<p><span class="math display">\[
+\text{cor}(y_{ij}, y_{ik}) = \hat{\rho} = \frac{\hat{\sigma}_\tau^2}{\hat{\sigma}_\tau^2 + \hat{\sigma^2}} = \frac{1.32}{1.508} 
+= 0.872
+\]</span></p>
+<p>Thus the correlation for animals from the same farm is 87.2 percent.</p>
+</div></li>
+<li><p>Is there a significant effect of <code>besetning</code>? Formulate the hypothesis and do the test.</p>
+<div class="ans">
+<p>To test the significance of the random factor <code>besetning</code>, the hypothesis can be written as,</p>
+<p><span class="math display">\[
+\begin{aligned}
+H_0 &amp;: \sigma_\tau^2 = 0 \\
+H_1 &amp;: \sigma_\tau^2 &gt; 0
+\end{aligned}
+\]</span></p>
+<p>Here, <span class="math inline">\(\sigma_\tau^2\)</span> is the variation between farms and the null hypothesis states that there is no variation between farms. Given ANOVA table shows that the p-value corresponding to <code>besetning</code> is very small and thus we reject null hypothesis and claim that there is significant difference between farms. As this is a random effect model, the inference is made on just those specific farms but population of farms in general.</p>
+</div></li>
+<li><p>Calculate a 99% confidence interval for <span class="math inline">\(\sigma^2\)</span></p>
+<div class="ans">
+<p>The confidence interval for <span class="math inline">\(\sigma^2\)</span> at <span class="math inline">\(\alpha\)</span> level of significance is,</p>
+<p><span class="math display">\[\frac{\text{SS}_E}{\chi^2_{\alpha/2, N-a}} \le \sigma^2 \le \frac{\text{SS}_E}{\chi^2_{1 - \alpha/2, N-a}}\]</span></p>
+<p>From Chi-square table, we can find chi-square values for <span class="math inline">\(\alpha = 0.01\)</span> and <span class="math inline">\(N-a = 12\)</span> as,</p>
+<p><span class="math display">\[
+\chi^2_{0.005, 12} = 28.3 \text{ and } 
+\chi^2_{0.995, 12} = 3.074
+\]</span></p>
+<p>Therefore, using <span class="math inline">\(\text{SS}_E = 2.308\)</span>, we can find,</p>
+<p><span class="math display">\[
+\begin{aligned}
+\frac{\text{SS}_E}{\chi^2_{\alpha/2, N-a}} &amp;\le \sigma^2 \le \frac{\text{SS}_E}{\chi^2_{1 - \alpha/2, N-a}} \\
+\frac{2.308}{28.3} &amp;\le \sigma^2 \le \frac{2.308}{3.074} \\
+0.082 &amp;\le \sigma^2 \le 0.751
+\end{aligned}
+\]</span></p>
+<p>Thus at 99% confidence level, the true error variance <span class="math inline">\((\sigma^2)\)</span> lie between the interval <span class="math inline">\(\left[0.082, 0.751\right]\)</span>.</p>
+</div></li>
+</ol>
+</div>
+<div id="exercise-3-lectures-august-24" class="section level2">
+<h2>Exercise 3 (Lectures August 24)</h2>
+<p><em>You are supposed to use R or other statistical software for this exercise</em>. The data is <code>comp3.dommere.RData</code>.</p>
+<p>The purpose of the data of this exercise is to investigate if 5 different types of feeding (<code>fortype</code> in the below data set) lead to differently tasting milk. Four judges (corresponding to <code>Dommer</code> in the data) were asked to taste and rate on a scale from 1 to 10, 10 being best.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Dommer</th>
+<th align="right">Fortype1</th>
+<th align="right">Fortype2</th>
+<th align="right">Fortype3</th>
+<th align="right">Fortype4</th>
+<th align="right">Fortype5</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Dommer1</td>
+<td align="right">6</td>
+<td align="right">6</td>
+<td align="right">3</td>
+<td align="right">4</td>
+<td align="right">3</td>
+</tr>
+<tr class="even">
+<td align="left">Dommer2</td>
+<td align="right">9</td>
+<td align="right">8</td>
+<td align="right">7</td>
+<td align="right">8</td>
+<td align="right">3</td>
+</tr>
+<tr class="odd">
+<td align="left">Dommer3</td>
+<td align="right">10</td>
+<td align="right">8</td>
+<td align="right">5</td>
+<td align="right">7</td>
+<td align="right">6</td>
+</tr>
+<tr class="even">
+<td align="left">Dommer4</td>
+<td align="right">9</td>
+<td align="right">7</td>
+<td align="right">3</td>
+<td align="right">4</td>
+<td align="right">1</td>
+</tr>
+</tbody>
+</table>
+<p>It is natural to let <code>Dommer</code> be regarded as a block effect.</p>
+<p>Assume two different model, one includes the blocks (<em>Model 1</em>), and the other without blocking (<em>Model 2</em>).</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>Describe the models and state the standard assumptions. Would you prefer <em>Model 1</em> or <em>Model2</em>? Give reasons for your answer.</p>
+<div class="ans">
+<p><strong>Model 1:</strong> Let <span class="math inline">\(y_{ij}\)</span> be the <code>poeng</code> of <span class="math inline">\(i^\text{th}\)</span> fortype given by <span class="math inline">\(j^\text{th}\)</span> dommer.</p>
+<p><span class="math display">\[y_{ij} = \mu + \tau_i + \gamma_j + \epsilon_{ij}, \text{ where, } \sum_{i = 1}^5 \tau_i = 0 \text{ and } \sum_{j = 0}^4 \gamma_j = 0\]</span></p>
+<p>Here, <span class="math inline">\(i = 1, \ldots, 5\)</span> (Fortype) and <span class="math inline">\(j = 1, \ldots, 5\)</span> (Dommer)</p>
+<p><strong>Model 2:</strong> Let <span class="math inline">\(y_{ij}\)</span> be the <span class="math inline">\(j^\text{th}\)</span> replication of <code>poeng</code> for <span class="math inline">\(i^\text{th}\)</span> fortype.</p>
+<p><span class="math display">\[y_{ij} = \mu + \tau_i + \epsilon_{ij}, \text{ where, } \sum_{i = 1}^a \tau_i = 0\]</span></p>
+<p>Here <span class="math inline">\(i = 1, \ldots, 5\)</span> (Fortype) and <span class="math inline">\(j = 1, \ldots, 5\)</span> (Replication) Since in this model dommer is not considered as blocking factor so, the points are considered as replications.</p>
+<p>The error terms <span class="math inline">\(\epsilon_{ij}\)</span> in both <strong>Model1</strong> and <strong>Model2</strong> are independent and follows normal distribution with mean 0 and constant variance <span class="math inline">\(\sigma^2\)</span>. i.e.,</p>
+<p><span class="math display">\[\epsilon_{ij} \sim \text{NID}\left(0, \sigma^2\right)\]</span></p>
+<p>ANOVA output from <strong>Model 1</strong> and <strong>Model 2</strong> are as follows,</p>
+<table>
+<caption><span id="tab:anovaModel1">Table 7: </span>ANOVA for <strong>Model 1</strong></caption>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">Df</th>
+<th align="right">Sum Sq</th>
+<th align="right">Mean Sq</th>
+<th align="right">F value</th>
+<th align="right">Pr(&gt;F)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Fortype</td>
+<td align="right">4</td>
+<td align="right">70.30</td>
+<td align="right">17.5750</td>
+<td align="right">12.7818</td>
+<td align="right">0.0003</td>
+</tr>
+<tr class="even">
+<td>Dommer</td>
+<td align="right">3</td>
+<td align="right">31.75</td>
+<td align="right">10.5833</td>
+<td align="right">7.6970</td>
+<td align="right">0.0039</td>
+</tr>
+<tr class="odd">
+<td>Residuals</td>
+<td align="right">12</td>
+<td align="right">16.50</td>
+<td align="right">1.3750</td>
+<td align="right"></td>
+<td align="right"></td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption><span id="tab:anovaModel2">Table 8: </span>ANOVA for <strong>Model 2</strong></caption>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">Df</th>
+<th align="right">Sum Sq</th>
+<th align="right">Mean Sq</th>
+<th align="right">F value</th>
+<th align="right">Pr(&gt;F)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Fortype</td>
+<td align="right">4</td>
+<td align="right">70.30</td>
+<td align="right">17.5750</td>
+<td align="right">5.4637</td>
+<td align="right">0.0064</td>
+</tr>
+<tr class="even">
+<td>Residuals</td>
+<td align="right">15</td>
+<td align="right">48.25</td>
+<td align="right">3.2167</td>
+<td align="right"></td>
+<td align="right"></td>
+</tr>
+</tbody>
+</table>
+<p>From the ANOVA tables above, we can see that the block factor <code>Dommer</code> has significant effect in Model 1 which indicates that the analysis will be affected if it is removed from the model. In Model 2 the MSE has increased that consiquently decreases F-value corresponding to Fortype.</p>
+</div></li>
+<li><p>Show that there is a significant effect of <code>Fortype</code> in <em>Model 1</em>.</p>
+<div class="ans">
+<table>
+<caption><span id="tab:unnamed-chunk-178">Table 9: </span>ANOVA table for <strong>Model 1</strong></caption>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">Df</th>
+<th align="right">Sum Sq</th>
+<th align="right">Mean Sq</th>
+<th align="right">F value</th>
+<th align="right">Pr(&gt;F)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Fortype</td>
+<td align="right">4</td>
+<td align="right">70.30</td>
+<td align="right">17.5750</td>
+<td align="right">12.7818</td>
+<td align="right">0.0003</td>
+</tr>
+<tr class="even">
+<td>Dommer</td>
+<td align="right">3</td>
+<td align="right">31.75</td>
+<td align="right">10.5833</td>
+<td align="right">7.6970</td>
+<td align="right">0.0039</td>
+</tr>
+<tr class="odd">
+<td>Residuals</td>
+<td align="right">12</td>
+<td align="right">16.50</td>
+<td align="right">1.3750</td>
+<td align="right"></td>
+<td align="right"></td>
+</tr>
+</tbody>
+</table>
+<p>Since, the p-value corresponding to <code>Fortype</code> is (<span class="math inline">\(0.0003\)</span>) &lt;&lt; 0.05, there is significant effect of <code>Fortype</code>.</p>
+</div></li>
+<li><p>Which types of feeding (<code>Fortype</code>) differ significantly Use <em>Model 1</em>?</p>
+<div class="ans">
+<p>Since there is significant effect of <code>Fortype</code>, it is desirable to perform pairwise comparison between different <code>Fortype</code>. This can be done using Tukey’s pariwise comparison. The output from Tukey’s test is,</p>
+<pre><code>                   Lower Center  Upper Std.Err t value P(&gt;t)
+Fortype1-Fortype2 -1.393  1.250  3.893   0.829   1.508  0.58
+Fortype1-Fortype3  1.357  4.000  6.643   0.829   4.824  0.00
+Fortype1-Fortype4  0.107  2.750  5.393   0.829   3.317  0.04
+Fortype1-Fortype5  2.607  5.250  7.893   0.829   6.332  0.00
+Fortype2-Fortype3  0.107  2.750  5.393   0.829   3.317  0.04
+Fortype2-Fortype4 -1.143  1.500  4.143   0.829   1.809  0.41
+Fortype2-Fortype5  1.357  4.000  6.643   0.829   4.824  0.00
+Fortype3-Fortype4 -3.893 -1.250  1.393   0.829  -1.508  0.58
+Fortype3-Fortype5 -1.393  1.250  3.893   0.829   1.508  0.58
+Fortype4-Fortype5 -0.143  2.500  5.143   0.829   3.015  0.07</code></pre>
+<p>The result shows that at 95% confidence level, <code>Fortype1</code>is significantly different than <code>Fortype3</code>, <code>Fortype4</code> and <code>Fortype5</code> while <code>Fortype2</code> is significantly different from <code>Frotype3</code> and <code>Fortype5</code>. In addition at 90% confidence level, <code>Fortype4</code> and <code>Fortype5</code> are also significantly different.</p>
+</div></li>
+<li><p>Fortype 1 and 2 are based on feed concentrates (<em>Norwegian: Kraftfor</em>), while Fortype 3 and 4 is based on rutabaga (<em>Norwegian Kålrot</em>).</p>
+<p>Construct a contrast that measures the difference between these two feeding regimes, and test if the concentrates types taste significantly better than the other.</p>
+<div class="ans">
+<p>A contrast to test the average of <code>Fortype1</code> and <code>Fortype2</code> with average of <code>Fortype3</code> and <code>Fortype4</code> can be written as,</p>
+<p><span class="math display">\[\text{Contrast: }(\Gamma) = \frac{1}{2}\left(\tau_1 + \tau_2\right) - \frac{1}{2}\left(\tau_3 + \tau_4\right) \]</span></p>
+<p>The above hypothesis is written in terms of effects <span class="math inline">\(\tau_i\)</span> rather than <span class="math inline">\(\mu_i\)</span> since <span class="math inline">\(\mu_1 + \mu_2 = \mu_3 + \mu_4\)</span> is same as <span class="math inline">\(\tau_1 + \tau_2 = \tau_3 + \tau_4\)</span>. Further, the coefficient of contrast is <span class="math inline">\(c_i = (0.5, 0.5, -0.5, -0.5, 0)\)</span>. The hypothesis to test if the difference between concentrates types (<code>Fortype1</code> and <code>Fortype2</code>) is better than Rutabaga (<code>Foretype3</code> and <code>Fortype4</code>) is,</p>
+<p><span class="math display">\[H_0: \Gamma = 0 \text{ vs } H_1: \Gamma &gt; 0\]</span></p>
+<p>The test statistic for this hypothesis is,</p>
+<p><span class="math display">\[
+t_0 = \frac{\sum_{i = 1}^ac_i\hat{\tau}_{i\cdot}}{\sqrt{\text{MS}_E \sum_{i = 1}^a\frac{c_i^2}{n_i}}} \sim t_{0.05, N-a}
+\]</span></p>
+<p>Using the test statistics above we can test the hypothesis. Test output obtained from R is as follows,</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">Estimate</th>
+<th align="right">Std. Error</th>
+<th align="right">t value</th>
+<th align="right">Pr(&gt;|t|)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Fortype c=( 0.5 0.5 -0.5 -0.5 0 )</td>
+<td align="right">2.75</td>
+<td align="right">0.586302</td>
+<td align="right">4.690416</td>
+<td align="right">0.0005228</td>
+</tr>
+</tbody>
+</table>
+<p>From the test output, we can see that the p-value is very small (smaller than 0.05, level of significance). The p-value here is for two-sided test and for one-sided test, this p-value will be half of the p-value in output which is even smaller. So, we reject the null hypothesis and conclude that the concentrations types are significantly better than the rutabaga type.</p>
+</div></li>
+</ol>
+
+</div>
+</div>
+<script>
+ans_btn_html = '<a class = "btn-ans"><span class="label label-success no-print">&lt;ANS/&gt;</span></a>';
+  showAns_btn = '<a class="showAns-btn btn pull-right js-toolbar-action">Show Answers</a>';
+  hideAns_btn = '<a class="hideAns-btn btn pull-right js-toolbar-action" style="display:none;">Hide Answers</a>';
+  
+  // Adding Extra Menus in Navigation
+  
+  // Adding button on before each answer:::
+  $(".ans").before(ans_btn_html);
+  $('.btn-ans').each(function(){
+    $(this).next('.ans').andSelf().wrapAll('<div class="wrap-ans"/>');
+  });
+  $('.btn-ans').click(function(){
+    $(this).siblings('.ans').toggle(400);
+  });
+  
+if ($(".ans").length > 0){
+    $('.book-header').prepend(showAns_btn, hideAns_btn);
+    $('.showAns-btn').show();
+    $('.showAns-btn').click(function(){
+      $('.btn-ans').hide(400);
+      $('.ans').show(400);
+      $('.hideAns-btn').show();
+      $(this).hide();
+      $('.hideAns-btn').click(function(){
+        $('.btn-ans').show(400);
+        $('.ans').hide(400);
+        $('.showAns-btn').show();
+        $(this).hide();
+      });
+    });
+  }
+
+var chap = "week-two"
+if(window.location.href.indexOf(chap) != -1){
+  var now = new Date();
+  var release = new Date("August 21, 2016");
+  if(now < release){
+    $(".ans, .btn-ans, .showAns-btn, .hideAns-btn").hide()
+  }
+}
+
+$('.ans p:has(img)').css('text-align', 'center');
+</script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-82812028-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="exam-2012-sep-3-2012.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/mathatistics/stat210-2016/edit/master/CompulsoryAssignment.Rmd",
+"text": "Edit"
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

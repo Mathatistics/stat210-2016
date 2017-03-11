@@ -1,0 +1,146 @@
+## Extra exercises from textbook with solutions
+
+### Exercise 3.1
+An experimenter has conducted a single-factor experiment with six levels of the
+factor, and each factor level has been replicated three times. The computed value of the F-statistic is $F_0 = 4.89$. Find bounds on the P-value. 
+
+<div class = 'ans'>
+  F~Fisher (5,12).
+  0.01 < Table P-value < 0.025 Computer P-value = 0.0114
+</div>
+
+### Exercise 3.2 
+An experimenter has conducted a single-factor experiment with four levels of the factor, and each factor level has been replicated six times. The computed value of the F-statistic is $F_0 = 4.02$. Find bounds on the P-value. 
+
+<div class = 'ans'>
+  F~Fisher (3,20).
+  0.01 < Table P-value < 0.025 Computer P-value = 0.022
+</div>
+
+### Exercise 3.3
+A computer ANOVA output is shown below. Fill in the blanks. You may give
+bounds on the P-value.
+
+#### One-way ANOVA
+```{r, echo = FALSE}
+anova3.3 <- data.frame(
+  Source = c('Factor', 'Error',  'Total'),
+  DF = c('?', 25, 29),
+  SS = c('?', 186.53, 1174.24),
+  MS = c(246.93, '?', ''),
+  F = c('?', '', ''),
+  P = c('?', '', '')
+)
+knitr::kable(anova3.3)
+```
+
+<div class = 'ans'>
+
+  Completed table is: (Answer regarding P requires computer, with table in
+Montgomery one can only say $P<0.01$)
+
+#### One-way ANOVA
+```{r, echo = FALSE}
+anova3.3.ans <- data.frame(
+  Source = c('Factor', 'Error',  'Total'),
+  DF = c(4, 25, 29),
+  SS = c(987.71, 186.53, 1174.24),
+  MS = c(246.93, 7.46, ''),
+  F = c(33.09, '', ''),
+  P = c('< 0.0001', '', '')
+)
+knitr::kable(anova3.3.ans)
+```
+
+</div>
+
+### Exercise 3.4
+A computer ANOVA output is shown below. Fill in the blanks. You may give
+bounds on the P-value.
+
+#### One-way ANOVA
+```{r, echo = FALSE}
+anova3.4 <- data.frame(
+  Source = c('Factor', 'Error',  'Total'),
+  DF = c(3, '?', 19),
+  SS = c(36.15, '?', 196.04),
+  MS = c('?', '?', ''),
+  F = c('?', '', ''),
+  P = c('?', '', '')
+)
+knitr::kable(anova3.4)
+```
+
+<div class = 'ans'>
+Completed table is: (Answer P requires computer)
+
+#### One-way ANOVA
+```{r, echo = FALSE}
+anova3.4.ans <- data.frame(
+  Source = c('Factor', 'Error',  'Total'),
+  DF = c(3, 16, 19),
+  SS = c(36.15, 159.89, 196.04),
+  MS = c(12.05, 9.99, ''),
+  F = c(1.21, '', ''),
+  P = c(0.3395, '', '')
+)
+knitr::kable(anova3.4.ans)
+```
+
+</div>
+
+### Exercise 3.5 
+A regional opera company has tried three approaches to solicit donations from 24
+potential sponsors. The 24 potential sponsors were randomly divided into three groups of eight, and one approach was used for each group. The dollar amounts of the resulting contributions are shown in the following table
+
+```{r}
+opera <- data.frame(
+  Approach = 1:3
+)
+opera$Contributions <- list(
+  c(1000 ,1500 ,1200 ,1800 ,1600 ,1100 ,1000 ,1250),
+  c(1500 ,1850 ,2000 ,1200 ,2000 ,1700 ,1800 ,1900),
+  c(900  ,1000 ,1200 ,1500 ,1200 ,1550 ,1000 ,1100)
+)
+knitr::kable(opera)
+```
+
+The data is available as `Table35.Dollar.RData` and below R is used rather than Minitab used in Montgomery
+
+```{r}
+load("_data/Table35.Dollar.RData")
+```
+
+  (a) Do the data indicate that there is a difference in results obtained from the three different approaches? Use $\alpha = 0.05$. 
+  
+<div class = 'ans'>
+    
+```{r}
+mod <- lm(Dollar ~ Approach, data = Tabl35.Dollar) 
+anova(mod)
+mixlm::simple.glht(mod, "Approach")
+```
+
+</div>
+  
+  (b) Analyze the residuals from this experiment and comment on the model adequacy.
+  
+<div class = 'ans'>
+  
+```{r, fig.height=4}
+op <- par(mfrow = c(1, 2))
+plot(mod, 1:2)
+par(op)
+```
+
+
+There is nothing unusual about the residuals.
+
+</div>
+  
+## Extra exercises
+_NOTE:: only if time_
+
+Textbook ed 8 (numbers in ed 7 in parenthesis): 2.1 (2.2), 2.3 (2.3) ,2.20 (2.16), 2.29 (2.21). 
+
+The exercises, short solutions (and a few more problems) can also be found in `ExtraProblemsWithSolutionsch02ed7.pdf`.

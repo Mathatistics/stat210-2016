@@ -1,0 +1,1497 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Design and Analysis of Experiment</title>
+  <meta name="description" content="This contains the weekly exercises related to Design and Analysis of Experiment">
+  <meta name="generator" content="bookdown 0.3.9 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Design and Analysis of Experiment" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This contains the weekly exercises related to Design and Analysis of Experiment" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Design and Analysis of Experiment" />
+  
+  <meta name="twitter:description" content="This contains the weekly exercises related to Design and Analysis of Experiment" />
+  
+
+<meta name="author" content="Trygve Almøy">
+
+
+<meta name="date" content="2017-01-01">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="week-one.html">
+<link rel="next" href="week-three.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Design and Analysis of Experiment</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Practical Information</a></li>
+<li class="chapter" data-level="" data-path="week-one.html"><a href="week-one.html"><i class="fa fa-check"></i>Week One</a></li>
+<li class="chapter" data-level="" data-path="week-two.html"><a href="week-two.html"><i class="fa fa-check"></i>Week Two</a></li>
+<li class="chapter" data-level="" data-path="week-three.html"><a href="week-three.html"><i class="fa fa-check"></i>Week Three</a></li>
+<li><a href="exam-2011-sep-5-2011.html#exam-2011-sep-5-2011">Exam 2011 <small>(Sep 5, 2011)</small></a></li>
+<li><a href="exam-2012-sep-3-2012.html#exam-2012-sep-3-2012">Exam 2012 <small>(Sep 3, 2012)</small></a></li>
+<li class="chapter" data-level="" data-path="compulsory-assignment.html"><a href="compulsory-assignment.html"><i class="fa fa-check"></i>Compulsory Assignment</a></li>
+<li class="divider"></li>
+<li><a name="title" href="javascript:void(0)"><b>Lecturer:</b></a><ul>
+<li><a href="https://www.nmbu.no/ans/trygve.almoy" target="blank">Trygve Almøy</a></li></ul></li>
+<li><a name="title" href="javascript:void(0)"><b>Assistent Teachers:</b></a><ul>
+<li><a href="https://www.nmbu.no/ans/hilde.vinje" target="blank">Hilde Vinje</a></li>
+<li><a href="https://www.nmbu.no/ans/raju.rimal" target="blank">Raju Rimal</a></li></ul></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Design and Analysis of Experiment</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="week-two" class="section level1">
+<h1>Week Two</h1>
+<div id="exercise-1-1" class="section level2">
+<h2>Exercise 1</h2>
+<p>Air pollution measured by chlorine content (measured in ppm, parts per million) for three cities, randomly selected during one year.</p>
+<p>One year ago the cities were approximately equal polluted, but City 1 has the last year tried to reduce the pollution. Data is in a word file called <em>Monday week 2</em> on fronter.</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>Stack the data. Use the ANOVA model to investigate if the chlorine content really differs. Check the model assumptions, which problems do you see?</p>
+<div class="ans">
+<p>One of the way you can import data from word file into R is using <em>clipboard</em>. Just copy the data and import the data in clipboard into R (Rcommander: <em>Data &gt; Import Data &gt; from text file …</em>)</p>
+<p>Let <span class="math inline">\(y_{ij}\)</span> be the chlorine content (polution measurement) for city <span class="math inline">\(i\)</span>. The ANOVA model to investigate if the chlorine content really differs is,</p>
+<span class="math display" id="eq:W2E1Model">\[\begin{equation}
+  y_{ij} = \mu + \tau_i + \epsilon_{ij}, \text{ where, } \epsilon_{ij} \sim \text{NID}\left(0, \sigma^2\right)
+  \tag{1}
+\end{equation}\]</span>
+<p>Since, city is randomly selected, we also have assumption that the treatment effect follows normal distribution with mean 0 and variance <span class="math inline">\(\sigma_\tau^2\)</span>, i.e. <span class="math inline">\(\tau_i\sim\text{NID}\left(0, \sigma_\tau^2\right)\)</span></p>
+<p>The ANOVA table for the Model (<a href="week-two.html#eq:W2E1Model">(1)</a>) is,</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">Df</th>
+<th align="right">Sum Sq</th>
+<th align="right">Mean Sq</th>
+<th align="right">F value</th>
+<th align="right">Pr(&gt;F)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>City</td>
+<td align="right">2</td>
+<td align="right">74.581</td>
+<td align="right">37.291</td>
+<td align="right">3.016</td>
+<td align="right">0.061</td>
+</tr>
+<tr class="even">
+<td>Residuals</td>
+<td align="right">39</td>
+<td align="right">482.230</td>
+<td align="right">12.365</td>
+<td align="right"></td>
+<td align="right"></td>
+</tr>
+</tbody>
+</table>
+<p>The p-value in ANVOA table is larger than 0.05, so can not reject following Hypothesis at 95% confidence level and stay on the fact that the polution level of different cities are same. However, at 90% confidence level the cities appears to be significantly different.</p>
+<p><span class="math display">\[
+\begin{aligned}
+H_0 &amp;: \sigma_\tau ^ 2 = 0 \\
+H_1 &amp;: \sigma_\tau ^ 2 &gt; 0
+\end{aligned}
+\]</span></p>
+<p>Following diagnostic plot (Rcommander: <em>Model&gt;Graph&gt;Basic Diagnostic Plot</em>) gives a picture of assumption wheather they hold true in this situation.</p>
+<p><img src="STAT210-2016_files/figure-html/unnamed-chunk-77-1.png" width="672" /></p>
+<p><strong>Try to interpreate the plot youself</strong></p>
+</div></li>
+<li><p>Take the logarithm of the response. (<em>Data &gt; Manage variables in active dataset &gt; compute new variables</em>). Note that natural logarithm is done by <code>log(variable)</code>. Repeat the analysis, but on <code>log(chlorine)</code>. Check model assumptions once again. Investigate if city 1 has been able to reduce the pollution significantly compared the two others cities by a suitable contrast.</p>
+<div class="ans">
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">Df</th>
+<th align="right">Sum Sq</th>
+<th align="right">Mean Sq</th>
+<th align="right">F value</th>
+<th align="right">Pr(&gt;F)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>City</td>
+<td align="right">2</td>
+<td align="right">10.5435</td>
+<td align="right">5.2718</td>
+<td align="right">6.1158</td>
+<td align="right">0.0049</td>
+</tr>
+<tr class="even">
+<td>Residuals</td>
+<td align="right">39</td>
+<td align="right">33.6177</td>
+<td align="right">0.8620</td>
+<td align="right"></td>
+<td align="right"></td>
+</tr>
+</tbody>
+</table>
+<p>The diagnostic plot can be obtained as in previous question,</p>
+<p><img src="STAT210-2016_files/figure-html/unnamed-chunk-79-1.png" width="672" /></p>
+<p><strong>Interpreate the plot youself and find its differences from the previous diagnostic plot</strong></p>
+<p>To investigate if <code>city 1</code> has been able to reduce the pollution significantly compared the two others cities, a contrast with cofficient <code>c(1, -0.5, -0.5)</code>. Since,</p>
+<p><span class="math display">\[\text{Contrast } (\Gamma) = \mu_1 - \frac{1}{2}\left(\mu_2 + \mu_3\right) = \tau_1 - \frac{1}{2}\left(\tau_2 + \tau_3\right)\]</span></p>
+<p>The hypothesis for this test is,</p>
+<p><span class="math display">\[
+\begin{aligned}
+H_0 &amp;: \Gamma = 0\\
+H_1 &amp;: \Gamma &lt; 0
+\end{aligned}
+\]</span></p>
+<p>In R-commander, we can test this hypothesis from <em>Models &gt; Test Contrasts in ANOVA</em>. The result for the test is,</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">Estimate</th>
+<th align="right">Std. Error</th>
+<th align="right">t value</th>
+<th align="right">Pr(&gt;|t|)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>City c=( 1 -0.5 -0.5 )</td>
+<td align="right">-1.057827</td>
+<td align="right">0.3039017</td>
+<td align="right">-3.480822</td>
+<td align="right">0.0012468</td>
+</tr>
+</tbody>
+</table>
+<p>Since this is one sided hypothesis, the p-value for this test will be <em>half</em> the p-value we obtain in above table (<a href="http://www.ats.ucla.edu/stat/mult_pkg/faq/general/tail_tests.htm"><em>See More</em></a>). i.e.</p>
+<p><span class="math display">\[\frac{0.0012}{2} = 0.0006\]</span></p>
+<p>Since the p-value is very small, we reject the null hypothesis and claim that <code>City1</code> has significantly low chlorine level as compared to the other two cities.</p>
+</div></li>
+</ol>
+
+</div>
+<div id="exercise-2-1" class="section level2">
+<h2>Exercise 2</h2>
+<p>The following data are from an exploration of what kind of brand people in general prefer. Data could be found in the word file called <code>Monday week 2</code> on fronter. 6 recipes were tried out, each with 8 replicates. 48 respondents were randomly picked out and given one piece of bread (without information on recipe). They were asked to give points on a scale from 0 to 10 (10 is best).</p>
+<table>
+<thead>
+<tr class="header">
+<th align="right">R1</th>
+<th align="right">R2</th>
+<th align="right">R3</th>
+<th align="right">R4</th>
+<th align="right">R5</th>
+<th align="right">R6</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">4</td>
+<td align="right">7</td>
+<td align="right">6</td>
+<td align="right">4</td>
+<td align="right">3</td>
+<td align="right">7</td>
+</tr>
+<tr class="even">
+<td align="right">4</td>
+<td align="right">6</td>
+<td align="right">6</td>
+<td align="right">3</td>
+<td align="right">5</td>
+<td align="right">8</td>
+</tr>
+<tr class="odd">
+<td align="right">6</td>
+<td align="right">5</td>
+<td align="right">8</td>
+<td align="right">5</td>
+<td align="right">5</td>
+<td align="right">6</td>
+</tr>
+<tr class="even">
+<td align="right">5</td>
+<td align="right">3</td>
+<td align="right">10</td>
+<td align="right">4</td>
+<td align="right">6</td>
+<td align="right">4</td>
+</tr>
+<tr class="odd">
+<td align="right">10</td>
+<td align="right">5</td>
+<td align="right">7</td>
+<td align="right">6</td>
+<td align="right">6</td>
+<td align="right">10</td>
+</tr>
+<tr class="even">
+<td align="right">8</td>
+<td align="right">6</td>
+<td align="right">10</td>
+<td align="right">7</td>
+<td align="right">9</td>
+<td align="right">6</td>
+</tr>
+<tr class="odd">
+<td align="right">9</td>
+<td align="right">9</td>
+<td align="right">8</td>
+<td align="right">3</td>
+<td align="right">2</td>
+<td align="right">4</td>
+</tr>
+<tr class="even">
+<td align="right">7</td>
+<td align="right">4</td>
+<td align="right">8</td>
+<td align="right">3</td>
+<td align="right">2</td>
+<td align="right">6</td>
+</tr>
+</tbody>
+</table>
+<p>R1, R2 and R3 are bread baked on coarse-grained flour (Norwegian grovmel), the others on fine.</p>
+<p>R1, R3 and R5 is Swedish recipes, the others are Norwegian.</p>
+<ul>
+<li><p>State a model for this investigation.</p>
+<div class="ans">
+<p>Let <span class="math inline">\(y_{ij}\)</span> be the point for <span class="math inline">\(i^\text{th}\)</span> recipe and <span class="math inline">\(j^\text{th}\)</span> replication. The model is,</p>
+<span class="math display">\[\begin{equation}
+  y_{ij} = \mu + \tau_i + \epsilon_{ij}, \text{ where, } \epsilon_{ij} \sim \text{NID}\left(0, \sigma^2\right)
+  \label{eq:W2E2Model}
+\end{equation}\]</span>
+<p>In the model (<a href="#eq:W2E2Model">(<strong>??</strong>)</a>), we have parameters,</p>
+<p><span class="math inline">\(\mu\)</span> : Overall average point obtained by all recipes</p>
+<p><span class="math inline">\(\tau_i\)</span> : Effect of recipe <span class="math inline">\(i^\text{th}\)</span> (point obtained by recipe <span class="math inline">\(i\)</span> more(less) than the overall average)</p>
+<p>Here, we also assume that the overall effect of all recipes equals to zero.,</p>
+<p><span class="math display">\[\sum_{i = 1}^5\tau_i = 0\]</span></p>
+</div></li>
+<li><p>Test if there is an effect of recipes.</p>
+<div class="ans">
+<p>To fit the model from the given data, first we need to stack it. The hypothesis for testing if there is an effect of recipes is,</p>
+<p><span class="math display">\[
+\begin{aligned}
+H_0 &amp;: \tau_i = 0 \text{ for all }i \\
+H_1 &amp;: \tau_i \ne 0 \text{ for any }i
+\end{aligned}
+\]</span></p>
+<p>The ANOVA table for model (<a href="#eq:W2E2Model">(<strong>??</strong>)</a>) in the previous answer is,</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">Df</th>
+<th align="right">Sum Sq</th>
+<th align="right">Mean Sq</th>
+<th align="right">F value</th>
+<th align="right">Pr(&gt;F)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Recipe</td>
+<td align="right">5</td>
+<td align="right">66.938</td>
+<td align="right">13.388</td>
+<td align="right">3.517</td>
+<td align="right">0.01</td>
+</tr>
+<tr class="even">
+<td>Residuals</td>
+<td align="right">42</td>
+<td align="right">159.875</td>
+<td align="right">3.807</td>
+<td align="right"></td>
+<td align="right"></td>
+</tr>
+</tbody>
+</table>
+<p>From the ANOVA table, the low p-value (<span class="math inline">\(0.01\)</span>) shows that <code>Recipes</code> have significantly different preferences.</p>
+</div></li>
+</ul>
+<p>Answer the following questions by suitable contrasts.</p>
+<ul>
+<li><p>Is there positive effect of coarse-grained flour?</p>
+<div class="ans">
+<p>Here, R1, R2 and R3 are bread baked on coarse-grained flour, so the contrast can be written with coefficients <code>c(1/3, 1/3, 1/3, -1/3, -1/3, -1/3)</code> as,</p>
+<p><span class="math display">\[
+\begin{aligned}
+\Gamma &amp;= \frac{1}{3}\left(\tau_1 + \tau_2 + \tau_3\right) - \frac{1}{3}\left(\tau_1 + \tau_2 + \tau_3\right)
+\end{aligned}
+\]</span></p>
+<p>The hypothesis to test if this contrast is positive is,</p>
+<p><span class="math display">\[
+\begin{aligned}
+H_0 &amp;: \Gamma = 0 \\
+H_1 &amp;: \Gamma &gt; 0
+\end{aligned}
+\]</span></p>
+<p>From the test output below, we reject <span class="math inline">\(H_0\)</span> (very small p-value, <em>compare with half of p-value</em>) and conclude that there is positive effect of coarse-grained flour.</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">Estimate</th>
+<th align="right">Std. Error</th>
+<th align="right">t value</th>
+<th align="right">Pr(&gt;|t|)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Recipe c=(1/3 1/3 1/3 -1/3 -1/3 -1/3)</td>
+<td align="right">1.5417</td>
+<td align="right">0.5632</td>
+<td align="right">2.7373</td>
+<td align="right">0.009</td>
+</tr>
+</tbody>
+</table>
+</div></li>
+<li><p>Is there positive effect of coarse-grained flour, if we decide to use Norwegian recipes?</p>
+<div class="ans">
+<p>Here only Norwegian recipes (R2, R4, R6) are considered among which only R2 is made from coarse-grained flour. Since we are testing R2 against average of R4 and R6, the coefficient for contrast in this situation is <code>c(0, 1, 0, -0.5, 0, -0.5)</code>. So,</p>
+<p><span class="math display">\[\text{Contrast: }\Gamma = \tau_2 - \frac{1}{2}\left(\tau_4 + \tau_6\right)\]</span></p>
+<p>The hypothesis for this test is,</p>
+<p><span class="math display">\[
+\begin{aligned}
+H_0 &amp;: \Gamma = 0 \\
+H_1 &amp;: \Gamma &gt; 0
+\end{aligned}
+\]</span></p>
+<p>From the test output below, we can not reject <span class="math inline">\(H_0\)</span> (high p-value) and conclude that there is not a positve effect of coarse-grained flour in Norwegian recipes. Here we compare p-value with <em>half</em> of its value since this is one-tailed test. Even in this situation, p-value is high enough not to reject <span class="math inline">\(H_0\)</span>.</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">Estimate</th>
+<th align="right">Std. Error</th>
+<th align="right">t value</th>
+<th align="right">Pr(&gt;|t|)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Recipe c=( 0 1 0 -0.5 0 -0.5 )</td>
+<td align="right">0.25</td>
+<td align="right">0.8448</td>
+<td align="right">0.2959</td>
+<td align="right">0.7687</td>
+</tr>
+</tbody>
+</table>
+</div></li>
+<li><p>Is there different effect of Norwegian and Swedish recipes if we decide to use coarse-grained flour?</p>
+<div class="ans">
+<p>Among the course grained flour, R1 and R3 are Swedish recipes while R2 is Norwegian. Here,</p>
+<p><strong>Contrast Coefficients</strong>: <code>c(-0.5, 1, -0.5, 0, 0, 0)</code></p>
+<p><strong>Contrast:</strong></p>
+<p><span class="math display">\[\text{Contrast: }\Gamma = \tau_2 - \frac{1}{2}\left(\tau_1 + \tau_3\right)\]</span></p>
+<p><strong>Hypothesis:</strong></p>
+<p><span class="math display">\[
+\begin{aligned}
+H_0 &amp;: \Gamma = 0 \\
+H_1 &amp;: \Gamma \ne 0
+\end{aligned}
+\]</span></p>
+<p><strong>Test Result:</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">Estimate</th>
+<th align="right">Std. Error</th>
+<th align="right">t value</th>
+<th align="right">Pr(&gt;|t|)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Recipe c=( -0.5 1 -0.5 0 0 0 )</td>
+<td align="right">-1.625</td>
+<td align="right">0.8448</td>
+<td align="right">-1.9235</td>
+<td align="right">0.0612</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Decision:</strong></p>
+<p>Could not reject <span class="math inline">\(H_0\)</span> at 5% level of significance so there is no eveidence of Norwegian and Swedish recipes being different. However, at 10% percent, we conclude that there is significance difference between Norwegian and Swedish recipes.</p>
+</div></li>
+</ul>
+
+</div>
+<div id="exercise-3" class="section level2">
+<h2>Exercise 3</h2>
+<ol style="list-style-type: lower-alpha">
+<li>See <a href="./week-one.html#exercise-11">Exercise 11 Week 1</a>. Load the sire data once more.</li>
+</ol>
+<ul>
+<li><p>Explain what we mean by a residual.</p>
+<div class="ans">
+<p>The part of response that your model could not expalin are residuals. Residuals are also termed as error terms or noise. You can obtain residuals as,</p>
+<p><span class="math display">\[\text{Error: }(\epsilon_{ij}) = y_{ij} - \hat{y}_{ij}\]</span></p>
+<p>For example in a one-way ANOVA model <span class="math inline">\(y_{ij} = \mu + \tau_i + \epsilon_{ij},\; \epsilon \sim \text{NID}(0, \sigma^2)\)</span>, the estimated error terms are,</p>
+<p><span class="math display">\[\text{Error: }(\epsilon_{ij}) = y_{ij} - \hat{y}_{ij} = y_{ij} - (\hat{\mu} + \hat{\tau_i})\]</span></p>
+</div></li>
+<li><p>Calculate the residuals for all observations.</p>
+<div class="ans">
+<p>In R-commander: <em>Model &gt; Add Observation to …</em> and choose Residuals.</p>
+</div></li>
+<li><p>What does it mean if a residual is positive or negative?</p>
+<div class="ans">
+<p>Since <span class="math inline">\(\epsilon_{ij} = y_{ij} - \hat{y}_{ij}\)</span>, when the true values are larger than the fitted values, residuals are positive. Similary, when the true values are smaller than the fitted values, residuals are negative. Large residual, either it is positive or negative indicates that the observation corresponding that residual is far away from the fitted model.</p>
+</div></li>
+<li><p>Find the standardized residual. Do any residual have large absolute value?</p>
+<div class="ans">
+<p>In R-commander: <em>Model &gt; Add Observation to …</em> and choose standardized residuals. Following observation has largest absolute residual and standardized residuals.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="right">milk</th>
+<th align="left">sire</th>
+<th align="right">residual</th>
+<th align="right">std.residual</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">7562</td>
+<td align="left">1</td>
+<td align="right">872.75</td>
+<td align="right">2.794619</td>
+</tr>
+</tbody>
+</table>
+</div></li>
+<li><p>Find the animal with the largest and the smallest residual.</p>
+<div class="ans">
+<p>Sire 1 has both largest and smallest residuals. This also shows that there is large variation in the milk production from <code>sire1</code>.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="right">milk</th>
+<th align="left">sire</th>
+<th align="right">residual</th>
+<th align="right">std.residual</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">6038</td>
+<td align="left">1</td>
+<td align="right">-651.25</td>
+<td align="right">-2.085358</td>
+</tr>
+<tr class="even">
+<td align="right">7562</td>
+<td align="left">1</td>
+<td align="right">872.75</td>
+<td align="right">2.794619</td>
+</tr>
+</tbody>
+</table>
+</div></li>
+<li><p>Plot the residuals against the fitted values, make comments</p>
+<div class="ans">
+<p><img src="STAT210-2016_files/figure-html/unnamed-chunk-90-1.png" width="672" /></p>
+<p>The plot shows that the residual terms have constant variance expcept for some larger fitted values. Observations 30, 39 and 40 have largest absolute residuals. These observations have distorted the assumption of constant variation of residual and could lead to poor predictions.</p>
+</div></li>
+</ul>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Assume now that sire is a random effect (<em>discussed on lecture Tuesday</em>).</li>
+</ol>
+<p>If we are interested in the sire effect in general, explain why it is natural to assume sire as a random factor.</p>
+<ul>
+<li><p>Write down the model. Interpretate the 3 parameter in the model.</p>
+<div class="ans">
+<p>The model with sire as random effect is,</p>
+<span class="math display">\[\begin{equation}
+y_{ij} = \mu + \tau_i + \epsilon_{ij}, \text{ where, }
+    \epsilon_{ij} \sim \text{NID}(0, \sigma^2) \text{ and }
+    \tau_i \sim \text{NID}(0, \sigma_\tau^2)
+\label{eq:W2E03bModel}
+\end{equation}\]</span>
+<p>The three unknown parameters are,</p>
+<p><span class="math inline">\(\mu\)</span> : Overall average annual milk production from all sires</p>
+<p><span class="math inline">\(\sigma_\tau^2\)</span> : Variability in annual milk production between different sires</p>
+<p><span class="math inline">\(\sigma^2\)</span> : Variability in annual milk production within same sires</p>
+</div></li>
+<li><p>Is there effect of sire? State the null hypothesis and the alternative. Estimate the variance components, and give an interpretation of these estimates. Estimate the correlation between cows with same father.</p>
+<div class="ans">
+<p>Hypothesis for testing effect of sire is,</p>
+<p><span class="math display">\[
+\begin{aligned}
+H_0 &amp;: \sigma_\tau^2 = 0 \\
+H_1 &amp;: \sigma_\tau^2 &gt; 0
+\end{aligned}
+\]</span></p>
+<p>The ANOVA table for model (<a href="#eq:W2E03bModel">(<strong>??</strong>)</a>) is,</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">Mean Sq</th>
+<th align="right">Sum Sq</th>
+<th align="right">Df</th>
+<th align="right">F value</th>
+<th align="right">Pr(&gt;F)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>sire</td>
+<td align="right">312752.3</td>
+<td align="right">1251009</td>
+<td align="right">4</td>
+<td align="right">2.806</td>
+<td align="right">0.04</td>
+</tr>
+<tr class="even">
+<td>Residuals</td>
+<td align="right">111461.9</td>
+<td align="right">3901166</td>
+<td align="right">35</td>
+<td align="right"></td>
+<td align="right"></td>
+</tr>
+</tbody>
+</table>
+<p>Here, we have Mean Sum of Squares,</p>
+<p><span class="math display">\[
+\begin{aligned}
+\text{MS}_\text{treatment} &amp;= 312752.34 \\  
+\text{MS}_\text{Error} &amp;= 111461.88
+\end{aligned}
+\]</span></p>
+<p>The variance components <span class="math inline">\(\sigma^2\)</span> and <span class="math inline">\(\sigma_\tau^2\)</span> referes to the variation within a factor and variation between factors respectively. The total variation present in <span class="math inline">\(y_{ij}\)</span> is the sum of these two variances. The estimates of these variance components can be obtained as,</p>
+<p><span class="math display">\[
+\begin{aligned}
+\hat{\sigma}^2 &amp;= 111462 \\
+\hat{\sigma}_\tau^2 &amp;= \frac{\text{MS}_\text{treatment} - \text{MS}_\text{E}}{n} \\
+&amp;= \frac{201290.46}{8} = 25161.31
+\end{aligned}
+\]</span></p>
+</div></li>
+<li><p>How would you estimate the variance and the standard deviation for annual milk production in the whole population?</p>
+<div class="ans">
+<p>Since the total variation present in <span class="math inline">\(y_{ij}\)</span> is the sum of two variance components we have,</p>
+<p><span class="math display">\[
+\begin{aligned}
+\text{Total Variation} &amp;= \sigma_\tau^2 + \sigma^2 \\
+&amp; = 25161.31+111461.88 = 136623.19
+\end{aligned}
+\]</span></p>
+<p>Thus, the standard deviation for annual milk production in whole population is estimated as <span class="math inline">\(\sqrt{136623.186} = 369.626\)</span></p>
+</div></li>
+<li><p>How would you estimate the expected annual milk production in the whole population? What is the standard error of this estimate? Construct a 95% CI for these expectation?</p></li>
+</ul>
+<div id="exam-questions-for-exercise" class="section level3">
+<h3>Exam Questions for exercise</h3>
+<ol style="list-style-type: lower-alpha">
+<li>Exam STAT 210 Sep 2012, Exercise 1. Problems and solutions available on fronter.</li>
+<li>Exam STAT 210 Sep 2013, Exercise 3. Problems and solutions available on fronter (Tuesday).</li>
+</ol>
+
+</div>
+</div>
+<div id="exercise-4-1" class="section level2">
+<h2>Exercise 4</h2>
+<p>Assume the following result from a completely randomized block design (called experiment1) Where</p>
+<div class="column-3">
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th></th>
+<th>Block</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Treatment</strong></td>
+<td></td>
+<td><strong>1</strong></td>
+<td><strong>2</strong></td>
+</tr>
+<tr class="even">
+<td></td>
+<td><strong>1</strong></td>
+<td>1</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td><strong>2</strong></td>
+<td>3</td>
+<td>5</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li>State the model.</li>
+</ul>
+<p>Use pocket calculator (if necessary).</p>
+<ul>
+<li>State the model for the block experiment.</li>
+<li>Find SSTotal, SSTReatment, SSBlock and SSError.</li>
+<li>Estimate all the parameters in the model.</li>
+<li>Find the standard error of the estimates.</li>
+<li>Find the residuals.</li>
+<li>Find the fitted values.</li>
+<li>Split the fitted values into a general part, a part by treatment and a part by block.</li>
+<li>Make an ANOVA table and, test if there is treatment effect.</li>
+</ul>
+<p><em>You can check your results with R-commander</em></p>
+<p>If you instead obtained the following result (Experiment 2)</p>
+<div class="column-3">
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th></th>
+<th>Block</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Treatment</strong></td>
+<td></td>
+<td><strong>1</strong></td>
+<td><strong>2</strong></td>
+</tr>
+<tr class="even">
+<td></td>
+<td><strong>1</strong></td>
+<td>1</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td><strong>2</strong></td>
+<td>4</td>
+<td>6</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Answer the following without any calculations.</p>
+<p>Experiment 2 gave:</p>
+<ul>
+<li>larger SSTR than Experiment 1?</li>
+<li>larger SSB than Experiment 1?</li>
+<li>larger SSE than Experiment 1?</li>
+<li>larger SST than Experiment 1?</li>
+<li>larger F or a larger p-value when testing for treatment effect than Experiment 1.</li>
+</ul>
+<p>Analyze experiment 1 (incorrectly) by a one factor model.</p>
+<ul>
+<li>Why is SSE larger compared to the block design?</li>
+<li>Is the unexplained variance (<span class="math inline">\(\sigma^2\)</span>) larger or small compared to the block design?</li>
+</ul>
+<div id="from-textbook" class="section level3">
+<h3>From textbook</h3>
+<div id="exercise-4.2" class="section level4">
+<h4>Exercise 4.2</h4>
+<p>The ANOVA from a randomized complete block experiment output is shown below.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Source</th>
+<th align="left">DF</th>
+<th align="left">SS</th>
+<th align="left">MS</th>
+<th align="left">F</th>
+<th align="left">P</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Treatment</td>
+<td align="left">4</td>
+<td align="left">1020.56</td>
+<td align="left">?</td>
+<td align="left">30.14</td>
+<td align="left">?</td>
+</tr>
+<tr class="even">
+<td align="left">Block</td>
+<td align="left">?</td>
+<td align="left">?</td>
+<td align="left">64.765</td>
+<td align="left">?</td>
+<td align="left">?</td>
+</tr>
+<tr class="odd">
+<td align="left">Error</td>
+<td align="left">20</td>
+<td align="left">169.33</td>
+<td align="left">?</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">Total</td>
+<td align="left">29</td>
+<td align="left">1513.71</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+<ol style="list-style-type: lower-alpha">
+<li><p>Fill in the blanks. You may give bounds on the P-value.</p>
+<div class="ans">
+<table>
+<thead>
+<tr class="header">
+<th align="left">Source</th>
+<th align="right">DF</th>
+<th align="right">SS</th>
+<th align="right">MS</th>
+<th align="right">F</th>
+<th align="left">P</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Treatment</td>
+<td align="right">4</td>
+<td align="right">1020.56</td>
+<td align="right">255.1400</td>
+<td align="right">30.14000</td>
+<td align="left">&lt; 0.0001</td>
+</tr>
+<tr class="even">
+<td align="left">Block</td>
+<td align="right">5</td>
+<td align="right">323.82</td>
+<td align="right">64.7650</td>
+<td align="right">7.64956</td>
+<td align="left">0.00037</td>
+</tr>
+<tr class="odd">
+<td align="left">Error</td>
+<td align="right">20</td>
+<td align="right">169.33</td>
+<td align="right">8.4665</td>
+<td align="right"></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">Total</td>
+<td align="right">29</td>
+<td align="right">1513.71</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+<p>We can find p-value using computer or some advanced calculator but try to find a range of p-value from the F-table.</p>
+</div></li>
+<li><p>How many blocks were used in this experiment?</p>
+<div class="ans">
+<p>One block factor with 5 levels is used in this experiment.</p>
+</div></li>
+<li><p>What conclusions can you draw?</p></li>
+</ol>
+</div>
+</div>
+<div id="problems-and-solutions-for-previous-exams-are-found-on-fronter." class="section level3">
+<h3>Problems and solutions for previous exams are found on fronter.</h3>
+<ul>
+<li>Exam Stat 210 Sep 5, 2011.</li>
+<li>Exam Stat 210 Sep, 2012 Exercise 2.</li>
+<li>Exam Stat 210 Sep, 2013 Exercises 1 and 2.</li>
+<li>Exam Stat 210 Sep, 2014 Exercise 2.</li>
+</ul>
+<p><strong>Comment:</strong> Datasets (named <code>Exam*.RData</code>) are available for the exam problems for those who would like to reproduce output and check answers using R.</p>
+
+</div>
+</div>
+<div id="exercise-5-1" class="section level2">
+<h2>Exercise 5</h2>
+<p><small><em>will be discussed on lecture Thursday, but try yourself</em></small></p>
+<p>Load the R data <code>blockwheat</code>. This is a block experiment where the response is <code>protein</code> in wheat. We have 3 sorts (Bastian, Berserk and Bjarne), each sort is tried once on 4 different fields (lock).</p>
+<ul>
+<li><p>Why is this regarded as a block experiment?</p>
+<div class="ans">
+<p>Here, our primary interest is sorts irrespective of where it is tried (or grown). However, <code>field</code> factor can affect (increase noise) the analysis if it is not included in the model which consequently prevent us from discovering the effect of sort. Thus, a block experiment where <code>field</code> factor is also included in the model not as a primary subject of interest but rather to block unnecessary noises that it can create if it is not included in the model. Block experiment reduces noise so that we can investigate the factor effect that is of our interest.</p>
+</div></li>
+<li><p>How many observations are there in total?</p>
+<div class="ans">
+<p>There are 4 fields and 3 sorts where a protein value is measured for each of the combination. The total number of observation is 12.</p>
+</div></li>
+<li><p>Do we have replicates?</p>
+<div class="ans">
+<p>Only one measurement is made for each combination of field and sort, so there are not any replications. But if we remove field factor and consider one-way ANOVA model, we will have 4 replication of sort.</p>
+</div></li>
+<li><p>State the model.</p>
+<div class="ans">
+<p>The block experiment model we have is,</p>
+<span class="math display">\[\begin{equation}
+y_{ij} + \mu + \tau_i + \beta_j + \epsilon_{ij}
+\label{eq:W2E05Model}
+\end{equation}\]</span>
+<p>Here the model follows the assumptions,</p>
+<p><span class="math display">\[
+\begin{aligned}
+\epsilon_{ij} &amp;\sim \text{NID}\left(0, \sigma^2\right) \\
+\sum_{i = 1}^3{\tau_i} &amp;= 0 \\
+\sum_{j = 1}^4{\beta_j} &amp;= 0
+\end{aligned}
+\]</span></p>
+</div></li>
+<li><p>Make an ANOVA table.</p>
+<div class="ans">
+<p>ANOVA table for model (<a href="#eq:W2E05Model">(<strong>??</strong>)</a>) is,</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">Df</th>
+<th align="right">Sum Sq</th>
+<th align="right">Mean Sq</th>
+<th align="right">F value</th>
+<th align="right">Pr(&gt;F)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Sort</td>
+<td align="right">2</td>
+<td align="right">1.487</td>
+<td align="right">0.743</td>
+<td align="right">3.867</td>
+<td align="right">0.083</td>
+</tr>
+<tr class="even">
+<td>Field</td>
+<td align="right">3</td>
+<td align="right">10.907</td>
+<td align="right">3.636</td>
+<td align="right">18.913</td>
+<td align="right">0.002</td>
+</tr>
+<tr class="odd">
+<td>Residuals</td>
+<td align="right">6</td>
+<td align="right">1.153</td>
+<td align="right">0.192</td>
+<td align="right"></td>
+<td align="right"></td>
+</tr>
+</tbody>
+</table>
+</div></li>
+<li><p>Does it seem smart to include field in the experiment (give reason for your answer?</p>
+<div class="ans">
+<p>It is a better idea to include <code>field</code> in this experiment. Since <code>field</code> factor has significant effect and if it is removed, the variation present in protein measurement that it describes will appear as a noise. Consequently, the probability of finding the effect of Sort which could be significant will decreases.</p>
+</div></li>
+<li><p>Estimate the parameters in the model.</p>
+<div class="ans">
+<p>The coefficient estimates are,</p>
+<table>
+<thead>
+<tr class="header">
+<th align="right">(Intercept) <span class="math inline">\(\hat{\mu}\)</span></th>
+<th align="right">Sort(Bastian) <span class="math inline">\(\hat{\tau}_1\)</span></th>
+<th align="right">Sort(Berserk) <span class="math inline">\(\hat{\tau}_2\)</span></th>
+<th align="right">Field(F1) <span class="math inline">\(\hat{\beta}_1\)</span></th>
+<th align="right">Field(F2) <span class="math inline">\(\hat{\beta}_2\)</span></th>
+<th align="right">Field(F3) <span class="math inline">\(\hat{\beta}_3\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">12.833</td>
+<td align="right">0.467</td>
+<td align="right">-0.383</td>
+<td align="right">-0.067</td>
+<td align="right">-1.2</td>
+<td align="right">-0.2</td>
+</tr>
+</tbody>
+</table>
+<p>From the sum-to-zero assumptions, we can get <span class="math inline">\(\hat{\tau}_3 = -(\hat{\tau}_1 + \tau_2) = -0.083\)</span> and <span class="math inline">\(\beta_4 = -(\beta_1 + \beta_2 + \beta_3) = 1.467\)</span></p>
+<p>Similarly, the estimate for error variance is given by <span class="math inline">\(\text{MS}_E\)</span> which is 0.192</p>
+</div></li>
+<li>Can you prove sort effect?</li>
+<li>Find the fitted values and the residuals for all observations.</li>
+<li><p>Check the model assumptions.</p>
+<div class="ans">
+<p>We can check model assumption from <em>basic diagnostic plots</em> for the fitted model.</p>
+<p><img src="STAT210-2016_files/figure-html/unnamed-chunk-99-1.png" width="672" /></p>
+<p>Plot shows that the residual terms are scattered randomly and constant over different fitted values. This means the assumption of constant residual variance holds true. Further, in the normal q-q plot, points are aligned with the q-q line which fairly suggest that error terms are normally distributed.</p>
+</div></li>
+<li><p>Explain the residual to a person without knowledge in statistics.</p></li>
+</ul>
+<p>Use the model to show that the expected differences between two sorts are independent on the block. (In block experiments it is unusual to include interaction.)</p>
+<p>Does the plot below (<em>Graphs &gt; Plot of means</em>) support the statement above?</p>
+<p><img src="STAT210-2016_files/figure-html/unnamed-chunk-100-1.png" width="672" /></p>
+<div class="ans">
+<p>The model for a block experiment is,</p>
+<p><span class="math display">\[y_{ij} = \mu + \tau_i + \beta_j + \epsilon_{ij}\]</span></p>
+<p>Here, the following assumption for a fixed effect models holds.</p>
+<p><span class="math display">\[
+\begin{aligned}
+\epsilon_{ij} &amp;= \text{NID}\left(0, \sigma^2\right) \\
+\sum_{i = 1}^a\tau_i &amp;= 0 \text{ and } \sum_{j = 1}^b \beta_j = 0
+\end{aligned}
+\]</span></p>
+<p>Since, <span class="math inline">\(\text{E}(y_{ij}) = \mu + \tau_i + \beta_j\)</span>, the expected difference between two sorts can be written as,</p>
+<p><span class="math display">\[
+\begin{aligned}
+\text{E}\left(y_{ij} - y_{kj}\right) &amp;= \mu + \tau_i + \beta_j - \mu - \tau_k + \beta_j \\
+&amp;= \tau_i - \tau_k
+\end{aligned}
+\]</span></p>
+<p>which is independent of block. In other words, the expected difference between sorts is same irrespective of which block they belong. In the following plot sorts <code>Bastian</code> and <code>Berserk</code> holds this statement, however it is not very true for sort <code>Bjarne</code>.</p>
+</div>
+<p>Assume incorrectly a One Way Analysis of Variance model (sort as factor).</p>
+<ul>
+<li>Why is this incorrect?</li>
+<li>Compare the SSError, the degrees of freedom and the estimate of the variance for this model and the model including blocks.</li>
+</ul>
+<p>If you had only the output from the block model, could you find the SSError from the One Way Analysis of Variance model.</p>
+
+</div>
+<div id="exercise-6" class="section level2">
+<h2>Exercise 6</h2>
+<p>Load <code>sortsoil.Rdata</code>. The dataset discussed on friday’s lecture,</p>
+<ul>
+<li><p>Calculate the mean in each cell (by hand)</p>
+<div class="ans">
+<p>The average in each cell along with column mean, row mean and overall mean is,</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Sort</th>
+<th align="right">Clay</th>
+<th align="right">Sand</th>
+<th align="right">(all)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">A1</td>
+<td align="right">515.0</td>
+<td align="right">685.0</td>
+<td align="right">600</td>
+</tr>
+<tr class="even">
+<td align="left">A2</td>
+<td align="right">560.0</td>
+<td align="right">400.0</td>
+<td align="right">480</td>
+</tr>
+<tr class="odd">
+<td align="left">(all)</td>
+<td align="right">537.5</td>
+<td align="right">542.5</td>
+<td align="right">540</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Calculate it by and hand, answer above are just for checking</strong></p>
+</div></li>
+<li><p>Regard the 4 means, do those support that interaction is present?</p>
+<div class="ans">
+<p>Averages in previous answer suggests interaction is present. Here, if you choose sort <code>A2</code> instead of sort <code>A1</code>, there is an increase in <code>Yield</code> for soil type <code>clay</code> while <code>Yield</code> decreases for soil type <code>Sand</code>. Similary, if you planned to cultivate a sort in <code>sand</code> rather than <code>clay</code>, the change in average <code>Yield</code> is different for Sort <code>A1</code> and <code>A2</code>.</p>
+</div></li>
+<li><p>Have we constructed a sand-sort and a clay-sort?</p>
+<div class="ans">
+<p>The averages can also be visualized by the mean plot below:</p>
+<p><img src="STAT210-2016_files/figure-html/unnamed-chunk-104-1.png" width="672" /></p>
+</div></li>
+</ul>
+<p>Apply a model with main effect and interaction effect, call this <strong>Model 1</strong>.</p>
+<div class="ans">
+<p>The model can be written as,</p>
+<p><span class="math display">\[y_{ij} = \mu + \tau_i + \beta_j + (\tau\beta)_{ij} + \epsilon_{ij}, \text{ where, } \epsilon_{ij} \sim \text{NID}(0, \sigma^2)\]</span></p>
+<p>Since this is two-factor fixed effect model, the assumption of sum-to-zero effect are,</p>
+<p><span class="math display">\[
+\begin{aligned}
+\sum_{i = 1}^a\tau_i = 0 &amp;&amp; \sum_{j = 1}^a\beta_j = 0 &amp;&amp; \sum_{i = 1}^a(\tau\beta)_{ij} = \sum_{j = 1}^b(\tau\beta)_{ij} = 0
+\end{aligned}
+\]</span></p>
+</div>
+<ul>
+<li><p>Test if interaction is present.</p>
+<div class="ans">
+<p>A test hypothesis for testing interaction effect is,</p>
+<p><span class="math display">\[
+\begin{aligned}
+H_0 &amp;: (\tau\beta)_{ij} = 0, \text{for all }i \text{ and } j \\
+H_1 &amp;: \text{at least one }(\tau\beta)_{ij} \ne 0
+\end{aligned}
+\]</span></p>
+<p>The ANOVA table for <strong>Model 1</strong> is,</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">Df</th>
+<th align="right">Sum Sq</th>
+<th align="right">Mean Sq</th>
+<th align="right">F value</th>
+<th align="right">Pr(&gt;F)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Sort</td>
+<td align="right">1</td>
+<td align="right">28800</td>
+<td align="right">28800</td>
+<td align="right">11.405941</td>
+<td align="right">0.0278557</td>
+</tr>
+<tr class="even">
+<td>Soil</td>
+<td align="right">1</td>
+<td align="right">50</td>
+<td align="right">50</td>
+<td align="right">0.019802</td>
+<td align="right">0.8948935</td>
+</tr>
+<tr class="odd">
+<td>Sort:Soil</td>
+<td align="right">1</td>
+<td align="right">54450</td>
+<td align="right">54450</td>
+<td align="right">21.564356</td>
+<td align="right">0.0097068</td>
+</tr>
+<tr class="even">
+<td>Residuals</td>
+<td align="right">4</td>
+<td align="right">10100</td>
+<td align="right">2525</td>
+<td align="right"></td>
+<td align="right"></td>
+</tr>
+</tbody>
+</table>
+<p>Low p-value corresponding to <code>Sort:Soil</code> rejects the null hypothesis, thus interaction is significant and is present in the model.</p>
+</div></li>
+<li><p>Estimate all expectation parameters in the model.</p>
+<div class="ans">
+<p>The coefficient estimates for <strong>Model 1</strong> are,</p>
+<table>
+<thead>
+<tr class="header">
+<th align="right">(Intercept) <span class="math inline">\((\hat{\mu})\)</span></th>
+<th align="right">Sort(A1) <span class="math inline">\((\hat{\tau}_1)\)</span></th>
+<th align="right">Soil(Clay) <span class="math inline">\((\hat{\beta}_1)\)</span></th>
+<th align="right">Sort(A1):Soil(Clay) <span class="math inline">\(((\hat{\tau}\hat{\beta})_{11})\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">540</td>
+<td align="right">60</td>
+<td align="right">-2.5</td>
+<td align="right">-82.5</td>
+</tr>
+</tbody>
+</table>
+<p>However, the output does not contain estimates for <span class="math inline">\(\tau_2\)</span>, <span class="math inline">\(\beta_2\)</span>, <span class="math inline">\((\tau\beta)_{12}\)</span>, <span class="math inline">\((\tau\beta)_{21}\)</span>, <span class="math inline">\((\tau\beta)_{22}\)</span>. These estimates can be obtained using sum-to-zero assumption for fixed effect model. These estimates are,</p>
+<p><span class="math display">\[
+\begin{aligned}
+\hat{\tau}_2 &amp;= -\hat{\tau}_1 = -60 \\
+\hat{\beta}_2 &amp;= -\hat{\beta}_1 = 2.5 \\
+\left(\hat{\tau}\hat{\beta}\right)_{12} &amp;= -\left(\hat{\tau}\hat{\beta}\right)_{11} = 82.5 \\
+\left(\hat{\tau}\hat{\beta}\right)_{21} &amp;= -\left(\hat{\tau}\hat{\beta}\right)_{12} = \left(\hat{\tau}\hat{\beta}\right)_{11} = -82.5 \\
+\left(\hat{\tau}\hat{\beta}\right)_{22} &amp;= -\left(\hat{\tau}\hat{\beta}\right)_{21} = -\left(\hat{\tau}\hat{\beta}\right)_{11} = 82.5 \\
+\end{aligned}
+\]</span></p>
+</div></li>
+<li><p>Estimate and give an interpretation of <span class="math inline">\(\sigma^2\)</span></p>
+<div class="ans">
+<p>The estimate of <span class="math inline">\(\sigma^2\)</span> is MSE, i.e.</p>
+<p><span class="math display">\[\hat{\sigma}^2 = \text{MS}_\text{E} = 2525\]</span></p>
+<p><strong>Interpretation:</strong> MSE is the estimate of variance of error terms <span class="math inline">\(\epsilon_{ij}\)</span>. It is the expected variation present in response (<code>Yield</code>) for any given <code>sort</code> and <code>soil</code>.</p>
+</div></li>
+<li><p>Find the fitted values and the residuals.</p>
+<div class="ans">
+<p><em>Fitted values</em> are obtained as, <span class="math inline">\(\hat{y_{ij}} = \hat{\mu} + \hat{\tau}_i + \hat{\beta}_j + \left(\hat{\tau}\hat{\beta}\right)_{ij}\)</span>. It is the average yield for each combination of <code>sort</code> and <code>soil</code>.</p>
+<p><em>Residuals</em> are variation present in data that our model is not able to explain. It is the difference between the actual value and the fitted value. i.e, <span class="math inline">\(e_{ij} = y_{ij} - \hat{y}_{ij}\)</span></p>
+<p><strong>Rcomander:</strong><em>model &gt; Add observation statistics to data</em></p>
+</div></li>
+<li><p>Find the standardized residuals, are some too large (absolute value).</p></li>
+<li><p>Check the model by suitable graphics.</p>
+<div class="ans">
+<p>We can check model assumptions using basic diagnostic plots (<strong>Rcomander:</strong> <em>Model&gt;Graphs&gt;Basic Diagnositic Plot</em>). The first two plots from Basic diagnostic plot for <strong>Model 1</strong> is as follows,</p>
+<p><img src="STAT210-2016_files/figure-html/unnamed-chunk-110-1.png" width="672" /></p>
+<p><strong>Interpreate the plot yourself</strong></p>
+</div></li>
+</ul>
+<p>Assume a model without interaction, call this <strong>Model 2</strong></p>
+<ul>
+<li><p>Compare SSE in both models.</p>
+<div class="ans">
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">Model 1</th>
+<th align="right">Model2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>SSE</td>
+<td align="right">10100</td>
+<td align="right">64550</td>
+</tr>
+</tbody>
+</table>
+<p>Sum of square of residuals in <strong>Model 2</strong> (without interaction term) is very high compared to <strong>Model 1</strong>. This also show us that without interaction term model error increases significantly. In addition, this also supports the significance of interaction term.</p>
+</div></li>
+<li><p>Find the fitted values and the residuals in <strong>Model 2</strong> and compare the models.</p>
+<div class="ans">
+<p>See how fitted values and residuals are dependent on how you specify your model. Both of these values depends on your model.</p>
+</div></li>
+<li><p>Check the model assumptions in model 1, can you see any problems. (Yes, there is a problem).</p></li>
+</ul>
+<p>Below you will find data from an identical experiment, but with one large difference. Carefully inspect the data, what is the difference? Repeat the analysis with these data. Why do the p-values change? Data is saved with the name <code>sortsoil2.rdata</code>.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="right">Yield</th>
+<th align="right">sort</th>
+<th align="right">soil</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">369</td>
+<td align="right">1</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="right">359</td>
+<td align="right">1</td>
+<td align="right">2</td>
+</tr>
+<tr class="odd">
+<td align="right">340</td>
+<td align="right">2</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="right">492</td>
+<td align="right">2</td>
+<td align="right">2</td>
+</tr>
+<tr class="odd">
+<td align="right">369</td>
+<td align="right">1</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="right">361</td>
+<td align="right">1</td>
+<td align="right">2</td>
+</tr>
+<tr class="odd">
+<td align="right">336</td>
+<td align="right">2</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="right">497</td>
+<td align="right">2</td>
+<td align="right">2</td>
+</tr>
+<tr class="odd">
+<td align="right">369</td>
+<td align="right">1</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="right">360</td>
+<td align="right">1</td>
+<td align="right">2</td>
+</tr>
+<tr class="odd">
+<td align="right">338</td>
+<td align="right">2</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="right">493</td>
+<td align="right">2</td>
+<td align="right">2</td>
+</tr>
+</tbody>
+</table>
+<div class="ans">
+<p>The ANOVA table for <code>sortsoil2</code> data is,</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">Df</th>
+<th align="right">Sum Sq</th>
+<th align="right">Mean Sq</th>
+<th align="right">F value</th>
+<th align="right">Pr(&gt;F)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>sort</td>
+<td align="right">1</td>
+<td align="right">7956.75</td>
+<td align="right">7956.75</td>
+<td align="right">2652.25</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td>soil</td>
+<td align="right">1</td>
+<td align="right">16206.75</td>
+<td align="right">16206.75</td>
+<td align="right">5402.25</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td>sort:soil</td>
+<td align="right">1</td>
+<td align="right">20418.75</td>
+<td align="right">20418.75</td>
+<td align="right">6806.25</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td>Residuals</td>
+<td align="right">8</td>
+<td align="right">24.00</td>
+<td align="right">3.00</td>
+<td align="right"></td>
+<td align="right"></td>
+</tr>
+</tbody>
+</table>
+<p>It is clear that all factor including interaction terms are highly significant in this model. Noise (measured by MSE) is very small as compared to <strong>Model 1</strong>, so that the variation present in different factors and interactions are clearly visible and thus they are highly significant.</p>
+</div>
+
+</div>
+</div>
+<script>
+ans_btn_html = '<a class = "btn-ans"><span class="label label-success no-print">&lt;ANS/&gt;</span></a>';
+  showAns_btn = '<a class="showAns-btn btn pull-right js-toolbar-action">Show Answers</a>';
+  hideAns_btn = '<a class="hideAns-btn btn pull-right js-toolbar-action" style="display:none;">Hide Answers</a>';
+  
+  // Adding Extra Menus in Navigation
+  
+  // Adding button on before each answer:::
+  $(".ans").before(ans_btn_html);
+  $('.btn-ans').each(function(){
+    $(this).next('.ans').andSelf().wrapAll('<div class="wrap-ans"/>');
+  });
+  $('.btn-ans').click(function(){
+    $(this).siblings('.ans').toggle(400);
+  });
+  
+if ($(".ans").length > 0){
+    $('.book-header').prepend(showAns_btn, hideAns_btn);
+    $('.showAns-btn').show();
+    $('.showAns-btn').click(function(){
+      $('.btn-ans').hide(400);
+      $('.ans').show(400);
+      $('.hideAns-btn').show();
+      $(this).hide();
+      $('.hideAns-btn').click(function(){
+        $('.btn-ans').show(400);
+        $('.ans').hide(400);
+        $('.showAns-btn').show();
+        $(this).hide();
+      });
+    });
+  }
+
+var chap = "week-two"
+if(window.location.href.indexOf(chap) != -1){
+  var now = new Date();
+  var release = new Date("August 21, 2016");
+  if(now < release){
+    $(".ans, .btn-ans, .showAns-btn, .hideAns-btn").hide()
+  }
+}
+
+$('.ans p:has(img)').css('text-align', 'center');
+</script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-82812028-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="week-one.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="week-three.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/mathatistics/stat210-2016/edit/master/week2/02-W2E01.Rmd",
+"text": "Edit"
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

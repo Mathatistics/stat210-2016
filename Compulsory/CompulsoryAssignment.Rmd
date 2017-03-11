@@ -1,0 +1,440 @@
+---
+title: "Compulsory Assignment"
+author: "Raju Rimal"
+date: "19 August 2016"
+output:
+  word_document: default
+  pdf_document:
+    keep_tex: yes
+  html_document:
+    css: custom.css
+fontsize: 11pt
+geometry: margin=1in
+header-includes:
+- \usepackage{mathpazo}
+- \usepackage{setspace}
+- \usepackage{enumitem}
+- \usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
+- \onehalfspacing
+- \setlength{\parindent}{0em}
+- \setlist[enumerate]{leftmargin=*}
+documentclass: article
+subtitle: Design and Analysis of Experiment (STAT210)
+classoption: a4paper
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, comment = NA)
+```
+
+```{r, echo = FALSE, message=FALSE, warning=FALSE}
+htmltools::tags$script(src = "custom.js")
+load("_data/comp1.frystemp.RData")
+load("_data/comp2.fett.RData")
+load("_data/comp3.dommere.RData")
+library(mixlm)
+```
+
+<div class = "text-center">
+  <button type="button" class="btn btn-info btn-lg showAns-btn">Show Answers</button>
+  <button type="button" class="btn btn-info btn-lg hideAns-btn" style="display:none;">Hide Answers</button>
+  <br/>
+</div>
+
+
+Please upload your solution to the fronter folder **Compulsory paper Stat 210 2016**. Each student is asked to hand in their own private solution. Please hand in only one file. The name of the file should start with your _family name_. It’s not important to type mathematical symbols nicely. You can, if you prefer, write longhand (by hand), scan and upload a _pdf_. 
+
+Please limit computer output as much as possible in your paper, and any computer output should be commented.
+
+# Exercise 1
+You may use R or other statistical software for this exercise. The data for this exercise is called `frystemp` and can be loaded from the file `comp1.frystemp.RData` (all data sets are in the _data_ folder of fronter). A lab has investigated the freezing temperature (called `frystemp` in the dataset reproduced below) for three different brands (called `merke` in the dataset).
+
+a) Calculate mean and standard deviation for each brand. Calculate the overall mean (mean for all observations).
+
+    <div class = 'ans'> 
+    
+    ```{r}
+    sumry <- sapply(list("Mean" = mean, SD = sd, N = length), function(x) {
+      with(frystemp, tapply(frystemp, merke, x))
+    })
+    ovrl <- sapply(list(Mean = mean, SD = sd, N = length), function(fn) fn(frystemp$frystemp))
+    ovrlSumry <- rbind(sumry, Overall = ovrl)
+    knitr::kable(ovrlSumry, caption = "Numerical Summary of `frystemp` data", digits = 3)
+    ```
+
+    </div>
+
+b) Consider the following model:
+    
+    $$y_{ij} = \mu + \tau_i + \epsilon_{ij}, \; \text{ where, } \sum_{i = 1}^3\tau_i = 0$$
+    
+    Here,
+    
+    $$
+    \begin{aligned}
+    y_{ij} &: \text{freezing temperature for each brand, } i = 1, 2, 3 \text{ and } j = 1, \ldots, 8 \\
+    \tau_i &: \text{effect of brand }i
+    \end{aligned}
+    $$ 
+    
+    State the standard assumptions of the model. Use ANOVA to test if there is a difference between the brands. Formulate the hypothesis, carry out a test and formulate a conclusion. Give the ANOVA table.
+    
+    <div class = 'ans'>
+    
+    The standard assumption of the model is, $$\epsilon_{ij} \sim N(0, \sigma^2)$$
+    
+    It is also assumed that the $y_{ij}$ are independent. The hypothesis for testing if there is a difference between the brands is,
+    
+    $$
+    \begin{aligned}
+    H_0 &: \tau_i = 0 \text{ for all } i \\
+    H_1 &: \tau_i \ne 0 \text{ for at least one } i
+    \end{aligned}
+    $$ 
+    
+    The ANOVA table for the model is,
+    
+    ```{r}
+    mdl <- mixlm::lm(frystemp ~ merke, data = frystemp)
+    aovtbl <- mixlm::anova_reg(mdl)
+    pvalue <- aovtbl[["Pr(>F)"]][1]
+    gsub("NA", "  ", knitr::kable(aovtbl, caption = "ANOVA table for `frystemp` model"))
+    ```   
+    
+    Here, p-value $\left(`r round(pvalue, 3)`\right)$ is much smaller than 0.05, so we reject $H_0$ and claim that there is significant difference between `merke` at 95% confidence level.
+    
+    </div>
+    
+c) Estimate all parameters in the model.
+    
+    <div class = 'ans'>
+    The estimated parameters in the model can be obtained from model summary as below:
+    
+    ```{r}
+    mdlSumry <- broom::tidy(mdl)
+    mdlSumry$term <- c("$\\hat{\\mu}$", "$\\hat{\\tau_1}$", "$\\hat{\\tau_2}$")
+    knitr::kable(mdlSumry, 
+                 caption = "Coefficient Estimate of Linear Model: `frystemp` ~ `merke`",
+                 digits = 3)
+    
+    knitr::kable(broom::glance(mdl)[c(1:6, 11)], 
+                 digits = 4, 
+                 caption = "Summary of Linear Model: `frystemp`~ `merke`")
+    ```
+    
+    From the output, we can estimate $\tau_3$ from the assumption that the overall mean sum to zero. i.e. $\hat{\tau}_3 = -\left(\tau_1 + \tau_2\right) = -(`r paste(round(mdlSumry[2:3, 2], 2), collapse = "+")`) = `r -1 * round(sum(mdlSumry[2:3, 2]), 3)`$
+    
+    </div>
+    
+d) Calculate confidence intervals for $\tau_1 - \tau_2$, $\tau_1 - \tau_3$ and $\tau_2 - \tau_3$ using Tukey's method. Are there any significant differences?
+    
+    <div class = 'ans'>
+    The confidence intervals for Tukey's method can be computed as,
+    
+    ```{r}
+    mdl.tukey <- mixlm::simple.glht(mdl, "merke")
+    mdl.tukey.df <- mdl.tukey$res
+    ```
+    
+    $$
+    \begin{aligned}
+    \bar{y}_{i\cdot} - \bar{y}_{j\cdot} - q_\alpha (a, f)\sqrt{\frac{\text{MS}_\text{E}}{n}} &\le \mu_i - \mu_j\\
+    & \le \bar{y}_{i\cdot} - \bar{y}_{j\cdot} + q_\alpha (a, f)\sqrt{\frac{\text{MS}_\text{E}}{n}} &\le \mu_i - \mu_j, i \ne j
+    \end{aligned}
+    $$
+    
+    since, $\mu_i - \mu_j$ is same as $\tau_i - \tau_j$, the conficence interval for group $i$ and $j$ can also be written as,
+    
+    $$
+    \begin{aligned}
+    \hat{\tau}_{i\cdot} - \hat{\tau}_{j\cdot} - q_\alpha (a, f)\sqrt{\frac{\text{MS}_\text{E}}{n}} &\le \mu_i - \mu_j\\
+    & \le \hat{\tau}_{i\cdot} - \hat{\tau}_{j\cdot} + q_\alpha (a, f)\sqrt{\frac{\text{MS}_\text{E}}{n}} &\le \mu_i - \mu_j, i \ne j
+    \label{eqn:tukeyCI}
+    \end{aligned}
+    $$
+    
+    Here we have, 
+    
+    $$
+    \begin{aligned}
+    q_\alpha (a, f)\sqrt{\frac{\text{MS}_\text{E}}{n}} &= q_{0.05} (3, 21)\sqrt{\frac{1.310119}{8}} \\
+    &= `r qtukey(0.95, 3, 21, lower.tail = TRUE) * sqrt(1.310119 / 8)`
+    \label{eqn:tukeyCriteria}
+    \end{aligned}
+    $$ 
+    
+    Further, this value is now compated with the absolute difference between the estimates. The difference between the estimates of various group-pairs are,
+    
+    ```{r}
+    cf <- c(coef(mdl)[-1], "merke(merke3)" = -(sum(coef(mdl)[-1])))
+    diff <- t(apply(combn(c(coef(mdl)[-1], "merke(merke3)" = -(sum(coef(mdl)[-1]))), 2)[2:1, ], 2, diff))
+    colnames(diff) <- apply(combn(mdl$xlevels$merke, 2), 2, paste, collapse = " - ")
+    knitr::kable(diff)
+    ```
+    
+    If the absolute difference between two groups are larger than the value `r round(qtukey(0.95, 3, 21, lower.tail = TRUE) * sqrt(1.310119 / 8), 3)` than we reject the null hypothesis and claim that the pair are significantly different from each other. The R output for this test is,
+    
+    ```{r}
+    printCoefmat(mdl.tukey.df, has.Pvalue = TRUE, digits = 4)
+    ```
+    
+    Above output shows the difference between `merke2` and `merke1` whose interpretation will be same as the difference between `merke1` and `merke2` except the sign of Estimate and interval will switch. For instance, in this situation, the estimate will be -2.6 and the lower and upper confidence interval at 95% confidence level will be -4.043 and -2.600 respectively.
+    
+    The result shows that `marke1` is significantly different than `marke2` and `marke3` at 95% confidence level.
+    </div>
+    
+# Exercise 2 (Topic discussed at lecture August 23)
+
+
+_You are **not** supposed to use R or other statistical software for this exercise_. (But you should use R to check. The dataset is ‘fett’ contained in the file `comp2.fett.RData`).
+
+We would like to investigate the fat concentration in milk (`fettprosent` in the below data set). Three farms have been randomly selected and 5 cows from each farm (`besetning`) is recruited to the study. The data is as given below:
+
+a) Explain what is meant by a _random effect_ and why `besetning` (farm) reasonably can be modeled as a random effect.
+
+    <div class = 'ans'>
+    
+    In many situations, factors have infinitely many levels and a researcher randomly choose some of the levels and make inference about the whole population. Models with such factors are called _Random effect models_. In case of random effect model, the interest is on the population distribution of factor rather than some specific chosen levels. 
+    
+    For example, An experiment where some specific drugs are to be tested for their efficacy. A randomly chosen drug will barely be an interest in any experiment. Here, the experiment is oriented in finding the effect of those specific drugs and thus, this is the case of _fixed effect model_. While in another experiment where researcher is interested in finding if there is any differences between farm in Akershus area of Norway in the context of milk production. There can be many farms and the research is not interested on some specific farm but rather is interested on overal population of farm. So some farms are randomly choosen and are used to construct a model. This is the case of _random effect model_.
+    
+    </div>
+    
+
+b) Consider the model,
+    $$
+    \begin{aligned}
+    y_{ij} &= \mu + \tau_i + \epsilon_{ij} \\
+    \tau_i &\sim \text{NID}\left(0, \sigma_\tau^2\right)\\
+    \epsilon_{ij} &\sim \text{N}\left(0, \sigma^2\right) \\
+    i &= 1, 2, 3\; j = 1, 2, \ldots 5\; N = 15
+    \end{aligned}
+    $$ 
+    Also, all random variables are independent
+    
+    Use the output below:
+    
+    ```{r}
+    mdl <- mixlm::lm(fettprosent ~ r(besetning), data = fett)
+    aovtbl <- mixlm::AnovaMix(mdl)
+    anova(mdl)[, -3]
+    ```
+    
+    Estimate $\sigma_\tau^2$ and $\sigma^2$ and the correlation for animals from the same farm.
+
+    <div class = 'ans'>
+    
+    Here we can find $\text{MS}_\text{treatment}$ and $\text{MS}_\text{E}$ as,
+    
+    $$
+    \begin{aligned}
+    \text{MS}_\text{treatment} &= \frac{\text{SS}_\text{treatment}}{df_\text{treatment}}
+    = `r round(anova(mdl)[1, 3], 3)` \\
+    \text{and, }\text{MS}_\text{E} &= \frac{\text{SS}_\text{E}}{df_\text{Error}}
+    = `r round(anova(mdl)[2, 3], 3)`
+    \end{aligned}
+    $$ 
+    
+    Therefore, we can find the estimates of _variance components_ $\hat{\sigma}_\tau^2$ and $\hat{\sigma}^2$ as,
+    
+    $$
+    \begin{aligned}
+    \hat{\sigma}^2 &= \text{MS}_\text{E} = `r round(anova(mdl)[2, 3], 3)` \\
+    \hat{\sigma}_\tau^2 &= \frac{\text{MS}_\text{treatment}-\text{MS}_\text{E}}{n} \\
+    &= \frac{`r round(anova(mdl)[1, 3], 3)` - `r round(anova(mdl)[2, 3], 3)`}{`r table(mdl$model$besetning)[1]`}
+    = `r round((anova(mdl)[1, 3] - anova(mdl)[2, 3])/table(mdl$model$besetning)[1], 3)`
+    \end{aligned}
+    $$ 
+    
+    Finally, the correlation for animals from the same farm is,
+    
+    $$
+    \text{cor}(y_{ij}, y_{ik}) = \hat{\rho} = \frac{\hat{\sigma}_\tau^2}{\hat{\sigma}_\tau^2 + \hat{\sigma^2}} = \frac{`r round(aovtbl$var.comps[1], 2)`}{`r round(sum(aovtbl$var.comps), 3)`} 
+    = `r round(aovtbl$var.comps[1]/sum(aovtbl$var.comps), 3)`
+    $$
+    
+    Thus the correlation for animals from the same farm is `r round(aovtbl$var.comps[1]/sum(aovtbl$var.comps), 3) * 100` percent.
+    
+    </div>
+
+c) Is there a significant effect of `besetning`? Formulate the hypothesis and do the test.
+
+    <div class = 'ans'>
+    
+    To test the significance of the random factor `besetning`, the hypothesis can be written as,
+    
+    $$
+    \begin{aligned}
+    H_0 &: \sigma_\tau^2 = 0 \\
+    H_1 &: \sigma_\tau^2 > 0
+    \end{aligned}
+    $$ 
+    
+    Here, $\sigma_\tau^2$ is the variation between farms and the null hypothesis states that there is no variation between farms. Given ANOVA table shows that the p-value corresponding to `besetning` is very small and thus we reject null hypothesis and claim that there is significant difference between farms. As this is a random effect model, the inference is made on just those specific farms but population of farms in general.
+    
+    </div>
+    
+
+d) Calculate a 99% confidence interval for $\sigma^2$
+
+    <div class = 'ans'>
+    
+    The confidence interval for $\sigma^2$ at $\alpha$ level of significance is,
+    
+    $$\frac{\text{SS}_E}{\chi^2_{\alpha/2, N-a}} \le \sigma^2 \le \frac{\text{SS}_E}{\chi^2_{1 - \alpha/2, N-a}}$$
+    
+    From Chi-square table, we can find chi-square values for $\alpha = 0.01$ and $N-a = 12$ as,
+    
+    ```{r}
+    c005 <- round(qchisq(0.005, 12, lower.tail = F), 3)
+    c995 <- round(qchisq(0.995, 12, lower.tail = F), 3)
+    sse <- round(anova(mdl)[2,2], 3)
+    ```
+    
+    $$
+    \chi^2_{0.005, 12} = `r c005` \text{ and } 
+    \chi^2_{0.995, 12} = `r c995`
+    $$
+    
+    Therefore, using $\text{SS}_E = `r sse`$, we can find,
+    
+    $$
+    \begin{aligned}
+    \frac{\text{SS}_E}{\chi^2_{\alpha/2, N-a}} &\le \sigma^2 \le \frac{\text{SS}_E}{\chi^2_{1 - \alpha/2, N-a}} \\
+    \frac{`r sse`}{`r c005`} &\le \sigma^2 \le \frac{`r sse`}{`r c995`} \\
+    `r round(sse / c005, 3)` &\le \sigma^2 \le `r round(sse / c995, 3)`
+    \end{aligned}
+    $$ 
+    
+    Thus at 99% confidence level, the true error variance $(\sigma^2)$ lie between the interval $\left[`r round(sse / c005, 3)`, `r round(sse / c995, 3)`\right]$.
+    
+    </div>
+  
+
+# Exercise 3 (Lectures August 24)
+
+_You are supposed to use R or other statistical software for this exercise_. The data is `comp3.dommere.RData`.
+
+The purpose of the data of this exercise is to investigate if 5 different types of feeding (`fortype` in the below data set) lead to differently tasting milk. Four judges (corresponding to `Dommer` in the data) were asked to taste and rate on a scale from 1 to 10, 10 being best. 
+
+```{r}
+knitr::kable(reshape2::dcast(dommere, Dommer ~ Fortype, value.var = 'Poeng'))
+```
+
+It is natural to let `Dommer` be regarded as a block effect.
+
+Assume two different model, one includes the blocks (_Model 1_), and the other without blocking (_Model 2_).
+
+```{r}
+Model1 <- mixlm::lm(Poeng ~ Fortype + Dommer, data = dommere)
+Model2 <- mixlm::lm(Poeng ~ Fortype, data = dommere)
+```
+
+a) Describe the models and state the standard assumptions. Would you prefer _Model 1_ or _Model2_? Give reasons for your answer.
+    
+    <div class = 'ans'>
+    
+    **Model 1:**
+    Let $y_{ij}$ be the `poeng` of $i^\text{th}$ fortype given by $j^\text{th}$ dommer.
+    
+    $$y_{ij} = \mu + \tau_i + \gamma_j + \epsilon_{ij}, \text{ where, } \sum_{i = 1}^5 \tau_i = 0 \text{ and } \sum_{j = 0}^4 \gamma_j = 0$$
+    
+    Here, $i = 1, \ldots, 5$ (Fortype) and $j = 1, \ldots, 5$ (Dommer)
+    
+    **Model 2:**
+    Let $y_{ij}$ be the $j^\text{th}$ replication of `poeng` for $i^\text{th}$ fortype.
+    
+    $$y_{ij} = \mu + \tau_i + \epsilon_{ij}, \text{ where, } \sum_{i = 1}^a \tau_i = 0$$
+    
+    Here $i = 1, \ldots, 5$ (Fortype) and $j = 1, \ldots, 5$ (Replication) Since in this model dommer is not considered as blocking factor so, the points are considered as replications.
+    
+    The error terms $\epsilon_{ij}$ in both **Model1** and **Model2** are independent and follows normal distribution with mean 0 and constant variance $\sigma^2$. i.e.,
+    
+    $$\epsilon_{ij} \sim \text{NID}\left(0, \sigma^2\right)$$
+    
+    ANOVA output from **Model 1** and **Model 2** are as follows,
+    
+    ```{r}
+    aovModel1 <- unclass(summary(aov(Model1)))[[1]]
+    aovModel2 <- unclass(summary(aov(Model2)))[[1]]
+    ```
+    
+    ```{r anovaModel1}
+    gsub("NA", "  ", knitr::kable(aovModel1, digits = 4, caption = "ANOVA for **Model 1**"))
+    ```
+    ```{r anovaModel2}
+    gsub("NA", "  ", knitr::kable(aovModel2, digits = 4, caption = "ANOVA for **Model 2**"))
+    ```
+    
+    From the ANOVA tables above, we can see that the block factor `Dommer` has significant effect in Model 1 which indicates that the analysis will be affected if it is removed from the model. In Model 2 the MSE has increased that consiquently decreases F-value corresponding to Fortype. 
+    
+    ```{r, eval = F}
+    mdlSumry12 <- rbind(Model1 = broom::glance(Model1)[c(1:6, 11)],
+                        Model2 = broom::glance(Model2)[c(1:6, 11)])
+    knitr::kable(mdlSumry12, digits = 3, caption = "Model Statistics from **Model 1** and **Model 2**")
+    ```
+    
+    
+    </div>
+    
+
+b) Show that there is a significant effect of `Fortype` in _Model 1_.
+
+    <div class = 'ans'>
+    
+    ```{r}
+    gsub("NA", "  ", knitr::kable(aovModel1, digits = 4,
+                                  caption = "ANOVA table for **Model 1**"))
+    ```
+    
+    Since, the p-value corresponding to `Fortype` is ($`r round(aovModel1[1, 5], 4)`$) << 0.05, there is significant effect of `Fortype`.
+    
+    </div>
+    
+
+c) Which types of feeding (`Fortype`) differ significantly Use _Model 1_? 
+    
+    <div class = 'ans'>
+    Since there is significant effect of `Fortype`, it is desirable to perform pairwise comparison between different `Fortype`. This can be done using Tukey's pariwise comparison. The output from Tukey's test is,
+    
+    ```{r}
+    mdl.tukey <- mixlm::simple.glht(Model1, "Fortype")
+    mdl.tukey.df <- mdl.tukey$res
+    
+    printCoefmat(mdl.tukey.df, digits = 3)
+    ```
+    
+    The result shows that at 95% confidence level, `Fortype1`is significantly different than `Fortype3`, `Fortype4` and `Fortype5` while `Fortype2` is significantly different from `Frotype3` and `Fortype5`. In addition at 90% confidence level, `Fortype4` and `Fortype5` are also significantly different.
+    
+    </div>
+
+d) Fortype 1 and 2 are based on feed concentrates (_Norwegian: Kraftfor_), while Fortype 3 and 4 is based on rutabaga (_Norwegian Kålrot_). 
+
+    Construct a contrast that measures the difference between these two feeding regimes, and test if the concentrates types taste significantly better than the other.
+    
+    <div class = 'ans'>
+    
+    A contrast to test the average of `Fortype1` and `Fortype2` with average of `Fortype3` and `Fortype4` can be written as,
+    
+    $$\text{Contrast: }(\Gamma) = \frac{1}{2}\left(\tau_1 + \tau_2\right) - \frac{1}{2}\left(\tau_3 + \tau_4\right) $$
+    
+    The above hypothesis is written in terms of effects $\tau_i$ rather than $\mu_i$ since $\mu_1 + \mu_2 = \mu_3 + \mu_4$ is same as $\tau_1 + \tau_2 = \tau_3 + \tau_4$. Further, the coefficient of contrast is $c_i = (0.5, 0.5, -0.5, -0.5, 0)$. The hypothesis to test if the difference between concentrates types (`Fortype1` and `Fortype2`) is better than Rutabaga (`Foretype3` and `Fortype4`) is,
+    
+    $$H_0: \Gamma = 0 \text{ vs } H_1: \Gamma > 0$$
+    
+    The test statistic for this hypothesis is,
+    
+    $$
+    t_0 = \frac{\sum_{i = 1}^ac_i\hat{\tau}_{i\cdot}}{\sqrt{\text{MS}_E \sum_{i = 1}^a\frac{c_i^2}{n_i}}} \sim t_{0.05, N-a}
+    $$ 
+        
+    Using the test statistics above we can test the hypothesis. Test output obtained from R is as follows,
+    
+    ```{r}
+    knitr::kable(gmodels::fit.contrast(Model1, "Fortype", c(0.5, 0.5, -0.5, -0.5, 0)))
+    ```
+    
+    From the test output, we can see that the p-value is very small (smaller than 0.05, level of significance). The p-value here is for two-sided test and for one-sided test, this p-value will be half of the p-value in output which is even smaller. So, we reject the null hypothesis and conclude that the concentrations types are significantly better than the rutabaga type.
+    
+    </div>
+    

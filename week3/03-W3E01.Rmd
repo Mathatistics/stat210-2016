@@ -1,0 +1,50 @@
+# Week Three
+
+```{r, echo = FALSE, include=FALSE}
+knitr::opts_chunk$set(comment = NA, echo = FALSE)
+```
+
+## Exercise 1 (Hospital Data)
+
+- Load the `Hospital.Rdata`
+
+```{r}
+load("_data/hospital.RData")
+```
+
+
+- Construct an interaction effect plot. (_Graphs > Plot of means_)
+    
+    <div class="ans">
+    
+    ```{r, warning=FALSE, message=FALSE}
+    with(syk, RcmdrMisc::plotMeans(Healing, Medicine, Disease))
+    ```
+    
+    </div>
+
+
+- Apply a model with Healing as response, Disease, and Medicine as factor where interaction is included, call this `Model1`.
+- Test if interaction is present.
+- Estimate all parameters.
+- Split the first observation into 5 parts: constant, (sample) effect of disease, (Sample) effect of medicine, (Sample) effect of interaction and residual Show that the sum of the 4 effects gives the sample mean in the level combination the observation belongs.
+- Repeat the analysis without including interaction, call this `Model2`.
+- Find and store the fitted value and the residuals for both model and compare.
+- Compare the Sum of squares for the two different models.
+- If you should test on main effects for in `Model2` without use of computer, show how you can use the results from the `Model1` relatively easy.
+- Plot the residuals (y-axis) against the fitted value (x-axis) for both models and show how this plot reveals model problems in `Model2`.
+- A student that had not heard about 2-factor design tried to investigate the effect of medicine by a One Way ANOVA model (`Model3`). Explain why this is incorrect for this data.
+- For all 3 models find R-square, and see how this increases with complexity.
+$$\text{R-square} = \frac{\text{SSModel}}{\text{SS}_\text{Total}} = 1 – \frac{\text{SSE}}{\text{SS}_\text{Total}}$$
+
+
+## Exercise 2 (Mussels Data)
+
+- Load the mussels data.
+- Assume a model where eatable is the response size and season are the factors.
+- Assume no interaction. Store the residuals and the fitted values.
+- Plot residual against fitted values and make comments.
+- Give an interpretation of the replicate variance ($\sigma^2$). Estimate $\sigma^2$ and construct a 95% confidence interval for the true value.
+- Assume a model including interaction. Store the residuals and the fitted values.
+- Plot residual against fitted values and make comments.
+- Give an interpretation of the replicate variance ($\sigma^2$) and construct a 95% confidence interval for the true value.

@@ -1,0 +1,7 @@
+# Exam 2013 <small>(Sep 3, 2012)</small>
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+require(mixlm)
+load("_data/Exam2012Ex1.RData")
+load("_data/0_622604440_examstat210sept2012problem2and3.rdata")
+```

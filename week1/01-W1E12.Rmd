@@ -1,0 +1,119 @@
+## Exercise 12
+
+```{r}
+dta1 <- `rownames<-`(matrix(c(69, 79, 89, 71, 81, 91), 3, 2), c("Diet1", "Diet2", "Diet3"))
+dta2 <- `rownames<-`(matrix(c(60, 70, 80, 80, 90, 100), 3, 2), c("Diet1", "Diet2", "Diet3"))
+dta3 <- `rownames<-`(matrix(c(70, 71, 72, 90, 91, 92), 3, 2), c("Diet1", "Diet2", "Diet3"))
+dta4 <- `rownames<-`(matrix(c(80, 82, 83, 82, 84, 85), 3, 2), c("Diet1", "Diet2", "Diet3"))
+dta <- list(dta1, dta2, dta3, dta4)
+```
+
+Tree diets for pigs were test out, in an experiment with 2 replicates. The Response is carcass weight (slaktevekt in Norwegian). Let’s assume 4students did the experiment and that they really obtained different results:
+
+### Experiment 1
+
+```{r}
+knitr::kable(dta1)
+```
+
+### Experiment 2
+
+```{r}
+knitr::kable(dta2)
+```
+
+### Experiment 3
+
+```{r}
+knitr::kable(dta3)
+```
+
+### Experiment 4
+
+```{r}
+knitr::kable(dta4)
+```
+
+### Without computing anything:
+
+<ul>
+<li>Describe all 4 experiments, have focus on large explained or unexplained variation.
+<div class = 'ans'>
+**Experiment 1:** Large difference between diets, small difference inside diets 
+
+**Experiment 2:** Large difference between diets, large difference inside diets 
+
+**Experiment 3:** Small difference between diets, large difference inside diets 
+
+**Experiment 4:** Small difference between diets, small difference inside diets
+</div>
+</li>
+<li>In which experiment do you think you will have a large, small or moderate F value?
+<div class = 'ans' id = "pfvalue">
+**Experiment 1:** Large F, small P-value
+
+**Experiment 2:** Moderate F
+
+**Experiment 3:** Small F, large P-value 
+
+**Experiment 4:** Moderate F
+</div>
+</li>
+<li>In which experiment do you think you will have a large, small or moderate P value?
+<div class = 'ans'>
+See [previous answer](#pfvalue)
+</div>
+</li>
+<li>In which experiment do you think you will prove a significant effect of diet?
+<div class = 'ans'>
+**Experiment 1** will prove a significant effect of diet due to large difference between diets and small difference inside diets.
+
+**Experiment 2** could results with significant effect of diet but may get influenced by the noise within diets.
+
+**Experiment 3** and **Experiment 4** has very small difference between diets however Experiment 4 has small variation within diets which can help us to see the difference between diets.
+</div>
+</li>
+<li>Check your answers by R-commander.
+<div class = 'ans'>
+The ANOVA table for four experiments from R-commander is,
+
+```{r}
+dta.stack <- lapply(dta, function(x) {
+  `names<-`(stack(as.data.frame(t(x))), c('weight', 'diet'))
+})
+mdls <- lapply(dta.stack, function(x) lm(weight ~ diet, data = x))
+aovTbls <- lapply(mdls, function(x) {
+  out <- knitr::kable(unclass(summary(aov(x)))[[1]])
+  gsub('NA', '  ', out)
+})
+```
+
+### Experiment 1:
+
+```{r}
+aovTbls[[1]]
+```
+
+### Experiment 2:
+
+```{r}
+aovTbls[[2]]
+```
+
+### Experiment 3:
+
+```{r}
+aovTbls[[3]]
+```
+
+### Experiment 4:
+
+```{r}
+aovTbls[[4]]
+```
+
+
+
+</div>
+</li>
+</ul>

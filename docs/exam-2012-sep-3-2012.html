@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Design and Analysis of Experiment</title>
+  <meta name="description" content="This contains the weekly exercises related to Design and Analysis of Experiment">
+  <meta name="generator" content="bookdown 0.3.9 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Design and Analysis of Experiment" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This contains the weekly exercises related to Design and Analysis of Experiment" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Design and Analysis of Experiment" />
+  
+  <meta name="twitter:description" content="This contains the weekly exercises related to Design and Analysis of Experiment" />
+  
+
+<meta name="author" content="Trygve Almøy">
+
+
+<meta name="date" content="2017-01-01">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="exam-2011-sep-5-2011.html">
+<link rel="next" href="compulsory-assignment.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Design and Analysis of Experiment</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Practical Information</a></li>
+<li class="chapter" data-level="" data-path="week-one.html"><a href="week-one.html"><i class="fa fa-check"></i>Week One</a></li>
+<li class="chapter" data-level="" data-path="week-two.html"><a href="week-two.html"><i class="fa fa-check"></i>Week Two</a></li>
+<li class="chapter" data-level="" data-path="week-three.html"><a href="week-three.html"><i class="fa fa-check"></i>Week Three</a></li>
+<li><a href="exam-2011-sep-5-2011.html#exam-2011-sep-5-2011">Exam 2011 <small>(Sep 5, 2011)</small></a></li>
+<li><a href="exam-2012-sep-3-2012.html#exam-2012-sep-3-2012">Exam 2012 <small>(Sep 3, 2012)</small></a></li>
+<li class="chapter" data-level="" data-path="compulsory-assignment.html"><a href="compulsory-assignment.html"><i class="fa fa-check"></i>Compulsory Assignment</a></li>
+<li class="divider"></li>
+<li><a name="title" href="javascript:void(0)"><b>Lecturer:</b></a><ul>
+<li><a href="https://www.nmbu.no/ans/trygve.almoy" target="blank">Trygve Almøy</a></li></ul></li>
+<li><a name="title" href="javascript:void(0)"><b>Assistent Teachers:</b></a><ul>
+<li><a href="https://www.nmbu.no/ans/hilde.vinje" target="blank">Hilde Vinje</a></li>
+<li><a href="https://www.nmbu.no/ans/raju.rimal" target="blank">Raju Rimal</a></li></ul></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Design and Analysis of Experiment</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="exam-2012-sep-3-2012" class="section level1">
+<h1>Exam 2012 <small>(Sep 3, 2012)</small></h1>
+<p>Each sub-question will be given the same weight in the evaluation of the exam. You may answer in English or Norwegian (or “Scandinavian”). There are three exercises.</p>
+<div id="exercise-1-3" class="section level2">
+<h2>Exercise 1</h2>
+<p>The purpose of this exercise to determine if a new diet treatment or method (called <code>M1</code>) designed to help people loosing weight is better than two well known methods (called <code>M2</code> and <code>M3</code>). Two individuals were recruited in each group. The individuals were weighed at the beginning and the end of the study. For each individual the weight difference (<code>final weight</code>-<code>initial weight</code>) was recorded. The data and some summary statistics are as follows:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Treatments</th>
+<th align="left">Observations</th>
+<th align="left">Averages</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">M1</td>
+<td align="left">0, 2</td>
+<td align="left">1</td>
+</tr>
+<tr class="even">
+<td align="left">M2</td>
+<td align="left">1, 3</td>
+<td align="left">2</td>
+</tr>
+<tr class="odd">
+<td align="left">M3</td>
+<td align="left">5, 7</td>
+<td align="left">6</td>
+</tr>
+<tr class="even">
+<td align="left">Total Average</td>
+<td align="left"></td>
+<td align="left">3</td>
+</tr>
+</tbody>
+</table>
+<p>We will use the model,</p>
+<p><span class="math display">\[
+y_{ij} = \mu + \tau_i + \epsilon_{ij}
+\]</span></p>
+<p>Where,</p>
+<p><span class="math inline">\(i = 1, 2, 3\)</span> Corresponding to <code>M1</code>, <code>M2</code> and <code>M3</code></p>
+<p><span class="math inline">\(j = 1, 2\)</span> corresponding to the two observations in each treatment group</p>
+<p><span class="math inline">\(y_{ij}\)</span> = Weight loss and</p>
+<p><span class="math inline">\(\epsilon_{ij} \sim \text{N}(0, \sigma^2)\)</span>, and <span class="math inline">\(\sum_{i = 1}^3 \tau_i = 0\)</span></p>
+<ol style="list-style-type: lower-alpha">
+<li><p>Calculate <span class="math inline">\(\text{SS}_\text{Treatments}\)</span> and <span class="math inline">\(\text{SS}_\text{E}\)</span> defined below :</p>
+<p><span class="math display">\[
+\begin{aligned}
+\text{SS}_\text{Treatments} &amp;= 2\sum_{i = 1}^3\left(\bar{y}_{i\cdot} - \bar{y}_{\cdot\cdot}\right)^2 \\
+\text{SS}_\text{E} &amp;= \sum_{i = 1}^3\sum_{j = 1}^2\left(\bar{y}_{ij} - \bar{y}_{i\cdot}\right)^2
+\end{aligned}
+\]</span></p>
+<div class="ans">
+<p><span class="math display">\[
+\begin{aligned}
+\text{SS}_\text{Treatments} &amp;= 2\sum_{i = 1}^3\left(\bar{y}_{i\cdot} - \bar{y}_{\cdot\cdot}\right)^2 \\
+&amp;= 2\left((1-3)^2+(2-3)^2+(6-3)^2\right) \\
+&amp;= 28 \\
+\text{SS}_\text{E} &amp;= \sum_{i = 1}^3\sum_{j = 1}^2\left(\bar{y}_{ij} - \bar{y}_{i\cdot}\right)^2 \\
+&amp;= (0-1)^2+(2-1)^2+(1-2)^2+(3-2)^2+(5-6)^2+(7-6)^2 \\
+&amp;= 6
+\end{aligned}
+\]</span></p>
+</div></li>
+<li><p>Consider the null hypothesis</p>
+<p><span class="math display">\[H_0: \tau_1 = \tau_2 = \tau_3 = 0\]</span></p>
+<p>Show that the test statistic is <span class="math inline">\(F_0=7\)</span> and use this to perform the test. Formulate a conclusion.</p>
+<div class="ans">
+<p>We have, degree of freedom for treatment is <span class="math inline">\(3 -1 = 2\)</span> and degree of freedom for error is <span class="math inline">\(6-3 =3\)</span>. So,</p>
+<p><span class="math display">\[
+\begin{aligned}
+\text{MS}_\text{treatment} &amp;= \frac{\text{SS}_\text{treatment}}{df_\text{treatment}} = \frac{28}{2}
+= 14 \\
+\text{MS}_\text{E} &amp;= \frac{\text{SS}_\text{E}}{df_\text{E}} = \frac{6}{3}
+= 2
+\end{aligned}
+\]</span></p>
+<p>Thus,</p>
+<p><span class="math display">\[F_0 = \frac{\text{MS}_\text{treatment}}{\text{MS}_\text{E}} = \frac{14}{2} = 7\]</span></p>
+<p>Further, <span class="math inline">\(f_{0.05, 2, 3} = 9.552\)</span></p>
+<p>Since, 7 &lt; 9.552, we cannot reject <span class="math inline">\(H_0\)</span> and cannot claim a significance difference between treatments <code>M1</code>, <code>M2</code> and <code>M3</code>.</p>
+</div></li>
+<li><p>We would like to extend on the above pilot study and design a real study. How would you design this study? You are free to state your assumptions. You <em>can</em> mention words like <em>randomization</em>, <em>blocking</em> and <em>replication</em>. You are not supposed to write more than 10 full sentences.</p>
+<div class="ans">
+<p>We should have a sample from the population for which we would like to generalize to. For instance, if we would like to generalize to adults aged 18 to 60, our sample should be individuals from 18 to 60. We could <strong>block</strong>, for instance wrt to sex. In this case it would be reasonable to have a <strong>random</strong> sample of females and a random sample of males. Normally we would choose these samples to be equally large aiming for a balanced study. The individuals should be assigned M1,M2 and M3 based on randomization. It is important to have a sufficiently large study and one could do power calculations to secure that the sample size is adequate.</p>
+<p><em>Comment:</em> power calculations are mentioned in the course, but he the students have not been taught how these are done.</p>
+</div></li>
+</ol>
+<p>Exercises 2 and 3 below are based on the simulated data reproduced in <a href="exam-2012-sep-3-2012.html#appendix-1-1">Appendix 1</a>. The response variable is weight of pigs. There are 24 observations. The variables are</p>
+<table style="width:100%;">
+<colgroup>
+<col width="11%" />
+<col width="88%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td><strong>Race</strong></td>
+<td>This variable indicates one of three possible races and is coded: <code>Race1</code>, <code>Race2</code> and <code>Race3</code></td>
+</tr>
+<tr class="even">
+<td><strong>Farm</strong></td>
+<td>This variable indicates which of six farms the pigs come from and is coded <code>Farm1</code>, …, <code>Farm6</code></td>
+</tr>
+<tr class="odd">
+<td><strong>Modern</strong></td>
+<td>This variable is <code>Yes</code> if the farm is considered to be run in a modern way and otherwise <code>No</code></td>
+</tr>
+<tr class="even">
+<td><strong>Weight</strong></td>
+<td>The final weight (English: carcass weight, Norwegian: slaktevekt) of pigs in kg</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="exercise-2-3" class="section level2">
+<h2>Exercise 2</h2>
+<p>In this exercise we will only be using the variables Farm and Weight. We consider the following random effect model:</p>
+<p><span class="math display">\[y_{ij} = \mu + \tau_i + \epsilon_{ij}\]</span></p>
+<p>Where,</p>
+<table>
+<colgroup>
+<col width="12%" />
+<col width="4%" />
+<col width="82%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td align="right"><span class="math inline">\(i\)</span></td>
+<td align="center">=</td>
+<td align="left"><span class="math inline">\(1, 2, \ldots, 6\)</span> corresponding to <code>Farm 1</code>, <code>Farm 2</code>, …, <code>Farm 6</code></td>
+</tr>
+<tr class="even">
+<td align="right"><span class="math inline">\(j\)</span></td>
+<td align="center">=</td>
+<td align="left"><span class="math inline">\(1, 2, \ldots, 4\)</span> corresponding to the four observations for each farm,</td>
+</tr>
+<tr class="odd">
+<td align="right"><span class="math inline">\(y_{ij}\)</span></td>
+<td align="center">=</td>
+<td align="left"><code>Weight</code>, <span class="math inline">\(\tau_i \sim \text{N}(0, \sigma_\tau^2)\)</span> and <span class="math inline">\(\epsilon_{ij} \sim \text{N}(0, \sigma^2)\)</span></td>
+</tr>
+</tbody>
+</table>
+<ol style="list-style-type: lower-alpha">
+<li><p>We would like to find out if the weights differ between farms, i.e., if we can reject,</p>
+<p><span class="math display">\[H_0: \sigma_\tau^2 = 0\]</span></p>
+<p>Use the output in <a href="exam-2012-sep-3-2012.html#appendix-2-1">Appendix 2</a> to perform the test at 5% significance level. Formulate a conclusion.</p>
+<div class="ans">
+<p>The p-value (0.1388) is above 0.05 and therefore we cannot reject. In other words, we cannot claim that there is significant variability between farms.</p>
+</div></li>
+<li><p>Use the output of <a href="(exam-2012-sep-3-2012.html#appendix-2-1%22)">Appendix 2</a> to estimate <span class="math inline">\(\sigma^2\)</span>. Calculate a 95% confidence interval for <span class="math inline">\(\sigma^2\)</span> and interpret the answer.</p>
+<div class="ans">
+<p>The estimate of <span class="math inline">\(\sigma^2\)</span> is,</p>
+<p><span class="math display">\[\hat{\sigma}^2 = \text{MS}_\text{E} = 4.01\]</span></p>
+<p>A 95% confidence interval is,</p>
+<p><span class="math display">\[\left[\frac{\text{SS}_\text{E}}{\chi^2_{0.025, 18}}, \frac{\text{SS}_\text{E}}{\chi^2_{0.975, 18}}\right]
+= \left(\frac{72.09}{31.53}, \frac{72.09}{8.23}\right) = (2.3, 8.8)\]</span></p>
+<p><strong>Interpretation:</strong> We are 95% sure that the true variation is in the interval <span class="math inline">\((2.3, 8.8)\)</span>.</p>
+</div></li>
+</ol>
+</div>
+<div id="exercise-3-2" class="section level2">
+<h2>Exercise 3</h2>
+<p>In this exercise we will be using the variables Race, Modern and Weight. We use the model,</p>
+<p><span class="math display">\[y_{ij} = \mu + \tau_i + \beta_j + (\tau\beta)_{ij} + \epsilon_{ij}\]</span></p>
+<p>Where,</p>
+<table>
+<tbody>
+<tr class="odd">
+<td align="right"><span class="math inline">\(i\)</span></td>
+<td align="center">=</td>
+<td align="left"><span class="math inline">\(1, 2, 3\)</span> corresponding to <code>Race1</code>, <code>Race2</code> and <code>Race3</code></td>
+</tr>
+<tr class="even">
+<td align="right"><span class="math inline">\(j\)</span></td>
+<td align="center">=</td>
+<td align="left"><span class="math inline">\(1, 2\)</span> corresponding to <code>Yes</code> and <code>No</code></td>
+</tr>
+<tr class="odd">
+<td align="right"><span class="math inline">\(k\)</span></td>
+<td align="center">=</td>
+<td align="left"><span class="math inline">\(1, 2, \ldots, 4\)</span> corresponding to replications</td>
+</tr>
+<tr class="even">
+<td align="right"><span class="math inline">\(y_{ijk}\)</span></td>
+<td align="center">=</td>
+<td align="left"><code>Weight</code> and <span class="math inline">\(\epsilon_{ijk} \sim \text{N}(0, \sigma^2)\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><span class="math display">\[
+\begin{aligned}
+\sum_{i = 1}^3\tau_i = 0 &amp;&amp; \sum_{j = 1}^2\beta_i = 0 &amp;&amp; \sum_{i = 1}^3(\tau\beta)_{ij} = 0 &amp;&amp; \sum_{j = 1}^2(\tau\beta)_{ij} = 0
+\end{aligned}
+\]</span></p>
+<p>The random variables <span class="math inline">\(\epsilon_{ijk}\)</span> are assumed to be independent.</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>Use the output of <a href="exam-2012-sep-3-2012.html#appendix-3-1">Appendix 3</a> to determine if there is an interaction between <strong>Race</strong> and <strong>Modern</strong>. Formulate the hypotheses and a conclusion. Use 5% significance level.</p>
+<div class="ans">
+<p>The null hypothesis is,</p>
+<p><span class="math display">\[H_0: (\alpha\beta)_{ij} = 0 \text{ for all } i \text{ and }j \]</span></p>
+<p>We can not reject as the p-value is 0.09 which does not exceed 0.05. In other words, there is no significant interaction. (A significant interaction would have meant that the effect of <strong>Modern</strong> depends significantly on <strong>Race</strong> and vice versa.)</p>
+</div></li>
+<li><p>For the remaining part of the exercise we will be using the reduced model:</p>
+<p><span class="math display">\[y_{ij} = \mu + \tau_i + \epsilon_{ij}\]</span></p>
+<p>Where,</p>
+<table>
+<colgroup>
+<col width="10%" />
+<col width="3%" />
+<col width="85%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td align="right"><span class="math inline">\(i\)</span></td>
+<td align="center">=</td>
+<td align="left"><span class="math inline">\(1, 2, 3\)</span> corresponding to the <span class="math inline">\(a=3\)</span> groups <code>Race1</code>, <code>Race2</code>, <code>Race3</code></td>
+</tr>
+<tr class="even">
+<td align="right"><span class="math inline">\(j\)</span></td>
+<td align="center">=</td>
+<td align="left"><span class="math inline">\(1,2, \ldots, 8\)</span> corresponding to the eight <span class="math inline">\((n = 8)\)</span> observations for each Race</td>
+</tr>
+<tr class="odd">
+<td align="right"><span class="math inline">\(y_{ij}\)</span></td>
+<td align="center">=</td>
+<td align="left"><code>Weight</code> and <span class="math inline">\(\epsilon_{ij} \sim \text{NID}(0, \sigma^2)\)</span> and <span class="math inline">\(\sum_{i = 1}^3 \tau_i = 0\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>The random variables <span class="math inline">\(\epsilon_{ij}\)</span> are assumed to be independent.</p>
+<p>Use the output of <a href="exam-2012-sep-3-2012.html#appendix-4-1">Appendix 4</a> to show that there significant differences depending on race at 5% significance level. Between which raises are there significant differences? Use Tukey’s test.</p>
+<div class="ans">
+<p>The p-value is below 0.05 and therefore we reject and claim that there is a statistically significant difference between the races.</p>
+<p>From Tukey, we see that only Race1 and Race3 differ significantly as the p-value is 0.02 while the other p-values exceed 0.05.</p>
+</div></li>
+<li><p>Use <a href="exam-2012-sep-3-2012.html#appendix-5-1">Appendix 5</a> to estimate <span class="math inline">\(\tau_1, \tau_2\)</span> and <span class="math inline">\(\tau_3\)</span></p>
+<div class="ans">
+<p>From Appendix 5, we can find,</p>
+<p><span class="math display">\[
+\begin{aligned}
+\hat{\tau}_1 &amp;= \hat{\mu}_1 - \mu = 76.825 - 78.004 = -1.179 \\
+\hat{\tau}_1 &amp;= \hat{\mu}_1 - \mu = 77.55 - 78.004 = -0.454 \\
+\hat{\tau}_1 &amp;= \hat{\mu}_1 - \mu = 79.638 - 78.004 = 1.634 \\
+\end{aligned}
+\]</span></p>
+</div></li>
+<li><p>Calculate the predicted value for a <code>Race1</code> pig. Calculate the residual corresponding to the first observation.</p>
+<div class="ans">
+<p>The predicted value for a <code>Race1</code> is the average of such pigs as given in Appendix 4, i.e.,</p>
+<p><span class="math display">\[
+\begin{aligned}
+\text{Predicted value } = 76.825 \\
+\text{Residual } = 77.9 - 76.825 = 1.075
+\end{aligned}
+\]</span></p>
+</div></li>
+</ol>
+</div>
+<div id="appendix-1-1" class="section level2">
+<h2>Appendix 1</h2>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Race</th>
+<th align="left">Modern</th>
+<th align="left">Farm</th>
+<th align="right">Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Race1</td>
+<td align="left">Yes</td>
+<td align="left">Farm1</td>
+<td align="right">77.9</td>
+</tr>
+<tr class="even">
+<td align="left">Race1</td>
+<td align="left">Yes</td>
+<td align="left">Farm1</td>
+<td align="right">76.2</td>
+</tr>
+<tr class="odd">
+<td align="left">Race1</td>
+<td align="left">Yes</td>
+<td align="left">Farm2</td>
+<td align="right">77.4</td>
+</tr>
+<tr class="even">
+<td align="left">Race1</td>
+<td align="left">Yes</td>
+<td align="left">Farm2</td>
+<td align="right">77.4</td>
+</tr>
+<tr class="odd">
+<td align="left">Race1</td>
+<td align="left">No</td>
+<td align="left">Farm1</td>
+<td align="right">77.5</td>
+</tr>
+<tr class="even">
+<td align="left">Race1</td>
+<td align="left">No</td>
+<td align="left">Farm1</td>
+<td align="right">74.2</td>
+</tr>
+<tr class="odd">
+<td align="left">Race1</td>
+<td align="left">No</td>
+<td align="left">Farm2</td>
+<td align="right">74.0</td>
+</tr>
+<tr class="even">
+<td align="left">Race1</td>
+<td align="left">No</td>
+<td align="left">Farm2</td>
+<td align="right">80.0</td>
+</tr>
+<tr class="odd">
+<td align="left">Race2</td>
+<td align="left">Yes</td>
+<td align="left">Farm3</td>
+<td align="right">76.5</td>
+</tr>
+<tr class="even">
+<td align="left">Race2</td>
+<td align="left">Yes</td>
+<td align="left">Farm3</td>
+<td align="right">76.8</td>
+</tr>
+<tr class="odd">
+<td align="left">Race2</td>
+<td align="left">Yes</td>
+<td align="left">Farm4</td>
+<td align="right">78.8</td>
+</tr>
+<tr class="even">
+<td align="left">Race2</td>
+<td align="left">Yes</td>
+<td align="left">Farm4</td>
+<td align="right">77.4</td>
+</tr>
+<tr class="odd">
+<td align="left">Race2</td>
+<td align="left">No</td>
+<td align="left">Farm3</td>
+<td align="right">79.1</td>
+</tr>
+<tr class="even">
+<td align="left">Race2</td>
+<td align="left">No</td>
+<td align="left">Farm3</td>
+<td align="right">76.3</td>
+</tr>
+<tr class="odd">
+<td align="left">Race2</td>
+<td align="left">No</td>
+<td align="left">Farm4</td>
+<td align="right">79.8</td>
+</tr>
+<tr class="even">
+<td align="left">Race2</td>
+<td align="left">No</td>
+<td align="left">Farm4</td>
+<td align="right">75.7</td>
+</tr>
+<tr class="odd">
+<td align="left">Race3</td>
+<td align="left">Yes</td>
+<td align="left">Farm5</td>
+<td align="right">77.5</td>
+</tr>
+<tr class="even">
+<td align="left">Race3</td>
+<td align="left">Yes</td>
+<td align="left">Farm5</td>
+<td align="right">79.0</td>
+</tr>
+<tr class="odd">
+<td align="left">Race3</td>
+<td align="left">Yes</td>
+<td align="left">Farm6</td>
+<td align="right">78.6</td>
+</tr>
+<tr class="even">
+<td align="left">Race3</td>
+<td align="left">Yes</td>
+<td align="left">Farm6</td>
+<td align="right">77.1</td>
+</tr>
+<tr class="odd">
+<td align="left">Race3</td>
+<td align="left">No</td>
+<td align="left">Farm5</td>
+<td align="right">81.1</td>
+</tr>
+<tr class="even">
+<td align="left">Race3</td>
+<td align="left">No</td>
+<td align="left">Farm5</td>
+<td align="right">78.8</td>
+</tr>
+<tr class="odd">
+<td align="left">Race3</td>
+<td align="left">No</td>
+<td align="left">Farm6</td>
+<td align="right">81.6</td>
+</tr>
+<tr class="even">
+<td align="left">Race3</td>
+<td align="left">No</td>
+<td align="left">Farm6</td>
+<td align="right">83.4</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="appendix-2-1" class="section level2">
+<h2>Appendix 2</h2>
+<pre><code>Analysis of Variance Table
+
+Response: Weight
+          Df Sum Sq Mean Sq F value Pr(&gt;F)
+Farm       5 38.677  7.7354  1.9314 0.1388
+Residuals 18 72.093  4.0051               </code></pre>
+</div>
+<div id="appendix-3-1" class="section level2">
+<h2>Appendix 3</h2>
+<pre><code>            Df Sum Sq Mean Sq F value Pr(&gt;F)  
+Race         2  34.12  17.058   5.586 0.0130 *
+Modern       1   4.95   4.950   1.621 0.2191  
+Race:Modern  2  16.74   8.368   2.740 0.0914 .
+Residuals   18  54.97   3.054                 
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+</div>
+<div id="appendix-4-1" class="section level2">
+<h2>Appendix 4</h2>
+<pre><code>            Df Sum Sq Mean Sq F value Pr(&gt;F)  
+Race         2  34.12   17.06   4.673  0.021 *
+Residuals   21  76.65    3.65                 
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<pre><code>  Tukey multiple comparisons of means
+    95% family-wise confidence level
+
+Fit: aov(formula = mdl4)
+
+$Race
+              diff        lwr     upr     p adj
+Race2-Race1 0.7250 -1.6828302 3.13283 0.7316436
+Race3-Race1 2.8125  0.4046698 5.22033 0.0202992
+Race3-Race2 2.0875 -0.3203302 4.49533 0.0971376</code></pre>
+</div>
+<div id="appendix-5-1" class="section level2">
+<h2>Appendix 5</h2>
+<pre><code>      mean weight  n
+Race1        76.8  8
+Race2        77.5  8
+Race3        79.6  8
+Total        78.0 24</code></pre>
+
+</div>
+</div>
+<script>
+ans_btn_html = '<a class = "btn-ans"><span class="label label-success no-print">&lt;ANS/&gt;</span></a>';
+  showAns_btn = '<a class="showAns-btn btn pull-right js-toolbar-action">Show Answers</a>';
+  hideAns_btn = '<a class="hideAns-btn btn pull-right js-toolbar-action" style="display:none;">Hide Answers</a>';
+  
+  // Adding Extra Menus in Navigation
+  
+  // Adding button on before each answer:::
+  $(".ans").before(ans_btn_html);
+  $('.btn-ans').each(function(){
+    $(this).next('.ans').andSelf().wrapAll('<div class="wrap-ans"/>');
+  });
+  $('.btn-ans').click(function(){
+    $(this).siblings('.ans').toggle(400);
+  });
+  
+if ($(".ans").length > 0){
+    $('.book-header').prepend(showAns_btn, hideAns_btn);
+    $('.showAns-btn').show();
+    $('.showAns-btn').click(function(){
+      $('.btn-ans').hide(400);
+      $('.ans').show(400);
+      $('.hideAns-btn').show();
+      $(this).hide();
+      $('.hideAns-btn').click(function(){
+        $('.btn-ans').show(400);
+        $('.ans').hide(400);
+        $('.showAns-btn').show();
+        $(this).hide();
+      });
+    });
+  }
+
+var chap = "week-two"
+if(window.location.href.indexOf(chap) != -1){
+  var now = new Date();
+  var release = new Date("August 21, 2016");
+  if(now < release){
+    $(".ans, .btn-ans, .showAns-btn, .hideAns-btn").hide()
+  }
+}
+
+$('.ans p:has(img)').css('text-align', 'center');
+</script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-82812028-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="exam-2011-sep-5-2011.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="compulsory-assignment.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/mathatistics/stat210-2016/edit/master/PastExam/Exam2012.Rmd",
+"text": "Edit"
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

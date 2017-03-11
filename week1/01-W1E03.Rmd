@@ -1,0 +1,62 @@
+## Exercise 3 (_Relatively Theoritical_)
+In a pond there are thousands of fish. Two students want to estimate the average weight of all fish in the pond. Student 1 catches one fish of 1 kg, while student 2 catches 2 fishes, one with weight 1 kg, another weighing 1.2 kg. The following estimators for the unknown expectation are suggested
+
+$$
+\begin{aligned}
+\hat{\mu}_1 &= \bar{Y}_1 = 1 \\
+\hat{\mu}_2 &= \bar{Y}_2 = 1.1 \\
+\hat{\mu}_3 &= \frac{\bar{Y}_1 + \bar{Y}_2}{2} = 1.05 \\
+\hat{\mu}_4 &= \frac{\bar{Y}_1 + 2\bar{Y}_2}{3} = 1.07
+\end{aligned}
+$$
+
+Show that all estimators are unbiased, calculate their variance, and give your vote to the one with smallest variance.
+
+<div class = 'ans'>
+Remember that $E(\bar{Y}) = \mu$, thus the first two estimators are unbiased as they are the average value of each students fish weight. Further,
+
+$$
+\begin{aligned}
+E(\hat{\mu}_3) &= \frac{E(\bar{Y}_1) + E(\bar{Y}_2)}{2} = \frac{\mu + \mu}{2} = \mu \\
+\text{and, } E(\hat{\mu}_4) &= \frac{E(\bar{Y}_1) + E(2\bar{Y}_2)}{3} = \frac{\mu + 2\mu}{3} = \mu \\
+\end{aligned}
+$$
+
+Also, the variance for each of them are,
+
+$$
+\newcommand{\var}{\text{var}}
+\begin{aligned}
+ \var(\hat{\mu}_1) &= \sigma^2 \\
+ \var(\hat{\mu}_2) &= \sigma^2/2 \\
+ \var(\hat{\mu}_3) &= \frac{1}{4}\left(\sigma^2 + \frac{\sigma^2}{2}\right) = \frac{3}{8}{\sigma^2} \\
+ \var(\hat{\mu}_4) &= \frac{1}{9}\left(\sigma^2 + \frac{4\sigma^2}{2}\right) = \frac{3}{9}{\sigma^2}
+\end{aligned}
+$$
+</div>
+
+**In general**: If student 1 has caught $n_1$ fishes and student 2 has caught $n_2$ fishes, the best estimator is $$\hat{\mu} = \frac{n_1\bar{Y}_1 + n_2\bar{Y}_2}{n_1 + n_2}$$ Show that this is unbiased and find the variance.
+
+<div class = 'ans'>
+
+Here,
+
+$$
+\begin{aligned}
+E(\hat{\mu}) & = E\left(\frac{n_1\bar{Y}_1 + n_2\bar{Y}_2}{n_1 + n_2}\right) \\
+& = \frac{n_1 E(\bar{Y}_1) + n_2 E(\bar{Y}_2)}{n_1 + n_2} \\
+& = \frac{n_1 \mu + n_2 \mu}{n_1 + n_2} = \mu
+\end{aligned}
+$$
+
+Thus, $\hat{\mu}$ is an unbiased estimator of $\mu$. Further, the variance is,
+
+$$
+\begin{aligned}
+\text{var} \left(\hat{\mu}\right) & = \frac{1}{(n_1 + n_2)^2}\left[
+n_1^2 \text{var}{\left(\bar{Y}_1\right)} + n_2^2 \text{var}{\left(\bar{Y}_2\right)}
+\right]
+\end{aligned}
+$$
+
+</div>

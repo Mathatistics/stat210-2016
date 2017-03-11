@@ -1,0 +1,104 @@
+## Exercise 11
+
+From Five sires (bulls used for breeding are often referred to as "sires") have we recoded the annual milk production from 8 daughters which are randomly picked out from all daughter of those sires. The data: `Sires.Rdata` (fronter)
+
+```{r}
+load("_data/Sires.Rdata")
+Sires$sire <- as.factor(Sires$sire)
+```
+
+a) State a model with `milk` production as response and `sire` as factor. How would you interpret all the parameters in this model?
+
+<div class = 'ans'>
+Let $Y_{ij}$ be milk produced by daughter $j$ of sires $i$.
+
+Model: $$Y_{ij} = \mu + \tau_i + \epsilon_{ij}$$
+
+Here, $\epsilon_{ij} \sim \text{NID}(0, \sigma^2)$ and $i = 1, 2, \ldots 5$ and $j = 1, 2, \ldots 8$
+
+Here, we also have one restriction,
+
+$$\sum_{i = 1}^5\tau_i = 0$$
+
+**Interpretaion of Parameters:**
+
+|            |   |                                                                            |
+|-----------:|:-:|----------------------------------------------------------------------------|
+|      $\mu$ | : | Average milk production for all daughters under the 5 sires                |
+|   $\tau_i$ | : | The average profit in annually milk production of using only sire $i$      |
+| $\sigma^2$ | : | The variance in milk production for all daughter under one particular sire |
+
+</div>
+
+
+b) Test if there is effect of `sire` with respect to milk production. (R-commander: _Statistics > Fit model > Linear model_. Note that `sire` must be factor variable)
+
+<div class = 'ans'>
+The hypothesis is,
+
+$$
+\begin{aligned}
+H_0 &: \tau_1 = \tau_2 = \tau_3 = 0 \\
+H_1 &: \tau_i \ne 0 \text{ for at least one }i
+\end{aligned}
+$$ 
+
+ANOVA for this model is,
+
+```{r}
+mdl <- lm(milk ~ sire, data = Sires)
+aovsumry <- unclass(summary(aov(mdl)))[[1]]
+sumry <- knitr::kable(aovsumry)
+gsub('NA', '  ', sumry)
+```
+
+Here, sire effect is significant at 5% (p-value: `r round(aovsumry[1, "Pr(>F)"], 4)`)
+</div>
+
+
+c) Estimate all parameters in the model (R-commander: _Model > summarize model_)
+
+<div class = 'ans'>
+
+The summary of above fitted model is,
+
+```{r}
+(mdlSumry <- summary(mdl))
+```
+
+Here, the estimates of unknown parameters are,
+
+```{r, results='asis'}
+estdf <- data.frame(estimates = c(coef(mdl), sigma = mdlSumry$sigma))
+rownames(estdf) <- c("$\\hat{\\mu}$", "$\\hat{\\tau}_1$", "$\\hat{\\tau}_2$", "$\\hat{\\tau}_3$","$\\hat{\\tau}_4$", "$\\hat{\\sigma}$")
+knitr::kable(estdf)
+```
+
+</div>
+
+
+d) (Use the general fact that in an one way ANOVA model with $a$ levels on the factor and $n$ replicates ${}^\text{SSE}\!/_{\sigma^2}$ is chi square distributed with $na – a$ degrees of freedom). Find a 95 % confidence interval for the error variance (the unexplained variance). Explain the interval to farmer. (use the general fact that in an one way ANOVA model with a levels on the factor and $n$ replicates ${}^\text{SSE}\!/_{\sigma^2}$ is chi square distributed with $na – a$ degrees of freedom)
+
+<div class = 'ans'>
+95% confidence interval for $\sigma^2$ is given by,
+
+
+```{r}
+sse <- round(aovsumry[['Sum Sq']][2], 1)
+sigma.ci <- c(sse / qchisq(0.975, 35), sse / qchisq(0.025, 35))
+```
+
+$$
+\begin{aligned}
+\left(
+\frac{\text{SSE}}{\chi^2_{35, 0.975}}, \frac{\text{SSE}}{\chi^2_{35, 0.025}}
+\right) &=
+\left(
+\frac{`r sse`}{`r qchisq(0.975, 35)`}, \frac{`r sse`}{`r qchisq(0.025, 35)`}
+\right) \\ &= 
+\left(`r sigma.ci`\right)
+\end{aligned}
+$$ 
+
+Therefore, 95% confidence limit for $\sigma$ is (`r round(sqrt(sigma.ci))`) kg of milk. This value revers that with 95% of confidence level, the true variation in annual milk production for all daughter under one particular sire lie between (`r round(sqrt(sigma.ci))`) kg.
+</div>

@@ -1,0 +1,164 @@
+## Exercise 2
+
+The following data are from an exploration of what kind of brand people in general prefer. Data could be found in the word file called `Monday week 2` on fronter. 6 recipes were tried out, each with 8 replicates. 48 respondents were randomly picked out and given one piece of bread (without information on recipe). They were asked to give points on a scale from 0 to 10 (10 is best).
+
+```{r}
+dta <- "
+R1 R2 R3 R4 R5 R6
+4 7 6 4 3 7
+4 6 6 3 5 8
+6 5 8 5 5 6
+5 3 10 4 6 4
+10 5 7 6 6 10
+8 6 10 7 9 6
+9 9 8 3 2 4
+7 4 8 3 2 6
+"
+con <- textConnection(dta)
+dta <- read.table(con, header = TRUE)
+close(con)
+
+knitr::kable(dta)
+```
+
+R1, R2 and R3 are bread baked on coarse-grained flour (Norwegian grovmel), the others on fine.
+
+R1, R3 and R5 is Swedish recipes, the others are Norwegian. 
+
+- State a model for this investigation.
+    
+    <div class = 'ans'>
+    Let $y_{ij}$ be the point for $i^\text{th}$ recipe and $j^\text{th}$ replication. The model is,
+    
+    \begin{equation}
+      y_{ij} = \mu + \tau_i + \epsilon_{ij}, \text{ where, } \epsilon_{ij} \sim \text{NID}\left(0, \sigma^2\right)
+      \label{eq:W2E2Model}
+    \end{equation}
+    
+    In the model (\@ref(eq:W2E2Model)), we have parameters,
+    
+    $\mu$ : Overall average point obtained by all recipes
+    
+    $\tau_i$ : Effect of recipe $i^\text{th}$ (point obtained by recipe $i$ more(less) than the overall average)
+    
+    Here, we also assume that the overall effect of all recipes equals to zero.,
+    
+    $$\sum_{i = 1}^5\tau_i = 0$$
+    </div>
+    
+- Test if there is an effect of recipes.
+    
+    <div class = 'ans'>
+    To fit the model from the given data, first we need to stack it.
+    The hypothesis for testing if there is an effect of recipes is,
+    
+    $$
+    \begin{aligned}
+    H_0 &: \tau_i = 0 \text{ for all }i \\
+    H_1 &: \tau_i \ne 0 \text{ for any }i
+    \end{aligned}
+    $$
+    
+    The ANOVA table for model (\@ref(eq:W2E2Model)) in the previous answer is,
+    
+    ```{r}
+    dta.stack <- `names<-`(stack(dta), c("Point", "Recipe"))
+    mdl <- mixlm::lm(Point ~ Recipe, data = dta.stack)
+    anovaTable <- unclass(summary(aov(mdl)))[[1]]
+    gsub("NA", "  ", knitr::kable(anovaTable, digits = 3))
+    ```
+    
+    From the ANOVA table, the low p-value ($`r round(anovaTable[1, 5], 3)`$) shows that `Recipes` have significantly different preferences.
+    
+    </div>
+
+Answer the following questions by suitable contrasts.
+
+- Is there positive effect of coarse-grained flour?
+    
+    <div class = 'ans'>
+    Here, R1, R2 and R3 are bread baked on coarse-grained flour, so the contrast can be written  with coefficients `c(1/3, 1/3, 1/3, -1/3, -1/3, -1/3)` as,
+    
+    $$
+    \begin{aligned}
+    \Gamma &= \frac{1}{3}\left(\tau_1 + \tau_2 + \tau_3\right) - \frac{1}{3}\left(\tau_1 + \tau_2 + \tau_3\right)
+    \end{aligned}
+    $$
+    
+    The hypothesis to test if this contrast is positive is,
+    
+    $$
+    \begin{aligned}
+    H_0 &: \Gamma = 0 \\
+    H_1 &: \Gamma > 0
+    \end{aligned}
+    $$ 
+    
+    From the test output below, we reject $H_0$ (very small p-value, _compare with half of p-value_) and conclude that there is positive effect of coarse-grained flour.
+    
+    ```{r}
+    out <- gmodels::fit.contrast(mdl, "Recipe", c(1/3, 1/3, 1/3, -1/3, -1/3, -1/3))
+    rownames(out) <- "Recipe c=(1/3 1/3 1/3 -1/3 -1/3 -1/3)"
+    knitr::kable(out, digits = 4)
+    ```
+    
+    </div>
+    
+- Is there positive effect of coarse-grained flour, if we decide to use Norwegian recipes?
+    
+    <div class = 'ans'>
+    Here only Norwegian recipes (R2, R4, R6) are considered among which only R2 is made from coarse-grained flour. Since we are testing R2 against average of R4 and R6, the coefficient for contrast in this situation is `c(0, 1, 0, -0.5, 0, -0.5)`. So,
+    
+    $$\text{Contrast: }\Gamma = \tau_2 - \frac{1}{2}\left(\tau_4 + \tau_6\right)$$
+    
+    The hypothesis for this test is,
+    
+    $$
+    \begin{aligned}
+    H_0 &: \Gamma = 0 \\
+    H_1 &: \Gamma > 0
+    \end{aligned}
+    $$ 
+    
+    From the test output below, we can not reject $H_0$ (high p-value) and conclude that there is not a positve effect of coarse-grained flour in Norwegian recipes. Here we compare p-value with _half_ of its value since this is one-tailed test. Even in this situation, p-value is high enough not to reject $H_0$.
+    
+    ```{r}
+    out <- gmodels::fit.contrast(mdl, "Recipe", c(0, 1, 0, -0.5, 0, -0.5))
+    knitr::kable(out, digits = 4)
+    ```
+    
+    </div>
+    
+- Is there different effect of Norwegian and Swedish recipes if we decide to use coarse-grained flour?
+    
+    <div class = 'ans'>
+    Among the course grained flour, R1 and R3 are Swedish recipes while R2 is Norwegian. Here,
+    
+    **Contrast Coefficients**: `c(-0.5, 1, -0.5, 0, 0, 0)`
+    
+    **Contrast:**
+    
+    $$\text{Contrast: }\Gamma = \tau_2 - \frac{1}{2}\left(\tau_1 + \tau_3\right)$$
+    
+    **Hypothesis:**
+    
+    $$
+    \begin{aligned}
+    H_0 &: \Gamma = 0 \\
+    H_1 &: \Gamma \ne 0
+    \end{aligned}
+    $$ 
+    
+    **Test Result:**
+    
+    ```{r}
+    out <- gmodels::fit.contrast(mdl, "Recipe", c(-0.5, 1, -0.5, 0, 0, 0))
+    knitr::kable(out, digits = 4)
+    ```
+    
+    **Decision:**
+    
+    Could not reject $H_0$ at 5% level of significance so there is no eveidence of Norwegian and Swedish recipes being different. However, at 10% percent, we conclude that there is significance difference between Norwegian and Swedish recipes.
+    
+    </div>
+    

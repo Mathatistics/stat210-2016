@@ -1,0 +1,168 @@
+## Exercise 8
+Load the data `fertilizer.RData`. The data have been discussed in class, different slides:
+
+```{r}
+load("_data/fertilizer.rdata")
+```
+```{r}
+fert_qtl <- `row.names<-`(t(do.call(cbind, 
+      lapply(with(fertilizer, tapply(y, fertilizer, quantile)), 
+             function(x) data.frame(x)))), 
+      unique(fertilizer$fertilizer))
+fert_sumry <- sapply(list(mean = mean, sd = sd, n = length), function(fn){
+    with(fertilizer, tapply(y, fertilizer, fn))
+})
+```
+
+
+a) Produce relevant summary statistics and plots.
+
+<div class = 'ans'>
+A summary statistics for the fertilizer data is,
+
+```{r}
+knitr::kable(cbind(fert_sumry, fert_qtl), digits = 3)
+```
+
+Further, a boxplot can be a relevant plot to compare the effect of fertilizer,
+
+```{r, fig.height=6}
+boxplot(y ~ fertilizer, data = fertilizer, 
+        horizontal = T, 
+        main = "Boxplot for fertilizer data", xlab = "Yield")
+```
+
+</div>
+
+b) Do the fertilizers give different yields? Formulate the hypotheses and do the ANOVA in R.
+
+<div class = 'ans'>
+Let $y_{ij}$ be the yield from $i^\text{th}$ fertilizer and $j^{th}$ replication.
+
+The model:
+$$ y_{ij} = \mu + \tau_i + \epsilon_{ij}, \epsilon_{ij} \sim NID(0, \sigma^2)$$
+Here, $i = 1, 2, 3, 4$ and $j = 1, 2, \ldots 6$
+
+The hypothesis for testing if the fertiliizers give different yields is,
+
+$$
+\begin{aligned}
+H_0 &: \tau_i = 0 \text{ for all } i = 1, 2, 3, 4 \\
+H_1 &: \tau_i \ne 0 \text{ for at least one } i
+\end{aligned}
+$$
+
+The ANOVA table we obtain is,
+
+```{r}
+fertilizer$fertilizer <- as.factor(fertilizer$fertilizer)
+mdl <- lm(y ~ fertilizer, data = fertilizer)
+fert_aov <- knitr::kable(unclass(summary(aov(mdl)))[[1]], digits = 3)
+gsub("NA", "  ", fert_aov)
+```
+
+Here, p-value is smaller than 0.05 or even 0.01. So we reject null hypothesis $H_0$ at 5% and also at 1% level of significance.
+</div>
+
+c) Formulate a conclusion.
+
+<div class = 'ans'>
+Since the null hypothesis is rejected, we conclude that fertilizers result significantly different yield.
+</div>
+
+d) There are four different fertilizers. How many pairwise comparisons can be made?
+
+<div class = 'ans'>
+From four differnt fertilizer, we can make $^4C_2 = 6$ comparisons. The comparisons can be between:
+
+```{r}
+knitr::kable(combn(unique(fertilizer$fertilizer), 2))
+```
+
+</div>
+
+e) Use Tukey's method to compute confidence intervals for the differences in means. Calculate p-values based on Tukey's method.
+
+<div class = 'ans'>
+The result from Tukey's method is,
+
+```{r}
+(fert_tukey <- mixlm::simple.glht(mdl, effect = 'fertilizer'))
+```
+
+The formula for finding Tukey's confidence interval for same sample size for all groups:
+
+$$
+\left[\bar{y}_{i\cdot} - \bar{y}_{j\cdot} \pm q_{\alpha(a, f)}\sqrt{\frac{\text{MSE}}{n}}\right]
+$$
+Here, $a =$ Total number of groups, $f =$ degree of freedom associated with $\text{MSE}$ and $\alpha =$ level of significance. The value of $q_{\alpha(a, f)}$ is on _Studentized Range Statistic Table_
+
+</div>
+
+f) Formulate a conclusion.
+
+<div class = 'ans'>
+
+Tukey's output in previous answer shows that yield from fertilizer `K20.N` differs significantly from `control` (p-value: 0.02562) and `K20.P205` (p-value: 0.00439).
+
+We can also use plot for Tukey test for some visualization,
+
+```{r}
+op <- par(mar = c(4, 9, 3, 0.5))
+plot(fert_tukey)
+par(op)
+```
+
+</div>
+
+g) Test if the 3 new fertilizers are better than the control by using a suitable contrast.
+
+<div class = 'ans'>
+For testing the average effect of 3 new fertilizer with control, a contrast can be constructed with coefficients `c(-1, 1/3, 1/3, 1/3)`. So, the hypothesis in this situation will be,
+
+$$
+\begin{aligned}
+H_0 &: \frac{1}{3}\left(\mu_2 + \mu_3 + \mu_4\right) - \mu_1 = 0 \\
+H_1 &: \frac{1}{3}\left(\mu_2 + \mu_3 + \mu_4\right) - \mu_1 \ne 0
+\end{aligned}
+$$
+
+In general form, the hypothesis can be written as,
+
+$$
+\begin{aligned}
+H_0 &: \sum_{i = 1}^a {c_i\bar{y}_{i\cdot}} = 0 \\
+H_1 &: \sum_{i = 1}^a {c_i\bar{y}_{i\cdot}} \ne 0
+\end{aligned}
+$$
+
+In this case, $c_i = -1, 1/3, 1/3, 1/3$ for $i = 1, 2, 3, 4$ respectively
+
+We can write contrast as,
+
+$$C = \sum_{i = 1}^a {c_i\bar{y}_{i\cdot}}$$
+
+The Standard Error for $C$ is,
+
+$$\text{SE}(C) = \sqrt{\frac{\text{MSE}}{n} \sum_{i = 1}^a {c_i^2}}$$
+
+Thus, the test statistics for testing the hypothesis is,
+
+$$t_0 = \frac{\sum_{i = 1}^a{c_i\bar{y}_{i\cdot}}}{\sqrt{\frac{\text{MSE}}{n} \sum_{i = 1}^a {c_i^2}}} \sim t_{\alpha/2, N-a}$$
+
+Further, the Confidence Interval is given as,
+
+$$
+\left[\sum_{i = 1}^a{c_i\bar{y}_{i\cdot}} \pm t_{\alpha/2, N-a} \sqrt{\frac{\text{MSE}}{n} \sum_{i = 1}^a {c_i^2}} \right]
+$$
+
+The result from R-commander contrast test is,
+
+```{r}
+gmodels::fit.contrast(mdl, varname = 'fertilizer', coeff = c(1, -0.33, -0.33, -0.33), df = TRUE, conf.int = 0.95)
+```
+
+From the output, we can see that we fail to reject Null hypothesis and thus conclude that the average yield on using new fertilizers is not significatly different from that obtained from `control`. 
+
+
+</div>

@@ -1,0 +1,2315 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Design and Analysis of Experiment</title>
+  <meta name="description" content="This contains the weekly exercises related to Design and Analysis of Experiment">
+  <meta name="generator" content="bookdown 0.3.9 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Design and Analysis of Experiment" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This contains the weekly exercises related to Design and Analysis of Experiment" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Design and Analysis of Experiment" />
+  
+  <meta name="twitter:description" content="This contains the weekly exercises related to Design and Analysis of Experiment" />
+  
+
+<meta name="author" content="Trygve Almøy">
+
+
+<meta name="date" content="2017-01-01">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="index.html">
+<link rel="next" href="week-two.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Design and Analysis of Experiment</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Practical Information</a></li>
+<li class="chapter" data-level="" data-path="week-one.html"><a href="week-one.html"><i class="fa fa-check"></i>Week One</a></li>
+<li class="chapter" data-level="" data-path="week-two.html"><a href="week-two.html"><i class="fa fa-check"></i>Week Two</a></li>
+<li class="chapter" data-level="" data-path="week-three.html"><a href="week-three.html"><i class="fa fa-check"></i>Week Three</a></li>
+<li><a href="exam-2011-sep-5-2011.html#exam-2011-sep-5-2011">Exam 2011 <small>(Sep 5, 2011)</small></a></li>
+<li><a href="exam-2012-sep-3-2012.html#exam-2012-sep-3-2012">Exam 2012 <small>(Sep 3, 2012)</small></a></li>
+<li class="chapter" data-level="" data-path="compulsory-assignment.html"><a href="compulsory-assignment.html"><i class="fa fa-check"></i>Compulsory Assignment</a></li>
+<li class="divider"></li>
+<li><a name="title" href="javascript:void(0)"><b>Lecturer:</b></a><ul>
+<li><a href="https://www.nmbu.no/ans/trygve.almoy" target="blank">Trygve Almøy</a></li></ul></li>
+<li><a name="title" href="javascript:void(0)"><b>Assistent Teachers:</b></a><ul>
+<li><a href="https://www.nmbu.no/ans/hilde.vinje" target="blank">Hilde Vinje</a></li>
+<li><a href="https://www.nmbu.no/ans/raju.rimal" target="blank">Raju Rimal</a></li></ul></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Design and Analysis of Experiment</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="week-one" class="section level1">
+<h1>Week One</h1>
+<div id="exercise-1" class="section level2">
+<h2>Exercise 1</h2>
+<ol style="list-style-type: lower-alpha">
+<li>Input the ‘Portland cement’ data (reproduced from Montgomery Table 2.1 in week1, slide 13) into R. Excel file called Tabl2</li>
+</ol>
+<div class="ans">
+<p>This can be done in several ways. One possibility is to enter data in excel and copy and then go <strong>R Commander:</strong> <em>Data &gt; Import data &gt; From text …</em> - Tick: Clipboard, Comma (If you use comma as Decimal point in excel) - Check that data looks right by ticking: View data set</p>
+<p>You can also load it using <code>load</code> function if your dataset is in <code>.Rdata</code> format. In this case, if your dataset <code>Tabl21.Rdata</code> is in download folder under your home folder,</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">load</span>(<span class="st">&quot;~/Downloads/Tabl21.Rdata&quot;</span>)</code></pre></div>
+<p>From R-commander: <em>Data &gt; Load data &gt; …</em></p>
+</div>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Stack the columns (<em>Data &gt; Active dataset&gt; …</em>)</li>
+</ol>
+<div class="ans">
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">PortlandStack &lt;-<span class="st"> </span><span class="kw">stack</span>(Portlandcement)
+<span class="kw">names</span>(PortlandStack) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;Strength&#39;</span>, <span class="st">&#39;Modification&#39;</span>)</code></pre></div>
+</div>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Use R to produce summary statistics (as produced by the summary command in R) for each of the groups.</li>
+</ol>
+<div class="ans">
+<pre><code>    Modified       Unmodified   
+ Min.   :16.35   Min.   :16.62  
+ 1st Qu.:16.54   1st Qu.:16.90  
+ Median :16.72   Median :17.05  
+ Mean   :16.77   Mean   :17.04  
+ 3rd Qu.:17.02   3rd Qu.:17.23  
+ Max.   :17.21   Max.   :17.37  </code></pre>
+</div>
+<ol start="4" style="list-style-type: lower-alpha">
+<li>Make boxplot for each of the groups.</li>
+</ol>
+<div class="ans">
+<p><img src="STAT210-2016_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+</div>
+<ol start="5" style="list-style-type: lower-alpha">
+<li>We would like to test if the two cement types are equal. Formulate the hypotheses formally and use R to perform the test. Formulate a conclusion.</li>
+</ol>
+<div class="ans">
+<p>Let <span class="math inline">\(Y_{ij}\)</span> is strength in cement type <span class="math inline">\(i\)</span>, sample <span class="math inline">\(j\)</span>. We assume <span class="math inline">\(Y_{ij} \sim N(\mu_i, \sigma^2)\)</span>, where all observations are independent. This is equal to assume this model: <span class="math display">\[Y_{ij} = \mu_i + \epsilon_{ij}, \text{ where } \epsilon_{ij} \sim N(0, \sigma^2), i = 1, 2 \text{ and } j = 1, 2, \ldots 9\]</span></p>
+<p>Note that we assumed equal variances for both types. The hypothesis for testing if the two mortar formulations are equal is,</p>
+<p><span class="math display">\[
+\begin{aligned}
+H_0 &amp;: \mu_\text{modified} - \mu_\text{unmodified} = 0 \\
+H_1 &amp;: \mu_\text{modified} - \mu_\text{unmodified} \ne 0
+\end{aligned}
+\]</span></p>
+<pre><code>
+    Two Sample t-test
+
+data:  Modified and Unmodified
+t = -2.1767, df = 18, p-value = 0.04306
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -0.542393085 -0.009606915
+sample estimates:
+       mean of x        mean of y  pooled std.dev. 
+      16.7660000       17.0420000        0.2835293 </code></pre>
+<p>Since p-value is smaller than 0.05, we reject null hypothesis (<span class="math inline">\(H_0\)</span>) and conclude that there is significant different between two mortar formulation at 5 percent level.</p>
+</div>
+<ol start="6" style="list-style-type: lower-alpha">
+<li>Explain different ways of performing tests (hints: test statistic, p-values, and confidence intervals).</li>
+</ol>
+<div class="ans">
+<p>Although we have used p-value in previous question, we can use following ways to perform this test,</p>
+<ol style="list-style-type: upper-roman">
+<li><strong>Test Statistics:</strong> The test-statistic is compared with the critical value from t-table at 5% level of significance. We reject <span class="math inline">\(H_0\)</span> if, <span class="math display">\[t_\text{calculated} (\text{test-statistic}) &gt; t_{\alpha/2, n_1 + n_2 - 2}\]</span>.</li>
+<li><strong>Confidence Interval Method:</strong> If 95% confidence interval for the estimate does not include zero, then we reject the null hypothesis <span class="math inline">\(H_0\)</span> at 5% level of significance. In our case, the 95% confidence interval (-0.5423931, -0.0096069) does not include zero so, we reject null hypothesis at 5% level of significance.</li>
+<li><strong>p-value Approach:</strong> If p-value is less than 0.05 then we reject <span class="math inline">\(H_0\)</span> at 5% level of significance.</li>
+</ol>
+</div>
+<ol start="7" style="list-style-type: lower-alpha">
+<li>Repeat the calculations for e) above, but now using only a calculator, summary output from R and a table of the t distribution.</li>
+</ol>
+<div class="ans">
+<p>The null hypotheses expresses equality of expected values, i.e.,</p>
+<p><span class="math display">\[H_0: \mu_1 = \mu_2\]</span> The test statistic is,</p>
+<p><span class="math display">\[t = \frac{\bar{x}_1 - \bar{x}_2}{\text{SEM}}\]</span> where,</p>
+<p><span class="math display">\[
+\begin{aligned}
+\bar{x}_1 &amp;= 16.766 &amp;&amp; \bar{x}_2 = 17.042 \\
+s_1^2 &amp;= 0.0993156 &amp;&amp; s_2^2 = 0.0614622 \\
+s_p^2 &amp;= \frac{(n_1-1)s_1^2 + (n_2-1)s_2^2}{n_1 + n_2 -2} = 0.2835293 \\
+\text{SEM} &amp;= s_p\sqrt{\frac{1}{n_1} + \frac{1}{n_2}} = 0.1267982\\
+t &amp;= -2.1766874
+\end{aligned}
+\]</span></p>
+<p>Here, We reject the null hypothesis since <span class="math display">\[|t| = 2.1766874 &gt; t_{0.025;18} = 2.100922\]</span></p>
+</div>
+
+</div>
+<div id="exercise-2" class="section level2">
+<h2>Exercise 2</h2>
+<p>Two sorts of wheat, Zebra and RB07, were grown in 8 <strong>randomly chosen</strong> fields per sort. The protein content was measured for each sort and the data are given below.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Sort</th>
+<th align="right">Protein</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Zebra</td>
+<td align="right">12.1</td>
+</tr>
+<tr class="even">
+<td align="left">Zebra</td>
+<td align="right">12.8</td>
+</tr>
+<tr class="odd">
+<td align="left">Zebra</td>
+<td align="right">10.4</td>
+</tr>
+<tr class="even">
+<td align="left">Zebra</td>
+<td align="right">11.9</td>
+</tr>
+<tr class="odd">
+<td align="left">Zebra</td>
+<td align="right">11.8</td>
+</tr>
+<tr class="even">
+<td align="left">Zebra</td>
+<td align="right">11.6</td>
+</tr>
+<tr class="odd">
+<td align="left">Zebra</td>
+<td align="right">13.4</td>
+</tr>
+<tr class="even">
+<td align="left">Zebra</td>
+<td align="right">13.3</td>
+</tr>
+<tr class="odd">
+<td align="left">RB07</td>
+<td align="right">18.3</td>
+</tr>
+<tr class="even">
+<td align="left">RB07</td>
+<td align="right">19.5</td>
+</tr>
+<tr class="odd">
+<td align="left">RB07</td>
+<td align="right">12.7</td>
+</tr>
+<tr class="even">
+<td align="left">RB07</td>
+<td align="right">14.7</td>
+</tr>
+<tr class="odd">
+<td align="left">RB07</td>
+<td align="right">15.3</td>
+</tr>
+<tr class="even">
+<td align="left">RB07</td>
+<td align="right">16.1</td>
+</tr>
+<tr class="odd">
+<td align="left">RB07</td>
+<td align="right">15.4</td>
+</tr>
+<tr class="even">
+<td align="left">RB07</td>
+<td align="right">16.8</td>
+</tr>
+</tbody>
+</table>
+<p>The data are stored in a file called <code>Zebra</code> (Excel). Import the data to R by <em>Data &gt; Import data from &gt; from excel file</em></p>
+<ol style="list-style-type: lower-alpha">
+<li>Consider both wheat sorts. Formulate a model for the data analysis where you assume equal variances.</li>
+</ol>
+<div class="ans">
+<p>A model for the data: <span class="math display">\[Y_{ij} = \mu_i + \epsilon_{ij}\]</span> where, <span class="math inline">\(\epsilon_{ij} \sim N(0, \sigma^2)\)</span> and the observations are indipendent for all Sorts <span class="math inline">\(i = 1, 2\)</span> and Portein Sample <span class="math inline">\(j = 1, 2, \ldots, 8\)</span></p>
+</div>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>How would you estimate this variance?</li>
+</ol>
+<div class="ans">
+<p>We first estimate the variance in each group. Here are summary statistics from R:</p>
+<pre><code>         mean        sd       var length
+RB07  16.1000 2.1226668 4.5057143      8
+Zebra 12.1625 0.9898593 0.9798214      8</code></pre>
+<p>Combine the two estimates by the pooled variance estimate as,</p>
+<p><span class="math display">\[
+\begin{aligned}
+S_p^2 &amp;= \frac{(n_1 -1)s_1^2 + (n_2 -1)s_2^2}{n_1 + n_2 - 2} \\
+&amp;= \frac{(8 - 1)4.51 + (8 - 1)0.98}{8 + 8 - 2} \\
+&amp;= 2.745
+\end{aligned}
+\]</span></p>
+</div>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>How many parameters are included in the model? Give an interpretation of the parameters.</li>
+</ol>
+<div class="ans">
+<p>There are 3 parameters in this model:</p>
+<ul>
+<li><span class="math inline">\(\mu_1\)</span> is the expected protein level in Zebra wheat (in the whole population)</li>
+<li><span class="math inline">\(\mu_2\)</span> is the expected protein level in RB07 wheat (in the whole population)</li>
+<li><span class="math inline">\(\sigma^2\)</span> is the variance in protein level within a wheat sort. This is assumed to be the same in both Zebra and RB07.</li>
+</ul>
+</div>
+<ol start="4" style="list-style-type: lower-alpha">
+<li>What is the estimated difference between the population means? What are the standard deviation and the standard error of this estimate?</li>
+</ol>
+<div class="ans">
+<pre><code>         mean        sd       var length
+RB07  16.1000 2.1226668 4.5057143      8
+Zebra 12.1625 0.9898593 0.9798214      8</code></pre>
+<p>We estimate the expected difference <span class="math inline">\(\mu_1 − \mu_2\)</span> by the difference in sample means which is <span class="math inline">\(16.1 – 12.1625 = 3.9375\)</span>. The standard deviation for this estimate is <span class="math display">\[ \sigma\sqrt{\frac{1}{n_1} + \frac{1}{n_1}} = \frac{\sigma}{2} (\text{ since, } n_1 = n_2 = 8)\]</span></p>
+<p>The standard error is the estimated standard deviation or <span class="math display">\[  
+\hat{\sigma}\sqrt{\frac{1}{n_1} + \frac{1}{n_2}} = \frac{\hat{\sigma}}{2} = \frac{S_\text{pooled}}{2} = 0.8280652
+\]</span></p>
+</div>
+<ol start="5" style="list-style-type: lower-alpha">
+<li>Test whether the expected protein content in Zebra is different from RB07.</li>
+</ol>
+<div class="ans">
+<p>The two sample t-test result from R is,</p>
+<pre><code>
+    Two Sample t-test
+
+data:  RB07 and Zebra
+t = 4.7551, df = 14, p-value = 0.0003075
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ 2.161477 5.713523
+sample estimates:
+       mean of x        mean of y  pooled std.dev. 
+        16.10000         12.16250          1.65613 </code></pre>
+<p>Since p-value = 0.00031 &lt;&lt; 0.05, we reject <span class="math inline">\(H_0\)</span> and claim that the there is significant different in the expected protein content in two types of wheat at 5% level of significance.</p>
+</div>
+<ol start="6" style="list-style-type: lower-alpha">
+<li>Construct a 95 % CI for the true difference in protein between the two sorts. Is zero included in the interval? If not, what does this mean?</li>
+</ol>
+<div class="ans">
+<p>From the two-sample t-test output above, the 95% confidence interval is (2.1614768, 5.7135232). Here zero is not included in the interval, this also confirm our previous result that the expected protein content in Zebra and RB07 is significantly different.</p>
+</div>
+<p><em>NOTE:: The remaining questions are a bit harder, more theoretical …</em></p>
+<ol start="7" style="list-style-type: lower-alpha">
+<li>If you are told that <span class="math display">\[ (n_1+n_2−2) \frac{S_\text{pooled}^2}{\sigma^2} \sim \chi^2_{n_1+n_2−2} \]</span> show that <span class="math inline">\(s_\text{pooled}^2\)</span> is an unbiased estimate of <span class="math inline">\(\sigma^2\)</span>.</li>
+</ol>
+<div class="ans">
+<p>From theory, we know, <span class="math display">\[\frac{k \cdot S^2}{\sigma^2} \sim \chi^2_k\]</span> where <span class="math inline">\(S^2\)</span> is a variance estimate based on <span class="math inline">\(k\)</span> independent terms (that is <span class="math inline">\(k\)</span> is the degrees of freedom associated with <span class="math inline">\(S^2\)</span>). Hence, we have, <span class="math display">\[\frac{(n_1 + n_2 - 2)S_p^2}{\sigma^2}\sim \chi_{n_1+n_2-2}^2\]</span></p>
+<p>For <span class="math inline">\(\chi^2\)</span> distribution variables with <span class="math inline">\(k\)</span> degrees of freedom we know that the expected value is <span class="math inline">\(k\)</span> and the variance is <span class="math inline">\(2k\)</span>. Therefore we can deduce: <span class="math display">\[
+\begin{aligned}
+E\left[\frac{(n_1+n_2-2)S_p^2}{\sigma^2}\right] &amp;= n_1 + n_2 - 2 \\
+\left[\frac{(n_1+n_2-2)E\left(S_p^2\right)}{\sigma^2}\right] &amp;= n_1 + n_2 - 2 \\
+\text{Therefore, } E\left(S_p^2\right) &amp;= \sigma^2
+\end{aligned}
+\]</span></p>
+</div>
+<ol start="8" style="list-style-type: lower-alpha">
+<li>Find the variance of <span class="math inline">\(S_\text{pooled}^2\)</span>. Construct a 95% CI for <span class="math inline">\(\sigma^2\)</span>. Explain the interval to a person without statistical knowledge.</li>
+</ol>
+<div class="ans">
+<p>Similarly using the fact that the variance of the <span class="math inline">\(\chi^2\)</span> distributed variable with <span class="math inline">\(k\)</span> degrees of freedom is <span class="math inline">\(2k\)</span>: <span class="math display">\[
+\begin{aligned}
+\text{var}\left[\frac{(n_1+n_2-2)S_p^2}{\sigma^2}\right] &amp;= 2(n_1 + n_2 - 2) \\
+\left[\frac{(n_1+n_2-2)}{\sigma^2}\right]^2 \text{var}\left(S_p^2\right) &amp;= 2(n_1 + n_2 - 2) \\
+\text{Therefore, } \text{var}\left(S_p^2\right) &amp;= \frac{2\sigma^4}{n_1 + n_2 - 2}
+\end{aligned}
+\]</span> Further, <span class="math display">\[\text{sd}\left(S_p^2\right) = \sqrt{\frac{2\sigma^4}{n_1 + n_2 - 2}}\]</span> and the standard error is the estimate of, <span class="math display">\[\text{se}\left(S_p^2\right) = \sqrt{\frac{2S_p^4}{n_1 + n_2 - 2}}\]</span> Which by inserting all the known values gives,</p>
+<p><span class="math display">\[\text{se}\left(S_p^2\right) = \sqrt{\frac{2\times2.743^2}{8 + 8 - 2}} = 1.075\]</span></p>
+<p>and the confidence interval is,</p>
+<p><span class="math display">\[\left[\frac{(n_1 + n_2 - 2)S_p^2}{\chi^2_{0.025, n_1+n_2-2}}, \frac{(n_1 + n_2 - 2)S_p^2}{\chi^2_{0.975, n_1+n_2-2}}\right]\]</span> for <span class="math inline">\(\alpha/2 = 0.025\)</span>, we find from the Table III in the Appendix over tail probabilities of the Chi-square distribution that <span class="math inline">\(\chi^2_{0.025, 14} = 26.119\)</span> and <span class="math inline">\(\chi^2_{0.975, 14} = 5.629\)</span>. This gives the interval [1.47, 6.823]. This means that we are 95% certain that the true variance of protein yield in either Zebra or RB07 is expected to lie in this interval.</p>
+</div>
+<ol style="list-style-type: lower-roman">
+<li>Test if the (population) variance is greater than 5. State the null hypothesis, the alternative and the level of significance, draw the conclusions.</li>
+</ol>
+<div class="ans">
+<p>Hypothesis for the test is, <span class="math display">\[H_0: \sigma^2 = 5 \text{ vs } H_1: \sigma^2 &gt; 5\]</span></p>
+<p>Under null hypothesis, <span class="math display">\[\chi^2 = \frac{(n_1+n_2-2)S_p^2}{\sigma_0^2} = \frac{38.402}{5} = 7.686\]</span> is distributed as <span class="math inline">\(\chi^2_{n_1+n_2-2}\)</span>. We reject the null hypothesis at 5% level if <span class="math inline">\(\chi^2 &gt; \chi^2_{0.05, 14} = 23.685\)</span>, which it is not. Thus, we retain the null hypothesis and cannot claim that the population variance in protein yield is larger than 5.</p>
+</div>
+
+</div>
+<div id="exercise-3-relatively-theoritical" class="section level2">
+<h2>Exercise 3 (<em>Relatively Theoritical</em>)</h2>
+<p>In a pond there are thousands of fish. Two students want to estimate the average weight of all fish in the pond. Student 1 catches one fish of 1 kg, while student 2 catches 2 fishes, one with weight 1 kg, another weighing 1.2 kg. The following estimators for the unknown expectation are suggested</p>
+<p><span class="math display">\[
+\begin{aligned}
+\hat{\mu}_1 &amp;= \bar{Y}_1 = 1 \\
+\hat{\mu}_2 &amp;= \bar{Y}_2 = 1.1 \\
+\hat{\mu}_3 &amp;= \frac{\bar{Y}_1 + \bar{Y}_2}{2} = 1.05 \\
+\hat{\mu}_4 &amp;= \frac{\bar{Y}_1 + 2\bar{Y}_2}{3} = 1.07
+\end{aligned}
+\]</span></p>
+<p>Show that all estimators are unbiased, calculate their variance, and give your vote to the one with smallest variance.</p>
+<div class="ans">
+<p>Remember that <span class="math inline">\(E(\bar{Y}) = \mu\)</span>, thus the first two estimators are unbiased as they are the average value of each students fish weight. Further,</p>
+<p><span class="math display">\[
+\begin{aligned}
+E(\hat{\mu}_3) &amp;= \frac{E(\bar{Y}_1) + E(\bar{Y}_2)}{2} = \frac{\mu + \mu}{2} = \mu \\
+\text{and, } E(\hat{\mu}_4) &amp;= \frac{E(\bar{Y}_1) + E(2\bar{Y}_2)}{3} = \frac{\mu + 2\mu}{3} = \mu \\
+\end{aligned}
+\]</span></p>
+<p>Also, the variance for each of them are,</p>
+<p><span class="math display">\[
+\newcommand{\var}{\text{var}}
+\begin{aligned}
+ \var(\hat{\mu}_1) &amp;= \sigma^2 \\
+ \var(\hat{\mu}_2) &amp;= \sigma^2/2 \\
+ \var(\hat{\mu}_3) &amp;= \frac{1}{4}\left(\sigma^2 + \frac{\sigma^2}{2}\right) = \frac{3}{8}{\sigma^2} \\
+ \var(\hat{\mu}_4) &amp;= \frac{1}{9}\left(\sigma^2 + \frac{4\sigma^2}{2}\right) = \frac{3}{9}{\sigma^2}
+\end{aligned}
+\]</span></p>
+</div>
+<p><strong>In general</strong>: If student 1 has caught <span class="math inline">\(n_1\)</span> fishes and student 2 has caught <span class="math inline">\(n_2\)</span> fishes, the best estimator is <span class="math display">\[\hat{\mu} = \frac{n_1\bar{Y}_1 + n_2\bar{Y}_2}{n_1 + n_2}\]</span> Show that this is unbiased and find the variance.</p>
+<div class="ans">
+<p>Here,</p>
+<p><span class="math display">\[
+\begin{aligned}
+E(\hat{\mu}) &amp; = E\left(\frac{n_1\bar{Y}_1 + n_2\bar{Y}_2}{n_1 + n_2}\right) \\
+&amp; = \frac{n_1 E(\bar{Y}_1) + n_2 E(\bar{Y}_2)}{n_1 + n_2} \\
+&amp; = \frac{n_1 \mu + n_2 \mu}{n_1 + n_2} = \mu
+\end{aligned}
+\]</span></p>
+<p>Thus, <span class="math inline">\(\hat{\mu}\)</span> is an unbiased estimator of <span class="math inline">\(\mu\)</span>. Further, the variance is,</p>
+<p><span class="math display">\[
+\begin{aligned}
+\text{var} \left(\hat{\mu}\right) &amp; = \frac{1}{(n_1 + n_2)^2}\left[
+n_1^2 \text{var}{\left(\bar{Y}_1\right)} + n_2^2 \text{var}{\left(\bar{Y}_2\right)}
+\right]
+\end{aligned}
+\]</span></p>
+</div>
+
+</div>
+<div id="exercise-4" class="section level2">
+<h2>Exercise 4</h2>
+<p>Assume the following result (on scale 0-100) based on 8 randomly selected students from an exam in a basic course in statistics.</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">S1</th>
+<th align="right">S2</th>
+<th align="right">S3</th>
+<th align="right">S4</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Females</td>
+<td align="right">80</td>
+<td align="right">85</td>
+<td align="right">73</td>
+<td align="right">69</td>
+</tr>
+<tr class="even">
+<td>Males</td>
+<td align="right">90</td>
+<td align="right">60</td>
+<td align="right">76</td>
+<td align="right">67</td>
+</tr>
+</tbody>
+</table>
+<ol style="list-style-type: lower-alpha">
+<li>Execute a test (choose the level of significance yourself) to investigate if there is larger variation in statistical ability among males compared to females.</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+N
+</th>
+<th style="text-align:right;">
+Mean
+</th>
+<th style="text-align:right;">
+Variance
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Females
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+76.75
+</td>
+<td style="text-align:right;">
+50.91667
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Males
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+73.25
+</td>
+<td style="text-align:right;">
+167.58333
+</td>
+</tr>
+</tbody>
+</table>
+<div class="ans">
+<p><span class="math inline">\(Y_{ij}\)</span> is result for person <span class="math inline">\(j\)</span> belonging to group <span class="math inline">\(i\)</span>.</p>
+<p>The Model is: <span class="math display">\[Y_{ij}=\mu_i + \epsilon_{ij}\]</span>, where <span class="math inline">\(\epsilon_{ij} \sim N(0, \sigma_i^2)\)</span>, <span class="math inline">\(i = 1, 2\)</span> and <span class="math inline">\(j = 1, 2, 3, 4\)</span> and the observations are independent</p>
+<p><span class="math inline">\(i = 1\)</span> is females, otherwise males</p>
+<p><span class="math display">\[
+\begin{aligned}
+H_0: &amp; \sigma_1^2 = \sigma_2^2\\
+H_1: &amp; \sigma_1^2 &lt; \sigma_2^2
+\end{aligned}
+\]</span></p>
+<p>The test statistics is, <span class="math display">\[F = \frac{S_\text{males}^2}{S_\text{females}^2} = 3.29\]</span></p>
+<p>If we apply 5% level of significance, then we reject <span class="math inline">\(H_0\)</span> if <span class="math inline">\(F &gt; 9.28\)</span>.</p>
+<p>Conclusion: We cannot reject.</p>
+</div>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Based on the result of the test in a) state a model and test if there is difference in statistical knowledge between males/females. The test gave a 0.65 as P-value. Explain in detail what this means.</li>
+</ol>
+<div class="ans">
+<p>Wa assume equal variances for males and females end state the following model:</p>
+<p><span class="math display">\[ Y_{ij} = \mu_i + \epsilon_{ij}\]</span> where, <span class="math inline">\(\epsilon_{ij} \sim N(0, \sigma^2)\)</span></p>
+<p>The hypothesis is,</p>
+<p><span class="math display">\[
+\begin{aligned}
+H_0: &amp; \mu_1 = \mu_2 \\
+H_1: &amp; \mu_1 \ne \mu_2
+\end{aligned}
+\]</span></p>
+<p>Assume <span class="math inline">\(H_0\)</span>, and <span class="math inline">\(T_\text{calculated} = 0.474\)</span>.</p>
+<p>Very small <span class="math inline">\(T\)</span>, it is impossible to reject <span class="math inline">\(H_0\)</span> also p-value = 0.653.</p>
+<p>If males and felmale in average (population) obtain the same result, the probability of observing a difference (absolute value) between the sample means equal or greater than 0.474 is 0.653.</p>
+</div>
+
+</div>
+<div id="exercise-5" class="section level2">
+<h2>Exercise 5</h2>
+<p>Consider the data of Exercise 1 again (available as <code>Table21Stacked.RData</code> in fronter; you can go <em>Data &gt; Load …</em> to load the data). If necessary stack the data.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Are the variances of the two groups different? Formulate a hypothesis test and perform the test using R (<em>Statistics &gt; Variances</em>)</li>
+</ol>
+<div class="ans">
+<p>The hypothesis to test if the variance of the two groups different is,</p>
+<p><span class="math display">\[
+\begin{aligned}
+H_0 &amp;: \sigma_\text{modified}^2 = \sigma_\text{unmodified}^2 \\
+H_1 &amp;: \sigma_\text{modified}^2 \ne \sigma_\text{modified}^2
+\end{aligned}
+\]</span></p>
+<p>The test result from R is,</p>
+<pre><code>
+    F test to compare two variances
+
+data:  variable by factor
+F = 1.6293, num df = 9, denom df = 9, p-value = 0.4785
+alternative hypothesis: true ratio of variances is not equal to 1
+95 percent confidence interval:
+ 0.4046845 6.5593806
+sample estimates:
+ratio of variances 
+          1.629257 </code></pre>
+<p>Here, p-value = <span class="math inline">\(0.478 &gt; 0.05\)</span>, we cannot reject <span class="math inline">\(H_0\)</span> and could not claim that the variance between two groups are different.</p>
+</div>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Do the test by as explained in Week1, slide 39 using only the fact below</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+var
+</th>
+<th style="text-align:right;">
+n
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Modified
+</td>
+<td style="text-align:right;">
+0.1001378
+</td>
+<td style="text-align:right;">
+10
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Unmodified
+</td>
+<td style="text-align:right;">
+0.0614622
+</td>
+<td style="text-align:right;">
+10
+</td>
+</tr>
+</tbody>
+</table>
+<div class="ans">
+<p>The observed test statistic is,</p>
+<p><span class="math display">\[F = \frac{0.1001}{0.0614} = 1.63\]</span></p>
+<p>Under the null hypothesis, <span class="math inline">\(F \sim \text{Fisher}(9,9)\)</span> From table (or in <em>R: Distributions &gt; Continuous distributions &gt; F distribution &gt; F quantiles</em>),</p>
+<p><span class="math display">\[F_{0.025, 9, 9} = 4.026\]</span></p>
+<p>This value is not exceeded (draw a figure) and therefore we cannot claim that variances differ.</p>
+<p><strong>Comment:</strong> Observe that we only know that the p-value <span class="math inline">\(&gt;0.05\)</span> as opposed to the exact p-value found in a) above. In this case we don’t need the lower critical value as <span class="math inline">\(F&gt;1\)</span>. However, this can be found as,</p>
+<p><span class="math display">\[F_{0.975, 9, 9} = \frac{1}{F_{0.025, 9, 9}} = \frac{1}{4.03} = 0.25\]</span></p>
+</div>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Assume now the variances of the two groups to be equal and calculate a 95% confidence interval for the common standard deviation using the output in b) above.</li>
+</ol>
+<div class="ans">
+<p>Here, we have,</p>
+<p><span class="math display">\[n = n_1 + n_2 = 20, \text{df} = 20 - 2 = 18\]</span></p>
+<p>Under the assumption of equal variance of the two groups, the pooled variance is calculated as,</p>
+<p><span class="math display">\[
+\begin{aligned}
+S_p^2 &amp; = \frac{(n_1 - 1)s_1^2 + (n_2 - 1)s_2^2}{n_1 + n_2 - 2} \\
+&amp; = \frac{s_1^2 + s_2^2}{2} = 0.0808
+\end{aligned}
+\]</span></p>
+<p>Also, <span class="math display">\[\chi_{0.975}^2 = 8.231 \text{ and } \chi_{0.025}^2 = 8.231\]</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+\left[
+  \frac{\text{df} \times S_p^2}{\chi_{0.025}^2}, 
+  \frac{\text{df} \times S_p^2}{\chi_{0.975}^2}
+\right] &amp;= 
+\left[
+  \frac{18 \times 0.0808}{31.53}, 
+  \frac{18 \times 0.0808}{8.23}
+\right] \\
+&amp;= [0.046, 0.0177]
+\end{aligned}
+\]</span></p>
+</div>
+
+</div>
+<div id="exercise-6-two-sample-t-test-or-one-way-anova-in-r" class="section level2">
+<h2>Exercise 6: Two sample t-test or One way ANOVA in R</h2>
+<p>Load the data svin.RData. The data are as described in Week1 slide 17. Final weights have been collected for 9 pigs in the soya group and 8 pigs in the non-soya group. The question addressed is: Do the different feeding strategies give different carcass weight (Norwegian: Slaktevekt)?</p>
+<ol style="list-style-type: lower-alpha">
+<li>Produce relevant summary statistics and plots. There are several ways to summarise, e.g., here’s default for <em>R: Data &gt; Numerical summaries</em> split on groups</li>
+</ol>
+<div class="ans">
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:left;">
+mean
+</th>
+<th style="text-align:left;">
+sd
+</th>
+<th style="text-align:left;">
+var
+</th>
+<th style="text-align:left;">
+n
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+not.soya
+</td>
+<td style="text-align:left;">
+77.75
+</td>
+<td style="text-align:left;">
+3.370036
+</td>
+<td style="text-align:left;">
+11.35714
+</td>
+<td style="text-align:left;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+soya
+</td>
+<td style="text-align:left;">
+82.88889
+</td>
+<td style="text-align:left;">
+4.675587
+</td>
+<td style="text-align:left;">
+21.86111
+</td>
+<td style="text-align:left;">
+9
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Boxplot:</strong> <br /> <img src="STAT210-2016_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
+</div>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Formulate the model (include assumptions, also equal variances in both groups) and hypotheses.</li>
+</ol>
+<div class="ans">
+<p>See <a href="week-one.html#exercise-4">Week 1, Exercise - 4</a> Answer</p>
+</div>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Perform the test and comment</li>
+</ol>
+<ol type="I">
+<li>
+<p>As a two-sample test (<em>R: Statistics &gt; Means …</em>)</p>
+<div class="ans">
+<pre><code>
+    Two Sample t-test
+
+data:  slaktevekt by group
+t = -2.5681, df = 15, p-value = 0.02142
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -9.4040625 -0.8737153
+sample estimates:
+       mean of x        mean of y  pooled std.dev. 
+       77.750000        82.888889         4.118162 </code></pre>
+</div>
+</li>
+<li>
+<p>As an ANOVA</p>
+<div class="ans">
+<pre><code>Analysis of Variance Table
+          Df Sum Sq Mean Sq F value  Pr(&gt;F)  
+group      1 111.85 111.846   6.595 0.02142 *
+Residuals 15 254.39  16.959                  
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p><strong>Comment:</strong> Same p-value. ANOVA only gives two sided test.</p>
+</div>
+</li>
+</ol>
+<ol start="4" style="list-style-type: lower-alpha">
+<li>Calculate a 95% confidence interval for the difference in weights in the two groups.</li>
+</ol>
+<div class="ans">
+<p>See <a href="week-two.html#exercise-6">Week 1, Exercise - 6(c)</a></p>
+</div>
+<ol start="5" style="list-style-type: lower-alpha">
+<li>Repeat c) and d) above but now use a significance level of 0.01 and calculate 99% confidence intervals.</li>
+<li>Explain the difference between one-sided and two-sided hypotheses.</li>
+</ol>
+
+</div>
+<div id="exercise-7-one-way-anova" class="section level2">
+<h2>Exercise 7: One way ANOVA</h2>
+<p>Three diets for pigs were investigated, two of the diets had different soya proteins (<code>S1</code> and <code>S2</code>) one diet had no soya included (<code>NONS</code>). The following weights were recorded.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="right">NONS</th>
+<th align="right">S1</th>
+<th align="right">S2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">80</td>
+<td align="right">82</td>
+<td align="right">82</td>
+</tr>
+<tr class="even">
+<td align="right">84</td>
+<td align="right">84</td>
+<td align="right">86</td>
+</tr>
+</tbody>
+</table>
+<p><em>NOTE::Do the following without any software or pocket calculator:</em></p>
+<ul>
+<li>
+State the model that you would apply to this experiment.
+<div class="ans">
+<p>The model is:</p>
+<p><span class="math display">\[Y_{ij} = \mu + \tau_i + \epsilon_{ij},\text{ where }\epsilon_{ij} \sim N(0,\sigma^2),\; i = 1, 2, 3; \;\; j = 1, 2\]</span></p>
+<p>and where the observations are independent</p>
+</div>
+</li>
+<li>
+How many parameters are included in the model?
+<div class="ans">
+<p>With the assumption of <span class="math inline">\(\tau_i&#39;s\)</span> sum to zero, i.e. <span class="math inline">\(\sum_{i = 1}^3{\tau_i} = 0\)</span>, there are 4 unknown paramters, <span class="math inline">\(\mu, \tau_1, \tau_2\)</span> and <span class="math inline">\(\sigma^2\)</span>.</p>
+</div>
+</li>
+<li>
+<p>State the null hypothesis and the alternative to test if there is any effect of diet.</p>
+<div class="ans">
+The null and alternative hypothese for testing if there is any effect of diet is, <span class="math display">\[
+\begin{aligned}
+H_0 &amp;: \tau_1 = \tau_2 = \tau_3 \\
+H_1 &amp;: \tau_i \ne 0 \text{ for at least one }i
+\end{aligned}
+\]</span>
+</div>
+</li>
+<li>
+Find the rejection area if you test on level 0.05 or on level 0.1
+<div class = 'ans'>
+<ul>
+<li>at 5% level of significance, we reject <span class="math inline">\(H_0\)</span>, if <span class="math inline">\(F\)</span>-statistic is larger than <span class="math inline">\(F_{0.05, (2, 3)}\)</span>, i.e. 9.552</li>
+<li>at 1% level of significance, we reject <span class="math inline">\(H_0\)</span>, if <span class="math inline">\(F\)</span>-statistic is larger than <span class="math inline">\(F_{0.01, (2, 3)}\)</span>, i.e. 30.817
+</div>
+</li>
+<li>
+Find <span class="math inline">\(SS_T\)</span>, <span class="math inline">\(SS_\text{Treatments}\)</span>, <span class="math inline">\(SS_E\)</span>, and their degrees of freedom.
+<div class="ans">
+<p>Let <span class="math inline">\(y_{ij}\)</span> denotes the measurement for <span class="math inline">\(i^\text{th}\)</span> treatment and <span class="math inline">\(j^\text{th}\)</span> observation. So, <span class="math inline">\(i = 1, 2, 3\)</span> and <span class="math inline">\(j = 1, 2\;(n)\)</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+\text{SS}_\text{total} &amp; = \sum_{i = 1}^3\sum_{j = 1}^2{\left(y_{ij} - \mu\right)^2} = 22\\
+\text{SS}_\text{residual} &amp; = \sum_{i = 1}^3\sum_{j = 1}^2{\left(y_{ij} - \bar{y}_i\right)^2} = 18 \\
+\text{and, } \text{SS}_\text{treatment} &amp; = n \sum_{i = 1}^3{\left(\bar{y}_i - \mu\right)^2} \\
+&amp; = \text{SS}_\text{total} - \text{SS}_\text{residual} = 4
+\end{aligned}
+\]</span></p>
+<p>Also, the degree of freedom for treatment is <span class="math inline">\(3 - 1 = 2\)</span>, for residual is is <span class="math inline">\(6 - 3 = 3\)</span> and for total is <span class="math inline">\(6 - 1 = 5\)</span></p>
+</div>
+</li>
+<li>
+Find <span class="math inline">\(MS_\text{Treatments}\)</span> and <span class="math inline">\(MS_E\)</span> and <span class="math inline">\(F_0\)</span>. Write up the ANOVA table. Use R to get the pvalue. <em>HINT: Distribution &gt; Continuous &gt; F …)</em>
+<div class="ans">
+<p><span class="math display">\[
+  \begin{aligned}
+   \text{MS}_\text{Treatment} = \frac{\text{SS}_\text{Treatment}}{\mathcal{df}_\text{treatment}} = 2 \\
+   \text{MSE} = \text{MS}_\text{residual} = \frac{\text{SS}_\text{residual}}{\mathcal{df}_\text{residual}} = 6
+  \end{aligned}
+  \]</span></p>
+<p>Further, <span class="math display">\[F_0 = \frac{\text{MS}_\text{Treatment}}{\text{MSE}} = 0.333\]</span></p>
+<p>Using R, the pvalue corresponding to <span class="math inline">\(F_0\)</span> is 0.7401</p>
+<p>Using all these values, we can construct ANOVA table as,</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">Df</th>
+<th align="right">Sum Sq</th>
+<th align="right">Mean Sq</th>
+<th align="right">F value</th>
+<th align="right">Pr(&gt;F)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>treatment</td>
+<td align="right">2</td>
+<td align="right">4</td>
+<td align="right">2</td>
+<td align="right">0.3333</td>
+<td align="right">0.7401</td>
+</tr>
+<tr class="even">
+<td>Residuals</td>
+<td align="right">3</td>
+<td align="right">18</td>
+<td align="right">6</td>
+<td align="right"></td>
+<td align="right"></td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+<li>
+What is your conclusion on the test?
+<div class="ans">
+Calculated <span class="math inline">\(F_0\)</span> is too small; for this test only large values can lead to rejection and the critical value is <span class="math inline">\(F_{0.05, 2, 3} = 9.55\)</span>. Therefore, We can not reject <span class="math inline">\(H_0\)</span>.
+</div>
+</li>
+<li>
+Estimate all the parameters in the model.
+<div class="ans">
+<p>The estimated parameters in the model are,</p>
+<span class="math display">\[
+\begin{aligned}
+  \hat{\sigma}^2 &amp; = \text{MSE} = 6 \\
+  \hat{\mu} &amp; = \bar{Y}_{\cdot\cdot} = 83 \\
+  \hat{\tau}_1 &amp; = \hat{\mu}_1 - \hat{\mu} = -1 \\
+  \hat{\tau}_2 &amp; = \hat{\mu}_2 - \hat{\mu} = 0 \\
+  \hat{\tau}_3 &amp; = \hat{\mu}_3 - \hat{\mu} = 1
+\end{aligned}
+\]</span>
+</div>
+</li>
+</ul>
+<em>NOTE:: Use pocket calculator:</em></li>
+</ul>
+<ul>
+<li>
+Find a 95% CI for <span class="math inline">\(\sigma^2\)</span>
+<div class="ans">
+<p>Use Chi-square table with 3 degrees of freedom to get,</p>
+<p><span class="math display">\[
+     \begin{aligned}
+       \chi^2_{0.025, 3} &amp; = 9.348 \\
+       \chi^2_{0.975, 3} &amp; = 0.216
+     \end{aligned}
+   \]</span></p>
+<p>The 95% CI for <span class="math inline">\(\sigma^2\)</span> is,</p>
+<p><span class="math display">\[
+   \left[
+     \frac{\text{SSE}}{\chi^2_{0.025, 3}}, 
+     \frac{\text{SSE}}{\chi^2_{0.975, 3}}
+     \right] =
+     \left[
+     1.925, 
+     83.412
+     \right]
+   \]</span></p>
+</div>
+</li>
+<li>
+Find a 99% CI for the difference between the two soya diets.
+<div class="ans">
+<p>The CI for <span class="math inline">\(\mu_i - \mu_j\)</span> is same as CI for <span class="math inline">\(\tau_i - \tau_j\)</span>, so, the CI for soya diets (<span class="math inline">\(\tau_2\)</span> and <span class="math inline">\(\tau_3\)</span>) is,</p>
+<p><span class="math display">\[
+    \begin{aligned}
+       \bar{y}_{3\cdot} - \bar{y}_{2\cdot} - t_{\alpha/2, N - a}\sqrt{\frac{2\text{MSE}}{n}} &amp; \le
+       \mu_3 - \mu_2 \\ &amp; \le
+       \bar{y}_{3\cdot} - \bar{y}_{2\cdot} + t_{\alpha/2, N - a}\sqrt{\frac{2\text{MSE}}{n}} \\
+       \hat{\tau}_{3\cdot} - \hat{\tau}_{2\cdot} - (5.841) \times \sqrt{\frac{2\times 6}{2}} &amp; \le
+       \mu_3 - \mu_2 \\ &amp;\le
+       \hat{\tau}_{3\cdot} - \hat{\tau}_{2\cdot} + (5.841) \times \sqrt{\frac{2\times 6}{2}} \\
+       1 - (14.307) \le
+       &amp; \mu_3 - \mu_2 \le
+       1 + (14.307) \\
+       -13.307 \le
+       &amp; \mu_3 - \mu_2 \le
+       15.307
+    \end{aligned}
+   \]</span></p>
+In otherwords, the 95% confidence limit for true difference between <span class="math inline">\(\mu_3\)</span> and <span class="math inline">\(\mu_2\)</span> lie in the interval <span class="math inline">\(\left[-9.26, 7.26\right]\)</span>
+</div>
+</li>
+</ul>
+<p>Control as many answers as possible by using R</p>
+<p><em>NOTE:: Without any software or pocket calculator:</em></p>
+<p>Add 6 kg to all the weights in the soya group.</p>
+<ul>
+<li>
+What influence will this have on the sum of squares?
+<div class="ans">
+<p>If we add 6 to the soya groups then the difference between the group averages will be larger, but noting happens to variation inside the group. <span class="math inline">\(\text{SS}_\text{treatments}\)</span> will increase, but the noise (SSE) will be unaffected. Sum of squares for Treatment, Residual and Toatal before and after adding 6 to soya group is,</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">before</th>
+<th align="right">after</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>treatment</td>
+<td align="right">4</td>
+<td align="right">76</td>
+</tr>
+<tr class="even">
+<td>residual</td>
+<td align="right">18</td>
+<td align="right">18</td>
+</tr>
+<tr class="odd">
+<td>total</td>
+<td align="right">22</td>
+<td align="right">94</td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+<li>
+What is <span class="math inline">\(F_0\)</span>. now? Comment!
+<div class="ans">
+Since F value is a ratio betwen MS for treatment and residuals, <span class="math inline">\(F_0\)</span> (F value) will be larger. This increases the chance of rejecting null hypothesis (no difference between groups).
+</div>
+</li>
+<li>
+Perform the test in this situation.
+<div class="ans">
+<p>The ANOVA table in this situation is,</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">Df</th>
+<th align="right">Sum Sq</th>
+<th align="right">Mean Sq</th>
+<th align="right">F value</th>
+<th align="right">Pr(&gt;F)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>treatment</td>
+<td align="right">2</td>
+<td align="right">76</td>
+<td align="right">38</td>
+<td align="right">6.3333</td>
+<td align="right">0.0838</td>
+</tr>
+<tr class="even">
+<td>Residuals</td>
+<td align="right">3</td>
+<td align="right">18</td>
+<td align="right">6</td>
+<td align="right"></td>
+<td align="right"></td>
+</tr>
+</tbody>
+</table>
+Here, the p-value is much smaller than in the previous case, and even is significant at 10%. This shows that the difference between treatments (NONS, S1 and S2) has increased in this situation.
+</div>
+</li>
+</ul>
+<p>Go back to the original data, but add 6 kg to the heaviest pig in each group.</p>
+<ul>
+<li>
+What influence will this have on the Sum of squares?
+<div class="ans">
+<p>The differences between the means will be unaffected, but the variance inside the groups will be larger. Hence <span class="math inline">\(\text{SS}_\text{treatments}\)</span> will be unaffected, but the noise and SSE will increase. The ANOVA in this situation is,</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">Df</th>
+<th align="right">Sum Sq</th>
+<th align="right">Mean Sq</th>
+<th align="right">F value</th>
+<th align="right">Pr(&gt;F)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>treatment</td>
+<td align="right">2</td>
+<td align="right">4</td>
+<td align="right">2</td>
+<td align="right">0.0455</td>
+<td align="right">0.9562</td>
+</tr>
+<tr class="even">
+<td>Residuals</td>
+<td align="right">3</td>
+<td align="right">132</td>
+<td align="right">44</td>
+<td align="right"></td>
+<td align="right"></td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+<li>
+What is <span class="math inline">\(F_0\)</span> now? Comment!
+<div class="ans">
+Here, <span class="math inline">\(F_0\)</span> is even smaller since noise (variation within groups) has increases.
+</div>
+</li>
+<li>
+Perform the test in this situation.
+<div class="ans">
+Small <span class="math inline">\(F_0\)</span> leads to low probability of rejecting null hypothesis. From ANOVA table, high p-value shows that we can not reject null hypothesis and conclude that there is not significant difference between the effects of diet on pigs.
+</div>
+</li>
+</ul>
+
+</div>
+<div id="exercise-8" class="section level2">
+<h2>Exercise 8</h2>
+<p>Load the data <code>fertilizer.RData</code>. The data have been discussed in class, different slides:</p>
+<ol style="list-style-type: lower-alpha">
+<li>Produce relevant summary statistics and plots.</li>
+</ol>
+<div class="ans">
+<p>A summary statistics for the fertilizer data is,</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">mean</th>
+<th align="right">sd</th>
+<th align="right">n</th>
+<th align="right">0%</th>
+<th align="right">25%</th>
+<th align="right">50%</th>
+<th align="right">75%</th>
+<th align="right">100%</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>control</td>
+<td align="right">72</td>
+<td align="right">20.169</td>
+<td align="right">6</td>
+<td align="right">40</td>
+<td align="right">63.75</td>
+<td align="right">74.0</td>
+<td align="right">82.00</td>
+<td align="right">99</td>
+</tr>
+<tr class="even">
+<td>K2O.N</td>
+<td align="right">95</td>
+<td align="right">9.879</td>
+<td align="right">6</td>
+<td align="right">82</td>
+<td align="right">87.00</td>
+<td align="right">97.5</td>
+<td align="right">102.75</td>
+<td align="right">105</td>
+</tr>
+<tr class="odd">
+<td>K2O.P2O5</td>
+<td align="right">66</td>
+<td align="right">8.989</td>
+<td align="right">6</td>
+<td align="right">57</td>
+<td align="right">60.00</td>
+<td align="right">63.5</td>
+<td align="right">70.00</td>
+<td align="right">81</td>
+</tr>
+<tr class="even">
+<td>N.P2O5</td>
+<td align="right">83</td>
+<td align="right">8.319</td>
+<td align="right">6</td>
+<td align="right">71</td>
+<td align="right">78.25</td>
+<td align="right">83.0</td>
+<td align="right">90.00</td>
+<td align="right">92</td>
+</tr>
+</tbody>
+</table>
+<p>Further, a boxplot can be a relevant plot to compare the effect of fertilizer,</p>
+<p><img src="STAT210-2016_files/figure-html/unnamed-chunk-42-1.png" width="672" /></p>
+</div>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Do the fertilizers give different yields? Formulate the hypotheses and do the ANOVA in R.</li>
+</ol>
+<div class="ans">
+<p>Let <span class="math inline">\(y_{ij}\)</span> be the yield from <span class="math inline">\(i^\text{th}\)</span> fertilizer and <span class="math inline">\(j^{th}\)</span> replication.</p>
+<p>The model: <span class="math display">\[ y_{ij} = \mu + \tau_i + \epsilon_{ij}, \epsilon_{ij} \sim NID(0, \sigma^2)\]</span> Here, <span class="math inline">\(i = 1, 2, 3, 4\)</span> and <span class="math inline">\(j = 1, 2, \ldots 6\)</span></p>
+<p>The hypothesis for testing if the fertiliizers give different yields is,</p>
+<p><span class="math display">\[
+\begin{aligned}
+H_0 &amp;: \tau_i = 0 \text{ for all } i = 1, 2, 3, 4 \\
+H_1 &amp;: \tau_i \ne 0 \text{ for at least one } i
+\end{aligned}
+\]</span></p>
+<p>The ANOVA table we obtain is,</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">Df</th>
+<th align="right">Sum Sq</th>
+<th align="right">Mean Sq</th>
+<th align="right">F value</th>
+<th align="right">Pr(&gt;F)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>fertilizer</td>
+<td align="right">3</td>
+<td align="right">2940</td>
+<td align="right">980.0</td>
+<td align="right">5.99</td>
+<td align="right">0.004</td>
+</tr>
+<tr class="even">
+<td>Residuals</td>
+<td align="right">20</td>
+<td align="right">3272</td>
+<td align="right">163.6</td>
+<td align="right"></td>
+<td align="right"></td>
+</tr>
+</tbody>
+</table>
+<p>Here, p-value is smaller than 0.05 or even 0.01. So we reject null hypothesis <span class="math inline">\(H_0\)</span> at 5% and also at 1% level of significance.</p>
+</div>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Formulate a conclusion.</li>
+</ol>
+<div class="ans">
+<p>Since the null hypothesis is rejected, we conclude that fertilizers result significantly different yield.</p>
+</div>
+<ol start="4" style="list-style-type: lower-alpha">
+<li>There are four different fertilizers. How many pairwise comparisons can be made?</li>
+</ol>
+<div class="ans">
+<p>From four differnt fertilizer, we can make <span class="math inline">\(^4C_2 = 6\)</span> comparisons. The comparisons can be between:</p>
+<table>
+<tbody>
+<tr class="odd">
+<td align="left">control</td>
+<td align="left">control</td>
+<td align="left">control</td>
+<td align="left">K2O.N</td>
+<td align="left">K2O.N</td>
+<td align="left">K2O.P2O5</td>
+</tr>
+<tr class="even">
+<td align="left">K2O.N</td>
+<td align="left">K2O.P2O5</td>
+<td align="left">N.P2O5</td>
+<td align="left">K2O.P2O5</td>
+<td align="left">N.P2O5</td>
+<td align="left">N.P2O5</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ol start="5" style="list-style-type: lower-alpha">
+<li>Use Tukey’s method to compute confidence intervals for the differences in means. Calculate p-values based on Tukey’s method.</li>
+</ol>
+<div class="ans">
+<p>The result from Tukey’s method is,</p>
+<pre><code>
+     Simultaneous Confidence Intervals and Tests for General Linear Hypotheses
+
+Multiple Comparisons of Means: Tukey Contrasts
+
+
+Fit: lm(formula = y ~ fertilizer, data = fertilizer)
+
+Quantile = 2.7989 
+Minimum significant difference = 20.6692
+95% confidence level
+ 
+Linear Hypotheses:
+                   Lower  Center   Upper Std.Err t value   P(&gt;t)   
+control-K2O.N    -43.669 -23.000  -2.331   7.385  -3.115 0.02582 * 
+control-K2O.P2O5 -14.669   6.000  26.669   7.385   0.812 0.84784   
+control-N.P2O5   -31.669 -11.000   9.669   7.385  -1.490 0.46190   
+K2O.N-K2O.P2O5     8.331  29.000  49.669   7.385   3.927 0.00427 **
+K2O.N-N.P2O5      -8.669  12.000  32.669   7.385   1.625 0.38785   
+K2O.P2O5-N.P2O5  -37.669 -17.000   3.669   7.385  -2.302 0.13109   
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+(Adjusted p values reported -- single-step method)</code></pre>
+<p>The formula for finding Tukey’s confidence interval for same sample size for all groups:</p>
+<p><span class="math display">\[
+\left[\bar{y}_{i\cdot} - \bar{y}_{j\cdot} \pm q_{\alpha(a, f)}\sqrt{\frac{\text{MSE}}{n}}\right]
+\]</span> Here, <span class="math inline">\(a =\)</span> Total number of groups, <span class="math inline">\(f =\)</span> degree of freedom associated with <span class="math inline">\(\text{MSE}\)</span> and <span class="math inline">\(\alpha =\)</span> level of significance. The value of <span class="math inline">\(q_{\alpha(a, f)}\)</span> is on <em>Studentized Range Statistic Table</em></p>
+</div>
+<ol start="6" style="list-style-type: lower-alpha">
+<li>Formulate a conclusion.</li>
+</ol>
+<div class="ans">
+<p>Tukey’s output in previous answer shows that yield from fertilizer <code>K20.N</code> differs significantly from <code>control</code> (p-value: 0.02562) and <code>K20.P205</code> (p-value: 0.00439).</p>
+<p>We can also use plot for Tukey test for some visualization,</p>
+<p><img src="STAT210-2016_files/figure-html/unnamed-chunk-46-1.png" width="672" /></p>
+</div>
+<ol start="7" style="list-style-type: lower-alpha">
+<li>Test if the 3 new fertilizers are better than the control by using a suitable contrast.</li>
+</ol>
+<div class="ans">
+<p>For testing the average effect of 3 new fertilizer with control, a contrast can be constructed with coefficients <code>c(-1, 1/3, 1/3, 1/3)</code>. So, the hypothesis in this situation will be,</p>
+<p><span class="math display">\[
+\begin{aligned}
+H_0 &amp;: \frac{1}{3}\left(\mu_2 + \mu_3 + \mu_4\right) - \mu_1 = 0 \\
+H_1 &amp;: \frac{1}{3}\left(\mu_2 + \mu_3 + \mu_4\right) - \mu_1 \ne 0
+\end{aligned}
+\]</span></p>
+<p>In general form, the hypothesis can be written as,</p>
+<p><span class="math display">\[
+\begin{aligned}
+H_0 &amp;: \sum_{i = 1}^a {c_i\bar{y}_{i\cdot}} = 0 \\
+H_1 &amp;: \sum_{i = 1}^a {c_i\bar{y}_{i\cdot}} \ne 0
+\end{aligned}
+\]</span></p>
+<p>In this case, <span class="math inline">\(c_i = -1, 1/3, 1/3, 1/3\)</span> for <span class="math inline">\(i = 1, 2, 3, 4\)</span> respectively</p>
+<p>We can write contrast as,</p>
+<p><span class="math display">\[C = \sum_{i = 1}^a {c_i\bar{y}_{i\cdot}}\]</span></p>
+<p>The Standard Error for <span class="math inline">\(C\)</span> is,</p>
+<p><span class="math display">\[\text{SE}(C) = \sqrt{\frac{\text{MSE}}{n} \sum_{i = 1}^a {c_i^2}}\]</span></p>
+<p>Thus, the test statistics for testing the hypothesis is,</p>
+<p><span class="math display">\[t_0 = \frac{\sum_{i = 1}^a{c_i\bar{y}_{i\cdot}}}{\sqrt{\frac{\text{MSE}}{n} \sum_{i = 1}^a {c_i^2}}} \sim t_{\alpha/2, N-a}\]</span></p>
+<p>Further, the Confidence Interval is given as,</p>
+<p><span class="math display">\[
+\left[\sum_{i = 1}^a{c_i\bar{y}_{i\cdot}} \pm t_{\alpha/2, N-a} \sqrt{\frac{\text{MSE}}{n} \sum_{i = 1}^a {c_i^2}} \right]
+\]</span></p>
+<p>The result from R-commander contrast test is,</p>
+<pre><code>                                      Estimate Std. Error  t value
+fertilizer c=( 1 -0.33 -0.33 -0.33 ) -9.310175   6.014596 -1.54793
+                                      Pr(&gt;|t|) DF lower CI upper CI
+fertilizer c=( 1 -0.33 -0.33 -0.33 ) 0.1373179 20 -21.8564 3.236053</code></pre>
+<p>From the output, we can see that we fail to reject Null hypothesis and thus conclude that the average yield on using new fertilizers is not significatly different from that obtained from <code>control</code>.</p>
+</div>
+
+</div>
+<div id="exercise-9" class="section level2">
+<h2>Exercise 9</h2>
+<div id="exam-stat-210-sep-2012-exercise-1" class="section level3">
+<h3>Exam STAT 210 Sep 2012, Exercise 1</h3>
+<p><strong>Question:</strong> The purpose of this exercise to determine if a new diet treatment or method (called ’M1’) designed to help people loosing weight is better than two well known methods (called ’M2’ and ’M3’). Two individuals were recruited in each group. The individuals were weighed at the beginning and the end of the study. For each individual the weight difference (’final weight’-’initial weight’) was recorded. The data and some summary statistics are as follows:</p>
+<pre><code>   Treatment Observations Averages
+1:        M1          0,2        1
+2:        M2          1,3        2
+3:        M3          5,7        6</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Treatment</th>
+<th align="left">Observations</th>
+<th align="left">Averages</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">M1</td>
+<td align="left">0, 2</td>
+<td align="left">1</td>
+</tr>
+<tr class="even">
+<td align="left">M2</td>
+<td align="left">1, 3</td>
+<td align="left">2</td>
+</tr>
+<tr class="odd">
+<td align="left">M3</td>
+<td align="left">5, 7</td>
+<td align="left">6</td>
+</tr>
+</tbody>
+</table>
+<table>
+<tbody>
+<tr class="odd">
+<td align="left">Total Average</td>
+<td></td>
+<td align="left">3</td>
+</tr>
+</tbody>
+</table>
+<p>We will use the model,</p>
+<p><span class="math display">\[y_{ij} = \mu + \tau_i + \epsilon_{ij},\; \epsilon_{ij} \sim NID(0, \sigma^2)\]</span></p>
+<p>Here,</p>
+<p><span class="math display">\[
+\begin{aligned}
+i &amp; = 1, 2, 3 \text{ corresponding to M1, M2 and M3} \\
+j &amp; = 1, 2 \text{ corresponding to the two observations in each treatment group} \\
+y_{ij} &amp; = \text{Weight Loss and}
+\sum_{i = 1}^3{\tau_i} = 0
+\end{aligned}
+\]</span></p>
+<ol style="list-style-type: lower-alpha">
+<li>Calculate <span class="math inline">\(\text{SS}_\text{Treatment}\)</span> and <span class="math inline">\(\text{SS}_\text{E}\)</span> defined below:</li>
+</ol>
+<p><span class="math display">\[
+\begin{aligned}
+\text{SS}_\text{Treatment} &amp;= 2\sum_{i = 1}^3 \left({\bar{y}_{i\cdot} - \bar{y}_{\cdot\cdot}}\right)^2 \\
+\text{SS}_\text{E} &amp;= \sum_{i = 1}^3\sum_{j = 1}^2\left(y_{ij} - \bar{y}_{i\cdot} \right)^2
+\end{aligned}
+\]</span></p>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Consider the null hypothesis</li>
+</ol>
+<p><span class="math display">\[H_0 : \tau_1 = \tau_2 = \tau_3 = 0\]</span></p>
+<p>Show that the test statistic is <span class="math inline">\(F_0=7\)</span> and use this to perform the test. Formulate a conclusion.</p>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>We would like to extend on the above pilot study and design a real study. How would you design this study? You are free to state your assumptions. You <em>can</em> mention words like <em>randomization</em>, <em>blocking</em> and <em>replication</em>. You are not supposed to write more than 10 full sentences.</li>
+</ol>
+
+</div>
+</div>
+<div id="exercise-10" class="section level2">
+<h2>Exercise 10</h2>
+<p>We will compare two sorts of barley cultivated at two different sites. Let <span class="math inline">\(Y_{i,j}\)</span> be yield (in kg) for sort <span class="math inline">\(i\)</span>, site <span class="math inline">\(j\)</span>, where <span class="math inline">\(i = 1, 2\)</span> and <span class="math inline">\(j = 1, 2\)</span> We have, <span class="math display">\[
+\begin{aligned}
+Y_{1,1} = 1 &amp;&amp;
+Y_{1,2} = 3 \\
+Y_{2,1} = 2 &amp;&amp;
+Y_{2,2} = 6
+\end{aligned}
+\]</span></p>
+<p>Find and interpret:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\bar{Y}_{i\cdot} &amp; = \frac{1}{2}\sum_{j = 1}^2{Y_{ij}} \text{ for } i = 1\text{ and } 2 \\
+\bar{Y}_{\cdot j} &amp; = \frac{1}{2}\sum_{j = 1}^2{Y_{ij}} \text{ for } i = 1\text{ and } 2 \\
+\bar{Y}_{\cdot\cdot} &amp; = \frac{1}{4}\sum_{j = 1}^2\sum_{j = 1}^2{Y_{ij}}
+\end{aligned}
+\]</span></p>
+<p>Find:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\sum_{i = 1}^2\sum_{j = 1}^2{\left(Y_{ij} - \bar{Y}_{\cdot\cdot}\right)^2} &amp;&amp;
+\sum_{i = 1}^2\sum_{j = 1}^2{\left(Y_{ij} - \bar{Y}_{i\cdot}\right)^2} \\
+\sum_{i = 1}^2\sum_{j = 1}^2{\left(Y_{ij} - \bar{Y}_{\cdot j}\right)^2} &amp;&amp;
+\sum_{i = 1}^2{\left(\bar{Y}_{i} - \bar{Y}_{\cdot\cdot}\right)^2}
+\end{aligned}
+\]</span></p>
+<div class="ans">
+<p>Here we can write,</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>Site 1</th>
+<th>Site 2</th>
+<th>Row Mean</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Sort 1</strong></td>
+<td><span class="math inline">\(y_{11} = 1\)</span></td>
+<td><span class="math inline">\(y_{12} = 3\)</span></td>
+<td><span class="math inline">\(\bar{y}_{1.} = 2\)</span></td>
+</tr>
+<tr class="even">
+<td><strong>Sort 2</strong></td>
+<td><span class="math inline">\(y_{21} = 2\)</span></td>
+<td><span class="math inline">\(y_{22} = 6\)</span></td>
+<td><span class="math inline">\(\bar{y}_{2.} = 4\)</span></td>
+</tr>
+<tr class="odd">
+<td><strong>Column Mean</strong></td>
+<td><span class="math inline">\(\bar{y}_{.1} = 1.5\)</span></td>
+<td><span class="math inline">\(\bar{y}_{.2} = 4.5\)</span></td>
+<td><span class="math inline">\(\bar{y}_{..} = 3\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><span class="math display">\[\bar{Y}_{i\cdot} = \frac{1}{2}\sum_{j = 1}^2{Y_{ij}} = 2\text{ and } 4 \text{ for } i = 1\text{ and } 2 \text{ respectively }\]</span></p>
+<p>These are the average of <em>sort</em> 1 and 2 over all the <em>sites</em>.</p>
+<p><span class="math display">\[\bar{Y}_{\cdot j} = \frac{1}{2}\sum_{i = 1}^2{Y_{ij}} = 1.5\text{ and } 4.5 \text{ for } i = 1\text{ and } 2 \text{ respectively }\]</span></p>
+<p>These are the average of <em>site</em> 1 and 2 for all the <em>sorts</em>.</p>
+<p>Further,</p>
+<p><span class="math display">\[\bar{Y}_{\cdot\cdot} = \frac{1}{4}\sum_{j = 1}^2\sum_{j = 1}^2{Y_{ij}} = 3\]</span></p>
+<p>This is the overall cultivated barley for all sorts and sites.</p>
+<p>Thus, we can also find, <span class="math display">\[
+\begin{aligned}
+\sum_{i = 1}^2\sum_{j = 1}^2{\left(Y_{ij} - \bar{Y}_{\cdot\cdot}\right)^2} = 14 &amp;&amp;
+\sum_{i = 1}^2\sum_{j = 1}^2{\left(Y_{ij} - \bar{Y}_{i\cdot}\right)^2} = 10 \\
+\sum_{i = 1}^2\sum_{j = 1}^2{\left(Y_{ij} - \bar{Y}_{\cdot j}\right)^2} = 5 &amp;&amp;
+\sum_{i = 1}^2{\left(\bar{Y}_{i} - \bar{Y}_{\cdot\cdot}\right)^2} = 2
+\end{aligned}
+\]</span></p>
+</div>
+
+</div>
+<div id="exercise-11" class="section level2">
+<h2>Exercise 11</h2>
+<p>From Five sires (bulls used for breeding are often referred to as “sires”) have we recoded the annual milk production from 8 daughters which are randomly picked out from all daughter of those sires. The data: <code>Sires.Rdata</code> (fronter)</p>
+<ol style="list-style-type: lower-alpha">
+<li>State a model with <code>milk</code> production as response and <code>sire</code> as factor. How would you interpret all the parameters in this model?</li>
+</ol>
+<div class="ans">
+<p>Let <span class="math inline">\(Y_{ij}\)</span> be milk produced by daughter <span class="math inline">\(j\)</span> of sires <span class="math inline">\(i\)</span>.</p>
+<p>Model: <span class="math display">\[Y_{ij} = \mu + \tau_i + \epsilon_{ij}\]</span></p>
+<p>Here, <span class="math inline">\(\epsilon_{ij} \sim \text{NID}(0, \sigma^2)\)</span> and <span class="math inline">\(i = 1, 2, \ldots 5\)</span> and <span class="math inline">\(j = 1, 2, \ldots 8\)</span></p>
+<p>Here, we also have one restriction,</p>
+<p><span class="math display">\[\sum_{i = 1}^5\tau_i = 0\]</span></p>
+<p><strong>Interpretaion of Parameters:</strong></p>
+<table>
+<colgroup>
+<col width="13%" />
+<col width="4%" />
+<col width="81%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td align="right"><span class="math inline">\(\mu\)</span></td>
+<td align="center">:</td>
+<td>Average milk production for all daughters under the 5 sires</td>
+</tr>
+<tr class="even">
+<td align="right"><span class="math inline">\(\tau_i\)</span></td>
+<td align="center">:</td>
+<td>The average profit in annually milk production of using only sire <span class="math inline">\(i\)</span></td>
+</tr>
+<tr class="odd">
+<td align="right"><span class="math inline">\(\sigma^2\)</span></td>
+<td align="center">:</td>
+<td>The variance in milk production for all daughter under one particular sire</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Test if there is effect of <code>sire</code> with respect to milk production. (R-commander: <em>Statistics &gt; Fit model &gt; Linear model</em>. Note that <code>sire</code> must be factor variable)</li>
+</ol>
+<div class="ans">
+<p>The hypothesis is,</p>
+<p><span class="math display">\[
+\begin{aligned}
+H_0 &amp;: \tau_1 = \tau_2 = \tau_3 = 0 \\
+H_1 &amp;: \tau_i \ne 0 \text{ for at least one }i
+\end{aligned}
+\]</span></p>
+<p>ANOVA for this model is,</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">Df</th>
+<th align="right">Sum Sq</th>
+<th align="right">Mean Sq</th>
+<th align="right">F value</th>
+<th align="right">Pr(&gt;F)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>sire</td>
+<td align="right">4</td>
+<td align="right">1251009</td>
+<td align="right">312752.3</td>
+<td align="right">2.805913</td>
+<td align="right">0.0403794</td>
+</tr>
+<tr class="even">
+<td>Residuals</td>
+<td align="right">35</td>
+<td align="right">3901166</td>
+<td align="right">111461.9</td>
+<td align="right"></td>
+<td align="right"></td>
+</tr>
+</tbody>
+</table>
+<p>Here, sire effect is significant at 5% (p-value: 0.0404)</p>
+</div>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Estimate all parameters in the model (R-commander: <em>Model &gt; summarize model</em>)</li>
+</ol>
+<div class="ans">
+<p>The summary of above fitted model is,</p>
+<pre><code>
+Call:
+lm(formula = milk ~ sire, data = Sires)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-651.25 -247.37   -2.69  199.84  872.75 
+
+Coefficients:
+            Estimate Std. Error t value            Pr(&gt;|t|)    
+(Intercept)  6518.15      52.79 123.478 &lt;0.0000000000000002 ***
+sire(1)       171.10     105.58   1.621              0.1141    
+sire(2)      -236.15     105.58  -2.237              0.0318 *  
+sire(3)      -192.40     105.58  -1.822              0.0769 .  
+sire(4)       152.97     105.58   1.449              0.1562    
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+s: 333.9 on 35 degrees of freedom
+Multiple R-squared: 0.2428,
+Adjusted R-squared: 0.1563 
+F-statistic: 2.806 on 4 and 35 DF,  p-value: 0.04038 </code></pre>
+<p>Here, the estimates of unknown parameters are,</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">estimates</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(\hat{\mu}\)</span></td>
+<td align="right">6518.1500</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\hat{\tau}_1\)</span></td>
+<td align="right">171.1000</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\hat{\tau}_2\)</span></td>
+<td align="right">-236.1500</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\hat{\tau}_3\)</span></td>
+<td align="right">-192.4000</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\hat{\tau}_4\)</span></td>
+<td align="right">152.9750</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\hat{\sigma}\)</span></td>
+<td align="right">333.8591</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ol start="4" style="list-style-type: lower-alpha">
+<li>(Use the general fact that in an one way ANOVA model with <span class="math inline">\(a\)</span> levels on the factor and <span class="math inline">\(n\)</span> replicates <span class="math inline">\({}^\text{SSE}\!/_{\sigma^2}\)</span> is chi square distributed with <span class="math inline">\(na – a\)</span> degrees of freedom). Find a 95 % confidence interval for the error variance (the unexplained variance). Explain the interval to farmer. (use the general fact that in an one way ANOVA model with a levels on the factor and <span class="math inline">\(n\)</span> replicates <span class="math inline">\({}^\text{SSE}\!/_{\sigma^2}\)</span> is chi square distributed with <span class="math inline">\(na – a\)</span> degrees of freedom)</li>
+</ol>
+<div class="ans">
+<p>95% confidence interval for <span class="math inline">\(\sigma^2\)</span> is given by,</p>
+<p><span class="math display">\[
+\begin{aligned}
+\left(
+\frac{\text{SSE}}{\chi^2_{35, 0.975}}, \frac{\text{SSE}}{\chi^2_{35, 0.025}}
+\right) &amp;=
+\left(
+\frac{3901165.8}{53.2033485}, \frac{3901165.8}{20.5693766}
+\right) \\ &amp;= 
+\left(73325.5689144, 189658.9220973\right)
+\end{aligned}
+\]</span></p>
+<p>Therefore, 95% confidence limit for <span class="math inline">\(\sigma\)</span> is (271, 435) kg of milk. This value revers that with 95% of confidence level, the true variation in annual milk production for all daughter under one particular sire lie between (271, 435) kg.</p>
+</div>
+
+</div>
+<div id="exercise-12" class="section level2">
+<h2>Exercise 12</h2>
+<p>Tree diets for pigs were test out, in an experiment with 2 replicates. The Response is carcass weight (slaktevekt in Norwegian). Let’s assume 4students did the experiment and that they really obtained different results:</p>
+<div id="experiment-1" class="section level3">
+<h3>Experiment 1</h3>
+<table>
+<tbody>
+<tr class="odd">
+<td align="left">Diet1</td>
+<td align="right">69</td>
+<td align="right">71</td>
+</tr>
+<tr class="even">
+<td align="left">Diet2</td>
+<td align="right">79</td>
+<td align="right">81</td>
+</tr>
+<tr class="odd">
+<td align="left">Diet3</td>
+<td align="right">89</td>
+<td align="right">91</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="experiment-2" class="section level3">
+<h3>Experiment 2</h3>
+<table>
+<tbody>
+<tr class="odd">
+<td align="left">Diet1</td>
+<td align="right">60</td>
+<td align="right">80</td>
+</tr>
+<tr class="even">
+<td align="left">Diet2</td>
+<td align="right">70</td>
+<td align="right">90</td>
+</tr>
+<tr class="odd">
+<td align="left">Diet3</td>
+<td align="right">80</td>
+<td align="right">100</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="experiment-3" class="section level3">
+<h3>Experiment 3</h3>
+<table>
+<tbody>
+<tr class="odd">
+<td align="left">Diet1</td>
+<td align="right">70</td>
+<td align="right">90</td>
+</tr>
+<tr class="even">
+<td align="left">Diet2</td>
+<td align="right">71</td>
+<td align="right">91</td>
+</tr>
+<tr class="odd">
+<td align="left">Diet3</td>
+<td align="right">72</td>
+<td align="right">92</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="experiment-4" class="section level3">
+<h3>Experiment 4</h3>
+<table>
+<tbody>
+<tr class="odd">
+<td align="left">Diet1</td>
+<td align="right">80</td>
+<td align="right">82</td>
+</tr>
+<tr class="even">
+<td align="left">Diet2</td>
+<td align="right">82</td>
+<td align="right">84</td>
+</tr>
+<tr class="odd">
+<td align="left">Diet3</td>
+<td align="right">83</td>
+<td align="right">85</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="without-computing-anything" class="section level3">
+<h3>Without computing anything:</h3>
+<ul>
+<li>
+Describe all 4 experiments, have focus on large explained or unexplained variation.
+<div class="ans">
+<p><strong>Experiment 1:</strong> Large difference between diets, small difference inside diets</p>
+<p><strong>Experiment 2:</strong> Large difference between diets, large difference inside diets</p>
+<p><strong>Experiment 3:</strong> Small difference between diets, large difference inside diets</p>
+<p><strong>Experiment 4:</strong> Small difference between diets, small difference inside diets</p>
+</div>
+</li>
+<li>
+In which experiment do you think you will have a large, small or moderate F value?
+<div id="pfvalue" class="ans">
+<p><strong>Experiment 1:</strong> Large F, small P-value</p>
+<p><strong>Experiment 2:</strong> Moderate F</p>
+<p><strong>Experiment 3:</strong> Small F, large P-value</p>
+<p><strong>Experiment 4:</strong> Moderate F</p>
+</div>
+</li>
+<li>
+In which experiment do you think you will have a large, small or moderate P value?
+<div class="ans">
+<p>See <a href="week-one.html#pfvalue">previous answer</a></p>
+</div>
+</li>
+<li>
+In which experiment do you think you will prove a significant effect of diet?
+<div class="ans">
+<p><strong>Experiment 1</strong> will prove a significant effect of diet due to large difference between diets and small difference inside diets.</p>
+<p><strong>Experiment 2</strong> could results with significant effect of diet but may get influenced by the noise within diets.</p>
+<p><strong>Experiment 3</strong> and <strong>Experiment 4</strong> has very small difference between diets however Experiment 4 has small variation within diets which can help us to see the difference between diets.</p>
+</div>
+</li>
+<li>
+Check your answers by R-commander.
+<div class="ans">
+<p>The ANOVA table for four experiments from R-commander is,</p>
+<h3 id="experiment-1-1">Experiment 1:</h3>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">Df</th>
+<th align="right">Sum Sq</th>
+<th align="right">Mean Sq</th>
+<th align="right">F value</th>
+<th align="right">Pr(&gt;F)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>diet</td>
+<td align="right">2</td>
+<td align="right">400</td>
+<td align="right">200</td>
+<td align="right">100</td>
+<td align="right">0.0017965</td>
+</tr>
+<tr class="even">
+<td>Residuals</td>
+<td align="right">3</td>
+<td align="right">6</td>
+<td align="right">2</td>
+<td align="right"></td>
+<td align="right"></td>
+</tr>
+</tbody>
+</table>
+<h3 id="experiment-2-1">Experiment 2:</h3>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">Df</th>
+<th align="right">Sum Sq</th>
+<th align="right">Mean Sq</th>
+<th align="right">F value</th>
+<th align="right">Pr(&gt;F)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>diet</td>
+<td align="right">2</td>
+<td align="right">400</td>
+<td align="right">200</td>
+<td align="right">1</td>
+<td align="right">0.464758</td>
+</tr>
+<tr class="even">
+<td>Residuals</td>
+<td align="right">3</td>
+<td align="right">600</td>
+<td align="right">200</td>
+<td align="right"></td>
+<td align="right"></td>
+</tr>
+</tbody>
+</table>
+<h3 id="experiment-3-1">Experiment 3:</h3>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">Df</th>
+<th align="right">Sum Sq</th>
+<th align="right">Mean Sq</th>
+<th align="right">F value</th>
+<th align="right">Pr(&gt;F)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>diet</td>
+<td align="right">2</td>
+<td align="right">4</td>
+<td align="right">2</td>
+<td align="right">0.01</td>
+<td align="right">0.9900827</td>
+</tr>
+<tr class="even">
+<td>Residuals</td>
+<td align="right">3</td>
+<td align="right">600</td>
+<td align="right">200</td>
+<td align="right"></td>
+<td align="right"></td>
+</tr>
+</tbody>
+</table>
+<h3 id="experiment-4-1">Experiment 4:</h3>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">Df</th>
+<th align="right">Sum Sq</th>
+<th align="right">Mean Sq</th>
+<th align="right">F value</th>
+<th align="right">Pr(&gt;F)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>diet</td>
+<td align="right">2</td>
+<td align="right">9.333333</td>
+<td align="right">4.666667</td>
+<td align="right">2.333333</td>
+<td align="right">0.2447778</td>
+</tr>
+<tr class="even">
+<td>Residuals</td>
+<td align="right">3</td>
+<td align="right">6.000000</td>
+<td align="right">2.000000</td>
+<td align="right"></td>
+<td align="right"></td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+</ul>
+
+</div>
+</div>
+<div id="extra-exercises-from-textbook-with-solutions" class="section level2">
+<h2>Extra exercises from textbook with solutions</h2>
+<div id="exercise-3.1" class="section level3">
+<h3>Exercise 3.1</h3>
+<p>An experimenter has conducted a single-factor experiment with six levels of the factor, and each factor level has been replicated three times. The computed value of the F-statistic is <span class="math inline">\(F_0 = 4.89\)</span>. Find bounds on the P-value.</p>
+<div class="ans">
+<p>F~Fisher (5,12). 0.01 &lt; Table P-value &lt; 0.025 Computer P-value = 0.0114</p>
+</div>
+</div>
+<div id="exercise-3.2" class="section level3">
+<h3>Exercise 3.2</h3>
+<p>An experimenter has conducted a single-factor experiment with four levels of the factor, and each factor level has been replicated six times. The computed value of the F-statistic is <span class="math inline">\(F_0 = 4.02\)</span>. Find bounds on the P-value.</p>
+<div class="ans">
+<p>F~Fisher (3,20). 0.01 &lt; Table P-value &lt; 0.025 Computer P-value = 0.022</p>
+</div>
+</div>
+<div id="exercise-3.3" class="section level3">
+<h3>Exercise 3.3</h3>
+<p>A computer ANOVA output is shown below. Fill in the blanks. You may give bounds on the P-value.</p>
+<div id="one-way-anova" class="section level4">
+<h4>One-way ANOVA</h4>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Source</th>
+<th align="left">DF</th>
+<th align="left">SS</th>
+<th align="left">MS</th>
+<th align="left">F</th>
+<th align="left">P</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Factor</td>
+<td align="left">?</td>
+<td align="left">?</td>
+<td align="left">246.93</td>
+<td align="left">?</td>
+<td align="left">?</td>
+</tr>
+<tr class="even">
+<td align="left">Error</td>
+<td align="left">25</td>
+<td align="left">186.53</td>
+<td align="left">?</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Total</td>
+<td align="left">29</td>
+<td align="left">1174.24</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+<div class="ans">
+<p>Completed table is: (Answer regarding P requires computer, with table in Montgomery one can only say <span class="math inline">\(P&lt;0.01\)</span>)</p>
+<h4 id="one-way-anova-1">One-way ANOVA</h4>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Source</th>
+<th align="right">DF</th>
+<th align="right">SS</th>
+<th align="left">MS</th>
+<th align="left">F</th>
+<th align="left">P</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Factor</td>
+<td align="right">4</td>
+<td align="right">987.71</td>
+<td align="left">246.93</td>
+<td align="left">33.09</td>
+<td align="left">&lt; 0.0001</td>
+</tr>
+<tr class="even">
+<td align="left">Error</td>
+<td align="right">25</td>
+<td align="right">186.53</td>
+<td align="left">7.46</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Total</td>
+<td align="right">29</td>
+<td align="right">1174.24</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="exercise-3.4" class="section level3">
+<h3>Exercise 3.4</h3>
+<p>A computer ANOVA output is shown below. Fill in the blanks. You may give bounds on the P-value.</p>
+<div id="one-way-anova-2" class="section level4">
+<h4>One-way ANOVA</h4>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Source</th>
+<th align="left">DF</th>
+<th align="left">SS</th>
+<th align="left">MS</th>
+<th align="left">F</th>
+<th align="left">P</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Factor</td>
+<td align="left">3</td>
+<td align="left">36.15</td>
+<td align="left">?</td>
+<td align="left">?</td>
+<td align="left">?</td>
+</tr>
+<tr class="even">
+<td align="left">Error</td>
+<td align="left">?</td>
+<td align="left">?</td>
+<td align="left">?</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Total</td>
+<td align="left">19</td>
+<td align="left">196.04</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+<div class="ans">
+<p>Completed table is: (Answer P requires computer)</p>
+<h4 id="one-way-anova-3">One-way ANOVA</h4>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Source</th>
+<th align="right">DF</th>
+<th align="right">SS</th>
+<th align="left">MS</th>
+<th align="left">F</th>
+<th align="left">P</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Factor</td>
+<td align="right">3</td>
+<td align="right">36.15</td>
+<td align="left">12.05</td>
+<td align="left">1.21</td>
+<td align="left">0.3395</td>
+</tr>
+<tr class="even">
+<td align="left">Error</td>
+<td align="right">16</td>
+<td align="right">159.89</td>
+<td align="left">9.99</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Total</td>
+<td align="right">19</td>
+<td align="right">196.04</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="exercise-3.5" class="section level3">
+<h3>Exercise 3.5</h3>
+<p>A regional opera company has tried three approaches to solicit donations from 24 potential sponsors. The 24 potential sponsors were randomly divided into three groups of eight, and one approach was used for each group. The dollar amounts of the resulting contributions are shown in the following table</p>
+<table>
+<thead>
+<tr class="header">
+<th align="right">Approach</th>
+<th align="left">Contributions</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">1000, 1500, 1200, 1800, 1600, 1100, 1000, 1250</td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="left">1500, 1850, 2000, 1200, 2000, 1700, 1800, 1900</td>
+</tr>
+<tr class="odd">
+<td align="right">3</td>
+<td align="left">900, 1000, 1200, 1500, 1200, 1550, 1000, 1100</td>
+</tr>
+</tbody>
+</table>
+<p>The data is available as <code>Table35.Dollar.RData</code> and below R is used rather than Minitab used in Montgomery</p>
+<ol style="list-style-type: lower-alpha">
+<li>Do the data indicate that there is a difference in results obtained from the three different approaches? Use <span class="math inline">\(\alpha = 0.05\)</span>.</li>
+</ol>
+<div class="ans">
+<pre><code>Analysis of Variance Table
+
+Response: Dollar
+          Df  Sum Sq Mean Sq F value   Pr(&gt;F)   
+Approach   2 1395833  697917  9.5851 0.001102 **
+Residuals 21 1529062   72812                    
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<pre><code>
+     Simultaneous Confidence Intervals and Tests for General Linear Hypotheses
+
+Multiple Comparisons of Means: Tukey Contrasts
+
+
+Fit: lm(formula = Dollar ~ Approach, data = Tabl35.Dollar)
+
+Quantile = 2.5206 
+Minimum significant difference = 340.0727
+95% confidence level
+ 
+Linear Hypotheses:
+        Lower  Center   Upper Std.Err t value   P(&gt;t)   
+A1-A2 -777.57 -437.50  -97.43  134.92  -3.243 0.01043 * 
+A1-A3 -215.07  125.00  465.07  134.92   0.926 0.63000   
+A2-A3  222.43  562.50  902.57  134.92   4.169 0.00121 **
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+(Adjusted p values reported -- single-step method)</code></pre>
+</div>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Analyze the residuals from this experiment and comment on the model adequacy.</li>
+</ol>
+<div class="ans">
+<p><img src="STAT210-2016_files/figure-html/unnamed-chunk-72-1.png" width="672" /></p>
+<p>There is nothing unusual about the residuals.</p>
+</div>
+</div>
+</div>
+<div id="extra-exercises" class="section level2">
+<h2>Extra exercises</h2>
+<p><em>NOTE:: only if time</em></p>
+<p>Textbook ed 8 (numbers in ed 7 in parenthesis): 2.1 (2.2), 2.3 (2.3) ,2.20 (2.16), 2.29 (2.21).</p>
+<p>The exercises, short solutions (and a few more problems) can also be found in <code>ExtraProblemsWithSolutionsch02ed7.pdf</code>.</p>
+
+</div>
+</div>
+<script>
+ans_btn_html = '<a class = "btn-ans"><span class="label label-success no-print">&lt;ANS/&gt;</span></a>';
+  showAns_btn = '<a class="showAns-btn btn pull-right js-toolbar-action">Show Answers</a>';
+  hideAns_btn = '<a class="hideAns-btn btn pull-right js-toolbar-action" style="display:none;">Hide Answers</a>';
+  
+  // Adding Extra Menus in Navigation
+  
+  // Adding button on before each answer:::
+  $(".ans").before(ans_btn_html);
+  $('.btn-ans').each(function(){
+    $(this).next('.ans').andSelf().wrapAll('<div class="wrap-ans"/>');
+  });
+  $('.btn-ans').click(function(){
+    $(this).siblings('.ans').toggle(400);
+  });
+  
+if ($(".ans").length > 0){
+    $('.book-header').prepend(showAns_btn, hideAns_btn);
+    $('.showAns-btn').show();
+    $('.showAns-btn').click(function(){
+      $('.btn-ans').hide(400);
+      $('.ans').show(400);
+      $('.hideAns-btn').show();
+      $(this).hide();
+      $('.hideAns-btn').click(function(){
+        $('.btn-ans').show(400);
+        $('.ans').hide(400);
+        $('.showAns-btn').show();
+        $(this).hide();
+      });
+    });
+  }
+
+var chap = "week-two"
+if(window.location.href.indexOf(chap) != -1){
+  var now = new Date();
+  var release = new Date("August 21, 2016");
+  if(now < release){
+    $(".ans, .btn-ans, .showAns-btn, .hideAns-btn").hide()
+  }
+}
+
+$('.ans p:has(img)').css('text-align', 'center');
+</script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-82812028-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="week-two.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/mathatistics/stat210-2016/edit/master/week1/01-W1E01.Rmd",
+"text": "Edit"
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

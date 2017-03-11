@@ -1,0 +1,297 @@
+# Exam 2012 <small>(Sep 3, 2012)</small>
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+require(mixlm)
+load("_data/Exam2012Ex1.RData")
+load("_data/ExamStat210sept2012Problem2and3.RData")
+```
+
+Each sub-question will be given the same weight in the evaluation of the exam. You may answer in English or Norwegian (or “Scandinavian”). There are three exercises.
+
+```{r Appendices}
+raceSumry <- sapply(list("mean weight" = mean, "n" = length), function(x){
+    apply(unstack(ex2and3, Weight ~ Race), 2, x)
+})
+raceSumry <- round(rbind(raceSumry, Total = c(mean(raceSumry[,1]), sum(raceSumry[, 2]))), 3)
+```
+
+
+## Exercise 1
+
+The purpose of this exercise to determine if a new diet treatment or method (called `M1`) designed to help people loosing weight is better than two well known methods (called `M2` and `M3`). Two individuals were recruited in each group. The individuals were weighed at the beginning and the end of the study. For each individual the weight difference (`final weight`-`initial weight`) was recorded. The data and some summary statistics are as follows: 
+
+```{r}
+dta <- reshape2::dcast(ex1, Diet ~ ., value.var = 'y', fun.aggregate = list)
+colnames(dta) <- c("Treatments", "Observations")
+avg <- reshape2::dcast(ex1, Diet ~ ., value.var = 'y', fun.aggregate = mean)
+colnames(avg) <- c("Treatments", "Averages")
+out1 <- merge(dta, avg, by = "Treatments")
+out1$Treatments <- as.character(unlist(out1$Treatments))
+out2 <- c(Treatments = "Total Average", "", mean(avg$Averages))
+knitr::kable(rbind(out1, out2))
+```
+
+We will use the model,
+
+$$
+y_{ij} = \mu + \tau_i + \epsilon_{ij}
+$$
+
+Where, 
+
+  $i = 1, 2, 3$ Corresponding to `M1`, `M2` and `M3`
+  
+  $j = 1, 2$ corresponding to the two observations in each treatment group
+  
+  $y_{ij}$ = Weight loss and
+  
+  $\epsilon_{ij} \sim \text{N}(0, \sigma^2)$, and $\sum_{i = 1}^3 \tau_i = 0$
+  
+a) Calculate $\text{SS}_\text{Treatments}$ and $\text{SS}_\text{E}$ defined below :
+    
+    $$
+    \begin{aligned}
+    \text{SS}_\text{Treatments} &= 2\sum_{i = 1}^3\left(\bar{y}_{i\cdot} - \bar{y}_{\cdot\cdot}\right)^2 \\
+    \text{SS}_\text{E} &= \sum_{i = 1}^3\sum_{j = 1}^2\left(\bar{y}_{ij} - \bar{y}_{i\cdot}\right)^2
+    \end{aligned}
+    $$ 
+    
+    <div class = 'ans'>
+    
+    $$
+    \begin{aligned}
+    \text{SS}_\text{Treatments} &= 2\sum_{i = 1}^3\left(\bar{y}_{i\cdot} - \bar{y}_{\cdot\cdot}\right)^2 \\
+    &= `r paste0("2\\left(", paste(paste0("(", paste(out1$Averages, as.numeric(out2[[3]]), sep = "-"), ")^2"), collapse = "+"), "\\right)")` \\
+    &= `r 2 * sum((out1$Averages - as.numeric(out2[[3]]))^2)` \\
+    \text{SS}_\text{E} &= \sum_{i = 1}^3\sum_{j = 1}^2\left(\bar{y}_{ij} - \bar{y}_{i\cdot}\right)^2 \\
+    &= `r paste(c(sapply(out1$Observations, function(x) paste0("(", paste(x, mean(x), sep = "-"), ")^2"))), collapse = "+")` \\
+    &= `r sum(c(sapply(out1$Observations, function(x) (x - mean(x))^2)))`
+    \end{aligned}
+    $$ 
+    
+    </div>
+    
+b) Consider the null hypothesis
+    
+    $$H_0: \tau_1 = \tau_2 = \tau_3 = 0$$
+    
+    Show that the test statistic is $F_0=7$ and use this to perform the test. Formulate a conclusion.
+    
+    <div class = 'ans'>
+    
+    We have, degree of freedom for treatment is $3 -1 = 2$ and degree of freedom for error is $6-3 =3$. So, 
+    
+    $$
+    \begin{aligned}
+    \text{MS}_\text{treatment} &= \frac{\text{SS}_\text{treatment}}{df_\text{treatment}} = \frac{`r 2 * sum((out1$Averages - as.numeric(out2[[3]]))^2)`}{2}
+    = `r 2 * sum((out1$Averages - as.numeric(out2[[3]]))^2)/2` \\
+    \text{MS}_\text{E} &= \frac{\text{SS}_\text{E}}{df_\text{E}} = \frac{`r sum(c(sapply(out1$Observations, function(x) (x - mean(x))^2)))`}{3}
+    = `r sum(c(sapply(out1$Observations, function(x) (x - mean(x))^2)))/3`
+    \end{aligned}
+    $$ 
+    
+    Thus,
+    
+    $$F_0 = \frac{\text{MS}_\text{treatment}}{\text{MS}_\text{E}} = \frac{`r 2 * sum((out1$Averages - as.numeric(out2[[3]]))^2)/2`}{`r sum(c(sapply(out1$Observations, function(x) (x - mean(x))^2)))/3`} = `r sum((out1$Averages - as.numeric(out2[[3]]))^2)/(sum(c(sapply(out1$Observations, function(x) (x - mean(x))^2)))/3)`$$
+    
+    Further, $f_{0.05, 2, 3} = `r round(qf(0.05, 2, 3, lower = F), 3)`$
+    
+    Since, `r sum((out1$Averages - as.numeric(out2[[3]]))^2)/(sum(c(sapply(out1$Observations, function(x) (x - mean(x))^2)))/3)` < `r round(qf(0.05, 2, 3, lower = F), 3)`, we cannot reject $H_0$ and cannot claim a significance difference between treatments `M1`, `M2` and `M3`.
+    </div>
+    
+
+c) We would like to extend on the above pilot study and design a real study. How would you design this study? You are free to state your assumptions. You _can_ mention words like _randomization_, _blocking_ and _replication_. You are not supposed to write more than 10 full sentences.
+
+    <div class = 'ans'>
+    
+    We should have a sample from the population for which we would like to generalize to. For instance, if we would like to generalize to adults aged 18 to 60, our sample should be individuals from 18 to 60. We could **block**, for instance wrt to sex. In this case it would be reasonable to have a **random** sample of females and a random sample of males. Normally we would choose these samples to be equally large aiming for a balanced study. The individuals should be assigned M1,M2 and M3 based on randomization. It is important to have a sufficiently large study and one could do power calculations to secure that the sample size is adequate.
+    
+    _Comment:_ power calculations are mentioned in the course, but he the students have not been taught how these are done.
+    
+    </div>
+
+Exercises 2 and 3 below are based on the simulated data reproduced in [Appendix 1](exam-2012-sep-3-2012.html#appendix-1-1). The response variable is weight of pigs. There are 24 observations. The variables are
+
+|            |                                                                                                   |
+|------------|---------------------------------------------------------------------------------------------------|
+| **Race**   |  This variable indicates one of three possible races and is coded: `Race1`,  `Race2` and `Race3`  |
+| **Farm**   |  This variable indicates which of six farms the pigs come from and is coded `Farm1`, ..., `Farm6` |
+| **Modern** |  This variable is `Yes` if the farm is considered to be run in a modern way and otherwise `No`    |
+| **Weight** |  The final weight (English: carcass weight, Norwegian: slaktevekt) of pigs in kg                  |
+
+## Exercise 2
+
+In this exercise we will only be using the variables Farm and Weight. We consider the following random effect model:
+
+$$y_{ij} = \mu + \tau_i + \epsilon_{ij}$$
+
+Where, 
+
+|            |     |                                                                                                   |
+| ---------: | :-: | :---------------------------------------------------------------------                            |
+| $i$        | =   | $1, 2, \ldots, 6$ corresponding to `Farm 1`, `Farm 2`, ..., `Farm 6`                              |
+| $j$        | =   | $1, 2, \ldots, 4$ corresponding to the four observations for each farm,                           |
+| $y_{ij}$   | =   | `Weight`, $\tau_i \sim \text{N}(0, \sigma_\tau^2)$ and $\epsilon_{ij} \sim \text{N}(0, \sigma^2)$ |
+
+
+a) 	We would like to find out if the weights differ between farms, i.e., if we can reject,
+    
+	  $$H_0: \sigma_\tau^2 = 0$$
+	  
+	  Use the output in [Appendix 2](exam-2012-sep-3-2012.html#appendix-2-1) to perform the test at 5% significance level. Formulate a conclusion.
+	  
+	  <div class = 'ans'>
+	  
+	  The p-value (0.1388) is above 0.05 and therefore we cannot reject. In other words, we cannot claim that there is significant variability between farms.
+	  
+	  </div>
+	  
+
+b)	Use the output of [Appendix 2]((exam-2012-sep-3-2012.html#appendix-2-1")) to estimate $\sigma^2$. Calculate a 95% confidence interval for $\sigma^2$ and interpret the answer.
+
+    <div class = 'ans'>
+    
+    The estimate of $\sigma^2$ is,
+    
+    $$\hat{\sigma}^2 = \text{MS}_\text{E} = 4.01$$
+    
+    A 95% confidence interval is,
+    
+    $$\left[\frac{\text{SS}_\text{E}}{\chi^2_{0.025, 18}}, \frac{\text{SS}_\text{E}}{\chi^2_{0.975, 18}}\right]
+    = \left(\frac{72.09}{31.53}, \frac{72.09}{8.23}\right) = (2.3, 8.8)$$
+    
+    **Interpretation:** We are 95% sure that the true variation is in the interval $(2.3, 8.8)$.
+    </div>
+
+
+## Exercise 3
+
+In this exercise we will be using the variables Race, Modern and Weight. We use the model,
+
+$$y_{ij} = \mu + \tau_i + \beta_j + (\tau\beta)_{ij} + \epsilon_{ij}$$
+
+Where,
+
+|           |   |                                                          |
+|----------:|:-:|:---------------------------------------------------------|
+| $i$       | = | $1, 2, 3$ corresponding to `Race1`, `Race2` and `Race3`  |
+| $j$       | = | $1, 2$ corresponding to `Yes` and `No`                   |
+| $k$       | = | $1, 2, \ldots, 4$ corresponding to replications          |
+| $y_{ijk}$ | = | `Weight` and $\epsilon_{ijk} \sim \text{N}(0, \sigma^2)$ |
+
+$$
+\begin{aligned}
+\sum_{i = 1}^3\tau_i = 0 && \sum_{j = 1}^2\beta_i = 0 && \sum_{i = 1}^3(\tau\beta)_{ij} = 0 && \sum_{j = 1}^2(\tau\beta)_{ij} = 0
+\end{aligned}
+$$ 
+
+The random variables $\epsilon_{ijk}$ are assumed to be independent.
+
+a) Use the output of [Appendix 3](exam-2012-sep-3-2012.html#appendix-3-1) to determine if there is an interaction between **Race** and **Modern**. Formulate the hypotheses and a conclusion. Use 5% significance level.
+
+    <div class = 'ans'>
+    
+    The null hypothesis is,
+    
+    $$H_0: (\alpha\beta)_{ij} = 0 \text{ for all } i \text{ and }j $$
+    
+    We can not reject as the p-value is 0.09 which does not exceed 0.05. In other words, there is no significant interaction. (A significant interaction would have meant that the effect of **Modern** depends significantly on **Race** and vice versa.)
+    
+    </div>
+
+
+b) For the remaining part of the exercise we will be using the reduced model:
+    
+    $$y_{ij} = \mu + \tau_i + \epsilon_{ij}$$
+    
+    Where,
+   
+	 |          |   |                                                                                           |
+	 |---------:|:-:|:------------------------------------------------------------------------------------------|
+	 | $i$      | = | $1, 2, 3$ corresponding to the $a=3$ groups `Race1`, `Race2`, `Race3`                     |
+	 | $j$      | = | $1,2, \ldots, 8$ corresponding to the eight $(n = 8)$ observations for each Race          |
+	 | $y_{ij}$ | = | `Weight` and $\epsilon_{ij} \sim \text{NID}(0, \sigma^2)$ and $\sum_{i = 1}^3 \tau_i = 0$ |		
+    
+    The random variables $\epsilon_{ij}$ are assumed to be independent.
+    
+    Use the output of [Appendix 4](exam-2012-sep-3-2012.html#appendix-4-1) to show that there significant differences depending on race at 5% significance level. Between which raises are there significant differences? Use Tukey’s test.
+    
+    <div class = 'ans'>
+    
+    The p-value is below 0.05 and therefore we reject and claim that there is a statistically significant difference between the races. 
+    
+    From Tukey, we see that only Race1 and Race3 differ significantly as the p-value is 0.02 while the other p-values exceed 0.05.
+    
+    </div>
+    
+
+c) Use [Appendix 5](exam-2012-sep-3-2012.html#appendix-5-1) to estimate $\tau_1, \tau_2$ and $\tau_3$
+
+    <div class = 'ans'>
+    
+    From Appendix 5, we can find,
+    
+    $$
+    \begin{aligned}
+    \hat{\tau}_1 &= \hat{\mu}_1 - \mu = `r raceSumry[1, 1]` - `r raceSumry[4, 1]` = `r raceSumry[1, 1] - raceSumry[4, 1]` \\
+    \hat{\tau}_1 &= \hat{\mu}_1 - \mu = `r raceSumry[2, 1]` - `r raceSumry[4, 1]` = `r raceSumry[2, 1] - raceSumry[4, 1]` \\
+    \hat{\tau}_1 &= \hat{\mu}_1 - \mu = `r raceSumry[3, 1]` - `r raceSumry[4, 1]` = `r raceSumry[3, 1] - raceSumry[4, 1]` \\
+    \end{aligned}
+    $$ 
+    
+    
+    </div>
+
+
+d) Calculate the predicted value for a `Race1` pig. Calculate the residual corresponding to the first observation.
+
+    <div class = 'ans'>
+    
+    The predicted value for a `Race1` is the average of such pigs as given in Appendix 4, i.e., 
+    
+    $$
+    \begin{aligned}
+    \text{Predicted value } = `r raceSumry[1, 1]` \\
+    \text{Residual } = `r ex2and3[1, "Weight"]` - `r raceSumry[1, 1]` = `r ex2and3[1, "Weight"] - raceSumry[1, 1]`
+    \end{aligned}
+    $$ 
+    
+    </div>
+    
+
+## Appendix 1
+
+```{r}
+knitr::kable(ex2and3)
+```
+
+## Appendix 2
+
+```{r}
+mdl2 <- lm(Weight ~ r(Farm), data = ex2and3)
+anova(mdl2)
+```
+
+## Appendix 3
+
+```{r}
+mdl3 <- lm(Weight ~ Race * Modern, data = ex2and3)
+summary(aov(mdl3))
+```
+
+## Appendix 4
+```{r}
+mdl4 <- lm(Weight ~ Race, data = ex2and3)
+summary(aov(mdl4))
+```
+
+```{r}
+TukeyHSD(aov(mdl4))
+```
+
+## Appendix 5
+
+```{r}
+print(raceSumry, digits = 3)
+```
+

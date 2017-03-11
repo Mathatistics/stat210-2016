@@ -1,0 +1,161 @@
+## Exercise 2
+Two sorts of wheat, Zebra and RB07, were grown in 8 **randomly chosen** fields per sort. The protein content was measured for each sort and the data are given below.
+
+```{r, echo = FALSE}
+sort <- data.frame(Sort = c("Zebra", "Zebra", "Zebra", "Zebra", "Zebra", 
+                            "Zebra", "Zebra", "Zebra", "RB07",  "RB07",  "RB07",  
+                            "RB07",  "RB07",  "RB07",  "RB07",  "RB07" ),
+                 Protein = c(12.1, 12.8, 10.4, 11.9, 11.8, 11.6, 13.4, 13.3, 18.3, 
+                             19.5, 12.7, 14.7, 15.3, 16.1, 15.4, 16.8))
+knitr::kable(sort)
+```
+
+The data are stored in a file called `Zebra` (Excel). Import the data to R by _Data > Import
+data from > from excel file_
+
+a) Consider both wheat sorts. Formulate a model for the data analysis where you assume equal variances.
+
+<div class = 'ans'>
+
+A model for the data:
+$$Y_{ij} = \mu_i + \epsilon_{ij}$$
+where, $\epsilon_{ij} \sim N(0, \sigma^2)$ and the observations are indipendent for all Sorts $i = 1, 2$ and Portein Sample $j = 1, 2, \ldots, 8$
+
+</div>
+
+b) How would you estimate this variance?
+
+<div class = 'ans'>
+
+We first estimate the variance in each group. Here are summary statistics from R:
+
+```{r}
+ss <- sapply(c("mean", "sd", "var", "length"), function(x){
+with(sort, tapply(Protein, Sort, x))
+})
+ss
+```
+
+Combine the two estimates by the pooled variance estimate as,
+
+$$
+\begin{aligned}
+S_p^2 &= \frac{(n_1 -1)s_1^2 + (n_2 -1)s_2^2}{n_1 + n_2 - 2} \\
+&= \frac{(`r ss[1,4]` - 1)`r round(ss[1,3], 2)` + (`r ss[2,4]` - 1)`r round(ss[2,3], 2)`}{`r ss[1,4]` + `r ss[2,4]` - 2} \\
+&= `r ((ss[1,4]-1) * round(ss[1,3], 2) + (ss[2,4]-1) * round(ss[2,3], 2))/(ss[1,4] + ss[2,4] - 2)`
+\end{aligned}
+$$
+
+</div>
+
+c) How many parameters are included in the model? Give an interpretation of the parameters.
+
+<div class = 'ans'>
+
+There are 3 parameters in this model:
+
+- $\mu_1$ is the expected protein level in Zebra wheat (in the whole population)
+- $\mu_2$ is the expected protein level in RB07 wheat (in the whole population)
+- $\sigma^2$ is the variance in protein level within a wheat sort. This is assumed to be the same in both Zebra and RB07.
+
+</div>
+
+d) What is the estimated difference between the population means? What are the standard deviation and the standard error of this estimate?
+
+<div class = 'ans'>
+
+```{r}
+ss
+```
+We estimate the expected difference $\mu_1 − \mu_2$ by the difference in sample means which is $`r ss[1,1]` – `r ss[2,1]` = `r ss[1,1] - ss[2, 1]`$. The standard deviation for this estimate is $$ \sigma\sqrt{\frac{1}{n_1} + \frac{1}{n_1}} = \frac{\sigma}{2} (\text{ since, } n_1 = n_2 = 8)$$ 
+
+The standard error is the estimated standard deviation or
+$$  
+\hat{\sigma}\sqrt{\frac{1}{n_1} + \frac{1}{n_2}} = \frac{\hat{\sigma}}{2} = \frac{S_\text{pooled}}{2} = `r sqrt(((ss[1,4]-1)*ss[1,3] + (ss[2,4]-1)*ss[2,3])/(ss[1,4] + ss[2,4] - 2))/2`
+$$
+</div>
+
+e) Test whether the expected protein content in Zebra is different from RB07. 
+
+<div class = 'ans'>
+
+The two sample t-test result from R is,
+
+```{r}
+sort.Ttest <- with(unstack(sort, Protein ~ Sort), mixlm::t_test(RB07, Zebra, var.equal = T))
+sort.Ttest
+```
+Since p-value = `r round(sort.Ttest$p.value, 5)` << 0.05, we reject $H_0$ and claim that the there is significant different in the expected protein content in two types of wheat at 5% level of significance.
+
+</div>
+
+f) Construct a 95 % CI for the true difference in protein between the two sorts. Is zero included in the interval? If not, what does this mean?
+
+<div class = 'ans'>
+
+From the two-sample t-test output above, the 95% confidence interval is (`r sort.Ttest$conf.int`). Here zero is not included in the interval, this also confirm our previous result that the expected protein content in Zebra and RB07 is significantly different.
+
+</div>
+
+_NOTE:: The remaining questions are a bit harder, more theoretical ..._
+
+g) If you are told that $$ (n_1+n_2−2) \frac{S_\text{pooled}^2}{\sigma^2} \sim \chi^2_{n_1+n_2−2} $$ show that $s_\text{pooled}^2$ is an unbiased estimate of $\sigma^2$.
+
+<div class = 'ans'>
+
+From theory, we know, $$\frac{k \cdot S^2}{\sigma^2} \sim \chi^2_k$$ where $S^2$ is a variance estimate based on $k$ independent terms (that is $k$ is the degrees of freedom associated with $S^2$). Hence, we have, $$\frac{(n_1 + n_2 - 2)S_p^2}{\sigma^2}\sim \chi_{n_1+n_2-2}^2$$
+
+For $\chi^2$ distribution variables with $k$ degrees of freedom we know that the expected value is $k$ and the variance is $2k$. Therefore we can deduce:
+$$
+\begin{aligned}
+E\left[\frac{(n_1+n_2-2)S_p^2}{\sigma^2}\right] &= n_1 + n_2 - 2 \\
+\left[\frac{(n_1+n_2-2)E\left(S_p^2\right)}{\sigma^2}\right] &= n_1 + n_2 - 2 \\
+\text{Therefore, } E\left(S_p^2\right) &= \sigma^2
+\end{aligned}
+$$
+
+</div>
+
+h) Find the variance of $S_\text{pooled}^2$. Construct a 95% CI for $\sigma^2$. Explain the interval to a person without statistical knowledge.
+
+<div class = 'ans'>
+
+Similarly using the fact that the variance of the $\chi^2$ distributed variable with $k$ degrees of freedom is $2k$:
+$$
+\begin{aligned}
+\text{var}\left[\frac{(n_1+n_2-2)S_p^2}{\sigma^2}\right] &= 2(n_1 + n_2 - 2) \\
+\left[\frac{(n_1+n_2-2)}{\sigma^2}\right]^2 \text{var}\left(S_p^2\right) &= 2(n_1 + n_2 - 2) \\
+\text{Therefore, } \text{var}\left(S_p^2\right) &= \frac{2\sigma^4}{n_1 + n_2 - 2}
+\end{aligned}
+$$
+Further, $$\text{sd}\left(S_p^2\right) = \sqrt{\frac{2\sigma^4}{n_1 + n_2 - 2}}$$ and the standard error is the estimate of,
+$$\text{se}\left(S_p^2\right) = \sqrt{\frac{2S_p^4}{n_1 + n_2 - 2}}$$
+Which by inserting all the known values gives,
+```{r}
+poolvar <- ((ss[1, 4] - 1) * ss[1, 3] + (ss[2, 4] - 1) * ss[2, 3]) / (ss[1, 4] + ss[2, 4] - 2)
+```
+
+$$\text{se}\left(S_p^2\right) = \sqrt{\frac{2\times`r round(poolvar, 3)`^2}{`r ss[1, 4]` + `r ss[2, 4]` - 2}} = `r round((2 * round(poolvar, 3)^2)/(ss[1, 4] + ss[2, 4] - 2), 3)`$$
+
+and the confidence interval is,
+```{r}
+cf.num <- (ss[1, 4] + ss[2, 4] - 2) * round(poolvar, 3)
+```
+
+$$\left[\frac{(n_1 + n_2 - 2)S_p^2}{\chi^2_{0.025, n_1+n_2-2}}, \frac{(n_1 + n_2 - 2)S_p^2}{\chi^2_{0.975, n_1+n_2-2}}\right]$$
+for $\alpha/2 = `r 0.025`$, we find from the Table III in the Appendix over tail probabilities of the Chi-square distribution that $\chi^2_{0.025, 14} = `r round(qchisq(0.025, 14, lower.tail = F), 3)`$ and $\chi^2_{0.975, 14} = `r round(qchisq(0.975, 14, lower.tail = F), 3)`$. This gives the interval [`r round(cf.num/qchisq(0.025, 14, lower.tail = F), 3)`, `r round(cf.num/qchisq(0.975, 14, lower.tail = F), 3)`]. This means that we are 95% certain that the true variance of protein yield in either Zebra or RB07 is expected to lie in this interval.
+
+</div>
+
+i) Test if the (population) variance is greater than 5. State the null hypothesis, the alternative and the level of significance, draw the conclusions.
+
+<div class = 'ans'>
+
+Hypothesis for the test is,
+$$H_0: \sigma^2 = 5 \text{ vs } H_1: \sigma^2 > 5$$
+
+Under null hypothesis, 
+$$\chi^2 = \frac{(n_1+n_2-2)S_p^2}{\sigma_0^2} = \frac{`r (ss[1,4]+ss[2,4]-2) * round(poolvar, 3)`}{5} = `r (ss[1,4]+ss[2,4]-2) * round(poolvar/5, 3)`$$ is distributed as $\chi^2_{n_1+n_2-2}$. We reject the null hypothesis at 5% level if $\chi^2 > \chi^2_{0.05, 14} = `r round(qchisq(0.05, 14, lower.tail = F), 3)`$, which it is not. Thus, we retain the null hypothesis and cannot claim that the population variance in protein yield is larger than 5.
+
+</div>
+

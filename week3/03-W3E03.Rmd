@@ -1,0 +1,429 @@
+```{r, echo = FALSE, include=FALSE}
+knitr::opts_chunk$set(comment = NA, echo = FALSE)
+```
+
+```{r, message=FALSE, warning=FALSE}
+library(mixlm)
+library(data.table)
+```
+
+
+## Exercise 6
+
+Mango is an excellent source for vitamin C. Assume content of vitamin C in mango are measured on 2 sites in Tanzania, A in the highland, B in the lowland. In each site 2 trees are randomly chosen and 2 fruit on each tree are also randomly chosen. Data is stored in the file called `Mango.Rdata`
+	
+```{r}
+txt <- "c-vit		site	tree		
+18		A	T1		
+17		A	T1		
+23		A	T2		
+20		A	T2		
+19		B	T1		
+24		B	T1		
+23		B	T2		
+20		B	T2"
+con <- textConnection(txt)
+Mango <- read.table(con, header = TRUE)
+close(con)
+
+mangoMdl <- lm(c.vit ~ site + r(tree) %in% site, data = Mango)
+mango.aov <- AnovaMix(mangoMdl)
+```
+
+- Explain why this must be treated as a nested design.
+
+    <div class = 'ans'>
+    
+    Here, trees are choosen after the sites are selected. It is impossible to see the effect of same trees in both lowland and highland. The trees selected at lowland is different from the trees selected at highland. and the measurements are made on mangos form each of the trees (replicated twice). Thus this must be a nested design with the following hierarchical structure.
+    
+    <center>
+    
+    ```{r}
+    knitr::include_graphics("images/NestedDesign.png")
+    ```
+    
+    </center>
+    
+    Here, `Tree:T1` from `Site:A` is different from `Tree:T1` from `Site:B` and so on. It is not possible observe the effect of `Tree:T1` of `Site:A` in `Site:B`.
+    
+    </div>
+    
+- Explain why it is natural to regard tree as a random effect.
+    
+    <div class = 'ans'>
+    
+    Two specific trees can not be an interest of a research, rather a population of tree can be a subject of interest in the research. This research is more interested to see if there is any variation in vitamin C content in mango found in different places in Tanzania. So, it is natural to regard tree as a random effect.
+    
+    </div>
+    
+
+Assume site to be a fixed effect State the model.
+
+- Test if there is site effect, and if there is tree effect. Write down both the null hypothesis ant the alternative hypothesis.
+    
+    <div class = 'ans'>
+    
+    A model is,
+    
+    $$y_{ijk} = \mu + \tau_i + \beta_{j(i)} + \epsilon_{(ij)k}$$
+    
+    where, $i = 1, 2$ for site, $j = 1, 2$ for tree nested in site $i$ and $k = 1, 2$ for two replication of mangos.
+    
+    The hypothesis to test the effect of tree is,
+    
+    $$
+    \begin{aligned}
+    H_0 &: \sigma_\beta^2 = 0 \\
+    H_1 &: \sigma_\beta^2 > 0
+    \end{aligned}
+    $$ 
+    
+    ```{r}
+    gsub("NA", "  ", knitr::kable(mango.aov$anova, digits = 3))
+    ```
+    
+    Here, neither the site or the trees nested on site are significant. There is no evidence of tree effect in this model.
+    
+    </div>
+    
+- Estimate both variance parameters.
+    
+    <div class = 'ans'>
+    
+    From the fitted model, we have
+    
+    ```{r}
+    cat(capture.output(mango.aov)[8:12], sep = "\n")
+    ```
+    
+    From the output above, the estimates of variance parameters $\sigma_\beta^2$ and $\sigma^2$ are `r paste(round(mango.aov$var.comps[-1], 2), collapse = " and ")` respectively.
+    
+    In addition, we can also find variance components using mean sum of squares as,
+    
+    $$
+    \begin{aligned}
+    \hat{\sigma}^2 &= \text{MS}_E = `r mango.aov$anova["Residuals", "Mean Sq"]` \\
+    \hat{\sigma}_\beta^2 &= \frac{\text{MS}_\text{B(A)} - \text{MS}_E}{n} \\
+    &= \frac{`r mango.aov$anova["site:tree", "Mean Sq"]` - `r mango.aov$anova["Residuals", "Mean Sq"]`}{2}
+    =`r (mango.aov$anova["site:tree", "Mean Sq"] - mango.aov$anova["Residuals", "Mean Sq"])/2`
+    \end{aligned}
+    $$
+    
+    </div>
+    
+- The researchers concluded that the variance in Vitamin C is larger inside the trees than between the trees. Do you agree?
+
+    <div class="ans">
+    
+    The estimate of variance components $\hat{\sigma}^2 = `r mango.aov[["anova"]]["Residuals", "Mean Sq"]`$ refers to the variance within the trees and $\hat{\sigma}_\tau^2 = `r (mango.aov[["anova"]]["site:tree", "Mean Sq"] - mango.aov[["anova"]]["Residuals", "Mean Sq"])/2`$ refers to the variance between the trees. Here the variance witin the tree is larger than between the tree, the conclusion of the researcher is true. However statistical testing of this difference is out of the scope of this course.
+    
+    </div>
+    
+    
+    
+
+## Exercise 7
+
+```{r}
+load("_data/Nestedsires.Rdata")
+```
+
+In an experiment 4 sires were used. Each sire was tried in 3 herds (different herds for each sire).
+From each herd 4 cows were randomly picked out. Data are saved as `Nestedsires.Rdata`
+
+If we assume a nested design (herd nested in sire) draw a figure of the design. How many herds are included in the experiment? How many observations do we have?
+
+<div class="ans">
+
+The nested design in this experiment can be visualized as,
+
+```{r}
+knitr::include_graphics("images/NestedDesign2.png")
+```
+
+Here, `Herd` is nested in `Sire` so, `Herd1` in `Sire1` is different from `Herd1` in `Sire2`. Therefore, there are 12 herd included in the experiment. Since 4 cows are randomly selected from each herd, there are 48 observations in this experiment.
+
+</div>
+
+
+- State the model you will use for this experiment.
+    <div class="ans">
+    
+    The model in this experiment is,
+    
+    $$y_{ijk} = \mu + \tau_i + \beta_{i(j)} + \epsilon_{(ij)k}$$
+    
+    Where,
+    
+    |                    |        |                                                                                           |
+    |--------------------|--------|-------------------------------------------------------------------------------------------|
+    | $i$                | =      | 1, 2, ..., 4 corresponding to `sire`                                                      |
+    | $j(i)$             | =      | 1, 2, 3 corresponding to `herd` nested in `sire` $i$                                      |
+    | $\epsilon_{(ij)k}$ | $\sim$ | $\text{NID}\left(0, \sigma^2\right)$ where $k = 1, 2, 3, 4$ for each  replication (`cow`) |
+
+    
+    </div>
+    
+- How do you explain the deviations ($\epsilon$'s) in this experiment?
+
+    <div class="ans">
+    
+    Deviations or Error ($\epsilon_{(ij)k}$) is the difference between observed response and expected response. i.e., $\epsilon_{(ij)k} = y_{ijk} - \text{E}\left(y_{(ij)k}\right)$. Here the expected response is the value you expect to observe in population for the given model. The residuls, on the other hand, is fitted deviations and are the difference between the observed values and the fitted values for the given sample.
+    
+    </div>
+    
+- Assume sire is a fixed factor and herd a random factor. How is the F value calculated for testing Herd effect and for testing Sire effect?
+
+    <div class="ans">
+    
+    When Factor A is fixed and Factor B is random, we have following expression,
+    
+    </div>
+    
+
+**Now Use R-commander:**
+
+- Test for sire and for herd effect.
+- Estimate the variance components.
+- Explain to the farmers what these estimates are saying.
+
+The farmers are sometimes asked to follow courses in the purpose of producing more milk. If the variance component for herd was extremely large, compare to the variance component for the error, would this support the opinion that we need better courses for the farmers obtaining the poorest results?
+
+Repeat, but assume sire to be a random effect. Estimate all 3 variance components. Which variance seems to be most important? How do you estimate the variance in milk production among the population of cattle’s?
+
+
+
+## Exercise 8 (Cheese Production)
+
+```{r}
+txt1 <- "AminoAcid  R50  R21  storage.time
+  1,697  	0    0         20
+  1,501  	0    0         40
+  1,930  	0    0         60
+  2,032  	1    0         20
+  2,017  	1    0         40
+  2,409  	1    0         60
+  2,211  	0    1         20
+  1,673  	0    1         40
+  1,973  	0    1         60
+  2,251  	1    1         20
+  2,255  	1    1         40
+  2,727  	1    1         60"
+
+txt2 <- "AminoAcid Bacteria Cheese
+1,669		1	1
+1,652		1	1
+1,733		1	1
+1,770		1	2
+1,826		1	2
+1,642		1	2
+1,898		1	3
+1,787		1	3
+1,866		1	3
+1,713		2	1
+1,850		2	1
+1,698		2	1
+1,696		2	2
+1,902		2	2
+1,748		2	2
+2,099		2	3
+2,042		2	3
+1,845		2	3
+1,632		3	1
+1,763		3	1
+1,661		3	1
+1,936		3	2
+1,887		3	2
+1,960		3	2
+2,112		3	3
+1,923		3	3
+2,032		3	3
+1,742		4	1
+1,779		4	1
+2,005		4	1
+1,946		4	2
+1,946		4	2
+1,930		4	2
+2,017		4	3
+2,392		4	3
+2,209		4	3"
+
+con1 <- textConnection(txt1)
+con2 <- textConnection(txt2)
+
+cheese1 <- read.table(con1, dec = ",", header = T)
+cheese2 <- read.table(con2, dec = ",", header = T)
+
+cheese1$R50 <- as.factor(cheese1$R50)
+cheese1$R21 <- as.factor(cheese1$R21)
+
+cheese2$Bacteria <- as.factor(cheese2$Bacteria)
+cheese2$Cheese <- as.factor(cheese2$Cheese)
+
+close(con1); close(con2)
+```
+
+```{r}
+cmodel1 <- lm(AminoAcid ~ R50 * R21, data = cheese1)
+caov1 <- unclass(summary(aov(cmodel1)))[[1]]
+
+cmodel1b <- lm(AminoAcid ~ R50 + R21, data = cheese1)
+caov1b <- unclass(summary(aov(cmodel1b)))[[1]]
+
+cmodel2 <- lm(AminoAcid ~ Bacteria + Bacteria %in% r(Cheese), data = cheese2)
+caov2 <- AnovaMix(cmodel2)
+```
+
+
+_Data for **Model 1** is called `cheese1.Rdata` and for **Model 2** is called `cheese2.Rdata`_
+
+Bacterial fermentation is an important part of cheese making and ripening, and specific starter cultures (bacteria) are used.  However, some other bacteria may also be added in the milk, they are not starters, but can have huge influence on the final quality of the cheese.
+
+We want to study the effect of two types of non-starters, we call them R50 and R21.
+
+Both factors (bacteria type) have 2 levels, absent (level 1) or present (level 2). The response is the total content of free amino acid which we want as high as possible. Each combination was replicated 3 times.
+
+The first model we use is: 
+
+$$\textbf{Model 1: } y_{ijk} = \mu + \tau_i + \beta_j + (\tau\beta)_{ij} + \epsilon_{ijk}$$
+
+$\tau_i$ is the effect of R50 on level $i$, $\beta_j$ is the effect of R21 of level $j$, $(\tau\beta)_{ij}$ is the effect of interaction between R50 and R21 on combination $ij$. Where,
+$i = 1, 2\;\; j = 1,2 \;\; k = 1,2,3$
+
+The $\epsilon_{ijk}$'s are independent and normally distributed with expectation 0 and variance $\sigma^2$. Also assume,
+
+$$
+\sum_{i=1}^2\tau_i = \sum_{j = 1}^2\beta_j=\sum_{i=1}^2(\tau\beta)_{ij} = \sum_{j=1}^2(\tau\beta)_{ij} = 0
+$$ 
+
+a)  Use this experiment to discuss the difference between fixed and random factors. 
+    
+    Use this experiment to explain what we mean by interaction. 
+    
+    Use this experiment to explain what we mean by a balanced design. 
+    
+    How would you interpret $\sigma^2$?
+
+b) Draw an interaction plot, (see Table \@ref(tab:tbl1)). 
+    
+    ```{r}
+    tbl1 <- `dimnames<-`(reshape2::acast(
+      cheese1, R21 ~ R50, 
+      value.var = "AminoAcid", 
+      fun.aggregate = function(x) round(mean(x), 2)), 
+      list(R21 = list(0, 1), R50 = list(0, 1)
+    ))
+    tbl1stk <- melt(tbl1, value.name = "AminoAcid")
+    ```
+
+    <div class = 'ans'>
+    
+    ```{r}
+    tbl1stk$R21 <- as.factor(tbl1stk$R21)
+    tbl1stk$R50 <- as.factor(tbl1stk$R50)
+    with(tbl1stk, RcmdrMisc::plotMeans(AminoAcid, R21, R50, 
+                                       error.bars = 'none'))
+    ```
+    
+    </div>
+    
+    
+    In Table \@ref(tab:tbl2) are parts of an ANOVA table, finish the table and test if interaction is present. 
+    
+    <div class = 'ans'>
+    
+    The complete ANOVA table is,
+    
+    ```{r}
+    gsub("NA", "  ", 
+         knitr::kable(caov1[, c("Sum Sq", "Df", "F value")], 
+                      digits = 3))
+    ```
+    
+    </div>
+    
+    
+    Why is it natural to exclude interaction from **Model 1**? 
+    
+    <div class = 'ans'>
+    
+    Sum of square corresponding interaction term `R50:R21` is almost zero so is the F-value. This consequently suggest that the interaction term is not significant and thus it is natural to exclude interaction from **Model 1**.
+    
+    </div>
+    
+    
+    Name the model without interaction **Model 1b**. Construct the ANOVA table for **Model 1b**.
+    
+    <div class = 'ans'>
+    
+    The model with out interaction term is,
+    
+    $$ \textbf{Model 1b: }y_{ij} = \mu + \tau_i + \beta_j + \epsilon_{ij}$$
+    
+    ANOVA table for this model is,
+    
+    ```{r}
+    gsub("NA", "  ", knitr::kable(caov1b, digits = 3))
+    ```
+    
+    Here, sum of square of Residuals has not increased than in **Model 1**, i.e. the additional noise in the model due to removal of interaction term is very small (almost zero).
+    
+    </div>
+    
+    
+    ```{r tbl1}
+    knitr::kable(tbl1, caption = "Sample means for each combination.")
+    ```
+    
+    ```{r tbl2}
+    gsub("NA", "  ", knitr::kable(cbind(
+      caov1[, "Sum Sq", drop = F], Df = NA, "F value" = NA
+    ), digits = 3, caption = "Parts of ANOVA table Model 1"))
+    ```
+    
+    Later a student realized that amino acid varied _within_ each cheese, so she divided each cheese into 3 parts and regarded each part as replicate. The student had 4 different bacteria cultures in her experiment. The following _nested_ model was applied:
+    
+    $$\textbf{Model 2: } y_{ijk} = \mu + \tau_i + \beta_{j(i)} + \epsilon_{ijk}$$
+    
+    Where, $i = 1, 2, 3, 4 \; \; j = 1,2,3 \; \; k = 1,2,3$
+    
+    $\tau_i$ is effect of bacteria group $i$, $\beta_{j(i)}$ is effect of cheese $j$ nested in group $i$. 
+    
+    The $\beta_{j(i)}$'s are independent and normally distributed with expectation 0 and variance $\sigma_\beta^2$. 
+    
+    The $\epsilon_{ijk}$'s are independent and normally distributed with expectation 0 and variance $\sigma^2$. 
+    
+    The $\beta_{j(i)}$'s and $\epsilon_{ijk}$'s are independent. 
+    
+    In addition,
+    
+    $$\sum_{i = 1}^4\tau_i = 0$$
+    
+c) Use this experiment to explain the difference between designs with nested and crossed factors.
+    
+    Why is it logical to assume cheese as a random factor?
+    
+    How would you explain $\sigma_\beta^2$ and $\sigma^2$ to the scientist?
+    
+    ```{r tbl3}
+    aovout <- cbind(round(caov2$anova[, 1:3], 3), 
+                    "F value" = NA, "Pr(>F)" = NA)
+    
+    gsub("NA", "  ", 
+         knitr::kable(aovout, caption = "Some results from **Model 2**"))
+    # paste(gsub("NA", "  ", capture.output(aovout)), sep = "\n")
+    # cat(capture.output(caov2)[c(14:17)], sep = "\n")
+    
+    cat(capture.output(caov2)[c(14:17)], sep = "\n")
+    ```
+    
+d) Estimate both variance components in **Model 2** (Table \@ref(tab:tbl3)). Test if there are effects of cheese and of bacteria group.
+
+
+e) The student was told that it is better to use the average of the 3 parts of the cheese as replicate.
+    
+    Reformulate Model 5 for this situation.
+    
+    What is the response now?
+    
+    Test if there is effect of bacteria group.

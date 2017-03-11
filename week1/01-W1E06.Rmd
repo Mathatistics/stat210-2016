@@ -1,0 +1,74 @@
+## Exercise 6: Two sample t-test or One way ANOVA in R
+Load the data svin.RData. The data are as described in Week1 slide 17. Final weights have been collected for 9 pigs in the soya group and 8 pigs in the non-soya group. The question addressed is: Do the different feeding strategies give different carcass weight (Norwegian: Slaktevekt)?
+
+```{r}
+load("_data/svin.RData")
+```
+
+
+  a) Produce relevant summary statistics and plots.
+There are several ways to summarise, e.g., here’s default for _R: Data > Numerical summaries_ split on groups
+
+<div class = 'ans'>
+
+```{r}
+sumry <- sapply(list(mean = mean, sd = sd, var = var, n = length), function(x){
+  with(soya, {
+    tapply(slaktevekt, group, x, simplify = FALSE)
+  })
+})
+knitr::kable(sumry, format = 'html')
+```
+
+**Boxplot:** <br />
+```{r}
+with(soya, plot(slaktevekt ~ group, horizontal = T))
+```
+
+</div>
+
+  b) Formulate the model (include assumptions, also equal variances in both groups) and hypotheses.
+  
+<div class = 'ans'>
+  See [Week 1, Exercise - 4 ](#exercise-4) Answer
+</div>  
+  
+  c) Perform the test and comment
+
+<ol type = "I">
+
+<li>As a two-sample test (_R: Statistics > Means ..._)
+    
+<div class = 'ans'>
+  
+```{r}
+mixlm::t_test(slaktevekt ~ group, data = soya, var.equal = TRUE)
+```
+
+</div>
+</li>
+<li>As an ANOVA
+
+<div class = 'ans'>
+
+```{r}
+mixlm::anova_reg(lm(slaktevekt ~ group, data = soya))
+```
+
+**Comment:** Same p-value. ANOVA only gives two sided test.
+
+</div>    
+</li>
+</ol>
+  d) Calculate a 95% confidence interval for the difference in weights in the two
+  groups.
+  
+<div class = 'ans'>
+
+See [Week 1, Exercise - 6(c)](#exercise-6)
+
+</div>
+  
+  e) Repeat c) and d) above but now use a significance level of 0.01 and calculate 99%
+  confidence intervals.
+  f) Explain the difference between one-sided and two-sided hypotheses.

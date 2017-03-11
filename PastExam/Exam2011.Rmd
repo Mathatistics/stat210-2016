@@ -1,0 +1,330 @@
+# Exam 2011 <small>(Sep 5, 2011)</small>
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+require(mixlm)
+```
+
+```{r}
+load("_data/Exam2011.RData")
+names(Exam2011)[2] <- "Frittgående"
+
+mdl2 <- mixlm::lm(Vekt ~ r(Besetning), data = Exam2011)
+aovTbl2 <- mixlm::AnovaMix(mdl2)
+
+mdl3 <- mixlm::lm(Vekt ~ For * Frittgående, data = Exam2011)
+aovTbl3 <- mixlm::Anova(mdl3)
+
+mdl4 <- lm(Vekt ~ For, data = Exam2011)
+aovTbl4 <- anova(mdl4)
+coefMdl4 <- round(coef(mdl4), 2)
+
+tukeyMdl4 <- TukeyHSD(aov(mdl4))
+```
+
+
+The problems are based on the simulated data of [Appendix 1](exam-2011-sep-5-2011.html#appendix-1). There are 24 observations and the variables are as follows:
+
+- **For** Three types of feed: `For1`, `For2` og `For3`.
+- **Frittgående** The variable is `Ja` for freely moving chickens and otherwise `No`.
+- **Besetning** Lifestock. The variable indicates which of 6 lifestock (or farms for that matter) the chicken comes from.
+- **Vekt** Weight in gram (g).
+
+## Exercise 1
+Only variables **Besetning** and **Vekt** are used in this exercise. Consider,
+
+$$
+\begin{aligned}
+y_{ij} &= \mu + \tau_i + \epsilon_{ij} \text{ where, } \\
+i &= 1, 2, \ldots, 6 \text{ corresponding to }\texttt{Bes1}, \texttt{Bes2}, \ldots, \texttt{Bes6} \\
+j &= 1, 2, \ldots, 4, \text{ corresponding to the four observations of each Besetning} \\
+y_{ij} &= `Vekt`, \; \tau_i \sim \text{N}(0, \sigma_\tau^2), \; \epsilon_{ij} \sim \text{N}(0, \sigma^2)
+\end{aligned}
+$$ 
+
+The random variables on the right hand side of the model equation are assumed to be independent.
+
+a) Use the output in [Appendix 2](exam-2011-sep-5-2011.html#appendix-2) to test at 5% significance level the null hypothesis
+
+    $$H_0: \sigma_\tau^2 = 0$$
+    
+    Formulate a conclusion.
+    
+    <div class = 'ans'>
+    
+    The p-value is 0.176 and therefore we cannot reject the null hypothesis. In other words, we cannot claim a significant effect of **Besetning**.
+    
+    </div>
+    
+
+b) Use the output in [Appendix 2](exam-2011-sep-5-2011.html#appendix-2) to estimate $\sigma^2$. Construct a 95% confidence interval for $\sigma^2$. What is the 95% confidence interval for the standard deviation ($\sigma$)? Interpret the confidence interval for $\sigma$.
+
+    <div class = 'ans'>
+    
+    ```{r}
+    mse <- round(aovTbl2$anova["Residuals", "Mean Sq"], 3)
+    df <- aovTbl2$anova["Residuals", "Df"]
+    ci <- round((mse * df)/qchisq(c(0.025, 0.975), df, lower.tail = F), 2)
+    ```
+    
+    Here, we have, $\hat{\sigma}^2 = \text{MSE} = `r mse`$ and degree of freedom corresponding to residual is `r aovTbl2$anova["Residuals", "Df"]`. Therefore $\text{SSE} = \text{MSE} \times df = `r mse * df`$
+    
+    From $\chi^2$ table, we have $\chi^2_{0.975, `r df`} = `r round(qchisq(0.975, df, lower.tail = F), 3)`$ and $\chi^2_{0.025, `r df`} = `r round(qchisq(0.025, df, lower.tail = F), 3)`$
+    
+    Thus, the 95% confidence interval for $\sigma^2$ is,
+    
+    $$
+    \left[
+    \frac{\text{SSE}}{\chi^2_{0.025, `r df`}}, \frac{\text{SSE}}{\chi^2_{0.975, `r df`}}
+    \right] = \left[`r ci`\right]
+    $$
+    
+    Further, 95% confidence interval for standard deviation $\sigma$ can be obtained by taking square root of confidence interval for $\sigma^2$, i.e. `r round(sqrt(ci), 2)`.
+    
+    **Interpretation:** We are 95% sure that the standard deviation is between `r paste(round(sqrt(ci), 1), collapse = " and ")`.
+    
+    </div>
+    
+
+c) The correlation coefficient for observations from the same **Besetning** is
+
+    $$\rho = \frac{\sigma_\tau^2}{\sigma_\tau^2 + \sigma^2}$$
+    
+    Use the output in [Appendix 2](exam-2011-sep-5-2011.html#appendix-2) to estimate $\rho$. Comment.
+    
+    <div class = 'ans'>
+    
+    The estimate of correlation coefficient ($\hat{\rho}$) is obtained as,
+    
+    ```{r}
+    vc <- aovTbl2$var.comps
+    crr <- vc[1]/sum(vc)
+    ```
+    
+    $$\hat{\rho} = \frac{\hat{\sigma}_\tau^2}{\hat{\sigma}_\tau^2 + \hat{\sigma}^2} = \frac{`r round(vc[1], 1)`}{`r round(vc[1], 1)` + `r round(vc[2], 1)`} = `r round(crr, 3)`$$
+    
+    There are several ways to comment on this:
+    
+    i) `r crr * 100`% of the total variability is _between Besetning_. Generally this number is between 0 and 100%. The value 0 would mean that the variable Besetning is irrelevant whereas the value 100% would imply no error, i.e., all _variance explained by Besetning_.
+    
+    ii) The correlation in this model is always between 0 and 1 (or equivalently between 0 and 100%); here the _correlation for animals from the same Besetning_ is estimated to `r crr`
+    
+    Regarding i) and ii) It is difficult to say that whether `r crr` or `r crr * 100`% is small or large and there is no definitive answer. Most would say that the correlation is rather low and one could add that numerator $\sigma_\tau^2$ is not significantly greater than 0.
+    
+    </div>
+    
+
+d) Mean `Vekt` is 925.6. Use this and the output of [Appendix 2](exam-2011-sep-5-2011.html#appendix-2) to estimate $\mu$ and to calculate a 95% confidence interval for $\mu$.
+    
+    <div class = 'ans'>
+    
+    ```{r}
+    mstr <- round(aovTbl2$anova["Besetning", "Mean Sq"], 2)
+    na <- length(Exam2011$Vekt)
+    cimu <- round(925.6 + c(-1, 1) * qt(0.025, 5, lower.tail = FALSE) * sqrt(mstr/na), 2)
+    ```
+    
+    We have, $\hat{\mu} = 925.6$
+    
+    Here, $a = 6$ and from t-table, $t_{0.025, a - 1} = t_{0.025, 5} = `r round(qt(0.025, 5, lower.tail = FALSE), 3)`$. Hence, the 95% confidence interval for $\mu$ is,
+    
+    $$
+    \begin{aligned}
+    \hat{\mu} - t_{0.025, 5} \sqrt{\frac{\text{MS}_\text{Treatment}}{N-a}} &\le \mu \le \hat{\mu} + t_{0.025, 5} \sqrt{\frac{\text{MS}_\text{Treatment}}{N - a}} \\
+    925.6 - `r round(qt(0.025, 5, lower.tail = FALSE), 3)` \sqrt{\frac{`r mstr`}{`r na`}} &\le \mu \le 925.6 + `r round(qt(0.025, 5, lower.tail = FALSE), 3)` \sqrt{\frac{`r mstr`}{`r na`}}\\
+    `r cimu[1]` \le \mu \le `r cimu[2]`
+    \end{aligned}
+    $$ 
+    
+    
+    </div>
+    
+
+## Exercise 2
+
+We now use the variables **For**, **Frittgående** and **Vekt** and consider the model,
+
+$$
+\begin{aligned}
+y_{ijk} &= \mu + \tau_i + \beta_j + (\tau\beta)_{ij} + \epsilon_{ijk} \text{ where, } \\
+i &= 1, 2, 3 \text{ corresponding to }\texttt{For1}, \texttt{For2}, \text{ and }\texttt{For3} \\
+j &= 1, 2, \text{ corresponding to }\texttt{Ja} \text{ and } \texttt{Nei} \\
+k &= 1, 2, \ldots, 4 \text{ corresponding to replications,} \\
+y_{ijk} &= \texttt{Vekt}, \; \epsilon_{ijk} \sim \text{N}(0, \sigma^2), \\
+\sum_{i = 1}^3 \tau_i &= 0 \; \sum_{j = 1}^2 \beta_j = 0 \; \sum_{i = 1}^3 (\tau\beta)_{ij} = 0 \; \sum_{j = 1}^2 (\tau\beta)_{ij} = 0
+\end{aligned}
+$$ 
+
+We assume $\epsilon_{ijk}$ to be independent.
+
+
+a) Use the output in [Appendix 3](exam-2011-sep-5-2011.html#appendix-3) to determine if there is a significant interaction between **For** and **Frittgående** by stating a null hypothesis and formulating a conclusion. Use 5% significance level. Use the output in [Appendix 3](exam-2011-sep-5-2011.html#appendix-3) to determine if there is a main effect of the variable **Frittgående** by stating a null hypothesis and formulating a conclusion. Use 5% significance level.
+
+    <div class = 'ans'>
+    
+    The null hypothesis of no interaction can be stated as,
+    
+    $$H_0: (\tau\beta)_{ij} = 0 \text{ for all}i\text{ and }j$$
+    
+    We do not reject as the p-value is greater than 0.05. A significant interaction would have meant that the effect of **Frittgående** depends on **For** and vice versa; there is no significant interaction.
+    
+    Next, the null hypothesis of no Frittgående effect is
+    
+    $$H_0: \beta_1 = \beta_2 = 0$$
+    
+    We do not reject as the p-value is greater than 0.05. Therefore, we cannot claim that there is a significant effect of **Frittgående**.
+    
+    </div>
+    
+
+b) For the remaining part we use the model
+
+    $$
+    \begin{aligned}
+    y_{ij} &= \mu + \tau_i + \epsilon_{ij}, \text{ where, } \\
+    i &= 1, 2, 3, \text{ corresponding to }\texttt{For1}, \texttt{For2}, \text{ and } \texttt{For3} \\
+    j &= 1, 2, \ldots, 8 \text{ corresponding to the eight observation for each }\texttt{For} \\
+    y_{ij} &= \texttt{Vekt}, \; \epsilon_{ij} \sim \text{N}(0, \sigma^2), 
+    \end{aligned}
+    $$ 
+
+    We assume $\epsilon_{ij}$ to be independent.
+    
+    Use the output in [Appendix 4](exam-2011-sep-5-2011.html#appendix-4) to show that there are significant differences between **For** at 5% significance level. Between which types of **For** are there differences? Use Tukey’s test and the output of [Appendix 4](exam-2011-sep-5-2011.html#appendix-4) for your answer.
+    
+    <div class = 'ans'>
+    
+    The p-value is below 0.05 and we therefore reject. In other words, we can claim that there is a significant difference depending on For. Tukey demonstrates a significant effect only between `For3` og `For1`, p-value=0.03.
+    
+    </div>
+    
+
+c) Use the output in [Appendix 4](exam-2011-sep-5-2011.html#appendix-4) to estimate $\mu, \tau_1, \tau_2$ and $\tau_3$
+
+    <div class = 'ans'>
+    Using Appendix 4, we have,
+    
+    |                |   |                 |
+    |---------------:|:-:|:----------------|
+    | $\hat{\mu}$    | = | `r coefMdl4[1]` |
+    | $\hat{\tau}_1$ | = | `r coefMdl4[2]` |
+    | $\hat{\tau}_1$ | = | `r coefMdl4[3]` |
+    
+    Using the assumption of sum-to-zero effect, i.e. $\sum_{i = 1}^3 \tau_i = 0$, we have,
+    
+    ```{r}
+    tau3 <- -(sum(coefMdl4[2:3]))
+    ```
+    
+    $$\tau_1 + \tau_2 + \tau_3 = 0 \Rightarrow \tau_3 = `r -(sum(coefMdl4[2:3]))`$$
+    
+    </div>
+    
+d) We would like to compare fortype `For1` against the average of `For2` and `For3`. Formulate a suitable contrast, compute a 95% CI and comment on the result.
+
+    <div class = 'ans'>
+    
+    ```{r}
+    n <- table(Exam2011$For)[1]
+    mse4 <- round(aovTbl4["Residuals", "Mean Sq"], 2)
+    resdf <- aovTbl4["Residuals", "Df"]
+    gammaest <- coefMdl4[2] - 0.5 * (coefMdl4[3] + tau3)
+    gammavar <- round((sum(c(1, -0.5, -0.5)^2) * mse4)/n, 2)
+    gammaci <- round(gammaest + c(-1, 1) * qt(0.025, resdf, lower.tail = FALSE) * sqrt(gammavar), 2)
+    ```
+    
+    The contrast can be formulated as,
+    
+    $$\Gamma = \tau_1 - \frac{1}{2}\left(\tau_2 + \tau_3\right), \text{ i.e., } c = \left(1, -\frac{1}{2}, -\frac{1}{2}\right)$$
+    
+    The estimated difference is,
+    
+    $$\hat{\Gamma} = `r coefMdl4[2]` - 0.5 \times `r coefMdl4[3] + tau3` = `r coefMdl4[2] - 0.5 * (coefMdl4[3] + tau3)`$$
+    
+    The variance of $\hat{\Gamma}$ is,
+    
+    $$\text{var}\left(\hat{\Gamma}\right) = \frac{\sum_{i = 1}^3 c_i^2 \times \hat{\sigma}^2}{n} = \frac{`r sum(c(1, -0.5, -0.5)^2) * mse4`}{`r n`} = `r round((sum(c(1, -0.5, -0.5)^2) * mse4)/n, 2)`$$
+    
+    Therefore, standard error is,
+    
+    $$\text{SE}\left(\hat{\Gamma}\right) = \sqrt{`r gammavar`} = `r sqrt(gammavar)`$$
+    
+    From t-table we have, $t_{0.025, `r resdf`} = `r round(qt(0.025, resdf, lower.tail = FALSE), 3)`$, so,
+    
+    95% confidence interval for $\Gamma$ is,
+    
+    $$\hat{\Gamma} \pm `r round(qt(0.025, resdf, lower.tail = FALSE), 3)` \times \text{SE}\left(\hat{\Gamma}\right) = \left[`r gammaci`\right]$$
+    
+    **Comment:** The difference between `For1` and the average of the others is estimated to `r gammaest`. There is 95% probability that the true difference is in the interval from `r gammaci[1]` to `r gammaci[2]`.
+    
+    </div>
+    
+e) Calculated predicted `Vekt` for a chicken fed on `For1`. Also calculate the residual for the first observation of [Appendix 1](exam-2011-sep-5-2011.html#appendix-1).
+
+    <div class = 'ans'>
+    
+    The predicted `Vekt` and residual for the first observation is,
+    
+    $$
+    \begin{aligned}
+    \text{Predicted} &: \hat{\mu} + \hat{\tau}_1 = `r coefMdl4[1] + coefMdl4[2]` \\
+    \text{Residual} &: `r Exam2011[1, "Vekt"]` - `r coefMdl4[1] + coefMdl4[2]` = `r Exam2011[1, "Vekt"] - (coefMdl4[1] + coefMdl4[2])` \\
+    \end{aligned}
+    $$
+    
+    </div>
+    
+
+f) Describe the assumptions for the model in b) above. Would you say that the assumptions are met? Your answer is supposed to be brief and you can use the figures of [Appendix 5](exam-2011-sep-5-2011.html#appendix-5).
+
+    <div class = 'ans'>
+    
+    We have to assume independence, normality and constant variance. The two last assumptions appear OK based on the figures: There are no striking deviations from the straight line and no striking pattern in the plot of fitted values against the residuals.
+    
+    Independence is not tested formally, but Exercise 1 does not indicate strong deviation from independence.
+    
+    </div>
+    
+
+## Appendix 1
+
+```{r}
+knitr::kable(Exam2011)
+```
+
+## Appendix 2
+
+```{r}
+
+cat(capture.output(aovTbl2)[1:10], sep = "\n")
+```
+
+## Appendix 3
+
+```{r}
+
+aovTbl3
+```
+
+## Appendix 4
+
+```{r}
+
+aovTbl4
+```
+
+```{r, R.options=list(scipen = 5)}
+cat(capture.output(summary(mdl4))[10:14], sep = "\n")
+```
+
+```{r}
+tukeyMdl4
+```
+
+## Appendix 5
+
+```{r}
+op <- par(mfrow = c(1,2), oma = c(0, 0, 3, 0))
+plot(mdl4, 1:2, add.smooth = FALSE, sub.caption = NA)
+par(op)
+```
+

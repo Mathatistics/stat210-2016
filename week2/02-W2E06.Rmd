@@ -1,0 +1,259 @@
+## Exercise 6
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+require(mixlm)
+```
+
+
+Load `sortsoil.Rdata`. The dataset discussed on friday's lecture,
+
+```{r}
+txt1 <- "
+ Yield Sort Soil
+   650   A1 Sand
+   720   A1 Sand
+   550   A1 Clay
+   480   A1 Clay
+   450   A2 Sand
+   350   A2 Sand
+   570   A2 Clay
+   550   A2 Clay
+"
+txt2 <- "
+ Yield sort soil
+   369    1    1
+   359    1    2
+   340    2    1
+   492    2    2
+   369    1    1
+   361    1    2
+   336    2    1
+   497    2    2
+   369    1    1
+   360    1    2
+   338    2    1
+   493    2    2
+"
+con1 <- textConnection(txt1); con2 <- textConnection(txt2)
+sortsoil <- read.table(con1, header = TRUE)
+sortsoil2 <- read.table(con2, header = TRUE)
+close(con1); close(con2)
+rm(txt1, txt2, con1, con2)
+```
+
+- Calculate the mean in each cell (by hand)
+
+    <div class = 'ans'>
+    
+    The average in each cell along with column mean, row mean and overall mean is,
+    
+    ```{r}
+    knitr::kable(reshape2::dcast(sortsoil, Sort ~ Soil, fun.aggregate = mean, 
+                                 value.var = 'Yield', margins = TRUE))
+    ```
+    
+    **Calculate it by and hand, answer above are just for checking**
+    
+    </div>
+    
+- Regard the 4 means, do those support that interaction is present?
+
+    <div class = 'ans'>
+    
+    Averages in previous answer suggests interaction is present. Here, if you choose sort `A2` instead of sort `A1`, there is an increase in `Yield` for soil type `clay` while `Yield` decreases for soil type `Sand`. Similary, if you planned to cultivate a sort in `sand` rather than `clay`, the change in average `Yield` is different for Sort `A1` and `A2`.
+    
+    </div>
+    
+- Have we constructed a sand-sort and a clay-sort?
+
+    <div class = 'ans'>
+    
+    The averages can also be visualized by the mean plot below:
+    
+    ```{r}
+    with(sortsoil, RcmdrMisc::plotMeans(response = Yield, factor1 = Sort, factor2 = Soil))
+    ```
+    
+    </div>
+    
+
+Apply a model with main effect and interaction effect, call this **Model 1**.
+
+```{r}
+Model1 <- mixlm::lm(Yield ~ Sort * Soil, data = sortsoil)
+Model2 <- mixlm::lm(Yield ~ Sort + Soil, data = sortsoil)
+```
+
+<div class = 'ans'>
+
+The model can be written as, 
+
+$$y_{ij} = \mu + \tau_i + \beta_j + (\tau\beta)_{ij} + \epsilon_{ij}, \text{ where, } \epsilon_{ij} \sim \text{NID}(0, \sigma^2)$$
+
+Since this is two-factor fixed effect model, the assumption of sum-to-zero effect are,
+
+$$
+\begin{aligned}
+\sum_{i = 1}^a\tau_i = 0 && \sum_{j = 1}^a\beta_j = 0 && \sum_{i = 1}^a(\tau\beta)_{ij} = \sum_{j = 1}^b(\tau\beta)_{ij} = 0
+\end{aligned}
+$$ 
+
+
+</div>
+
+
+- Test if interaction is present.
+
+    <div class = 'ans'>
+    
+    A test hypothesis for testing interaction effect is,
+    
+    $$
+    \begin{aligned}
+    H_0 &: (\tau\beta)_{ij} = 0, \text{for all }i \text{ and } j \\
+    H_1 &: \text{at least one }(\tau\beta)_{ij} \ne 0
+    \end{aligned}
+    $$ 
+    
+    The ANOVA table for **Model 1** is,
+    
+    ```{r}
+    aovTbl <- unclass(summary(aov(Model1)))[[1]]
+    gsub("NA", "  ", knitr::kable(aovTbl))
+    ```
+    
+    Low p-value corresponding to `Sort:Soil` rejects the null hypothesis, thus interaction is significant and is present in the model.
+    
+    </div>
+    
+- Estimate all expectation parameters in the model.
+
+    <div class = 'ans'>
+    
+    The coefficient estimates for **Model 1** are,
+    
+    ```{r}
+    cf <- t(coef(Model1))
+    colnames(cf) <- paste(colnames(cf), c("$(\\hat{\\mu})$", 
+                                          "$(\\hat{\\tau}_1)$", 
+                                          "$(\\hat{\\beta}_1)$", 
+                                          "$((\\hat{\\tau}\\hat{\\beta})_{11})$"))
+    knitr::kable(cf)
+    ```
+    
+    However, the output does not contain estimates for $\tau_2$, $\beta_2$, $(\tau\beta)_{12}$, $(\tau\beta)_{21}$, $(\tau\beta)_{22}$. These estimates can be obtained using sum-to-zero assumption for fixed effect model. These estimates are,
+    
+    $$
+    \begin{aligned}
+    \hat{\tau}_2 &= -\hat{\tau}_1 = `r -1 * cf[2]` \\
+    \hat{\beta}_2 &= -\hat{\beta}_1 = `r -1 * cf[3]` \\
+    \left(\hat{\tau}\hat{\beta}\right)_{12} &= -\left(\hat{\tau}\hat{\beta}\right)_{11} = `r -1 * cf[4]` \\
+    \left(\hat{\tau}\hat{\beta}\right)_{21} &= -\left(\hat{\tau}\hat{\beta}\right)_{12} = \left(\hat{\tau}\hat{\beta}\right)_{11} = `r cf[4]` \\
+    \left(\hat{\tau}\hat{\beta}\right)_{22} &= -\left(\hat{\tau}\hat{\beta}\right)_{21} = -\left(\hat{\tau}\hat{\beta}\right)_{11} = `r -1 * cf[4]` \\
+    \end{aligned}
+    $$ 
+    
+    </div>
+    
+- Estimate and give an interpretation of $\sigma^2$
+
+    <div class = 'ans'>
+    
+    The estimate of $\sigma^2$ is MSE, i.e.
+    
+    $$\hat{\sigma}^2 = \text{MS}_\text{E} = `r aovTbl["Residuals  ", "Mean Sq"]`$$
+    
+    **Interpretation:** MSE is the estimate of variance of error terms $\epsilon_{ij}$. It is the expected variation present in response (`Yield`) for any given `sort` and `soil`.
+    
+    </div>
+    
+- Find the fitted values and the residuals.
+
+    <div class = 'ans'>
+    
+    ```{r}
+    sortsoil$residuals <- residuals(Model1)
+    sortsoil$fitted <- fitted(Model1)
+    ```  
+    
+    _Fitted values_ are obtained as, $\hat{y_{ij}} = \hat{\mu} + \hat{\tau}_i + \hat{\beta}_j + \left(\hat{\tau}\hat{\beta}\right)_{ij}$. It is the average yield for each combination of `sort` and `soil`.
+    
+    _Residuals_ are variation present in data that our model is not able to explain. It is the difference between the actual value and the fitted value. i.e, $e_{ij} = y_{ij} - \hat{y}_{ij}$
+    
+    **Rcomander:**_model > Add observation statistics to data_
+    
+    </div>
+    
+- Find the standardized residuals, are some too large (absolute value).
+    
+    ```{r}
+    sortsoil$std.res <- rstandard(Model1)
+    ```
+    
+
+- Check the model by suitable graphics.
+
+    <div class = 'ans'>
+    
+    We can check model assumptions using basic diagnostic plots (**Rcomander:** _Model>Graphs>Basic Diagnositic Plot_). The first two plots from Basic diagnostic plot for **Model 1** is as follows,
+    
+    ```{r}
+    op <- par(mfrow = c(1, 2), oma = c(0, 0, 3, 0))
+    plot(Model1, c(1, 2))
+    par(op)
+    ```
+    
+    **Interpreate the plot yourself**
+    
+    </div>
+    
+
+
+Assume a model without interaction, call this **Model 2**
+
+- Compare SSE in both models.
+
+    <div class = 'ans'>
+    
+    ```{r}
+    sse <- sapply(list("Model 1" = Model1, "Model2" = Model2), function(x){
+        anova(x)["Residuals", 2]
+    })
+    knitr::kable(`rownames<-`(t(sse), "SSE"))
+    ```
+    
+    Sum of square of residuals in **Model 2** (without interaction term) is very high compared to **Model 1**. This also show us that without interaction term model error increases significantly. In addition, this also supports the significance of interaction term.
+    </div>
+    
+- Find the fitted values and the residuals in **Model 2** and compare the models.
+
+    <div class = 'ans'>
+    
+    See how fitted values and residuals are dependent on how you specify your model. Both of these values depends on your model.
+    
+    </div>
+    
+
+- Check the model assumptions in model 1, can you see any problems. (Yes, there is a problem).
+
+
+Below you will find data from an identical experiment, but with one large difference. Carefully inspect the data, what is the difference? Repeat the analysis with these data. Why do the p-values change? Data is saved with the name `sortsoil2.rdata`.
+
+```{r}
+knitr::kable(sortsoil2)
+```
+
+<div class = 'ans'>
+
+The ANOVA table for `sortsoil2` data is,
+
+```{r}
+Model3 <- mixlm::lm(Yield ~ sort * soil, data = sortsoil2)
+aovModel3 <- unclass(summary(aov(Model3)))[[1]]
+
+gsub("NA", "  ", knitr::kable(aovModel3))
+```
+
+It is clear that all factor including interaction terms are highly significant in this model. Noise (measured by MSE) is very small as compared to **Model 1**, so that the variation present in different factors and interactions are clearly visible and thus they are highly significant.
+
+</div>

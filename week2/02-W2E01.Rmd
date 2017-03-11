@@ -1,0 +1,136 @@
+# Week Two
+
+```{r, echo = FALSE, include=FALSE}
+knitr::opts_chunk$set(comment = NA, echo = FALSE)
+```
+
+## Exercise 1
+
+Air pollution measured by chlorine content (measured in ppm, parts per million) for three cities, randomly selected during one year. 
+
+One year ago the cities were approximately equal polluted, but City 1 has the last year tried to reduce the pollution. Data is in a word file called _Monday week 2_ on fronter.
+
+```{r, message=FALSE, warning=FALSE}
+txt <- "
+C1	C2	C3
+0.46	1.21	0.44
+0.92	10.86	0.71
+0.86	2.09	2.87
+0.33	6.76	0.81
+0.53	3.20	7.34
+5.13	2.02	2.21
+1.51	2.16	9.00
+1.00	0.44	17.20
+0.70	7.80	2.76
+1.89	1.20	1.07
+0.68	1.39	2.07
+0.71	2.42	1.70
+0.41	1.62	7.89
+0.78	10.78	0.79
+"
+con <- textConnection(txt)
+Pollution <- read.table(con, header = T)
+close(con)
+library(mixlm)
+```
+
+
+a) Stack the data. Use the ANOVA model to investigate if the chlorine content really differs. Check the model assumptions, which problems do you see?
+
+    <div class = 'ans'>
+    
+    One of the way you can import data from word file into R is using _clipboard_. Just copy the data and import the data in clipboard into R (Rcommander: _Data > Import Data > from text file ..._)
+    
+    ```{r}
+    PolutStack <- `names<-`(stack(Pollution), c("Chlorine", "City"))
+    ```
+    
+    Let $y_{ij}$ be the chlorine content (polution measurement) for city $i$. The ANOVA model to investigate if the chlorine content really differs is,
+    
+    \begin{equation}
+      y_{ij} = \mu + \tau_i + \epsilon_{ij}, \text{ where, } \epsilon_{ij} \sim \text{NID}\left(0, \sigma^2\right)
+      (\#eq:W2E1Model)
+    \end{equation}
+    
+    Since, city is randomly selected, we also have assumption that the  treatment effect follows normal distribution with mean 0 and variance $\sigma_\tau^2$, i.e. $\tau_i\sim\text{NID}\left(0, \sigma_\tau^2\right)$
+    
+    The ANOVA table for the Model (\@ref(eq:W2E1Model)) is,
+    
+    ```{r}
+    mdl <- mixlm::lm(Chlorine ~ r(City), data = PolutStack)
+    CityAnova <- unclass(summary(aov(mdl)))[[1]]
+    gsub("NA", "  ", knitr::kable(CityAnova, digits = 3))
+    ```
+    
+    The p-value in ANVOA table is larger than 0.05, so can not reject following Hypothesis at 95% confidence level and stay on the fact that the polution level of different cities are same. However, at 90% confidence level the cities appears to be significantly different.
+    
+    $$
+    \begin{aligned}
+    H_0 &: \sigma_\tau ^ 2 = 0 \\
+    H_1 &: \sigma_\tau ^ 2 > 0
+    \end{aligned}
+    $$
+    
+    Following diagnostic plot (Rcommander: _Model>Graph>Basic Diagnostic Plot_) gives a picture of assumption wheather they hold true in this situation.
+    
+    ```{r, fig.height = 6}
+    op <- par(mfrow = c(2, 2), oma = c(0, 0, 3, 0))
+    plot(mdl, c(1, 2, 4, 5), add.smooth = FALSE)
+    par(op)
+    ```
+    
+    **Try to interpreate the plot youself**
+    
+    </div>
+    
+
+b) Take the logarithm of the response. (_Data > Manage variables in active dataset > compute new variables_). Note that natural logarithm is done by `log(variable)`. Repeat the analysis, but on `log(chlorine)`. Check model assumptions once again. Investigate if city 1 has been able to reduce the pollution significantly compared the two others cities by a suitable contrast.
+
+    <div class = 'ans'>
+    
+    ```{r}
+    PolutStack$`log(Chlorine)` <- log(PolutStack$Chlorine)
+    mdl2 <- mixlm::lm(`log(Chlorine)` ~ r(City), data = PolutStack)
+    
+    cityAnova2 <- unclass(summary(aov(mdl2)))[[1]]
+    gsub("NA", "  ", knitr::kable(cityAnova2, digits = 4))
+    ```
+    
+    The diagnostic plot can be obtained as in previous question,
+    
+    ```{r, fig.height = 6}
+    op <- par(mfrow = c(2, 2), oma = c(0, 0, 3, 0))
+    plot(mdl2, c(1, 2, 4, 5), add.smooth = FALSE)
+    par(op)
+    ```
+    
+    **Interpreate the plot youself and find its differences from the previous diagnostic plot**
+    
+    To investigate if `city 1` has been able to reduce the pollution significantly compared the two others cities, a contrast with cofficient `c(1, -0.5, -0.5)`. Since, 
+    
+    $$\text{Contrast } (\Gamma) = \mu_1 - \frac{1}{2}\left(\mu_2 + \mu_3\right) = \tau_1 - \frac{1}{2}\left(\tau_2 + \tau_3\right)$$ 
+    
+    The hypothesis for this test is,
+    
+    $$
+    \begin{aligned}
+    H_0 &: \Gamma = 0\\
+    H_1 &: \Gamma < 0
+    \end{aligned}
+    $$ 
+    
+    In R-commander, we can test this hypothesis from _Models > Test Contrasts in ANOVA_. The result for the test is,
+    
+    ```{r}
+    cntrFit <- gmodels::fit.contrast(mdl2, "City", c(1, -0.5, -0.5))
+    knitr::kable(cntrFit)
+    ```
+    
+    Since this is one sided hypothesis, the p-value for this test will be _half_ the p-value we obtain in above table ([_See More_](http://www.ats.ucla.edu/stat/mult_pkg/faq/general/tail_tests.htm)). i.e. 
+    
+    $$\frac{`r round(cntrFit[1, 4], 4)`}{2} = `r round(cntrFit[1, 4] / 2, 4)`$$
+    
+    Since the p-value is very small, we reject the null hypothesis and claim that `City1` has significantly low chlorine level as compared to the other two cities.
+    </div>
+    
+    

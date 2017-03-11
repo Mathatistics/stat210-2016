@@ -1,0 +1,1218 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Design and Analysis of Experiment</title>
+  <meta name="description" content="This contains the weekly exercises related to Design and Analysis of Experiment">
+  <meta name="generator" content="bookdown 0.3.9 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Design and Analysis of Experiment" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This contains the weekly exercises related to Design and Analysis of Experiment" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Design and Analysis of Experiment" />
+  
+  <meta name="twitter:description" content="This contains the weekly exercises related to Design and Analysis of Experiment" />
+  
+
+<meta name="author" content="Trygve Almøy">
+
+
+<meta name="date" content="2017-01-01">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="week-two.html">
+<link rel="next" href="exam-2011-sep-5-2011.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Design and Analysis of Experiment</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Practical Information</a></li>
+<li class="chapter" data-level="" data-path="week-one.html"><a href="week-one.html"><i class="fa fa-check"></i>Week One</a></li>
+<li class="chapter" data-level="" data-path="week-two.html"><a href="week-two.html"><i class="fa fa-check"></i>Week Two</a></li>
+<li class="chapter" data-level="" data-path="week-three.html"><a href="week-three.html"><i class="fa fa-check"></i>Week Three</a></li>
+<li><a href="exam-2011-sep-5-2011.html#exam-2011-sep-5-2011">Exam 2011 <small>(Sep 5, 2011)</small></a></li>
+<li><a href="exam-2012-sep-3-2012.html#exam-2012-sep-3-2012">Exam 2012 <small>(Sep 3, 2012)</small></a></li>
+<li class="chapter" data-level="" data-path="compulsory-assignment.html"><a href="compulsory-assignment.html"><i class="fa fa-check"></i>Compulsory Assignment</a></li>
+<li class="divider"></li>
+<li><a name="title" href="javascript:void(0)"><b>Lecturer:</b></a><ul>
+<li><a href="https://www.nmbu.no/ans/trygve.almoy" target="blank">Trygve Almøy</a></li></ul></li>
+<li><a name="title" href="javascript:void(0)"><b>Assistent Teachers:</b></a><ul>
+<li><a href="https://www.nmbu.no/ans/hilde.vinje" target="blank">Hilde Vinje</a></li>
+<li><a href="https://www.nmbu.no/ans/raju.rimal" target="blank">Raju Rimal</a></li></ul></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Design and Analysis of Experiment</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="week-three" class="section level1">
+<h1>Week Three</h1>
+<div id="exercise-1-hospital-data" class="section level2">
+<h2>Exercise 1 (Hospital Data)</h2>
+<ul>
+<li><p>Load the <code>Hospital.Rdata</code></p></li>
+<li><p>Construct an interaction effect plot. (<em>Graphs &gt; Plot of means</em>)</p>
+<div class="ans">
+<p><img src="STAT210-2016_files/figure-html/unnamed-chunk-116-1.png" width="672" /></p>
+</div></li>
+<li>Apply a model with Healing as response, Disease, and Medicine as factor where interaction is included, call this <code>Model1</code>.</li>
+<li>Test if interaction is present.</li>
+<li>Estimate all parameters.</li>
+<li>Split the first observation into 5 parts: constant, (sample) effect of disease, (Sample) effect of medicine, (Sample) effect of interaction and residual Show that the sum of the 4 effects gives the sample mean in the level combination the observation belongs.</li>
+<li>Repeat the analysis without including interaction, call this <code>Model2</code>.</li>
+<li>Find and store the fitted value and the residuals for both model and compare.</li>
+<li>Compare the Sum of squares for the two different models.</li>
+<li>If you should test on main effects for in <code>Model2</code> without use of computer, show how you can use the results from the <code>Model1</code> relatively easy.</li>
+<li>Plot the residuals (y-axis) against the fitted value (x-axis) for both models and show how this plot reveals model problems in <code>Model2</code>.</li>
+<li>A student that had not heard about 2-factor design tried to investigate the effect of medicine by a One Way ANOVA model (<code>Model3</code>). Explain why this is incorrect for this data.</li>
+<li><p>For all 3 models find R-square, and see how this increases with complexity. <span class="math display">\[\text{R-square} = \frac{\text{SSModel}}{\text{SS}_\text{Total}} = 1 – \frac{\text{SSE}}{\text{SS}_\text{Total}}\]</span></p></li>
+</ul>
+</div>
+<div id="exercise-2-mussels-data" class="section level2">
+<h2>Exercise 2 (Mussels Data)</h2>
+<ul>
+<li>Load the mussels data.</li>
+<li>Assume a model where eatable is the response size and season are the factors.</li>
+<li>Assume no interaction. Store the residuals and the fitted values.</li>
+<li>Plot residual against fitted values and make comments.</li>
+<li>Give an interpretation of the replicate variance (<span class="math inline">\(\sigma^2\)</span>). Estimate <span class="math inline">\(\sigma^2\)</span> and construct a 95% confidence interval for the true value.</li>
+<li>Assume a model including interaction. Store the residuals and the fitted values.</li>
+<li>Plot residual against fitted values and make comments.</li>
+<li>Give an interpretation of the replicate variance (<span class="math inline">\(\sigma^2\)</span>) and construct a 95% confidence interval for the true value.</li>
+</ul>
+
+</div>
+<div id="exercise-3-1" class="section level2">
+<h2>Exercise 3</h2>
+<p>Load the mussels data. The data is from a commercial farming of Blue Mussels where response is eatable food after boiling in percent of total weight. The mussels are sorted after size (Large and small) and season they were harvested (summer or autumn).</p>
+<p>Assume a model where eatable is the response, size and season are the factors and interaction is included. Analyze the model.</p>
+<div class="ans">
+<p>The model we are analysing is,</p>
+<span class="math display">\[\begin{equation}
+y_{ijk} = \mu + \tau_i + \beta_j + (\tau\beta)_{ij} + \epsilon_{ijk}
+\label{eq:musselFullModel}
+\end{equation}\]</span>
+<p>Where,</p>
+<table>
+<colgroup>
+<col width="13%" />
+<col width="5%" />
+<col width="80%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(i\)</span></td>
+<td>=</td>
+<td><span class="math inline">\(1\)</span> (small), <span class="math inline">\(2\)</span> (large) corresponding to size</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(j\)</span></td>
+<td>=</td>
+<td><span class="math inline">\(1\)</span> (autumn), <span class="math inline">\(2\)</span> (summer) corresponding to season</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(k\)</span></td>
+<td>=</td>
+<td><span class="math inline">\(1, 2, \ldots, 6\)</span> corresponding to replicates</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(y_{ijk}\)</span></td>
+<td>=</td>
+<td>eatable percentage of total weight of <span class="math inline">\(k^\text{th}\)</span> mussels of size <span class="math inline">\(i\)</span> on farmed during <span class="math inline">\(j\)</span> season</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\epsilon_{ijk}\)</span></td>
+<td><span class="math inline">\(\sim\)</span></td>
+<td><span class="math inline">\(\text{NID}(0, \sigma^2)\)</span>, <span class="math inline">\(\sum_{i = 1}^2\tau_i = 0\)</span> and <span class="math inline">\(\sum_{j = 1}^2 \beta_j = 0\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>In addition,</p>
+<p><span class="math display">\[\sum_{i = 1}^2(\tau\beta)_{ij} = \sum_{j = 1}^2(\tau\beta)_{ij} = 0\]</span></p>
+<p>The ANOVA table for model in equation (<a href="#eq:musselFullModel">(<strong>??</strong>)</a>) is,</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">Df</th>
+<th align="right">Sum Sq</th>
+<th align="right">Mean Sq</th>
+<th align="right">F value</th>
+<th align="right">Pr(&gt;F)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>season</td>
+<td align="right">1</td>
+<td align="right">294</td>
+<td align="right">294.0</td>
+<td align="right">122.5</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td>size</td>
+<td align="right">1</td>
+<td align="right">96</td>
+<td align="right">96.0</td>
+<td align="right">40.0</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td>season:size</td>
+<td align="right">1</td>
+<td align="right">294</td>
+<td align="right">294.0</td>
+<td align="right">122.5</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td>Residuals</td>
+<td align="right">20</td>
+<td align="right">48</td>
+<td align="right">2.4</td>
+<td align="right"></td>
+<td align="right"></td>
+</tr>
+</tbody>
+</table>
+<p>Here, both factors <code>season</code> and <code>size</code> along with their interactions are significant (low p-value). Thus, we can conclude the model contains interaction between <code>size</code> and <code>season</code>.</p>
+</div>
+<p>The farm decide to harvest in summer, and they wanted to find out if there are significant positive effect of harvesting large mussels compare to small mussels. Answer the question by a t-test. State the null hypothesis and the alternative hypothesis.</p>
+<div class="ans">
+<p>Here we have average percent of total weigth of eatable mussels by size and summer is,</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">season</th>
+<th align="right">liten</th>
+<th align="right">stor</th>
+<th align="right">(all)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">host</td>
+<td align="right">24</td>
+<td align="right">13</td>
+<td align="right">18.5</td>
+</tr>
+<tr class="even">
+<td align="left">sommer</td>
+<td align="right">24</td>
+<td align="right">27</td>
+<td align="right">25.5</td>
+</tr>
+<tr class="odd">
+<td align="left">(all)</td>
+<td align="right">24</td>
+<td align="right">20</td>
+<td align="right">22.0</td>
+</tr>
+</tbody>
+</table>
+<p>The hypotheis to test if there is positive effect of harvesting large mussels than small mussels in summer season is,</p>
+<p><span class="math display">\[
+\begin{aligned}
+H_0 &amp;: \mu_\text{large:summer } (\mu_{22}) = \mu_\text{small:summer }(\mu_{12}) \\
+H_1 &amp;: \mu_\text{large:summer } (\mu_{22}) &gt; \mu_\text{small:summer }(\mu_{12})
+\end{aligned}
+\]</span></p>
+<p>Note that:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\mu_{12} - \mu_{22} &amp;= \mu + \tau_2 + \beta_2 + (\tau\beta)_{22} - \mu - \tau_1 - \beta_2 - (\tau\beta)_{12} \\
+&amp;= \tau_2 - \tau_1 + (\tau\beta)_{22} - (\tau\beta)_{12}
+\end{aligned}
+\]</span></p>
+<p>Due to interaction term, the difference in mean is dependent on both of the factors. We can use the difference of their respective estimates, i.e, <span class="math inline">\(\bar{y}_{12} - \bar{y}_{22} = 27 - 24 = 3\)</span>.</p>
+<p>Further,</p>
+<p><span class="math display">\[
+\begin{aligned}
+\text{var}\left(\bar{y}_{12} - \bar{y}_{22}\right) &amp;= \frac{\sigma^2}{6} + \frac{\sigma^2}{6} = \frac{\sigma^2}{3} \\
+\text{SE}\left(\bar{y}_{12} - \bar{y}_{22}\right) &amp;= \sqrt{\frac{\hat{\sigma}^2}{3}} \\
+&amp;= \sqrt{\frac{\text{MSE}}{3}} = 0.894
+\end{aligned}
+\]</span></p>
+<p>Therefore, the test-statistics,</p>
+<p><span class="math display">\[t = \frac{\left(\bar{y}_{12} - \bar{y}_{22}\right)}{\text{SE}\left(\bar{y}_{12} - \bar{y}_{22}\right)} = \frac{3}{0.894} = 3.354 \sim t_{\alpha, N-a}\]</span></p>
+<p>At 95% confidence level, <span class="math inline">\(t_{\alpha, N-a} = t_{0.05, 2.4} = 2.614\)</span></p>
+<p>Since, <span class="math inline">\(3.354\)</span> &gt; 2.614, we reject Null hypothesis and conclude that the farm can make more profit by farming larger mussels than in smaller mussels in summer.</p>
+</div>
+</div>
+<div id="exercise-4-2" class="section level2">
+<h2>Exercise 4</h2>
+<p>Load hospital data.</p>
+<p>Apply a model with Healing as response, Disease, and Medicine as factors and interaction is included. Test if interaction is present.</p>
+<div class="ans">
+<p>The model is,</p>
+<p><span class="math display">\[y_{ijk} = \mu + \tau_i + \beta_j + (\tau\beta)_{ij} + \epsilon_{ijk}\]</span></p>
+<p>where,</p>
+<table>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(i\)</span></td>
+<td>=</td>
+<td>1(D), 2(S) corresponding to <code>Disease</code></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(j\)</span></td>
+<td>=</td>
+<td>1(A), 2(B), 3(C) corresponding to <code>Medicine</code></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(i\)</span></td>
+<td>=</td>
+<td>1, 2 corresponding to replication</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(y_{ijk}\)</span></td>
+<td>=</td>
+<td>Healing of <code>Disease</code> <span class="math inline">\(i\)</span> due to <code>Medicine</code> <span class="math inline">\(j\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\epsilon_{ijk}\)</span></td>
+<td><span class="math inline">\(\sim\)</span></td>
+<td><span class="math inline">\(\text{NID}\left(0, \sigma^2\right)\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>The ANOVA table for the model is,</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">Df</th>
+<th align="right">Sum Sq</th>
+<th align="right">Mean Sq</th>
+<th align="right">F value</th>
+<th align="right">Pr(&gt;F)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Medicine</td>
+<td align="right">2</td>
+<td align="right">31.5</td>
+<td align="right">15.75</td>
+<td align="right">3.500</td>
+<td align="right">0.098</td>
+</tr>
+<tr class="even">
+<td>Disease</td>
+<td align="right">1</td>
+<td align="right">3.0</td>
+<td align="right">3.00</td>
+<td align="right">0.667</td>
+<td align="right">0.445</td>
+</tr>
+<tr class="odd">
+<td>Medicine:Disease</td>
+<td align="right">2</td>
+<td align="right">138.5</td>
+<td align="right">69.25</td>
+<td align="right">15.389</td>
+<td align="right">0.004</td>
+</tr>
+<tr class="even">
+<td>Residuals</td>
+<td align="right">6</td>
+<td align="right">27.0</td>
+<td align="right">4.50</td>
+<td align="right"></td>
+<td align="right"></td>
+</tr>
+</tbody>
+</table>
+<p>The table shows that the interaction is significant (low p-value corresponding the interaction). Thus we can conclude that the interaction is present in the model.</p>
+</div>
+<p>Execute Tukey tests on the pairs of medicine for patients having Depression and for patients having schizophrenia.</p>
+<div class="ans">
+<p>The average of factors and their combinations are as follows,</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Disease</th>
+<th align="right">Medicine:A</th>
+<th align="right">Medicine:B</th>
+<th align="right">Medicine:C</th>
+<th align="right">Medicine:(all)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">D</td>
+<td align="right">14.00</td>
+<td align="right">4.50</td>
+<td align="right">16.0</td>
+<td align="right">11.5</td>
+</tr>
+<tr class="even">
+<td align="left">S</td>
+<td align="right">9.50</td>
+<td align="right">13.00</td>
+<td align="right">9.0</td>
+<td align="right">10.5</td>
+</tr>
+<tr class="odd">
+<td align="left">(all)</td>
+<td align="right">11.75</td>
+<td align="right">8.75</td>
+<td align="right">12.5</td>
+<td align="right">11.0</td>
+</tr>
+</tbody>
+</table>
+<p>Thus, we have the difference in mean between the pairs of Medicine i.e, AB, AC and BC for patients having Depression and Schizophrenia as,</p>
+<div class="row">
+<div class="col-md-6">
+<p><strong>Schizophrenia</strong></p>
+<p><span class="math display">\[
+\begin{aligned}
+\hat{\mu}_{A:S} - \hat{\mu}_{B:S} &amp;= -3.5 \\
+\hat{\mu}_{A:S} - \hat{\mu}_{C:S} &amp;= 0.5 \\
+\hat{\mu}_{B:S} - \hat{\mu}_{C:S} &amp;= 4 \\
+\end{aligned}
+\]</span></p>
+</div>
+<div class="col-md-6">
+<p><strong>Depression</strong></p>
+<p><span class="math display">\[
+\begin{aligned}
+\hat{\mu}_{A:D} - \hat{\mu}_{B:D} &amp;= 9.5 \\
+\hat{\mu}_{A:D} - \hat{\mu}_{C:D} &amp;= -2 \\
+\hat{\mu}_{B:D} - \hat{\mu}_{C:D} &amp;= -11.5 \\
+\end{aligned}
+\]</span></p>
+</div>
+</div>
+<p>Further, the Tukey test criteria is,</p>
+<p><span class="math display">\[
+\begin{aligned}
+T &amp;= q_{\alpha, (a, f)}\sqrt{\frac{\text{MSE}}{n}} = q_{0.05, (3, 6)} \sqrt{\frac{4.5}{3}}
+= 4.339 \times \sqrt{1.5} = 5.314
+\end{aligned}
+\]</span></p>
+</div>
+<p>Medicine A and C are new medicine. Test if those are better than B for patients suffering from Depression.</p>
+</div>
+<div id="exercise-5-2" class="section level2">
+<h2>Exercise 5</h2>
+<p>A student wanted to study how a medicament influenced feed consumption on rats. She included sex and the fact that some of the rats were sterilized in her study. In addition half of the animals were given placebo. In total 40 animals were available, and the design is balanced.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Sex</th>
+<th align="left">Sterilized</th>
+<th align="right">Medicament</th>
+<th align="left">Mean</th>
+<th align="right">Placebo</th>
+<th align="left">Mean</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Male</td>
+<td align="left">No</td>
+<td align="right">21.46, 23.92, 22.56, 16.12, 21.48</td>
+<td align="left">21.108</td>
+<td align="right">25.64, 28.84, 26.00, 26.02, 23.24</td>
+<td align="left">25.948</td>
+</tr>
+<tr class="even">
+<td align="left">Male</td>
+<td align="left">Yes</td>
+<td align="right">15.44, 23.54, 23.52, 17.96, 19.02</td>
+<td align="left">19.896</td>
+<td align="right">22.50, 24.48, 25.52, 24.76, 20.62</td>
+<td align="left">23.576</td>
+</tr>
+<tr class="odd">
+<td align="left">Female</td>
+<td align="left">No</td>
+<td align="right">18.58, 15.44, 16.12, 16.88, 17.58</td>
+<td align="left">16.920</td>
+<td align="right">17.82, 15.76, 12.96, 15.00, 19.54</td>
+<td align="left">16.216</td>
+</tr>
+<tr class="even">
+<td align="left">Female</td>
+<td align="left">Yes</td>
+<td align="right">18.20, 14.56, 15.54, 16.82, 14.56</td>
+<td align="left">15.936</td>
+<td align="right">19.74, 17.48, 16.46, 16.44, 15.70</td>
+<td align="left">17.164</td>
+</tr>
+</tbody>
+</table>
+<p>This model was applied:</p>
+<p><span class="math display">\[y_{ijkl} = \mu + \alpha_i + \beta_j + \gamma_k + (\alpha\beta)_{ij} + (\alpha\gamma)_{ik} + (\beta\gamma)_{jk} + (\alpha\beta\gamma)_{ijk} + \epsilon_{ijkl}\]</span></p>
+<p>Where,</p>
+<table>
+<tbody>
+<tr class="odd">
+<td align="right"><span class="math inline">\(i\)</span></td>
+<td align="center">=</td>
+<td align="left">1 (Active Medicament) or 2(Placebo)</td>
+</tr>
+<tr class="even">
+<td align="right"><span class="math inline">\(j\)</span></td>
+<td align="center">=</td>
+<td align="left">1 (Male) or 2 (Female)</td>
+</tr>
+<tr class="odd">
+<td align="right"><span class="math inline">\(k\)</span></td>
+<td align="center">=</td>
+<td align="left">1 (Non sterilizes) or 2 (Sterilized)</td>
+</tr>
+<tr class="even">
+<td align="right"><span class="math inline">\(l\)</span></td>
+<td align="center">=</td>
+<td align="left">1, 2, …, 5 corresponding to replications</td>
+</tr>
+</tbody>
+</table>
+<ol style="list-style-type: lower-alpha">
+<li>Give the Common assumptions concerning <span class="math inline">\(\epsilon_{ijkl}\)</span>. Explain why these are necessary in the model.</li>
+</ol>
+<table>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="right">Df</th>
+<th align="right">Sum Sq</th>
+<th align="right">Mean Sq</th>
+<th align="right">F value</th>
+<th align="right">Pr(&gt;F)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Sex</td>
+<td align="right">1</td>
+<td align="right">368.813</td>
+<td align="right">368.813</td>
+<td align="right">69.703</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="even">
+<td align="left">Sterilized</td>
+<td align="right">1</td>
+<td align="right">8.190</td>
+<td align="right">8.190</td>
+<td align="right">1.548</td>
+<td align="right">0.222</td>
+</tr>
+<tr class="odd">
+<td align="left">Medicament</td>
+<td align="right">1</td>
+<td align="right">51.121</td>
+<td align="right">51.121</td>
+<td align="right">9.662</td>
+<td align="right">0.004</td>
+</tr>
+<tr class="even">
+<td align="left">Sex:Sterilized</td>
+<td align="right">1</td>
+<td align="right">7.868</td>
+<td align="right">7.868</td>
+<td align="right">1.487</td>
+<td align="right">0.232</td>
+</tr>
+<tr class="odd">
+<td align="left">Sex:Medicament</td>
+<td align="right">1</td>
+<td align="right">39.960</td>
+<td align="right">39.960</td>
+<td align="right">7.552</td>
+<td align="right">0.010</td>
+</tr>
+<tr class="even">
+<td align="left">Sterilized:Medicament</td>
+<td align="right">1</td>
+<td align="right">0.372</td>
+<td align="right">0.372</td>
+<td align="right">0.070</td>
+<td align="right">0.792</td>
+</tr>
+<tr class="odd">
+<td align="left">Sex:Sterilized:Medicament</td>
+<td align="right">A</td>
+<td align="right">B</td>
+<td align="right">C</td>
+<td align="right">D</td>
+<td align="right">0.296</td>
+</tr>
+<tr class="even">
+<td align="left">Residuals</td>
+<td align="right">E</td>
+<td align="right">169.318</td>
+<td align="right">5.291</td>
+<td align="right"></td>
+<td align="right"></td>
+</tr>
+<tr class="odd">
+<td align="left">Total</td>
+<td align="right">F</td>
+<td align="right">651.618</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+</tr>
+</tbody>
+</table>
+<pre><code>S =  2.30026 ,   R-Sq = G%</code></pre>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Find the missing values <code>A</code>, <code>B</code>, <code>C</code>, <code>D</code>, <code>E</code>, <code>F</code> and <code>G</code>.</li>
+</ol>
+<div class="ans">
+<table>
+<colgroup>
+<col width="4%" />
+<col width="95%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td><strong>A:</strong></td>
+<td>Degree of freedom of 3 factor interaction = 1</td>
+</tr>
+<tr class="even">
+<td><strong>B:</strong></td>
+<td>Sum of square of 3 factor interaction</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td><span class="math display">\[\text{SS}_\text{Total} - \text{ sum of all other degree of freedom } = 5.975\]</span></td>
+</tr>
+<tr class="even">
+<td><strong>C:</strong></td>
+<td>Mean sum of square of 3 factor interaction</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td><span class="math display">\[\text{MS}_{\alpha\beta\gamma}=\frac{\text{SS}_{\alpha\beta\gamma}}{df_{\alpha\beta\gamma}} = 5.975\]</span></td>
+</tr>
+<tr class="even">
+<td><strong>D:</strong></td>
+<td>F statistic corresponding to 3 factor interaction</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td><span class="math display">\[\frac{\text{MS}_{\alpha\beta\gamma}}{\text{MS}_\text{residual}} = 1.129\]</span></td>
+</tr>
+<tr class="even">
+<td><strong>E:</strong></td>
+<td>Error Degree of freedom <span class="math inline">\(=abc(n-1) = 32\)</span></td>
+</tr>
+<tr class="odd">
+<td><strong>F:</strong></td>
+<td>Total Degree of freedom <span class="math inline">\(=(N - 1) = 39\)</span></td>
+</tr>
+<tr class="even">
+<td><strong>G:</strong></td>
+<td>R-squared (variation explained by the model)</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td><span class="math display">\[\text{R-sq} = 1 - \frac{\text{SS}_\text{E}}{\text{SS}_\text{Total}} = 74.02\]</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>What important conclusions can be detected?</li>
+</ol>
+
+</div>
+<div id="exercise-6-1" class="section level2">
+<h2>Exercise 6</h2>
+<p>Mango is an excellent source for vitamin C. Assume content of vitamin C in mango are measured on 2 sites in Tanzania, A in the highland, B in the lowland. In each site 2 trees are randomly chosen and 2 fruit on each tree are also randomly chosen. Data is stored in the file called <code>Mango.Rdata</code></p>
+<ul>
+<li><p>Explain why this must be treated as a nested design.</p>
+<div class="ans">
+<p>Here, trees are choosen after the sites are selected. It is impossible to see the effect of same trees in both lowland and highland. The trees selected at lowland is different from the trees selected at highland. and the measurements are made on mangos form each of the trees (replicated twice). Thus this must be a nested design with the following hierarchical structure.</p>
+<center>
+<p><img src="images/NestedDesign.png" /><!-- --></p>
+</center>
+<p>Here, <code>Tree:T1</code> from <code>Site:A</code> is different from <code>Tree:T1</code> from <code>Site:B</code> and so on. It is not possible observe the effect of <code>Tree:T1</code> of <code>Site:A</code> in <code>Site:B</code>.</p>
+</div></li>
+<li><p>Explain why it is natural to regard tree as a random effect.</p>
+<div class="ans">
+<p>Two specific trees can not be an interest of a research, rather a population of tree can be a subject of interest in the research. This research is more interested to see if there is any variation in vitamin C content in mango found in different places in Tanzania. So, it is natural to regard tree as a random effect.</p>
+</div></li>
+</ul>
+<p>Assume site to be a fixed effect State the model.</p>
+<ul>
+<li><p>Test if there is site effect, and if there is tree effect. Write down both the null hypothesis ant the alternative hypothesis.</p>
+<div class="ans">
+<p>A model is,</p>
+<p><span class="math display">\[y_{ijk} = \mu + \tau_i + \beta_{j(i)} + \epsilon_{(ij)k}\]</span></p>
+<p>where, <span class="math inline">\(i = 1, 2\)</span> for site, <span class="math inline">\(j = 1, 2\)</span> for tree nested in site <span class="math inline">\(i\)</span> and <span class="math inline">\(k = 1, 2\)</span> for two replication of mangos.</p>
+<p>The hypothesis to test the effect of tree is,</p>
+<p><span class="math display">\[
+\begin{aligned}
+H_0 &amp;: \sigma_\beta^2 = 0 \\
+H_1 &amp;: \sigma_\beta^2 &gt; 0
+\end{aligned}
+\]</span></p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">Mean Sq</th>
+<th align="right">Sum Sq</th>
+<th align="right">Df</th>
+<th align="right">F value</th>
+<th align="right">Pr(&gt;F)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>site</td>
+<td align="right">8.0</td>
+<td align="right">8</td>
+<td align="right">1</td>
+<td align="right">1.000</td>
+<td align="right">0.423</td>
+</tr>
+<tr class="even">
+<td>site:tree</td>
+<td align="right">8.0</td>
+<td align="right">16</td>
+<td align="right">2</td>
+<td align="right">1.455</td>
+<td align="right">0.335</td>
+</tr>
+<tr class="odd">
+<td>Residuals</td>
+<td align="right">5.5</td>
+<td align="right">22</td>
+<td align="right">4</td>
+<td align="right"></td>
+<td align="right"></td>
+</tr>
+</tbody>
+</table>
+<p>Here, neither the site or the trees nested on site are significant. There is no evidence of tree effect in this model.</p>
+</div></li>
+<li><p>Estimate both variance parameters.</p>
+<div class="ans">
+<p>From the fitted model, we have</p>
+<pre><code>            Err.term(s) Err.df VC(SS)
+1 site              (2)      2  fixed
+2 site:tree         (3)      4   1.25
+3 Residuals           -      -   5.50
+(VC = variance component)</code></pre>
+<p>From the output above, the estimates of variance parameters <span class="math inline">\(\sigma_\beta^2\)</span> and <span class="math inline">\(\sigma^2\)</span> are 1.25 and 5.5 respectively.</p>
+<p>In addition, we can also find variance components using mean sum of squares as,</p>
+<p><span class="math display">\[
+\begin{aligned}
+\hat{\sigma}^2 &amp;= \text{MS}_E = 5.5 \\
+\hat{\sigma}_\beta^2 &amp;= \frac{\text{MS}_\text{B(A)} - \text{MS}_E}{n} \\
+&amp;= \frac{8 - 5.5}{2}
+=1.25
+\end{aligned}
+\]</span></p>
+</div></li>
+<li><p>The researchers concluded that the variance in Vitamin C is larger inside the trees than between the trees. Do you agree?</p>
+<div class="ans">
+<p>The estimate of variance components <span class="math inline">\(\hat{\sigma}^2 = 5.5\)</span> refers to the variance within the trees and <span class="math inline">\(\hat{\sigma}_\tau^2 = 1.25\)</span> refers to the variance between the trees. Here the variance witin the tree is larger than between the tree, the conclusion of the researcher is true. However statistical testing of this difference is out of the scope of this course.</p>
+</div></li>
+</ul>
+</div>
+<div id="exercise-7" class="section level2">
+<h2>Exercise 7</h2>
+<p>In an experiment 4 sires were used. Each sire was tried in 3 herds (different herds for each sire). From each herd 4 cows were randomly picked out. Data are saved as <code>Nestedsires.Rdata</code></p>
+<p>If we assume a nested design (herd nested in sire) draw a figure of the design. How many herds are included in the experiment? How many observations do we have?</p>
+<div class="ans">
+<p>The nested design in this experiment can be visualized as,</p>
+<p><img src="images/NestedDesign2.png" /><!-- --></p>
+<p>Here, <code>Herd</code> is nested in <code>Sire</code> so, <code>Herd1</code> in <code>Sire1</code> is different from <code>Herd1</code> in <code>Sire2</code>. Therefore, there are 12 herd included in the experiment. Since 4 cows are randomly selected from each herd, there are 48 observations in this experiment.</p>
+</div>
+<ul>
+<li>State the model you will use for this experiment.
+<div class="ans">
+<p>The model in this experiment is,</p>
+<p><span class="math display">\[y_{ijk} = \mu + \tau_i + \beta_{i(j)} + \epsilon_{(ij)k}\]</span></p>
+<p>Where,</p>
+<table>
+<colgroup>
+<col width="17%" />
+<col width="7%" />
+<col width="75%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(i\)</span></td>
+<td>=</td>
+<td>1, 2, …, 4 corresponding to <code>sire</code></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(j(i)\)</span></td>
+<td>=</td>
+<td>1, 2, 3 corresponding to <code>herd</code> nested in <code>sire</code> <span class="math inline">\(i\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\epsilon_{(ij)k}\)</span></td>
+<td><span class="math inline">\(\sim\)</span></td>
+<td><span class="math inline">\(\text{NID}\left(0, \sigma^2\right)\)</span> where <span class="math inline">\(k = 1, 2, 3, 4\)</span> for each replication (<code>cow</code>)</td>
+</tr>
+</tbody>
+</table>
+</div></li>
+<li><p>How do you explain the deviations (<span class="math inline">\(\epsilon\)</span>’s) in this experiment?</p>
+<div class="ans">
+<p>Deviations or Error (<span class="math inline">\(\epsilon_{(ij)k}\)</span>) is the difference between observed response and expected response. i.e., <span class="math inline">\(\epsilon_{(ij)k} = y_{ijk} - \text{E}\left(y_{(ij)k}\right)\)</span>. Here the expected response is the value you expect to observe in population for the given model. The residuls, on the other hand, is fitted deviations and are the difference between the observed values and the fitted values for the given sample.</p>
+</div></li>
+<li><p>Assume sire is a fixed factor and herd a random factor. How is the F value calculated for testing Herd effect and for testing Sire effect?</p>
+<div class="ans">
+<p>When Factor A is fixed and Factor B is random, we have following expression,</p>
+</div></li>
+</ul>
+<p><strong>Now Use R-commander:</strong></p>
+<ul>
+<li>Test for sire and for herd effect.</li>
+<li>Estimate the variance components.</li>
+<li>Explain to the farmers what these estimates are saying.</li>
+</ul>
+<p>The farmers are sometimes asked to follow courses in the purpose of producing more milk. If the variance component for herd was extremely large, compare to the variance component for the error, would this support the opinion that we need better courses for the farmers obtaining the poorest results?</p>
+<p>Repeat, but assume sire to be a random effect. Estimate all 3 variance components. Which variance seems to be most important? How do you estimate the variance in milk production among the population of cattle’s?</p>
+</div>
+<div id="exercise-8-cheese-production" class="section level2">
+<h2>Exercise 8 (Cheese Production)</h2>
+<p><em>Data for <strong>Model 1</strong> is called <code>cheese1.Rdata</code> and for <strong>Model 2</strong> is called <code>cheese2.Rdata</code></em></p>
+<p>Bacterial fermentation is an important part of cheese making and ripening, and specific starter cultures (bacteria) are used. However, some other bacteria may also be added in the milk, they are not starters, but can have huge influence on the final quality of the cheese.</p>
+<p>We want to study the effect of two types of non-starters, we call them R50 and R21.</p>
+<p>Both factors (bacteria type) have 2 levels, absent (level 1) or present (level 2). The response is the total content of free amino acid which we want as high as possible. Each combination was replicated 3 times.</p>
+<p>The first model we use is:</p>
+<p><span class="math display">\[\textbf{Model 1: } y_{ijk} = \mu + \tau_i + \beta_j + (\tau\beta)_{ij} + \epsilon_{ijk}\]</span></p>
+<p><span class="math inline">\(\tau_i\)</span> is the effect of R50 on level <span class="math inline">\(i\)</span>, <span class="math inline">\(\beta_j\)</span> is the effect of R21 of level <span class="math inline">\(j\)</span>, <span class="math inline">\((\tau\beta)_{ij}\)</span> is the effect of interaction between R50 and R21 on combination <span class="math inline">\(ij\)</span>. Where, <span class="math inline">\(i = 1, 2\;\; j = 1,2 \;\; k = 1,2,3\)</span></p>
+<p>The <span class="math inline">\(\epsilon_{ijk}\)</span>’s are independent and normally distributed with expectation 0 and variance <span class="math inline">\(\sigma^2\)</span>. Also assume,</p>
+<p><span class="math display">\[
+\sum_{i=1}^2\tau_i = \sum_{j = 1}^2\beta_j=\sum_{i=1}^2(\tau\beta)_{ij} = \sum_{j=1}^2(\tau\beta)_{ij} = 0
+\]</span></p>
+<ol style="list-style-type: lower-alpha">
+<li><p>Use this experiment to discuss the difference between fixed and random factors.</p>
+<p>Use this experiment to explain what we mean by interaction.</p>
+<p>Use this experiment to explain what we mean by a balanced design.</p>
+<p>How would you interpret <span class="math inline">\(\sigma^2\)</span>?</p></li>
+<li><p>Draw an interaction plot, (see Table <a href="week-three.html#tab:tbl1">1</a>).</p>
+<div class="ans">
+<p><img src="STAT210-2016_files/figure-html/unnamed-chunk-140-1.png" width="672" /></p>
+</div>
+<p>In Table <a href="week-three.html#tab:tbl2">2</a> are parts of an ANOVA table, finish the table and test if interaction is present.</p>
+<div class="ans">
+<p>The complete ANOVA table is,</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">Sum Sq</th>
+<th align="right">Df</th>
+<th align="right">F value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>R50</td>
+<td align="right">0.610</td>
+<td align="right">1</td>
+<td align="right">10.043</td>
+</tr>
+<tr class="even">
+<td>R21</td>
+<td align="right">0.189</td>
+<td align="right">1</td>
+<td align="right">3.102</td>
+</tr>
+<tr class="odd">
+<td>R50:R21</td>
+<td align="right">0.000</td>
+<td align="right">1</td>
+<td align="right">0.003</td>
+</tr>
+<tr class="even">
+<td>Residuals</td>
+<td align="right">0.486</td>
+<td align="right">8</td>
+<td align="right"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Why is it natural to exclude interaction from <strong>Model 1</strong>?</p>
+<div class="ans">
+<p>Sum of square corresponding interaction term <code>R50:R21</code> is almost zero so is the F-value. This consequently suggest that the interaction term is not significant and thus it is natural to exclude interaction from <strong>Model 1</strong>.</p>
+</div>
+<p>Name the model without interaction <strong>Model 1b</strong>. Construct the ANOVA table for <strong>Model 1b</strong>.</p>
+<div class="ans">
+<p>The model with out interaction term is,</p>
+<p><span class="math display">\[ \textbf{Model 1b: }y_{ij} = \mu + \tau_i + \beta_j + \epsilon_{ij}\]</span></p>
+<p>ANOVA table for this model is,</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">Df</th>
+<th align="right">Sum Sq</th>
+<th align="right">Mean Sq</th>
+<th align="right">F value</th>
+<th align="right">Pr(&gt;F)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>R50</td>
+<td align="right">1</td>
+<td align="right">0.610</td>
+<td align="right">0.610</td>
+<td align="right">11.294</td>
+<td align="right">0.008</td>
+</tr>
+<tr class="even">
+<td>R21</td>
+<td align="right">1</td>
+<td align="right">0.189</td>
+<td align="right">0.189</td>
+<td align="right">3.489</td>
+<td align="right">0.095</td>
+</tr>
+<tr class="odd">
+<td>Residuals</td>
+<td align="right">9</td>
+<td align="right">0.486</td>
+<td align="right">0.054</td>
+<td align="right"></td>
+<td align="right"></td>
+</tr>
+</tbody>
+</table>
+<p>Here, sum of square of Residuals has not increased than in <strong>Model 1</strong>, i.e. the additional noise in the model due to removal of interaction term is very small (almost zero).</p>
+</div>
+<table>
+<caption><span id="tab:tbl1">Table 1: </span>Sample means for each combination.</caption>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">0</th>
+<th align="right">1</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td align="right">1.71</td>
+<td align="right">2.15</td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td align="right">1.95</td>
+<td align="right">2.41</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption><span id="tab:tbl2">Table 2: </span>Parts of ANOVA table Model 1</caption>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">Sum Sq</th>
+<th align="left">Df</th>
+<th align="left">F value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>R50</td>
+<td align="right">0.610</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td>R21</td>
+<td align="right">0.189</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td>R50:R21</td>
+<td align="right">0.000</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td>Residuals</td>
+<td align="right">0.486</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+<p>Later a student realized that amino acid varied <em>within</em> each cheese, so she divided each cheese into 3 parts and regarded each part as replicate. The student had 4 different bacteria cultures in her experiment. The following <em>nested</em> model was applied:</p>
+<p><span class="math display">\[\textbf{Model 2: } y_{ijk} = \mu + \tau_i + \beta_{j(i)} + \epsilon_{ijk}\]</span></p>
+<p>Where, <span class="math inline">\(i = 1, 2, 3, 4 \; \; j = 1,2,3 \; \; k = 1,2,3\)</span></p>
+<p><span class="math inline">\(\tau_i\)</span> is effect of bacteria group <span class="math inline">\(i\)</span>, <span class="math inline">\(\beta_{j(i)}\)</span> is effect of cheese <span class="math inline">\(j\)</span> nested in group <span class="math inline">\(i\)</span>.</p>
+<p>The <span class="math inline">\(\beta_{j(i)}\)</span>’s are independent and normally distributed with expectation 0 and variance <span class="math inline">\(\sigma_\beta^2\)</span>.</p>
+<p>The <span class="math inline">\(\epsilon_{ijk}\)</span>’s are independent and normally distributed with expectation 0 and variance <span class="math inline">\(\sigma^2\)</span>.</p>
+<p>The <span class="math inline">\(\beta_{j(i)}\)</span>’s and <span class="math inline">\(\epsilon_{ijk}\)</span>’s are independent.</p>
+<p>In addition,</p>
+<p><span class="math display">\[\sum_{i = 1}^4\tau_i = 0\]</span></p></li>
+<li><p>Use this experiment to explain the difference between designs with nested and crossed factors.</p>
+<p>Why is it logical to assume cheese as a random factor?</p>
+<p>How would you explain <span class="math inline">\(\sigma_\beta^2\)</span> and <span class="math inline">\(\sigma^2\)</span> to the scientist?</p>
+<table>
+<caption><span id="tab:tbl3">Table 3: </span>Some results from <strong>Model 2</strong></caption>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">Mean Sq</th>
+<th align="right">Sum Sq</th>
+<th align="right">Df</th>
+<th align="left">F value</th>
+<th align="left">Pr(&gt;F)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Bacteria</td>
+<td align="right">0.086</td>
+<td align="right">0.259</td>
+<td align="right">3</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td>Bacteria:Cheese</td>
+<td align="right">0.068</td>
+<td align="right">0.541</td>
+<td align="right">8</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td>Residuals</td>
+<td align="right">0.010</td>
+<td align="right">0.242</td>
+<td align="right">24</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+<pre><code>                Expected mean squares
+Bacteria         (3) + 3 (2) + 9 Q[1]
+Bacteria:Cheese  (3) + 3 (2)         
+Residuals        (3)                 </code></pre></li>
+<li><p>Estimate both variance components in <strong>Model 2</strong> (Table <a href="week-three.html#tab:tbl3">3</a>). Test if there are effects of cheese and of bacteria group.</p></li>
+<li><p>The student was told that it is better to use the average of the 3 parts of the cheese as replicate.</p>
+<p>Reformulate Model 5 for this situation.</p>
+<p>What is the response now?</p>
+<p>Test if there is effect of bacteria group.</p></li>
+</ol>
+
+</div>
+</div>
+<script>
+ans_btn_html = '<a class = "btn-ans"><span class="label label-success no-print">&lt;ANS/&gt;</span></a>';
+  showAns_btn = '<a class="showAns-btn btn pull-right js-toolbar-action">Show Answers</a>';
+  hideAns_btn = '<a class="hideAns-btn btn pull-right js-toolbar-action" style="display:none;">Hide Answers</a>';
+  
+  // Adding Extra Menus in Navigation
+  
+  // Adding button on before each answer:::
+  $(".ans").before(ans_btn_html);
+  $('.btn-ans').each(function(){
+    $(this).next('.ans').andSelf().wrapAll('<div class="wrap-ans"/>');
+  });
+  $('.btn-ans').click(function(){
+    $(this).siblings('.ans').toggle(400);
+  });
+  
+if ($(".ans").length > 0){
+    $('.book-header').prepend(showAns_btn, hideAns_btn);
+    $('.showAns-btn').show();
+    $('.showAns-btn').click(function(){
+      $('.btn-ans').hide(400);
+      $('.ans').show(400);
+      $('.hideAns-btn').show();
+      $(this).hide();
+      $('.hideAns-btn').click(function(){
+        $('.btn-ans').show(400);
+        $('.ans').hide(400);
+        $('.showAns-btn').show();
+        $(this).hide();
+      });
+    });
+  }
+
+var chap = "week-two"
+if(window.location.href.indexOf(chap) != -1){
+  var now = new Date();
+  var release = new Date("August 21, 2016");
+  if(now < release){
+    $(".ans, .btn-ans, .showAns-btn, .hideAns-btn").hide()
+  }
+}
+
+$('.ans p:has(img)').css('text-align', 'center');
+</script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-82812028-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="week-two.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="exam-2011-sep-5-2011.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/mathatistics/stat210-2016/edit/master/week3/03-W3E01.Rmd",
+"text": "Edit"
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

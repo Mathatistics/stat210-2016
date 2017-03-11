@@ -1,0 +1,83 @@
+## Exercise 10
+
+```{r}
+dta <- matrix(c(1,3,2,6), 2, 2, byrow = T)
+dta.rm <- rowMeans(dta)
+dta.cm <- colMeans(dta)
+dta.m <- mean(dta)
+ss.11 <- sumsq(dta - dta.m)
+ss.12 <- sumsq(dta - cbind(dta.rm, dta.rm))
+ss.21 <- sumsq(dta - rbind(dta.cm, dta.cm))
+ss.22 <- sumsq(dta.rm - dta.m)
+```
+
+
+We will compare two sorts of barley cultivated at two different sites.
+Let $Y_{i,j}$ be yield (in kg) for sort $i$, site $j$, where $i = 1, 2$ and $j = 1, 2$
+We have,
+$$
+\begin{aligned}
+Y_{1,1} = 1 &&
+Y_{1,2} = 3 \\
+Y_{2,1} = 2 &&
+Y_{2,2} = 6
+\end{aligned}
+$$
+
+Find and interpret:
+
+$$
+\begin{aligned}
+\bar{Y}_{i\cdot} & = \frac{1}{2}\sum_{j = 1}^2{Y_{ij}} \text{ for } i = 1\text{ and } 2 \\
+\bar{Y}_{\cdot j} & = \frac{1}{2}\sum_{j = 1}^2{Y_{ij}} \text{ for } i = 1\text{ and } 2 \\
+\bar{Y}_{\cdot\cdot} & = \frac{1}{4}\sum_{j = 1}^2\sum_{j = 1}^2{Y_{ij}}
+\end{aligned}
+$$
+
+Find:
+
+$$
+\begin{aligned}
+\sum_{i = 1}^2\sum_{j = 1}^2{\left(Y_{ij} - \bar{Y}_{\cdot\cdot}\right)^2} &&
+\sum_{i = 1}^2\sum_{j = 1}^2{\left(Y_{ij} - \bar{Y}_{i\cdot}\right)^2} \\
+\sum_{i = 1}^2\sum_{j = 1}^2{\left(Y_{ij} - \bar{Y}_{\cdot j}\right)^2} &&
+\sum_{i = 1}^2{\left(\bar{Y}_{i} - \bar{Y}_{\cdot\cdot}\right)^2}
+\end{aligned}
+$$
+
+
+<div class = 'ans'>
+
+Here we can write,
+
+|                 | Site 1               | Site 2               | Row Mean           |
+|-----------------|----------------------|----------------------|--------------------|
+| **Sort 1**      | $y_{11} = 1$         | $y_{12} = 3$         | $\bar{y}_{1.} = 2$ |
+| **Sort 2**      | $y_{21} = 2$         | $y_{22} = 6$         | $\bar{y}_{2.} = 4$ |
+| **Column Mean** | $\bar{y}_{.1} = 1.5$ | $\bar{y}_{.2} = 4.5$ | $\bar{y}_{..} = 3$ |
+
+$$\bar{Y}_{i\cdot} = \frac{1}{2}\sum_{j = 1}^2{Y_{ij}} = 2\text{ and } 4 \text{ for } i = 1\text{ and } 2 \text{ respectively }$$
+
+These are the average of _sort_ 1 and 2 over all the _sites_.
+
+$$\bar{Y}_{\cdot j} = \frac{1}{2}\sum_{i = 1}^2{Y_{ij}} = 1.5\text{ and } 4.5 \text{ for } i = 1\text{ and } 2 \text{ respectively }$$
+
+These are the average of _site_ 1 and 2 for all the _sorts_.
+
+Further, 
+
+$$\bar{Y}_{\cdot\cdot} = \frac{1}{4}\sum_{j = 1}^2\sum_{j = 1}^2{Y_{ij}} = 3$$
+
+This is the overall cultivated barley for all sorts and sites.
+
+Thus, we can also find,
+$$
+\begin{aligned}
+\sum_{i = 1}^2\sum_{j = 1}^2{\left(Y_{ij} - \bar{Y}_{\cdot\cdot}\right)^2} = `r ss.11` &&
+\sum_{i = 1}^2\sum_{j = 1}^2{\left(Y_{ij} - \bar{Y}_{i\cdot}\right)^2} = `r ss.12` \\
+\sum_{i = 1}^2\sum_{j = 1}^2{\left(Y_{ij} - \bar{Y}_{\cdot j}\right)^2} = `r ss.21` &&
+\sum_{i = 1}^2{\left(\bar{Y}_{i} - \bar{Y}_{\cdot\cdot}\right)^2} = `r ss.22`
+\end{aligned}
+$$
+
+</div>

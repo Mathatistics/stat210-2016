@@ -1,0 +1,65 @@
+--- 
+title: "Design and Analysis of Experiment"
+author: "Trygve Almøy"
+date: "`r format(Sys.Date(), '%Y')`"
+site: bookdown::bookdown_site
+output: bookdown::gitbook
+documentclass: article
+fontsize: '12pt'
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+#github-repo: rstudio/bookdown-demo
+description: "This contains the weekly exercises related to Design and Analysis of Experiment"
+---
+```{r include = FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+options(scipen = 999)
+```
+
+
+# Practical Information
+
+Note: Editions 6, 7 and 8 of Montgomery can all be used. Note, however, that the numbering of exercises and tables typically differs and information is given to clarify as needed. The data is in the fronter folder data, also in some cases where the student is asked to input the data.
+
+### Book we use in this course
+<center>
+
+```{r, message=FALSE, warning=FALSE}
+pkgs <- c("mixlm", "reshape2", "DiagrammeR")
+for (pkg in pkgs) require(pkg, quietly = TRUE, warn.conflicts = FALSE, character.only = TRUE)
+```
+
+
+```{r, out.height="5cm"}
+knitr::include_graphics(c(
+  "images/BookCover_Ed6.jpeg", 
+  "images/BookCover_Ed7.jpg",
+  "images/BookCover_Ed8.jpg"
+))
+```
+
+</center>
+
+### Exercise and Page Number in Different Editions
+```{r}
+lns <- "
+Table/Exercise	Edition6	Edition7	Edition8
+Table 	2.5	2.5	2.6
+Exercise	Missing	2.2	2.1
+Exercise	Missing	2.3	2.3
+Exercise	2.5	2.16	2.20
+Exercise	2.13	2.21	2.29
+Exercise	2.18	2.27	2.34"
+con <- textConnection(lns)
+exMap <- read.table(con, sep = "\t", header = T)
+knitr::kable(exMap)
+```
+
+
+```{r include=FALSE}
+# automatically create a bib database for R packages
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown'
+), 'packages.bib')
+```

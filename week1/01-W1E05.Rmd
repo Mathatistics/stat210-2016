@@ -1,0 +1,93 @@
+```{r include=FALSE, warning=FALSE, message=FALSE}
+library(knitr)
+```
+
+## Exercise 5
+Consider the data of Exercise 1 again (available as `Table21Stacked.RData` in fronter; you can go _Data > Load ..._ to load the data). If necessary stack the data.
+
+  a) Are the variances of the two groups different? Formulate a hypothesis test and perform the test using R (_Statistics > Variances_)
+  
+<div class = 'ans'>
+
+The hypothesis to test if the variance of the two groups different is,
+
+$$
+\begin{aligned}
+H_0 &: \sigma_\text{modified}^2 = \sigma_\text{unmodified}^2 \\
+H_1 &: \sigma_\text{modified}^2 \ne \sigma_\text{modified}^2
+\end{aligned}
+$$
+
+The test result from R is,
+
+```{r}
+load("_data/Table21Stacked.RData")
+ftest <- var.test(variable ~ factor, data = Table21Stacked)
+ftest
+```
+
+Here, p-value = $`r round(ftest[["p.value"]], 3)` > 0.05$, we cannot reject $H_0$ and could not claim that the variance between two groups are different.
+</div>
+  
+  b) Do the test by as explained in Week1, slide 39 using only the fact below
+
+```{r, echo = FALSE, results='asis'}
+sumry <- sapply(list(var = var, n = length), function(x){
+  tapply(Table21Stacked$variable, Table21Stacked$factor, x)
+})
+
+kable(data.frame(sumry), format = 'html')
+```  
+
+<div class = 'ans'>
+The observed test statistic is,
+
+$$F = \frac{0.1001}{0.0614} = 1.63$$ 
+
+Under the null hypothesis, $F \sim \text{Fisher}(9,9)$  From table (or in _R: Distributions > Continuous distributions > F distribution > F quantiles_), 
+
+$$F_{0.025, 9, 9} = `r round(qf(0.025, 9, 9, lower = F), 3)`$$ 
+
+This value is not exceeded (draw a figure) and therefore we cannot claim that variances differ.
+
+**Comment:** Observe that we only know that the p-value $>0.05$ as opposed to the exact p-value found in a) above. In this case we don't need the lower critical value as $F>1$. However, this can be found as,
+
+$$F_{0.975, 9, 9} = \frac{1}{F_{0.025, 9, 9}} = \frac{1}{4.03} = 0.25$$
+
+</div>
+
+  c) Assume now the variances of the two groups to be equal and calculate a 95% confidence interval for the common standard deviation using the output in b) above.
+  
+<div class = 'ans'>
+
+Here, we have,
+
+$$n = n_1 + n_2 = 20, \text{df} = 20 - 2 = 18$$
+
+Under the assumption of equal variance of the two groups, the pooled variance is calculated as,
+
+$$
+\begin{aligned}
+S_p^2 & = \frac{(n_1 - 1)s_1^2 + (n_2 - 1)s_2^2}{n_1 + n_2 - 2} \\
+& = \frac{s_1^2 + s_2^2}{2} = 0.0808
+\end{aligned}
+$$
+
+Also, 
+$$\chi_{0.975}^2 = `r round(qchisq(0.975, 18, lower = FALSE), 3)` \text{ and } \chi_{0.025}^2 = `r round(qchisq(0.025, 18, lower = TRUE), 3)`$$
+
+$$
+\begin{aligned}
+\left[
+  \frac{\text{df} \times S_p^2}{\chi_{0.025}^2}, 
+  \frac{\text{df} \times S_p^2}{\chi_{0.975}^2}
+\right] &= 
+\left[
+  \frac{18 \times 0.0808}{31.53}, 
+  \frac{18 \times 0.0808}{8.23}
+\right] \\
+&= [0.046, 0.0177]
+\end{aligned}
+$$
+
+</div>

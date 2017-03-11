@@ -1,0 +1,295 @@
+```{r, echo = FALSE, include=FALSE}
+knitr::opts_chunk$set(comment = NA, echo = FALSE)
+```
+
+```{r, message=FALSE, warning=FALSE}
+library(mixlm)
+library(data.table)
+```
+
+
+## Exercise 3
+Load the mussels data. The data is from a commercial farming of Blue Mussels where response is eatable food after boiling in percent of total weight. The mussels are sorted after size (Large and small) and season they were harvested (summer or autumn). 
+
+```{r}
+load("_data/mussels.RData")
+```
+
+Assume a model where eatable is the response, size and season are the factors and interaction is included. Analyze the model.
+
+<div class = 'ans'>
+
+The model we are analysing is,
+
+\begin{equation}
+y_{ijk} = \mu + \tau_i + \beta_j + (\tau\beta)_{ij} + \epsilon_{ijk}
+\label{eq:musselFullModel}
+\end{equation}
+
+Where,
+
+|                  |        |                                                                                                     |
+| ---------------- | ------ | --------------------------------------------------------------------------------------------------- |
+| $i$              | =      | $1$ (small), $2$ (large) corresponding to size                                                      |
+| $j$              | =      | $1$ (autumn), $2$ (summer) corresponding to season                                                  |
+| $k$              | =      | $1, 2, \ldots, 6$ corresponding to replicates                                                       |
+| $y_{ijk}$        | =      | eatable percentage of total weight of $k^\text{th}$ mussels of size $i$ on farmed during $j$ season |
+| $\epsilon_{ijk}$ | $\sim$ | $\text{NID}(0, \sigma^2)$, $\sum_{i = 1}^2\tau_i = 0$ and $\sum_{j = 1}^2 \beta_j = 0$              |
+
+In addition,
+
+$$\sum_{i = 1}^2(\tau\beta)_{ij} = \sum_{j = 1}^2(\tau\beta)_{ij} = 0$$
+
+The ANOVA table for model in equation (\@ref(eq:musselFullModel)) is,
+
+```{r}
+musselMdl <- lm(eatable ~ season * size, data = skjell)
+musselaov <- unclass(summary(aov(musselMdl)))[[1]]
+gsub("NA", "  ", knitr::kable(musselaov, digits = 3))
+```
+
+Here, both factors `season` and `size` along with their interactions are significant (low p-value). Thus, we can conclude the model contains interaction between `size` and `season`.
+
+</div>
+
+
+The farm decide to harvest in summer, and they wanted to find out if there are significant positive effect of harvesting large mussels compare to small mussels. Answer the question by a t-test. State the null hypothesis and the alternative hypothesis.
+
+<div class = 'ans'>
+
+Here we have average percent of total weigth of eatable mussels by size and summer is,
+
+```{r}
+MusselMeanDf <- reshape2::dcast(skjell, season ~ size, value.var = "eatable", fun.aggregate = mean, margins = TRUE)
+knitr::kable(MusselMeanDf)
+```
+
+The hypotheis to test if there is positive effect of harvesting large mussels than small mussels in summer season is,
+
+$$
+\begin{aligned}
+H_0 &: \mu_\text{large:summer } (\mu_{22}) = \mu_\text{small:summer }(\mu_{12}) \\
+H_1 &: \mu_\text{large:summer } (\mu_{22}) > \mu_\text{small:summer }(\mu_{12})
+\end{aligned}
+$$ 
+
+Note that: 
+
+$$
+\begin{aligned}
+\mu_{12} - \mu_{22} &= \mu + \tau_2 + \beta_2 + (\tau\beta)_{22} - \mu - \tau_1 - \beta_2 - (\tau\beta)_{12} \\
+&= \tau_2 - \tau_1 + (\tau\beta)_{22} - (\tau\beta)_{12}
+\end{aligned}
+$$ 
+
+Due to interaction term, the difference in mean is dependent on both of the factors. We can use the difference of their respective estimates, i.e, $\bar{y}_{12} - \bar{y}_{22} = `r MusselMeanDf$stor[2]` - `r MusselMeanDf$liten[2]` = `r MusselMeanDf$stor[2] - MusselMeanDf$liten[2]`$.
+
+Further,
+
+$$
+\begin{aligned}
+\text{var}\left(\bar{y}_{12} - \bar{y}_{22}\right) &= \frac{\sigma^2}{6} + \frac{\sigma^2}{6} = \frac{\sigma^2}{3} \\
+\text{SE}\left(\bar{y}_{12} - \bar{y}_{22}\right) &= \sqrt{\frac{\hat{\sigma}^2}{3}} \\
+&= \sqrt{\frac{\text{MSE}}{3}} = `r round(sqrt(musselaov["Residuals  ", "Mean Sq"]/3), 3)`
+\end{aligned}
+$$ 
+
+Therefore, the test-statistics,
+
+$$t = \frac{\left(\bar{y}_{12} - \bar{y}_{22}\right)}{\text{SE}\left(\bar{y}_{12} - \bar{y}_{22}\right)} = \frac{`r MusselMeanDf$stor[2] - MusselMeanDf$liten[2]`}{`r round(sqrt(musselaov["Residuals  ", "Mean Sq"]/3), 3)`} = `r round((MusselMeanDf$stor[2] - MusselMeanDf$liten[2])/sqrt(musselaov["Residuals  ", "Mean Sq"]/3), 3)` \sim t_{\alpha, N-a}$$
+
+At 95% confidence level, $t_{\alpha, N-a} = t_{0.05, `r musselaov["Residuals  ", "Mean Sq"]`} = `r round(qt(0.05, musselaov["Residuals  ", "Mean Sq"], lower.tail = FALSE), 3)`$
+
+Since, $`r round((MusselMeanDf$stor[2] - MusselMeanDf$liten[2])/sqrt(musselaov["Residuals  ", "Mean Sq"]/3), 3)`$ > `r round(qt(0.05, musselaov["Residuals  ", "Mean Sq"], lower.tail = FALSE), 3)`, we reject Null hypothesis and conclude that the farm can make more profit by farming larger mussels than in smaller mussels in summer.
+
+</div>
+
+
+
+## Exercise 4
+
+Load hospital data.
+
+```{r}
+load("_data/hospital.RData")
+```
+
+```{r}
+sykMdl1 <- lm(Healing ~ Medicine * Disease, data = syk)
+sykaov1 <- unclass(summary(aov(sykMdl1)))[[1]]
+```
+
+
+Apply a model with Healing as response, Disease, and Medicine as factors and interaction is included. Test if interaction is present.
+
+<div class="ans">
+
+The model is,
+
+$$y_{ijk} = \mu + \tau_i + \beta_j + (\tau\beta)_{ij} + \epsilon_{ijk}$$
+
+where,
+
+|                  |        |                                                |
+|------------------|--------|------------------------------------------------|
+| $i$              | =      | 1(D), 2(S) corresponding to `Disease`          |
+| $j$              | =      | 1(A), 2(B), 3(C) corresponding to `Medicine`   |
+| $i$              | =      | 1, 2 corresponding to replication              |
+| $y_{ijk}$        | =      | Healing of `Disease` $i$ due to `Medicine` $j$ |
+| $\epsilon_{ijk}$ | $\sim$ | $\text{NID}\left(0, \sigma^2\right)$           |
+
+The ANOVA table for the model is,
+
+```{r}
+gsub("NA", "  ", knitr::kable(sykaov1, digits = 3))
+```
+
+The table shows that the interaction is significant (low p-value corresponding the interaction). Thus we can conclude that the interaction is present in the model.
+
+</div>
+
+
+Execute Tukey tests on the pairs of medicine for patients having Depression and for patients having schizophrenia.
+
+<div class="ans">
+
+The average of factors and their combinations are as follows,
+
+```{r}
+avgMat <- reshape2::dcast(syk, Disease ~ Medicine, fun.aggregate = mean, value.var = "Healing", margins = TRUE)
+knitr::kable(avgMat, col.names = c("Disease", "Medicine:A", "Medicine:B", "Medicine:C", "Medicine:(all)"))
+```
+
+Thus, we have the difference in mean between the pairs of Medicine i.e, AB, AC and BC for patients having Depression and Schizophrenia as,
+
+<div class="row">
+
+<div class="col-md-6">
+
+**Schizophrenia**
+
+$$
+\begin{aligned}
+\hat{\mu}_{A:S} - \hat{\mu}_{B:S} &= `r avgMat['2', 'A'] - avgMat['2', 'B']` \\
+\hat{\mu}_{A:S} - \hat{\mu}_{C:S} &= `r avgMat['2', 'A'] - avgMat['2', 'C']` \\
+\hat{\mu}_{B:S} - \hat{\mu}_{C:S} &= `r avgMat['2', 'B'] - avgMat['2', 'C']` \\
+\end{aligned}
+$$
+
+</div>
+
+<div class="col-md-6">
+
+**Depression**
+
+$$
+\begin{aligned}
+\hat{\mu}_{A:D} - \hat{\mu}_{B:D} &= `r avgMat['1', 'A'] - avgMat['1', 'B']` \\
+\hat{\mu}_{A:D} - \hat{\mu}_{C:D} &= `r avgMat['1', 'A'] - avgMat['1', 'C']` \\
+\hat{\mu}_{B:D} - \hat{\mu}_{C:D} &= `r avgMat['1', 'B'] - avgMat['1', 'C']` \\
+\end{aligned}
+$$
+
+</div>
+
+</div>
+
+Further, the Tukey test criteria is,
+
+$$
+\begin{aligned}
+T &= q_{\alpha, (a, f)}\sqrt{\frac{\text{MSE}}{n}} = q_{0.05, (`r length(unique(syk$Medicine))`, `r sykaov1["Residuals       ", "Df"]`)} \sqrt{\frac{`r sykaov1["Residuals       ", "Mean Sq"]`}{`r length(unique(syk$Medicine))`}}
+= `r round(qtukey(0.05, length(unique(syk$Medicine)), sykaov1["Residuals       ", "Df"], lower.tail = F), 3)` \times \sqrt{`r sykaov1["Residuals       ", "Mean Sq"]/ length(unique(syk$Medicine))`} = `r round(qtukey(0.05, length(unique(syk$Medicine)), sykaov1["Residuals       ", "Df"], lower.tail = F) * sqrt(sykaov1["Residuals       ", "Mean Sq"]/ length(unique(syk$Medicine))), 3)`
+\end{aligned}
+$$
+
+
+</div>
+
+
+Medicine A and C are new medicine. Test if those are better than B for patients suffering from Depression.
+
+
+## Exercise 5
+
+A student wanted to study how a medicament influenced feed consumption on rats. She included sex and the fact that some of the rats were sterilized in her study. In addition half of the animals were given placebo. In total 40 animals were available, and the design is balanced.
+
+```{r}
+Sex <-  rep(c("Male", "Female"), each = 2)
+Sterilized <- rep(c("No", "Yes"), 2)
+Medicament <- list(c(21.46, 23.92, 22.56, 16.12, 21.48),
+c(15.44, 23.54, 23.52, 17.96, 19.02),
+c(18.58, 15.44, 16.12, 16.88, 17.58),
+c(18.20, 14.56, 15.54, 16.82, 14.56))
+AvgMedicament <- sapply(Medicament, mean)
+Placebo <- list(c(25.64, 28.84, 26.00, 26.02, 23.24),
+c(22.50, 24.48, 25.52, 24.76, 20.62),
+c(17.82, 15.76, 12.96, 15.00, 19.54),
+c(19.74, 17.48, 16.46, 16.44, 15.70))
+AvgPlacebo <- sapply(Placebo, mean)
+W3E23_data_raw <- data.table(Sex, Sterilized, Medicament, Mean = AvgMedicament, Placebo, Mean = AvgPlacebo)
+knitr::kable(W3E23_data_raw, align = c('l', 'l', 'r', 'l', 'r', 'l', 'r'))
+W3E23_data <- melt(W3E23_data_raw[, lapply(.SD, unlist), by = .(Sex, Sterilized), .SDcols = c(3,5)], 1:2, variable.name = "Medicament", value.name = "FeedConsumption")
+```
+
+This model was applied:
+
+$$y_{ijkl} = \mu + \alpha_i + \beta_j + \gamma_k + (\alpha\beta)_{ij} + (\alpha\gamma)_{ik} + (\beta\gamma)_{jk} + (\alpha\beta\gamma)_{ijk} + \epsilon_{ijkl}$$
+
+Where,
+
+|     |     |                                            |
+| --: |:---:|:------------------------------------------ |
+| $i$ | =   | 1 (Active Medicament) or 2(Placebo)        |
+| $j$ | =   | 1 (Male) or 2 (Female)                     |
+| $k$ | =   | 1 (Non sterilizes) or 2 (Sterilized)       |
+| $l$ | =   | 1, 2, ..., 5 corresponding to replications |
+
+a) Give the Common assumptions concerning $\epsilon_{ijkl}$. Explain why these are necessary in the model.
+
+```{r}
+W3E23_model <- lm(FeedConsumption ~ Sex * Sterilized * Medicament, data = W3E23_data)
+W3E23_aov <- unclass(summary(aov(W3E23_model)))[[1]]
+# gsub("NA", "  ", knitr::kable(W3E23_aov, digits = 3))
+```
+|                           |  Df |                  Sum Sq                  | Mean Sq | F value | Pr(>F) |
+| :------------------------ | --: | ---------------------------------------: | ------: | ------: | -----: |
+| Sex                       |   1 |                                  368.813 | 368.813 |  69.703 |  0.000 |
+| Sterilized                |   1 |                                    8.190 |   8.190 |   1.548 |  0.222 |
+| Medicament                |   1 |                                   51.121 |  51.121 |   9.662 |  0.004 |
+| Sex:Sterilized            |   1 |                                    7.868 |   7.868 |   1.487 |  0.232 |
+| Sex:Medicament            |   1 |                                   39.960 |  39.960 |   7.552 |  0.010 |
+| Sterilized:Medicament     |   1 |                                    0.372 |   0.372 |   0.070 |  0.792 |
+| Sex:Sterilized:Medicament |   A |                                        B |       C |       D |  0.296 |
+| Residuals                 |   E |                                  169.318 |   5.291 |         |        |
+| Total                     |   F | `r round(sum(W3E23_aov[, "Sum Sq"]), 3)` |         |         |        |
+
+```{r}
+cat('S = ', round(summary(W3E23_model)$sigma, 5), ', \t R-Sq = G%')
+```
+
+
+
+b)	Find the missing values `A`, `B`, `C`, `D`, `E`, `F` and `G`. 
+
+<div class = 'ans'>
+
+|        |                                                                                                                                                                 |
+| ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **A:** | Degree of freedom of 3 factor interaction  = 1                                                                                                                  |
+| **B:** | Sum of square of 3 factor interaction                                                                                                                           |
+|        | $$\text{SS}_\text{Total} - \text{ sum of all other degree of freedom } = `r round(W3E23_aov["Sex:Sterilized:Medicament", "Sum Sq"], 3)`$$                       |
+| **C:** | Mean sum of square of 3 factor interaction                                                                                                                      |
+|        | $$\text{MS}_{\alpha\beta\gamma}=\frac{\text{SS}_{\alpha\beta\gamma}}{df_{\alpha\beta\gamma}} = `r round(W3E23_aov["Sex:Sterilized:Medicament", "Mean Sq"], 3)`$$|
+| **D:** | F statistic corresponding to 3 factor interaction                                                                                                               |
+|        | $$\frac{\text{MS}_{\alpha\beta\gamma}}{\text{MS}_\text{residual}} = `r round(W3E23_aov["Sex:Sterilized:Medicament", "F value"], 3)`$$                           |
+| **E:** | Error Degree of freedom $=abc(n-1) = `r W3E23_aov["Residuals                ", "Df"]`$                                                                          |
+| **F:** | Total Degree of freedom $=(N - 1) = `r sum(W3E23_aov[, "Df"])`$                                                                                                 |
+| **G:** | R-squared (variation explained by the model)                                                                                                                    |
+|        | $$\text{R-sq} = 1 - \frac{\text{SS}_\text{E}}{\text{SS}_\text{Total}} = `r round(summary(W3E23_model)$r.sq, 4)*100`$$                                           |
+
+</div>
+
+
+c)	What important conclusions can be detected? 
+

@@ -1,0 +1,632 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+  \newcommand{\euro}{€}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\PassOptionsToPackage{usenames,dvipsnames}{color} % color is loaded by hyperref
+\hypersetup{unicode=true,
+            pdftitle={Compulsory Assignment},
+            pdfauthor={Raju Rimal},
+            pdfsubject={Design and Analysis of Experiment (STAT210)},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{longtable,booktabs}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\newcommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+  \title{Compulsory Assignment}
+  \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+\subtitle{Design and Analysis of Experiment (STAT210)}
+  \author{Raju Rimal}
+  \preauthor{\centering\large\emph}
+  \postauthor{\par}
+  \predate{\centering\large\emph}
+  \postdate{\par}
+  \date{19 August 2016}
+
+
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+\usepackage{mathpazo}
+\usepackage{setspace}
+\usepackage{enumitem}
+\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
+\onehalfspacing
+\setlength{\parindent}{0em}
+\setlist[enumerate]{leftmargin=*}
+
+\begin{document}
+\maketitle
+
+Show Answers
+
+Hide Answers
+
+NA
+
+Please limit computer output as much as possible in your paper, and any
+computer output should be commented.
+
+\section{Exercise 1}\label{exercise-1}
+
+You may use R or other statistical software for this exercise. The data
+for this exercise is called \texttt{frystemp} and can be loaded from the
+file \texttt{comp1.frystemp.RData} (all data sets are in the \emph{data}
+folder of fronter). A lab has investigated the freezing temperature
+(called \texttt{frystemp} in the dataset reproduced below) for three
+different brands (called \texttt{merke} in the dataset).
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\item
+  Calculate mean and standard deviation for each brand. Calculate the
+  overall mean (mean for all observations).
+
+  \begin{longtable}[c]{@{}lrrr@{}}
+  \caption{Numerical Summary of \texttt{frystemp} data}\tabularnewline
+  \toprule
+  & Mean & SD & N\tabularnewline
+  \midrule
+  \endfirsthead
+  \toprule
+  & Mean & SD & N\tabularnewline
+  \midrule
+  \endhead
+  merke1 & -16.163 & 1.309 & 8\tabularnewline
+  merke2 & -13.562 & 1.283 & 8\tabularnewline
+  merke3 & -14.575 & 0.755 & 8\tabularnewline
+  Overall & -14.767 & 1.546 & 24\tabularnewline
+  \bottomrule
+  \end{longtable}
+\item
+  Consider the following model:
+
+  \[y_{ij} = \mu + \tau_i + \epsilon_{ij}, \; \text{ where, } \sum_{i = 1}^3\tau_i = 0\]
+
+  Here,
+
+  \[
+  \begin{aligned}
+  y_{ij} &: \text{freezing temperature for each brand, } i = 1, 2, 3 \text{ and } j = 1, \ldots, 8 \\
+  \tau_i &: \text{effect of brand }i
+  \end{aligned}
+  \]
+
+  State the standard assumptions of the model. Use ANOVA to test if
+  there is a difference between the brands. Formulate the hypothesis,
+  carry out a test and formulate a conclusion. Give the ANOVA table.
+
+  The standard assumption of the model is,
+  \[\epsilon_{ij} \sim N(0, \sigma^2)\]
+
+  It is also assumed that the \(y_{ij}\) are independent. The hypothesis
+  for testing if there is a difference between the brands is,
+
+  \[
+  \begin{aligned}
+  H_0 &: \tau_i = 0 \text{ for all } i \\
+  H_1 &: \tau_i \ne 0 \text{ for at least one } i
+  \end{aligned}
+  \]
+
+  The ANOVA table for the model is,
+
+  \begin{longtable}[c]{@{}lrrrrr@{}}
+  \caption{ANOVA table for \texttt{frystemp} model}\tabularnewline
+  \toprule
+  & Df & Sum Sq & Mean Sq & F value & Pr(\textgreater{}F)\tabularnewline
+  \midrule
+  \endfirsthead
+  \toprule
+  & Df & Sum Sq & Mean Sq & F value & Pr(\textgreater{}F)\tabularnewline
+  \midrule
+  \endhead
+  merke & 2 & 27.48083 & 13.740417 & 10.48791 & 0.0006947\tabularnewline
+  Residuals & 21 & 27.51250 & 1.310119 & &\tabularnewline
+  \bottomrule
+  \end{longtable}
+
+  Here, p-value \(\left(0.001\right)\) is much smaller than 0.05, so we
+  reject \(H_0\) and claim that there is significant difference between
+  \texttt{merke} at 95\% confidence level.
+\item
+  Estimate all parameters in the model.
+
+  The estimated parameters in the model can be obtained from model
+  summary as below:
+
+  \begin{longtable}[c]{@{}lrrrr@{}}
+  \caption{Coefficient Estimate of Linear Model: \texttt{frystemp}
+  \textasciitilde{} \texttt{merke}}\tabularnewline
+  \toprule
+  term & estimate & std.error & statistic & p.value\tabularnewline
+  \midrule
+  \endfirsthead
+  \toprule
+  term & estimate & std.error & statistic & p.value\tabularnewline
+  \midrule
+  \endhead
+  \(\hat{\mu}\) & -14.767 & 0.234 & -63.202 & 0.000\tabularnewline
+  \(\hat{\tau_1}\) & -1.396 & 0.330 & -4.224 & 0.000\tabularnewline
+  \(\hat{\tau_2}\) & 1.204 & 0.330 & 3.644 & 0.002\tabularnewline
+  \bottomrule
+  \end{longtable}
+
+  \begin{longtable}[c]{@{}rrrrrrr@{}}
+  \caption{Summary of Linear Model: \texttt{frystemp}\textasciitilde{}
+  \texttt{merke}}\tabularnewline
+  \toprule
+  r.squared & adj.r.squared & sigma & statistic & p.value & df &
+  df.residual\tabularnewline
+  \midrule
+  \endfirsthead
+  \toprule
+  r.squared & adj.r.squared & sigma & statistic & p.value & df &
+  df.residual\tabularnewline
+  \midrule
+  \endhead
+  0.4997 & 0.4521 & 1.1446 & 10.4879 & 7e-04 & 3 & 21\tabularnewline
+  \bottomrule
+  \end{longtable}
+
+  From the output, we can estimate \(\tau_3\) from the assumption that
+  the overall mean sum to zero. i.e.
+  \(\hat{\tau}_3 = -\left(\tau_1 + \tau_2\right) = -(-1.4+1.2) = 0.192\)
+\item
+  Calculate confidence intervals for \(\tau_1 - \tau_2\),
+  \(\tau_1 - \tau_3\) and \(\tau_2 - \tau_3\) using Tukey's method. Are
+  there any significant differences?
+
+  The confidence intervals for Tukey's method can be computed as,
+
+  \[
+  \begin{aligned}
+  \bar{y}_{i\cdot} - \bar{y}_{j\cdot} - q_\alpha (a, f)\sqrt{\frac{\text{MS}_\text{E}}{n}} &\le \mu_i - \mu_j\\
+  & \le \bar{y}_{i\cdot} - \bar{y}_{j\cdot} + q_\alpha (a, f)\sqrt{\frac{\text{MS}_\text{E}}{n}} &\le \mu_i - \mu_j, i \ne j
+  \end{aligned}
+  \]
+
+  since, \(\mu_i - \mu_j\) is same as \(\tau_i - \tau_j\), the
+  conficence interval for group \(i\) and \(j\) can also be written as,
+
+  \[
+  \begin{aligned}
+  \hat{\tau}_{i\cdot} - \hat{\tau}_{j\cdot} - q_\alpha (a, f)\sqrt{\frac{\text{MS}_\text{E}}{n}} &\le \mu_i - \mu_j\\
+  & \le \hat{\tau}_{i\cdot} - \hat{\tau}_{j\cdot} + q_\alpha (a, f)\sqrt{\frac{\text{MS}_\text{E}}{n}} &\le \mu_i - \mu_j, i \ne j
+  \label{eqn:tukeyCI}
+  \end{aligned}
+  \]
+
+  Here we have,
+
+  \[
+  \begin{aligned}
+  q_\alpha (a, f)\sqrt{\frac{\text{MS}_\text{E}}{n}} &= q_{0.05} (3, 21)\sqrt{\frac{1.310119}{8}} \\
+  &= 1.4425278
+  \label{eqn:tukeyCriteria}
+  \end{aligned}
+  \]
+
+  Further, this value is now compated with the absolute difference
+  between the estimates. The difference between the estimates of various
+  group-pairs are,
+
+  \begin{longtable}[c]{@{}rrr@{}}
+  \toprule
+  merke1 - merke2 & merke1 - merke3 & merke2 - merke3\tabularnewline
+  \midrule
+  \endhead
+  -2.6 & -1.5875 & 1.0125\tabularnewline
+  \bottomrule
+  \end{longtable}
+
+  If the absolute difference between two groups are larger than the
+  value 1.443 than we reject the null hypothesis and claim that the pair
+  are significantly different from each other. The R output for this
+  test is,
+
+\begin{verbatim}
+                Lower  Center   Upper Std.Err t value  P(>t)    
+merke1-merke2 -4.0425 -2.6000 -1.1575  0.5723  -4.543 0.0005 ***
+merke1-merke3 -3.0300 -1.5875 -0.1450  0.5723  -2.774 0.0294 *  
+merke2-merke3 -0.4300  1.0125  2.4550  0.5723   1.769 0.2042    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+  Above output shows the difference between \texttt{merke2} and
+  \texttt{merke1} whose interpretation will be same as the difference
+  between \texttt{merke1} and \texttt{merke2} except the sign of
+  Estimate and interval will switch. For instance, in this situation,
+  the estimate will be -2.6 and the lower and upper confidence interval
+  at 95\% confidence level will be -4.043 and -2.600 respectively.
+
+  The result shows that \texttt{marke1} is significantly different than
+  \texttt{marke2} and \texttt{marke3} at 95\% confidence level.
+\end{enumerate}
+
+\section{Exercise 2 (Topic discussed at lecture August
+23)}\label{exercise-2-topic-discussed-at-lecture-august-23}
+
+NA
+
+We would like to investigate the fat concentration in milk
+(\texttt{fettprosent} in the below data set). Three farms have been
+randomly selected and 5 cows from each farm (\texttt{besetning}) is
+recruited to the study. The data is as given below:
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\item
+  Explain what is meant by a \emph{random effect} and why
+  \texttt{besetning} (farm) reasonably can be modeled as a random
+  effect.
+
+  In many situations, factors have infinitely many levels and a
+  researcher randomly choose some of the levels and make inference about
+  the whole population. Models with such factors are called \emph{Random
+  effect models}. In case of random effect model, the interest is on the
+  population distribution of factor rather than some specific chosen
+  levels.
+
+  For example, An experiment where some specific drugs are to be tested
+  for their efficacy. A randomly chosen drug will barely be an interest
+  in any experiment. Here, the experiment is oriented in finding the
+  effect of those specific drugs and thus, this is the case of
+  \emph{fixed effect model}. While in another experiment where
+  researcher is interested in finding if there is any differences
+  between farm in Akershus area of Norway in the context of milk
+  production. There can be many farms and the research is not interested
+  on some specific farm but rather is interested on overal population of
+  farm. So some farms are randomly choosen and are used to construct a
+  model. This is the case of \emph{random effect model}.
+\item
+  Consider the model, \[
+  \begin{aligned}
+  y_{ij} &= \mu + \tau_i + \epsilon_{ij} \\
+  \tau_i &\sim \text{NID}\left(0, \sigma_\tau^2\right)\\
+  \epsilon_{ij} &\sim \text{N}\left(0, \sigma^2\right) \\
+  i &= 1, 2, 3\; j = 1, 2, \ldots 5\; N = 15
+  \end{aligned}
+  \] Also, all random variables are independent
+
+  Use the output below:
+
+\begin{verbatim}
+          Df Sum Sq F value    Pr(>F)    
+besetning  2 13.545  35.213 9.521e-06 ***
+Residuals 12  2.308                      
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+  Estimate \(\sigma_\tau^2\) and \(\sigma^2\) and the correlation for
+  animals from the same farm.
+
+  Here we can find \(\text{MS}_\text{treatment}\) and
+  \(\text{MS}_\text{E}\) as,
+
+  \[
+  \begin{aligned}
+  \text{MS}_\text{treatment} &= \frac{\text{SS}_\text{treatment}}{df_\text{treatment}}
+  = 6.773 \\
+  \text{and, }\text{MS}_\text{E} &= \frac{\text{SS}_\text{E}}{df_\text{Error}}
+  = 0.192
+  \end{aligned}
+  \]
+
+  Therefore, we can find the estimates of \emph{variance components}
+  \(\hat{\sigma}_\tau^2\) and \(\hat{\sigma}^2\) as,
+
+  \[
+  \begin{aligned}
+  \hat{\sigma}^2 &= \text{MS}_\text{E} = 0.192 \\
+  \hat{\sigma}_\tau^2 &= \frac{\text{MS}_\text{treatment}-\text{MS}_\text{E}}{n} \\
+  &= \frac{6.773 - 0.192}{5}
+  = 1.316
+  \end{aligned}
+  \]
+
+  Finally, the correlation for animals from the same farm is,
+
+  \[
+  \text{cor}(y_{ij}, y_{ik}) = \hat{\rho} = \frac{\hat{\sigma}_\tau^2}{\hat{\sigma}_\tau^2 + \hat{\sigma^2}} = \frac{1.32}{1.508} 
+  = 0.872
+  \]
+
+  Thus the correlation for animals from the same farm is 87.2 percent.
+\item
+  Is there a significant effect of \texttt{besetning}? Formulate the
+  hypothesis and do the test.
+
+  To test the significance of the random factor \texttt{besetning}, the
+  hypothesis can be written as,
+
+  \[
+  \begin{aligned}
+  H_0 &: \sigma_\tau^2 = 0 \\
+  H_1 &: \sigma_\tau^2 > 0
+  \end{aligned}
+  \]
+
+  Here, \(\sigma_\tau^2\) is the variation between farms and the null
+  hypothesis states that there is no variation between farms. Given
+  ANOVA table shows that the p-value corresponding to \texttt{besetning}
+  is very small and thus we reject null hypothesis and claim that there
+  is significant difference between farms. As this is a random effect
+  model, the inference is made on just those specific farms but
+  population of farms in general.
+\item
+  Calculate a 99\% confidence interval for \(\sigma^2\)
+
+  The confidence interval for \(\sigma^2\) at \(\alpha\) level of
+  significance is,
+
+  \[\frac{\text{SS}_E}{\chi^2_{\alpha/2, N-a}} \le \sigma^2 \le \frac{\text{SS}_E}{\chi^2_{1 - \alpha/2, N-a}}\]
+
+  From Chi-square table, we can find chi-square values for
+  \(\alpha = 0.01\) and \(N-a = 12\) as,
+
+  \[
+  \chi^2_{0.005, 12} = 28.3 \text{ and } 
+  \chi^2_{0.995, 12} = 3.074
+  \]
+
+  Therefore, using \(\text{SS}_E = 2.308\), we can find,
+
+  \[
+  \begin{aligned}
+  \frac{\text{SS}_E}{\chi^2_{\alpha/2, N-a}} &\le \sigma^2 \le \frac{\text{SS}_E}{\chi^2_{1 - \alpha/2, N-a}} \\
+  \frac{2.308}{28.3} &\le \sigma^2 \le \frac{2.308}{3.074} \\
+  0.082 &\le \sigma^2 \le 0.751
+  \end{aligned}
+  \]
+
+  Thus at 99\% confidence level, the true error variance \((\sigma^2)\)
+  lie between the interval \(\left[0.082, 0.751\right]\).
+\end{enumerate}
+
+\section{Exercise 3 (Lectures August
+24)}\label{exercise-3-lectures-august-24}
+
+\emph{You are supposed to use R or other statistical software for this
+exercise}. The data is \texttt{comp3.dommere.RData}.
+
+The purpose of the data of this exercise is to investigate if 5
+different types of feeding (\texttt{fortype} in the below data set) lead
+to differently tasting milk. Four judges (corresponding to
+\texttt{Dommer} in the data) were asked to taste and rate on a scale
+from 1 to 10, 10 being best.
+
+\begin{longtable}[c]{@{}lrrrrr@{}}
+\toprule
+Dommer & Fortype1 & Fortype2 & Fortype3 & Fortype4 &
+Fortype5\tabularnewline
+\midrule
+\endhead
+Dommer1 & 6 & 6 & 3 & 4 & 3\tabularnewline
+Dommer2 & 9 & 8 & 7 & 8 & 3\tabularnewline
+Dommer3 & 10 & 8 & 5 & 7 & 6\tabularnewline
+Dommer4 & 9 & 7 & 3 & 4 & 1\tabularnewline
+\bottomrule
+\end{longtable}
+
+It is natural to let \texttt{Dommer} be regarded as a block effect.
+
+Assume two different model, one includes the blocks (\emph{Model 1}),
+and the other without blocking (\emph{Model 2}).
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\item
+  Describe the models and state the standard assumptions. Would you
+  prefer \emph{Model 1} or \emph{Model2}? Give reasons for your answer.
+
+  \textbf{Model 1:} Let \(y_{ij}\) be the \texttt{poeng} of
+  \(i^\text{th}\) fortype given by \(j^\text{th}\) dommer.
+
+  \[y_{ij} = \mu + \tau_i + \gamma_j + \epsilon_{ij}, \text{ where, } \sum_{i = 1}^5 \tau_i = 0 \text{ and } \sum_{j = 0}^4 \gamma_j = 0\]
+
+  Here, \(i = 1, \ldots, 5\) (Fortype) and \(j = 1, \ldots, 5\) (Dommer)
+
+  \textbf{Model 2:} Let \(y_{ij}\) be the \(j^\text{th}\) replication of
+  \texttt{poeng} for \(i^\text{th}\) fortype.
+
+  \[y_{ij} = \mu + \tau_i + \epsilon_{ij}, \text{ where, } \sum_{i = 1}^a \tau_i = 0\]
+
+  Here \(i = 1, \ldots, 5\) (Fortype) and \(j = 1, \ldots, 5\)
+  (Replication) Since in this model dommer is not considered as blocking
+  factor so, the points are considered as replications.
+
+  The error terms \(\epsilon_{ij}\) in both \textbf{Model1} and
+  \textbf{Model2} are independent and follows normal distribution with
+  mean 0 and constant variance \(\sigma^2\). i.e.,
+
+  \[\epsilon_{ij} \sim \text{NID}\left(0, \sigma^2\right)\]
+
+  ANOVA output from \textbf{Model 1} and \textbf{Model 2} are as
+  follows,
+
+  \begin{longtable}[c]{@{}lrrrrr@{}}
+  \caption{ANOVA for \textbf{Model 1}}\tabularnewline
+  \toprule
+  & Df & Sum Sq & Mean Sq & F value & Pr(\textgreater{}F)\tabularnewline
+  \midrule
+  \endfirsthead
+  \toprule
+  & Df & Sum Sq & Mean Sq & F value & Pr(\textgreater{}F)\tabularnewline
+  \midrule
+  \endhead
+  Fortype & 4 & 70.30 & 17.5750 & 12.7818 & 0.0003\tabularnewline
+  Dommer & 3 & 31.75 & 10.5833 & 7.6970 & 0.0039\tabularnewline
+  Residuals & 12 & 16.50 & 1.3750 & &\tabularnewline
+  \bottomrule
+  \end{longtable}
+
+  \begin{longtable}[c]{@{}lrrrrr@{}}
+  \caption{ANOVA for \textbf{Model 2}}\tabularnewline
+  \toprule
+  & Df & Sum Sq & Mean Sq & F value & Pr(\textgreater{}F)\tabularnewline
+  \midrule
+  \endfirsthead
+  \toprule
+  & Df & Sum Sq & Mean Sq & F value & Pr(\textgreater{}F)\tabularnewline
+  \midrule
+  \endhead
+  Fortype & 4 & 70.30 & 17.5750 & 5.4637 & 0.0064\tabularnewline
+  Residuals & 15 & 48.25 & 3.2167 & &\tabularnewline
+  \bottomrule
+  \end{longtable}
+
+  From the ANOVA tables above, we can see that the block factor
+  \texttt{Dommer} has significant effect in Model 1 which indicates that
+  the analysis will be affected if it is removed from the model. In
+  Model 2 the MSE has increased that consiquently decreases F-value
+  corresponding to Fortype.
+\item
+  Show that there is a significant effect of \texttt{Fortype} in
+  \emph{Model 1}.
+
+  \begin{longtable}[c]{@{}lrrrrr@{}}
+  \caption{ANOVA table for \textbf{Model 1}}\tabularnewline
+  \toprule
+  & Df & Sum Sq & Mean Sq & F value & Pr(\textgreater{}F)\tabularnewline
+  \midrule
+  \endfirsthead
+  \toprule
+  & Df & Sum Sq & Mean Sq & F value & Pr(\textgreater{}F)\tabularnewline
+  \midrule
+  \endhead
+  Fortype & 4 & 70.30 & 17.5750 & 12.7818 & 0.0003\tabularnewline
+  Dommer & 3 & 31.75 & 10.5833 & 7.6970 & 0.0039\tabularnewline
+  Residuals & 12 & 16.50 & 1.3750 & &\tabularnewline
+  \bottomrule
+  \end{longtable}
+
+  Since, the p-value corresponding to \texttt{Fortype} is
+  (\(3\times 10^{-4}\)) \textless{}\textless{} 0.05, there is
+  significant effect of \texttt{Fortype}.
+\item
+  Which types of feeding (\texttt{Fortype}) differ significantly Use
+  \emph{Model 1}?
+
+  Since there is significant effect of \texttt{Fortype}, it is desirable
+  to perform pairwise comparison between different \texttt{Fortype}.
+  This can be done using Tukey's pariwise comparison. The output from
+  Tukey's test is,
+
+\begin{verbatim}
+                   Lower Center  Upper Std.Err t value P(>t)
+Fortype1-Fortype2 -1.393  1.250  3.893   0.829   1.508  0.58
+Fortype1-Fortype3  1.357  4.000  6.643   0.829   4.824  0.00
+Fortype1-Fortype4  0.107  2.750  5.393   0.829   3.317  0.04
+Fortype1-Fortype5  2.607  5.250  7.893   0.829   6.332  0.00
+Fortype2-Fortype3  0.107  2.750  5.393   0.829   3.317  0.04
+Fortype2-Fortype4 -1.143  1.500  4.143   0.829   1.809  0.41
+Fortype2-Fortype5  1.357  4.000  6.643   0.829   4.824  0.00
+Fortype3-Fortype4 -3.893 -1.250  1.393   0.829  -1.508  0.58
+Fortype3-Fortype5 -1.393  1.250  3.893   0.829   1.508  0.58
+Fortype4-Fortype5 -0.143  2.500  5.143   0.829   3.015  0.07
+\end{verbatim}
+
+  The result shows that at 95\% confidence level, \texttt{Fortype1}is
+  significantly different than \texttt{Fortype3}, \texttt{Fortype4} and
+  \texttt{Fortype5} while \texttt{Fortype2} is significantly different
+  from \texttt{Frotype3} and \texttt{Fortype5}. In addition at 90\%
+  confidence level, \texttt{Fortype4} and \texttt{Fortype5} are also
+  significantly different.
+\end{enumerate}
+
+NA
+
+\begin{verbatim}
+Construct a contrast that measures the difference between these two feeding regimes, and test if the concentrates types taste significantly better than the other.
+
+<div class = 'ans'>
+
+A contrast to test the average of `Fortype1` and `Fortype2` with average of `Fortype3` and `Fortype4` can be written as,
+
+$$\text{Contrast: }(\Gamma) = \frac{1}{2}\left(\tau_1 + \tau_2\right) - \frac{1}{2}\left(\tau_3 + \tau_4\right) $$
+
+The above hypothesis is written in terms of effects $\tau_i$ rather than $\mu_i$ since $\mu_1 + \mu_2 = \mu_3 + \mu_4$ is same as $\tau_1 + \tau_2 = \tau_3 + \tau_4$. Further, the coefficient of contrast is $c_i = (0.5, 0.5, -0.5, -0.5, 0)$. The hypothesis to test if the difference between concentrates types (`Fortype1` and `Fortype2`) is better than Rutabaga (`Foretype3` and `Fortype4`) is,
+
+$$H_0: \Gamma = 0 \text{ vs } H_1: \Gamma > 0$$
+
+The test statistic for this hypothesis is,
+
+$$
+t_0 = \frac{\sum_{i = 1}^ac_i\hat{\tau}_{i\cdot}}{\sqrt{\text{MS}_E \sum_{i = 1}^a\frac{c_i^2}{n_i}}} \sim t_{0.05, N-a}
+$$ 
+    
+Using the test statistics above we can test the hypothesis. Test output obtained from R is as follows,
+
+
+                                     Estimate   Std. Error    t value    Pr(>|t|)
+----------------------------------  ---------  -----------  ---------  ----------
+Fortype c=( 0.5 0.5 -0.5 -0.5 0 )        2.75     0.586302   4.690416   0.0005228
+
+From the test output, we can see that the p-value is very small (smaller than 0.05, level of significance). The p-value here is for two-sided test and for one-sided test, this p-value will be half of the p-value in output which is even smaller. So, we reject the null hypothesis and conclude that the concentrations types are significantly better than the rutabaga type.
+
+</div>
+\end{verbatim}
+
+\end{document}

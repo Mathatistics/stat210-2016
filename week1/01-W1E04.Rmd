@@ -1,0 +1,75 @@
+## Exercise 4
+Assume the following result (on scale 0-100) based on 8 randomly selected students from an exam in a basic course in statistics.
+
+```{r}
+lns <- "
+Females 80 85 73 69
+Males 90 60 76 67
+"
+con <- textConnection(lns)
+df <- read.table(con, sep = " ")
+close(con)
+df <- `colnames<-`(`rownames<-`(df[, -1], df[, 1]), paste0('S', 1:4))
+knitr::kable(df)
+```
+
+a) Execute a test (choose the level of significance yourself) to investigate if there is larger variation in statistical ability among males compared to females.
+
+```{r, results='asis'}
+sumry <- sapply(list(N = length, Mean = mean, Variance = var), function(fn){
+  apply(df, 1, fn)
+})
+knitr::kable(sumry, format = 'html')
+```
+
+<div class = 'ans'>
+
+$Y_{ij}$ is result for person $j$ belonging to group $i$.
+
+The Model is:  $$Y_{ij}=\mu_i + \epsilon_{ij}$$, where $\epsilon_{ij} \sim N(0, \sigma_i^2)$, $i = 1, 2$ and $j = 1, 2, 3, 4$ and the observations are independent
+
+$i = 1$ is females, otherwise males
+
+$$
+\begin{aligned}
+H_0: & \sigma_1^2 = \sigma_2^2\\
+H_1: & \sigma_1^2 < \sigma_2^2
+\end{aligned}
+$$
+
+The test statistics is, $$F = \frac{S_\text{males}^2}{S_\text{females}^2} = 3.29$$ 
+
+If we apply 5% level of significance, then we reject $H_0$ if $F > 9.28$. 
+
+Conclusion: We cannot reject.
+
+</div>
+
+b) Based on the result of the test in a) state a model and test if there is difference in statistical knowledge between males/females. The test gave a 0.65 as P-value. Explain in detail what this means.
+
+<div class = 'ans'>
+
+Wa assume equal variances for males and females end state the following model:
+
+$$ Y_{ij} = \mu_i + \epsilon_{ij}$$ where, $\epsilon_{ij} \sim N(0, \sigma^2)$
+
+The hypothesis is,
+
+$$
+\begin{aligned}
+H_0: & \mu_1 = \mu_2 \\
+H_1: & \mu_1 \ne \mu_2
+\end{aligned}
+$$
+
+```{r}
+ttest <- mixlm::t_test(df[1, ], df[2, ], var.equal = T)
+```
+
+Assume $H_0$, and $T_\text{calculated} = `r round(ttest$statistic, 3)`$.
+
+Very small $T$, it is impossible to reject $H_0$ also p-value = `r round(ttest$p.value, 3)`.
+
+If males and felmale in average  (population) obtain the same result, the probability of observing a difference (absolute value) between the sample means equal or greater than `r round(ttest$statistic, 3)` is `r round(ttest$p.value, 3)`.
+
+</div>

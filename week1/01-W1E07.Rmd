@@ -1,0 +1,275 @@
+## Exercise 7: One way ANOVA
+Three diets for pigs were investigated, two of the diets had different soya proteins (`S1` and `S2`) one diet had no soya included (`NONS`). The following weights were recorded.
+
+```{r}
+soya <- data.frame(
+  NONS = c(80, 84),
+  S1 = c(82, 84),
+  S2 = c(82, 86)
+)
+knitr::kable(soya)
+```
+
+_NOTE::Do the following without any software or pocket calculator:_
+
+<ul>
+  <li>State the model that you would apply to this experiment.
+<div class = 'ans'>
+The model is:
+
+$$Y_{ij} = \mu + \tau_i + \epsilon_{ij},\text{ where }\epsilon_{ij} \sim N(0,\sigma^2),\; i = 1, 2, 3; \;\; j = 1, 2$$
+
+and where the observations are independent
+</div>
+  </li>
+  <li>How many parameters are included in the model?
+<div class = 'ans'>
+With the assumption of $\tau_i's$  sum to zero, i.e. $\sum_{i = 1}^3{\tau_i} = 0$, there are 4 unknown paramters, $\mu, \tau_1, \tau_2$ and $\sigma^2$.
+</div>
+  </li>
+  <li>State the null hypothesis and the alternative to test if there is any effect of diet.
+  
+  <div class = 'ans'>
+  The null and alternative hypothese for testing if there is any effect of diet is,
+$$
+\begin{aligned}
+H_0 &: \tau_1 = \tau_2 = \tau_3 \\
+H_1 &: \tau_i \ne 0 \text{ for at least one }i
+\end{aligned}
+$$
+  </div>
+  </li>
+  <li>Find the rejection area if you test on level 0.05 or on level 0.1
+   <div class = 'ans'>
+   - at 5% level of significance, we reject $H_0$, if $F$-statistic is larger than $F_{0.05, (2, 3)}$, i.e. `r round(qf(0.05, 2, 3, lower = FALSE), 3)`
+   - at 1% level of significance, we reject $H_0$,  if $F$-statistic is larger than $F_{0.01, (2, 3)}$, i.e. `r round(qf(0.01, 2, 3, lower = FALSE), 3)`
+   </div>
+  </li>
+  <li>Find $SS_T$, $SS_\text{Treatments}$, $SS_E$, and their degrees of freedom.
+    <div class = 'ans'>
+    
+    ```{r}
+    mu <- mean(unlist(soya))
+    tmean <- colMeans(soya)
+    sumsq <- function(x) sum(x^2)
+    SS_total <- sumsq(soya - mu)
+    SS_residual <- sumsq(soya - rbind(tmean, tmean))
+    SS_treatment <- nrow(soya) * sumsq(tmean - mu)
+    df_residual <- length(unlist(soya)) - ncol(soya)
+    df_treatment <- ncol(soya) - 1
+    df_total <- length(unlist(soya)) - 1
+    MS_treatment <- SS_treatment / df_treatment
+    MS_residual <- SS_residual / df_residual
+    F0 <- MS_treatment / MS_residual
+    ```
+    
+    Let $y_{ij}$ denotes the measurement for $i^\text{th}$ treatment and $j^\text{th}$ observation. So, $i = 1, 2, 3$ and $j = 1, 2\;(n)$
+    
+    $$
+    \begin{aligned}
+    \text{SS}_\text{total} & = \sum_{i = 1}^3\sum_{j = 1}^2{\left(y_{ij} - \mu\right)^2} = `r SS_total`\\
+    \text{SS}_\text{residual} & = \sum_{i = 1}^3\sum_{j = 1}^2{\left(y_{ij} - \bar{y}_i\right)^2} = `r SS_residual` \\
+    \text{and, } \text{SS}_\text{treatment} & = n \sum_{i = 1}^3{\left(\bar{y}_i - \mu\right)^2} \\
+    & = \text{SS}_\text{total} - \text{SS}_\text{residual} = `r SS_treatment`
+    \end{aligned}
+    $$
+    
+    Also, the degree of freedom for treatment is $3 - 1 = 2$, for residual is is $6 - 3 = 3$ and for total is $6 - 1 = 5$
+    
+    </div>
+  </li>
+  <li>Find $MS_\text{Treatments}$ and $MS_E$ and $F_0$. Write up the ANOVA table. Use R to get the pvalue. _HINT: Distribution > Continuous > F ...)_
+    <div class = 'ans'>
+    
+      $$
+      \begin{aligned}
+       \text{MS}_\text{Treatment} = \frac{\text{SS}_\text{Treatment}}{\mathcal{df}_\text{treatment}} = `r SS_treatment / 2` \\
+       \text{MSE} = \text{MS}_\text{residual} = \frac{\text{SS}_\text{residual}}{\mathcal{df}_\text{residual}} = `r SS_residual / 3`
+      \end{aligned}
+      $$
+      
+      Further, $$F_0 = \frac{\text{MS}_\text{Treatment}}{\text{MSE}} = `r round((SS_treatment / 2)/(SS_residual / 3), 3)`$$
+      
+      Using R, the pvalue corresponding to $F_0$ is `r round(pf((SS_treatment / 2)/(SS_residual / 3), 2, 3, lower = F), 4)`
+      
+      Using all these values, we can construct ANOVA table as,
+    
+    ```{r}
+    soya.stack <- `names<-`(stack(soya), c('measurement', 'treatment'))
+    
+    soya_aov <- knitr::kable(mixlm::anova_reg(lm(measurement ~ treatment, data = soya.stack)), digits = 4)
+    gsub('\\bNA\\b', '  ', soya_aov)
+    ```
+    
+    </div>
+  </li>
+  <li>What is your conclusion on the test?
+  <div class = 'ans'>
+    Calculated $F_0$ is too small; for this test only large values can lead to rejection and the critical value is $F_{0.05, 2, 3} = 9.55$. Therefore, We can not reject $H_0$.
+  </div></li>
+  <li>Estimate all the parameters in the model.
+  <div class = 'ans'>
+    The estimated parameters in the model are,
+    
+    ```{r}
+    teff <- colMeans(soya) - mu
+    ```
+    
+    $$
+    \begin{aligned}
+      \hat{\sigma}^2 & = \text{MSE} = `r SS_residual / 3` \\
+      \hat{\mu} & = \bar{Y}_{\cdot\cdot} = `r mu` \\
+      \hat{\tau}_1 & = \hat{\mu}_1 - \hat{\mu} = `r teff[1]` \\
+      \hat{\tau}_2 & = \hat{\mu}_2 - \hat{\mu} = `r teff[2]` \\
+      \hat{\tau}_3 & = \hat{\mu}_3 - \hat{\mu} = `r teff[3]`
+    \end{aligned}
+    $$
+  </div></li>
+</ul>
+_NOTE:: Use pocket calculator:_
+
+<ul>
+  <li>Find a 95% CI for $\sigma^2$
+  <div class = 'ans'>
+   Use Chi-square table with 3 degrees of freedom to get, 
+   
+   $$
+     \begin{aligned}
+       \chi^2_{0.025, 3} & = `r round(qchisq(0.025, 3, lower = F), 3)` \\
+       \chi^2_{0.975, 3} & = `r round(qchisq(0.975, 3, lower = F), 3)`
+     \end{aligned}
+   $$
+   
+   The 95% CI for $\sigma^2$ is,
+   
+   $$
+   \left[
+     \frac{\text{SSE}}{\chi^2_{0.025, 3}}, 
+     \frac{\text{SSE}}{\chi^2_{0.975, 3}}
+     \right] =
+     \left[
+     `r round(SS_residual/qchisq(0.025, 3, lower = F), 3)`, 
+     `r round(SS_residual/qchisq(0.975, 3, lower = F), 3)`
+     \right]
+   $$
+    
+  </div></li>
+  <li>Find a 99% CI for the difference between the two soya diets.
+  <div class = 'ans'>
+  
+   The CI for $\mu_i - \mu_j$ is same as CI for $\tau_i - \tau_j$, so, the CI for soya diets ($\tau_2$ and $\tau_3$) is,
+   
+   $$
+    \begin{aligned}
+       \bar{y}_{3\cdot} - \bar{y}_{2\cdot} - t_{\alpha/2, N - a}\sqrt{\frac{2\text{MSE}}{n}} & \le
+       \mu_3 - \mu_2 \\ & \le
+       \bar{y}_{3\cdot} - \bar{y}_{2\cdot} + t_{\alpha/2, N - a}\sqrt{\frac{2\text{MSE}}{n}} \\
+       \hat{\tau}_{3\cdot} - \hat{\tau}_{2\cdot} - (`r round(qt(0.005, 3, lower = FALSE), 3)`) \times \sqrt{\frac{2\times `r SS_residual / 3`}{2}} & \le
+       \mu_3 - \mu_2 \\ &\le
+       \hat{\tau}_{3\cdot} - \hat{\tau}_{2\cdot} + (`r round(qt(0.005, 3, lower = FALSE), 3)`) \times \sqrt{\frac{2\times `r SS_residual / 3`}{2}} \\
+       `r teff[3] - teff[2]` - (`r round(qt(0.005, 3, lower = FALSE) * sqrt((2 * SS_residual / 3)/2), 3)`) \le
+       & \mu_3 - \mu_2 \le
+       `r teff[3] - teff[2]` + (`r round(qt(0.005, 3, lower = FALSE) * sqrt((2 * SS_residual / 3)/2), 3)`) \\
+       `r teff[3] - teff[2] - (round(qt(0.005, 3, lower = FALSE) * sqrt((2 * SS_residual / 3)/2), 3))` \le
+       & \mu_3 - \mu_2 \le
+       `r teff[3] - teff[2] + (round(qt(0.005, 3, lower = FALSE) * sqrt((2 * SS_residual / 3)/2), 3))`
+    \end{aligned}
+   $$
+   
+   In otherwords, the 95% confidence limit for true difference between $\mu_3$ and $\mu_2$ lie in the interval $\left[`r round(confint(lm(measurement ~ treatment, data = soya.stack), level = 0.99)[2,], 3)`\right]$
+  </div></li>
+</ul>
+Control as many answers as possible by using R
+
+_NOTE:: Without any software or pocket calculator:_
+
+Add 6 kg to all the weights in the soya group.
+```{r}
+soya2 <- cbind(soya[1], soya[-1] + 6)
+mu2 <- mean(unlist(soya2))
+tmean2 <- colMeans(soya2)
+SS_total2 <- sumsq(soya2 - mu2)
+SS_residual2 <- sumsq(soya2 - rbind(tmean2, tmean2))
+SS_treatment2 <- nrow(soya2) * sumsq(tmean2 - mu2)
+df_residual2 <- length(unlist(soya2)) - ncol(soya2)
+df_treatment2 <- ncol(soya2) - 1
+MS_residual2 <- SS_residual2 / df_residual2
+MS_treatment2 <- nrow(soya2) * SS_treatment2 / df_treatment2
+F0_2 <- MS_treatment2 / MS_residual2
+
+soya2.stack <- `names<-`(stack(soya2), c('measurement', 'treatment'))
+```
+
+<ul>
+  <li>What influence will this have on the sum of squares?
+  <div class = 'ans'>
+  
+   If we add 6 to the soya groups then the difference between the group averages will be larger, but noting happens to variation inside the group. $\text{SS}_\text{treatments}$ will increase, but the noise (SSE) will be unaffected. Sum of squares for Treatment, Residual and Toatal before and after adding 6 to soya group is,
+   
+   ```{r}
+     knitr::kable(data.frame(
+       before = c(treatment = SS_treatment, residual = SS_residual, total = SS_total),
+       after = c(treatment = SS_treatment2, residual = SS_residual2, total = SS_total2)
+     ))
+   ```
+    
+  </div></li>
+  <li>What is $F_0$. now? Comment!
+  <div class = 'ans'>
+   Since F value is a ratio betwen MS for treatment and residuals, $F_0$ (F value) will be larger. This increases the chance of rejecting null hypothesis (no difference between groups).
+  </div></li>
+  <li>Perform the test in this situation.
+  <div class = 'ans'>
+   The ANOVA table in this situation is,
+   
+   ```{r}
+     soya2_aov <- knitr::kable(mixlm::anova_reg(lm(measurement ~ treatment, data = soya2.stack)), digits = 4)
+     gsub('\\bNA\\b', '  ', soya2_aov)
+   ```
+   
+   Here, the p-value is much smaller than in the previous case, and even is significant at 10%. This shows that the difference between treatments (NONS, S1 and S2) has increased in this situation.
+  </div></li>
+</ul>
+Go back to the original data, but add 6 kg to the heaviest pig in each group.
+
+```{r}
+soya3 <- apply(soya, 2, function(x){
+    x[which.max(x)] <- x[which.max(x)] + 6
+    return(x)
+})
+soya3 <- data.frame(soya3)
+
+mu3 <- mean(unlist(soya3))
+tmean3 <- colMeans(soya3)
+SS_total3 <- sumsq(soya3 - mu3)
+SS_residual3 <- sumsq(soya3 - rbind(tmean3, tmean3))
+SS_treatment3 <- nrow(soya3) * sumsq(tmean3 - mu3)
+df_residual3 <- length(unlist(soya3)) - ncol(soya3)
+df_treatment3 <- ncol(soya3) - 1
+MS_residual3 <- SS_residual3 / df_residual3
+MS_treatment3 <- nrow(soya3) * SS_treatment3 / df_treatment3
+F0_3 <- MS_treatment3 / MS_residual3
+
+soya3.stack <- `names<-`(stack(soya3), c('measurement', 'treatment'))
+```
+
+<ul>
+ <li>What influence will this have on the Sum of squares?
+ <div class = 'ans'>
+   The differences between the means will be unaffected, but the variance inside the groups will be larger. Hence $\text{SS}_\text{treatments}$ will be unaffected, but the noise and SSE will increase. The ANOVA in this situation is,
+   
+   ```{r}
+   soya3_aov <- knitr::kable(mixlm::anova_reg(lm(measurement ~ treatment, data = soya3.stack)), digits = 4)
+   gsub('\\bNA\\b', '  ', soya3_aov)
+   ```
+   
+ </div></li>
+ <li>What is $F_0$ now? Comment!
+ <div class = 'ans'>
+   Here, $F_0$ is even smaller since noise (variation within groups) has increases.
+ </div></li>
+ <li>Perform the test in this situation.
+ <div class = 'ans'>
+   Small $F_0$ leads to low probability of rejecting null hypothesis. From ANOVA table, high p-value shows that we can not reject null hypothesis and conclude that there is not significant difference between the effects of diet on pigs.
+ </div></li>
+</ul>

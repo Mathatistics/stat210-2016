@@ -1,0 +1,153 @@
+## Exercise 5 
+<small>_will be discussed on lecture Thursday, but try yourself_</small>
+
+Load the R data `blockwheat`. This is a block experiment where the response is `protein` in wheat.
+We have 3 sorts (Bastian, Berserk and Bjarne), each sort is tried once on 4 different fields (lock).
+
+```{r, message=FALSE, warning=FALSE}
+load("_data/blockwheat.RData")
+require(mixlm)
+```
+
+- Why is this regarded as a block experiment?
+    
+    <div class = 'ans'>
+    Here, our primary interest is sorts irrespective of where it is tried (or grown). However, `field` factor can affect (increase noise) the analysis if it is not included in the model which consequently prevent us from discovering the effect of sort. Thus, a block experiment where `field` factor is also included in the model not as a primary subject of interest but rather to block unnecessary noises that it can create if it is not included in the model. Block experiment reduces noise so that we can investigate the factor effect that is of our interest.
+    </div>
+
+- How many observations are there in total?
+
+    <div class = 'ans'>
+    There are 4 fields and 3 sorts where a protein value is measured for each of the combination. The total number of observation is 12.
+    </div>
+    
+- Do we have replicates?
+
+    <div class = 'ans'>
+    Only one measurement is made for each combination of field and sort, so there are not any replications. But if we remove field factor and consider one-way ANOVA model, we will have 4 replication of sort.
+    </div>
+    
+- State the model.
+
+    <div class = 'ans'>
+    The block experiment model we have is,
+    
+    \begin{equation}
+    y_{ij} + \mu + \tau_i + \beta_j + \epsilon_{ij}
+    \label{eq:W2E05Model}
+    \end{equation}
+
+    
+    Here the model follows the assumptions,
+    
+    $$
+    \begin{aligned}
+    \epsilon_{ij} &\sim \text{NID}\left(0, \sigma^2\right) \\
+    \sum_{i = 1}^3{\tau_i} &= 0 \\
+    \sum_{j = 1}^4{\beta_j} &= 0
+    \end{aligned}
+    $$ 
+    
+    </div>
+    
+- Make an ANOVA table.
+
+    <div class = 'ans'>
+    
+    ANOVA table for model (\@ref(eq:W2E05Model)) is,
+    
+    ```{r}
+    mdl <- mixlm::lm(Protein ~ Sort + Field, data = lect10)
+    aovTable <- unclass(summary(aov(mdl)))[[1]]
+    gsub("NA", "  ", knitr::kable(aovTable, digits = 3))
+    ```
+    
+    </div>
+    
+- Does it seem smart to include field in the experiment (give reason for your answer?
+
+    <div class = 'ans'>
+    It is a better idea to include `field` in this experiment. Since `field` factor has significant effect and if it is removed, the variation present in protein measurement that it describes will appear as a noise. Consequently, the probability of finding the effect of Sort which could be significant will decreases.
+    </div>
+    
+- Estimate the parameters in the model.
+
+    <div class = 'ans'>
+    The coefficient estimates are, 
+    
+    ```{r}
+    col.names1 <- c("$\\hat{\\mu}$", "$\\hat{\\tau}_1$", "$\\hat{\\tau}_2$",
+                   "$\\hat{\\beta}_1$", "$\\hat{\\beta}_2$", "$\\hat{\\beta}_3$")
+    col.names <- sapply(seq_along(mdl$coefficients), function(x){
+        paste(names(mdl$coefficients)[x], col.names1[x], sep = " ")
+    })
+    knitr::kable(t(mdl$coefficients), digits = 3, col.names = col.names)
+    ```
+    
+    From the sum-to-zero assumptions, we can get $\hat{\tau}_3 = -(\hat{\tau}_1 + \tau_2) = `r -1 * round(sum(mdl[["coefficients"]][2:3]), 3)`$ and $\beta_4 = -(\beta_1 + \beta_2 + \beta_3) = `r -1 * round(sum(mdl[["coefficients"]][4:6]), 3)`$
+    
+    Similarly, the estimate for error variance is given by $\text{MS}_E$ which is `r round(aovTable["Residuals  ", "Mean Sq"], 3)`
+    </div>
+    
+- Can you prove sort effect?
+- Find the fitted values and the residuals for all observations.
+- Check the model assumptions.
+
+    <div class = 'ans'>
+    We can check model assumption from _basic diagnostic plots_ for the fitted model.
+    
+    ```{r, fig.height = 6}
+    op <- par(mfrow = c(1, 2), oma = c(0, 0, 3, 0))
+    plot(mdl, c(1, 2), add.smooth = FALSE)
+    par(op)
+    ```
+    
+    Plot shows that the residual terms are scattered randomly and constant over different fitted values. This means the assumption of constant residual variance holds true. Further, in the normal q-q plot, points are aligned with the q-q line which fairly suggest that error terms are normally distributed. 
+    
+    </div>
+    
+- Explain the residual to a person without knowledge in statistics.
+
+Use the model to show that the expected differences between two sorts are independent on the block. (In block experiments it is unusual to include interaction.)
+
+Does the plot below (_Graphs > Plot of means_) support the statement above? 
+
+```{r, fig.height=5, warning=FALSE}
+with(lect10, RcmdrMisc::plotMeans(Protein, Field, Sort))
+```
+
+<div class = 'ans'>
+
+The model for a block experiment is,
+
+$$y_{ij} = \mu + \tau_i + \beta_j + \epsilon_{ij}$$
+
+Here, the following assumption for a fixed effect models holds.
+
+$$
+\begin{aligned}
+\epsilon_{ij} &= \text{NID}\left(0, \sigma^2\right) \\
+\sum_{i = 1}^a\tau_i &= 0 \text{ and } \sum_{j = 1}^b \beta_j = 0
+\end{aligned}
+$$ 
+
+Since, $\text{E}(y_{ij}) = \mu + \tau_i + \beta_j$, the expected difference between two sorts can be written as,
+
+$$
+\begin{aligned}
+\text{E}\left(y_{ij} - y_{kj}\right) &= \mu + \tau_i + \beta_j - \mu - \tau_k + \beta_j \\
+&= \tau_i - \tau_k
+\end{aligned}
+$$ 
+
+which is independent of block. In other words, the expected difference between sorts is same irrespective of which block they belong. In the following plot sorts `Bastian` and `Berserk` holds this statement, however it is not very true for sort `Bjarne`.
+
+</div>
+
+
+Assume incorrectly a One Way Analysis of Variance model (sort as factor).
+
+- Why is this incorrect?
+- Compare the SSError, the degrees of freedom and the estimate of the variance for this model and the model including blocks.
+
+If you had only the output from the block model, could you find the SSError from the One Way Analysis of Variance model.
