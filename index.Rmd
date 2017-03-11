@@ -31,7 +31,7 @@ for (pkg in pkgs) require(pkg, quietly = TRUE, warn.conflicts = FALSE, character
 ```
 
 
-```{r, out.height="5cm"}
+```{r, out.width="30%"}
 knitr::include_graphics(c(
   "images/BookCover_Ed6.jpeg", 
   "images/BookCover_Ed7.jpg",
