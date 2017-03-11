@@ -3,9 +3,9 @@ bookdown::gitbook:
     after_body: '_footer.html'
   css: style.css
   number_sections: no
-  download: ["epub", "pdf"]
   toc_depth: 1
   config:
+    download: ["epub", "pdf"]
     edit: "https://github.com/mathatistics/stat210-2016/edit/master/%s" 
     toc:
       before: |
